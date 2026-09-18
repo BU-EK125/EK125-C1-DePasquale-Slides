@@ -17,8 +17,10 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install Jupyter Book and marimo
-        run: pip install --force-reinstall --no-cache-dir jupyter-book==1.0.2 marimo
+      - name: Install Jupyter Book, marimo, and uv
+        # uv is required by `marimo export html-wasm` to resolve each
+        # deck's imports into a WASM-compatible dependency set.
+        run: pip install --force-reinstall --no-cache-dir jupyter-book==1.0.2 marimo uv
 
       - name: Export marimo slide decks
         run: ./build_slides.sh
