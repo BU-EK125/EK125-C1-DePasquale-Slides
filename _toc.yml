@@ -1,0 +1,17 @@
+format: jb-book
+root: intro
+parts:
+  - caption: Class 2
+    chapters:
+      - file: pages/Class2_Lecture
+      - file: pages/Class2_GPP
+      - file: pages/HW2_Monday_Help_Session
+  - caption: Class 3
+    chapters:
+      - file: pages/Class3_Lecture
+      - file: pages/Class3_GPP
+      - file: pages/HW3_Homework_Help_Session
+  - caption: Class 4
+    chapters:
+      - file: pages/Class4_Lecture
+      - file: pages/Class4_GPP

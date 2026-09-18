@@ -1,0 +1,30 @@
+name: deploy-book
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Jupyter Book, marimo, and tools
+        run: pip install --force-reinstall --no-cache-dir jupyter-book==1.0.2 marimo ghp-import
+
+      - name: Export marimo slide decks
+        run: ./build_slides.sh
+
+      - name: Build the Jupyter Book
+        run: jb build .
+
+      - name: Deploy to GitHub Pages
+        run: ghp-import -n -p -f _build/html

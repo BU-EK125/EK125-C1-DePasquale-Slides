@@ -1,0 +1,79 @@
+{
+  "type": "slides",
+  "data": {
+    "cells": [
+      {
+        "showCode": false
+      },
+      {},
+      {},
+      {},
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "fragment"
+      },
+      {},
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "fragment"
+      },
+      {},
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "fragment"
+      },
+      {},
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "fragment"
+      },
+      {},
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "fragment"
+      },
+      {},
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "fragment"
+      },
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "deck": {}
+  }
+}
