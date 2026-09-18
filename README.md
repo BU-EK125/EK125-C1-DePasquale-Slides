@@ -9,6 +9,7 @@ This repo works differently from the other EK125 sites, which are jupyter-book n
 - `build_slides.sh` -- exports every deck in `slides/` to a self-contained WASM HTML bundle under `_slides_build/<DeckName>/`. This runs automatically in CI (both `pr-check` and the deploy workflow); you don't need to run it yourself, and `_slides_build/` is never committed (it's regenerated every build, and each bundle is tens of MB, so keeping it out of git history matters).
 - `_config.yml`'s `html_extra_path` is what copies `_slides_build/<DeckName>/index.html` onto the built site at `<DeckName>/index.html`.
 - `_toc.yml` -- one `url:` entry per deck, pointing at its full published URL (e.g. `https://bu-ek125.github.io/EK125-slides/Class2_Lecture/index.html`), organized into a part per class. **Note:** because these are absolute URLs to the live site, sidebar links always go to the live site even when you're previewing a local `jb build` -- there's no local-preview equivalent for these links, only for the intro page itself.
+- `.marimo.toml` -- repo-wide marimo settings applied to every exported deck (currently just `[display] theme = "dark"`). marimo searches upward from the current directory for this file, and `build_slides.sh` runs from inside each `slides/ClassN/` folder, so this one file at the repo root covers every deck.
 
 **To add a new deck:**
 
