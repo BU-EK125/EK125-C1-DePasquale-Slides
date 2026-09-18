@@ -49,7 +49,7 @@ marimo edit slides/Class2/Class2_Lecture.py
 ```
 This opens marimo's UI in your browser, where you can edit cells and rearrange slides like normal. Save when you're done -- marimo saves directly back to the `.py` file.
 
-**Adding a brand-new deck?** See the "To add a new deck" section in the [README](README.md) -- you'll also need a small wrapper page and a `_toc.yml` entry.
+**Adding a brand-new deck?** See the "To add a new deck" section in the [README](README.md) -- you'll also need a `_toc.yml` entry.
 
 You do **not** need to export or build anything yourself -- that happens automatically in CI (see step 6).
 
