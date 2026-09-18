@@ -15,4 +15,6 @@ sphinx:
 # README.md and CONTRIBUTING.md are repo/instructor documentation, not
 # student-facing content, so they're excluded from the public site too.
 # archive/ and slides/ (marimo .py sources) aren't book content either.
-exclude_patterns: ["archive/*", "archive/**/*", "slides/*", "slides/**/*", "README.md", "CONTRIBUTING.md"]
+# notebooks/*.ipynb are raw artifacts for the Colab button to open, not
+# meant to be built/executed/rendered as book pages themselves.
+exclude_patterns: ["archive/*", "archive/**/*", "slides/*", "slides/**/*", "notebooks/*", "notebooks/**/*", "README.md", "CONTRIBUTING.md"]
