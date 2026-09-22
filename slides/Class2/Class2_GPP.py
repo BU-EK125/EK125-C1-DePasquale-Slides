@@ -2,6 +2,7 @@ import marimo
 
 __generated_with = "0.24.0"
 app = marimo.App(
+    html_head_file="../../colab_button.html",
     width="full",
     layout_file="layouts/Class2_GPP.slides.json",
     css_file="custom.css",

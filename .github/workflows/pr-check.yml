@@ -36,6 +36,20 @@ jobs:
         if: github.event.action != 'closed'
         run: ./build_slides.sh
 
+      - name: Verify notebooks/ is committed and up to date
+        # notebooks/*.ipynb (what the Colab button opens) must be real,
+        # committed files -- Colab reads them straight from GitHub, not
+        # from this ephemeral CI build. git status (not git diff) so this
+        # also catches a brand-new deck whose .ipynb was never committed
+        # at all, not just an edited one that's now out of sync.
+        if: github.event.action != 'closed'
+        run: |
+          if [ -n "$(git status --porcelain notebooks/)" ]; then
+            git status --porcelain notebooks/
+            echo "::error::notebooks/*.ipynb is out of date with slides/*.py. Run ./build_slides.sh locally and commit the result."
+            exit 1
+          fi
+
       - name: Build the Jupyter Book
         if: github.event.action != 'closed'
         run: jb build .

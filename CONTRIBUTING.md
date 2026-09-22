@@ -49,9 +49,9 @@ marimo edit slides/Class2/Class2_Lecture.py
 ```
 This opens marimo's UI in your browser, where you can edit cells and rearrange slides like normal. Save when you're done -- marimo saves directly back to the `.py` file.
 
-**Adding a brand-new deck?** See the "To add a new deck" section in the [README](README.md) -- you'll also need a `_toc.yml` entry.
+**Adding a brand-new deck?** See the "To add a new deck" section in the [README](README.md) -- you'll also need a `_toc.yml` entry and the Colab-button config.
 
-You do **not** need to export or build anything yourself -- that happens automatically in CI (see step 6).
+**One thing you do need to do yourself:** after editing a deck (new or existing), run `./build_slides.sh` from the repo root and include the resulting change to `notebooks/<DeckName>.ipynb` in your commit. That file is what the 🚀 Colab button on the live site opens -- it has to be a real, committed file, so it can't be generated automatically by CI the way the rest of the build is. If you forget, step 6's check will catch it and tell you to fix it.
 
 ### 4. Save your change to git ("commit") and upload it ("push")
 
@@ -76,7 +76,7 @@ Open that link in your browser (or go to the repo on github.com -- it'll show a 
 
 ### 6. Wait for the automatic check, then merge
 
-Every PR automatically runs a check called `pr-check` that exports every marimo deck and rebuilds the whole site -- this is where a deck that fails to export gets caught. You'll see a status at the bottom of the PR page:
+Every PR automatically runs a check called `pr-check` that exports every marimo deck, verifies `notebooks/` matches what you committed, and rebuilds the whole site -- this is where a deck that fails to export, or a forgotten `notebooks/` commit, gets caught. You'll see a status at the bottom of the PR page:
 - 🟡 Yellow = still running, wait a few minutes.
 - ✅ Green = passed. Click **Merge pull request**.
 - ❌ Red = something's broken. Click "Details" next to the check to see what failed, fix it (edit the file, then repeat step 4 to push another commit to the same branch -- no need to open a new PR), and it'll re-run automatically.

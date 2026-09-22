@@ -1,0 +1,37 @@
+<script>
+(function () {
+  function addColabButton() {
+    var parts = window.location.pathname.split('/').filter(Boolean);
+    // Path is .../EK125-slides/<DeckName>/index.html -- deck name is the
+    // second-to-last segment regardless of trailing slash/filename.
+    var deckName = parts[parts.length - 2] || parts[parts.length - 1];
+    if (!deckName) return;
+
+    var colabUrl =
+      'https://colab.research.google.com/github/BU-EK125/EK125-slides/blob/main/notebooks/' +
+      deckName + '.ipynb';
+
+    var btn = document.createElement('a');
+    btn.href = colabUrl;
+    btn.target = '_blank';
+    btn.rel = 'noopener';
+    btn.title = 'Open this deck as a notebook in Google Colab';
+    btn.textContent = '🚀 Open in Colab';
+    btn.style.cssText = [
+      'position:fixed', 'top:12px', 'right:12px', 'z-index:99999',
+      'background:#fff', 'color:#111', 'padding:8px 14px',
+      'border-radius:8px', 'text-decoration:none',
+      'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif',
+      'font-size:14px', 'font-weight:600',
+      'box-shadow:0 2px 8px rgba(0,0,0,0.25)', 'border:1px solid #ddd',
+    ].join(';');
+    document.body.appendChild(btn);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', addColabButton);
+  } else {
+    addColabButton();
+  }
+})();
+</script>
