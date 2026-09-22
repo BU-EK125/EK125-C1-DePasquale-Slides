@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-CZceb_kH.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-Bam3NpBI.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-C_DwAp7Z.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-CEsLFVD9.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-D5MAsWEG.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-C6PDArdf.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        const scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          const element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          const newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((_entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>Class6 Lecture</title>
+    <script type="module" crossorigin src="./assets/index-4n22QjCD.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/rolldown-runtime-B0Z9INg1.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-CBDbhulC.js">
+    <link rel="modulepreload" crossorigin href="./assets/compiler-runtime-CYIjoINj.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-xfs0Sn4r.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-BQrReHnR.js">
+    <link rel="modulepreload" crossorigin href="./assets/schemas-aTUejmFi.js">
+    <link rel="modulepreload" crossorigin href="./assets/isObject-BCaOs5rp.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-oX0TOjjx.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-Cmx0b_zA.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-aFmHgJZY.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DnwgSs_Z.js">
+    <link rel="modulepreload" crossorigin href="./assets/_initCloneObject-CM3WilQg.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseMerge-DLqSVasz.js">
+    <link rel="modulepreload" crossorigin href="./assets/objects-snlMn4yk.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-B74pBk57.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-92uWqz-P.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-Ci2dTZ72.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-D5Ywm7-q.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-BDbGiS7O.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-CrTnjj37.js">
+    <link rel="modulepreload" crossorigin href="./assets/session-Sz5nSFku.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-BlNM0caL.js">
+    <link rel="modulepreload" crossorigin href="./assets/clsx-DB0hHKMi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-ldLVeaqm.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-BH2jz-F4.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DzCQtGkt.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-BSRA2YI9.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-Dh8EwhsF.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-CA-2mBs3.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-B7HeEoG2.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-BoA6XBpj.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-Do8M9TDF.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-DHJ9s6Vk.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-nLt2y0Sw.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-ByJdIf5p.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-BUtPzKB4.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BtC9ym6k.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CZNULd6Z.js">
+    <link rel="modulepreload" crossorigin href="./assets/arrays-BqUx5USx.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-Haz_uxEL.js">
+    <link rel="modulepreload" crossorigin href="./assets/capabilities-D8kPgMKr.js">
+    <link rel="modulepreload" crossorigin href="./assets/cjs-C49f7GXV.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-B_XmHROl.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DiYjQAhI.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-B_3iMIUq.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-CReV1AYG.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-C6_IaFh7.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B8pdsUrS.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-BUaJcygz.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-hGYJX0Ha.js">
+    <link rel="modulepreload" crossorigin href="./assets/database-zap-CloO6gbw.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-Bc-r3jsC.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-DgpSQhrP.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-DEbY281O.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-k9DpjH68.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-DpWHUGuF.js">
+    <link rel="modulepreload" crossorigin href="./assets/write-secret-modal-D6zoZgLY.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-C4J9gIE1.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-D_HX-0qx.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-BSgtkC2e.js">
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-HclGiUj8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DkPPv0FB.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Dw9YRsCU.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B0RXffUm.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Cx4BE7jC.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CKUpxYGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-Dc5bKD4z.js">
+    <link rel="modulepreload" crossorigin href="./assets/paths-zcL04qUW.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-C-ri8BtY.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-Buhk-UgR.js">
+    <link rel="modulepreload" crossorigin href="./assets/purify.es-DrVcFY1Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-Cp-G34Rz.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-DjNf4SIX.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasPath-BmRQipI0.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-yw4sIeJR.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-gX6o3Pih.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-Bs4cJfJU.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-DzO-nXy-.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-DjXr9Y9D.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BMXKNElG.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-CFuPxa9F.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-DlEomWzI.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-CvVTau-c.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-BHMOvJzM.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-DdB_uBif.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DpIyjHqY.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-LboTfNDv.js">
+    <link rel="modulepreload" crossorigin href="./assets/micromark-factory-space-D9Dr-k4J.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-5FQGJX7Z-CRg4xQWg.js">
+    <link rel="modulepreload" crossorigin href="./assets/markdown-renderer-BZKlbm2Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-z8fuTE3w.js">
+    <link rel="modulepreload" crossorigin href="./assets/useRunCells-CX7oW5zy.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-DwhMAd9l.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-B2d_dHwI.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-CPtBiNgr.js">
+    <link rel="modulepreload" crossorigin href="./assets/events-CbeVJ6OD.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-Di9TbuV9.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-CDVGFYfr.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-B-r81uZ6.js">
+    <link rel="modulepreload" crossorigin href="./assets/tabs-Cy1qXLzH.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-CKA5zVsM.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-C40jM9o4.js">
+    <link rel="modulepreload" crossorigin href="./assets/html-to-image-D6GUC5q6.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-DMxOzI7b.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CUK1W5bI.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-Bf-rx_aV.js">
+    <link rel="modulepreload" crossorigin href="./assets/tree-actions-CG5g7aUQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/ellipsis-Dfik_tuW.js">
+    <link rel="modulepreload" crossorigin href="./assets/external-link-Bp3BxyRA.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-Ck-Hgfvj.js">
+    <link rel="modulepreload" crossorigin href="./assets/message-circle-BQB1AIAg.js">
+    <link rel="modulepreload" crossorigin href="./assets/hat-glasses-C8LSY3HT.js">
+    <link rel="modulepreload" crossorigin href="./assets/package-DPlscLzt.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-DrODSIs0.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-Cwh96ZBE.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dmKwNsrp.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-DsD08SLK.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-B6AklCzD.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-6burT2XF.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-DqpoYOvw.js">
+    <link rel="modulepreload" crossorigin href="./assets/VisuallyHidden-CBMDmozt.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-BiqAQ-zI.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-yTIMUO13.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-nQ3Iam8J.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-B58T85Jq.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-CNPGWpMu.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-Bq_nmf5u.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-Dm4DaIgg.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser-AQmjV9CX.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-BG35uS_N.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-icons.esm-hr79-MCS.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-nLO-SoUf.js">
+    <link rel="modulepreload" crossorigin href="./assets/useIframeCapabilities-C7Di8f2y.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-Dw5YY9wq.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-49LGK4zG.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-C6s96nu2.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-DmqOOjfe.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-resizable-panels.browser.esm-BSRAHC4P.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-CzIGPEZQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-ChZdjJhj.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-DkZweMAs.js">
+    <link rel="modulepreload" crossorigin href="./assets/spec-DKsAmLTi.js">
+    <link rel="modulepreload" crossorigin href="./assets/semaphore-BjoL5P0h.js">
+    <link rel="modulepreload" crossorigin href="./assets/fileToBase64-NhpNrK5l.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-BXC4CItZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/code-xml-B7x62Eeh.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-headphone-rFCxFRI8.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-DF8n85RA.js">
+    <link rel="modulepreload" crossorigin href="./assets/image-ab13yGv4.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-icons-DdGYuADJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/globe-BQf75qV_.js">
+    <link rel="modulepreload" crossorigin href="./assets/markdown-export-0rLbaq8b.js">
+    <link rel="modulepreload" crossorigin href="./assets/data-grid-types-DgHVN_Zz.js">
+    <link rel="modulepreload" crossorigin href="./assets/glide-utils-UGsrRHYj.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-riSXbYe_.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-B58Ib8Ir.js">
+    <link rel="modulepreload" crossorigin href="./assets/triangle-alert-MihykDYG.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-Djf4O40e.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-CrFhA96G.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-X-CJUSM8.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-DzY74mzC.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-CjLa9BiH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-CLytDdMl.js">
+    <link rel="modulepreload" crossorigin href="./assets/pathUtils-Cryrlpma.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-DaUHnl_e.js">
+    <link rel="stylesheet" crossorigin href="./assets/cells-D-c15Ks-.css">
+    <link rel="stylesheet" crossorigin href="./assets/markdown-renderer-B7zTpxjS.css">
+    <link rel="stylesheet" crossorigin href="./assets/JsonOutput-BQtz7-np.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-C7yAojRA.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <style title='marimo-custom'>/* Slightly bigger code font when presenting in Slides layout, sized to still fit on one slide */
+.reveal .cm-editor,
+.reveal .cm-content,
+.reveal .cm-line {
+  font-size: 1.05em !important;
+  line-height: 1.3 !important;
+}
+
+/* Slightly bigger code/output text (e.g. print results) on slides */
+.reveal pre,
+.reveal code,
+.reveal .text-xs,
+.reveal .text-sm,
+.reveal .output {
+  font-size: 1.2em !important;
+  line-height: 1.25 !important;
+}
+</style><script>
+(function () {
+  function addColabButton() {
+    var parts = window.location.pathname.split('/').filter(Boolean);
+    // Path is .../EK125-slides/<DeckName>/index.html -- deck name is the
+    // second-to-last segment regardless of trailing slash/filename.
+    var deckName = parts[parts.length - 2] || parts[parts.length - 1];
+    if (!deckName) return;
+
+    var colabUrl =
+      'https://colab.research.google.com/github/BU-EK125/EK125-slides/blob/main/notebooks/' +
+      deckName + '.ipynb';
+
+    var btn = document.createElement('a');
+    btn.href = colabUrl;
+    btn.target = '_blank';
+    btn.rel = 'noopener';
+    btn.title = 'Open this deck as a notebook in Google Colab';
+    btn.textContent = '🚀 Open in Colab';
+    btn.style.cssText = [
+      'position:fixed', 'top:12px', 'right:12px', 'z-index:99999',
+      'background:#fff', 'color:#111', 'padding:8px 14px',
+      'border-radius:8px', 'text-decoration:none',
+      'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif',
+      'font-size:14px', 'font-weight:600',
+      'box-shadow:0 2px 8px rgba(0,0,0,0.25)', 'border:1px solid #ddd',
+    ].join(';');
+    document.body.appendChild(btn);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', addColabButton);
+  } else {
+    addColabButton();
+  }
+})();
+</script>
+
+<script data-marimo="true">
+    Object.defineProperty(window, "__MARIMO_EXPORT_CONTEXT__", {
+        value: Object.freeze({
+            trusted: true,
+            notebookCode: "import marimo\n\n__generated_with = \"0.24.2\"\napp = marimo.App(\n    width=\"full\",\n    layout_file=\"data:application/json;base64,eyJ0eXBlIjogInNsaWRlcyIsICJkYXRhIjogeyJjZWxscyI6IFt7InNob3dDb2RlIjogZmFsc2V9LCB7fSwge30sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7InR5cGUiOiAiZnJhZ21lbnQiLCAic2hvd0NvZGUiOiB0cnVlfSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQiLCAic2hvd0NvZGUiOiB0cnVlfSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwgeyJ0eXBlIjogImZyYWdtZW50IiwgInNob3dDb2RlIjogdHJ1ZX0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwge30sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7InR5cGUiOiAiZnJhZ21lbnQiLCAic2hvd0NvZGUiOiB0cnVlfSwge30sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50IiwgInNob3dDb2RlIjogdHJ1ZX0sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwge30sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwge31dfX0=\",\n    css_file=\"custom.css\",\n    html_head_file=\"../../colab_button.html\",\n)\n\n\n@app.cell\ndef _():\n    import marimo as mo\n\n    return (mo,)\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    # Nested Loops\n\n    ### One Loop Inside Another\n\n    *Class 6*\n\n    \ud83d\udcd6 [Full reading: Class 6](https://BU-EK125.github.io/EK125/class/Class6.html)\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## Nested `for` Loops\n\n    A **nested loop** is one loop inside another \u2014 the *action* of the\n    outer loop contains a whole other loop.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    A list of words, printed character by character. The outer loop picks\n    each word; the inner loop picks each character in that word.\n    \"\"\")\n    return\n\n\n@app.cell\ndef _():\n    wordlist = ['hello', \"hi\", 'ciao']\n    for myword in wordlist:\n        for c in myword:\n            print(c, end=' ')\n        print()\n    print(\"That's it!\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Takeaway\n\n    The **outer loop** iterates over the *words*. For each word, the\n    **inner loop** iterates over its *characters*. The `print()` that\n    starts a new line belongs to the outer loop's action, not the inner\n    loop's \u2014 it runs once per word, not once per character.\n\n    \ud83d\udea9 **Common mistake:** misplacing that newline `print()`. If it's\n    indented one level too far \u2014 inside the inner loop instead of after\n    it \u2014 you get a newline after *every character* instead of after\n    every *word*. When a nested loop's output looks \"off by one\n    indentation level,\" check exactly which loop each statement belongs\n    to.\n\n    You'll practice this exact pattern in today's GPP \u2014 see\n    [Problem 5](https://BU-EK125.github.io/EK125/gpps/Class6_GPP.html#problem-5-printing-characters-from-strings-with-separators).\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Building Up: Numbers and Stars\n\n    Same shape, different content. The outer loop repeats 3 times,\n    printing a number and a colon; the inner loop prints stars.\n    \"\"\")\n    return\n\n\n@app.cell\ndef _():\n    for num in range(3):\n        print(f'{num}:', end=' ')\n        for n in range(5):\n            print('*', end='')\n        print()\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    Fixed 5 stars every time. To make the star *count* track the outer\n    loop's number, the inner loop needs to depend on `num` too.\n    \"\"\")\n    return\n\n\n@app.cell\ndef _():\n    for num2 in range(3):\n        print(f'{num2}:', end=' ')\n        for n2 in range(num2 + 1):\n            print('*', end='')\n        print()\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    What if we want the *labels* to start at 1 instead of 0?\n    \"\"\")\n    return\n\n\n@app.cell\ndef _():\n    for num3 in range(3):\n        print(f'{num3 + 1}:', end=' ')\n        for n3 in range(num3 + 1):\n            print('*', end='')\n        print()\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Takeaway\n\n    \ud83d\udea9 **Common mistake:** updating what gets *displayed* without\n    updating what gets *counted*, or vice versa. Both `{num+1}` (the\n    printed label) and `range(num+1)` (the star count) had to change\n    *together* to stay in sync \u2014 if you only update one, your displayed\n    row number and its star count won't match.\n\n    You'll practice this exact pattern in today's GPP \u2014 see\n    [Problem 2](https://BU-EK125.github.io/EK125/gpps/Class6_GPP.html#problem-2-formatted-output-with-nested-loops)\n    and\n    [Problem 7](https://BU-EK125.github.io/EK125/gpps/Class6_GPP.html#problem-7-triangle-of-stars).\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## Nesting a `while` Loop Inside a `for` Loop\n\n    Say we want the user to enter **3 positive numbers**. A `for` loop\n    repeats the action 3 times; each time, a `while` loop error-checks\n    until a positive number actually comes through.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ```python\n    for i in range(3):\n        number = input('Enter a positive number: ')\n        number = float(number)\n        while number \u003C= 0:\n            print('Please follow directions!')\n            number = input('Enter a positive number: ')\n            number = float(number)\n        print('Thanks for entering', number)\n        print()\n    ```\n\n    ```\n    Enter a positive number: 4\n    Thanks for entering 4.0\n\n    Enter a positive number: -3.3\n    Please follow directions!\n    Enter a positive number: 5.1\n    Thanks for entering 5.1\n\n    Enter a positive number: -6\n    Please follow directions!\n    Enter a positive number: 11\n    Thanks for entering 11.0\n    ```\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Takeaway\n\n    \ud83d\udea9 **Common mistake #1:** forgetting to re-read `number` inside the\n    `while` loop's body. Leave out that second `number = input(...)` and\n    `number` never changes \u2014 the condition `number \u003C= 0` stays true\n    forever, and the program hangs in an infinite loop.\n\n    \ud83d\udea9 **Common mistake #2:** confusing \"loop 3 times\" with \"3 total\n    attempts.\" The outer `for` loop only counts *successful* entries \u2014 a\n    user who enters `-5, -3, 7` has used 3 attempts but only filled 1 of\n    the 3 required slots. Rejected entries don't count toward the 3.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## Nesting a `while` Loop Inside Another `while` Loop\n\n    What if you don't know in advance how many times you'll need to\n    repeat something? Say you want to keep collecting positive numbers\n    *until their total reaches at least 20* \u2014 that calls for a `while`\n    loop as the **outer** loop too.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ```python\n    total = 0\n\n    while total \u003C 20:\n        number = input('Enter a positive number: ')\n        number = float(number)\n        while number \u003C= 0:\n            print('Please follow directions!')\n            number = input('Enter a positive number: ')\n            number = float(number)\n        print('Thanks for entering', number)\n        total = total + number\n        print('Running total:', total)\n        print()\n\n    print('Reached the target! Final total:', total)\n    ```\n\n    ```\n    Enter a positive number: 8\n    Thanks for entering 8.0\n    Running total: 8.0\n\n    Enter a positive number: -3\n    Please follow directions!\n    Enter a positive number: 9\n    Thanks for entering 9.0\n    Running total: 17.0\n\n    Enter a positive number: 5\n    Thanks for entering 5.0\n    Running total: 22.0\n\n    Reached the target! Final total: 22.0\n    ```\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Takeaway\n\n    The **inner** `while` is the same validation logic as before. What's\n    new is the **outer** `while`: instead of a fixed count, it keeps\n    going as long as `total` hasn't reached 20 \u2014 the same accumulator\n    pattern from Class 5's\n    [Calculating Running Sums](https://BU-EK125.github.io/EK125/class/Class5.html#calculating-running-sums).\n\n    \ud83d\udea9 **Common mistake:** putting a statement that belongs to the\n    *outer* loop inside the *inner* loop by mistake (or vice versa) \u2014\n    e.g. updating `total` inside the inner validation `while` instead of\n    after it finishes.\n\n    Today's GPP\n    [Problem 6](https://BU-EK125.github.io/EK125/gpps/Class6_GPP.html#problem-6-nested-while-and-for-loops)\n    builds on this \"keep going while valid input keeps coming\" idea.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## Using `if` Inside a Loop\n\n    So far every loop has repeated the *same* action every time. An\n    `if` statement inside a loop lets the action change depending on\n    the current value of the loop variable.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Example: Even and Odd Numbers\n\n    The **modulus operator `%`** gives the remainder after division. If\n    `n % 2 == 0`, `n` is even; otherwise it's odd.\n    \"\"\")\n    return\n\n\n@app.cell\ndef _():\n    for n in range(10):\n        if n % 2 == 0:\n            print(n, \"is even\")\n        else:\n            print(n, \"is odd\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Takeaway\n\n    \ud83d\udea9 **Common mistake:** writing `if n = 0:` instead of\n    `if n % 2 == 0:` \u2014 a single `=` *assigns* a value, `==` *compares*\n    two values. Python raises a `SyntaxError` if you try this in an\n    `if` statement, so it's easy to catch, but it's still the single\n    most common typo when writing conditionals.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## Randomness and Reproducibility\n\n    Engineering results must be **repeatable** \u2014 but Python's `random`\n    module is exactly how you get simulation, testing, and sampling. How\n    do you make \"random\" reproducible?\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    Python's `random` module gives you **pseudo-random** numbers: they\n    look random but are generated by a formula, stepping forward in a\n    fixed sequence from a starting point called a **seed**. Run this a\n    few times \u2014 the result changes each time, since no seed is set.\n    \"\"\")\n    return\n\n\n@app.cell\ndef _():\n    import random\n\n    print(random.randint(1, 6))  # simulates a die roll\n    return (random,)\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    Set a **seed**, and the sequence becomes reproducible \u2014 same seed,\n    same numbers, every run.\n    \"\"\")\n    return\n\n\n@app.cell\ndef _(random):\n    random.seed(42)\n    print(random.randint(1, 6))\n    print(random.randint(1, 6))\n    print(random.randint(1, 6))\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Takeaway\n\n    \ud83d\udea9 **Common mistake:** putting `random.seed()` *inside* a loop\n    instead of before it. Watch what happens:\n    \"\"\")\n    return\n\n\n@app.cell\ndef _(random):\n    print(\"Wrong -- seed inside the loop:\")\n    for _i in range(3):\n        random.seed(99)\n        print(random.randint(1, 6))\n    return\n\n\n@app.cell\ndef _(random):\n    print(\"Right -- seed once, before the loop:\")\n    random.seed(5)\n    for _j in range(3):\n        print(random.randint(1, 6))\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    Seeding inside the loop resets the sequence back to the same\n    starting point on *every single iteration* \u2014 same number, three\n    times in a row \u2014 instead of three different ones. Seed once, at the\n    very top of your program, before any of the random calls you\n    actually want to vary.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Combining Loops with Random Numbers\n\n    Now put loops and randomness together \u2014 simulate rolling a die 5\n    times.\n    \"\"\")\n    return\n\n\n@app.cell\ndef _(random):\n    random.seed(10)\n    print(\"Rolling a die 5 times:\")\n    for _k in range(5):\n        roll = random.randint(1, 6)\n        print(f\"Roll {_k + 1}: {roll}\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Takeaway\n\n    - **Use a seed** when testing, debugging, building examples, or\n      submitting homework that needs a specific output.\n    - **Don't use a seed** for games or real applications where you\n      actually want different outcomes every time.\n\n    You'll extend this into a nested loop in today's GPP \u2014 see\n    [Problem 8](https://BU-EK125.github.io/EK125/gpps/Class6_GPP.html#problem-8-simulating-multiple-trials-with-random-numbers).\n    This is also exactly the bug behind Homework 4's *Seed Reset Bug*\n    problem \u2014 now you've seen it happen live.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## Summary\n\n    - A **nested loop** is one loop inside another's action \u2014 `for`\n      inside `for`, `while` inside `for`, `while` inside `while`, any\n      combination.\n    - The habit that matters most: **check which loop each line belongs\n      to.** Indentation is the only thing telling you.\n    - An `if` inside a loop lets the action *change* based on the loop\n      variable, instead of repeating identically every time.\n    - Python's randomness is **pseudo-random**: reproducible with a\n      seed, genuinely varying without one. Use a seed for testing and\n      debugging; skip it for real applications.\n\n    \ud83d\udcdd [Today's GPP](https://BU-EK125.github.io/EK125/gpps/Class6_GPP.html)\n    \"\"\")\n    return\n\n\nif __name__ == \"__main__\":\n    app.run()\n",
+        }),
+        writable: false,
+        configurable: false,
+    });
+</script>
+<marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.24.2%22%0Aapp%20%3D%20marimo.App(%0A%20%20%20%20width%3D%22full%22%2C%0A%20%20%20%20layout_file%3D%22data%3Aapplication%2Fjson%3Bbase64%2CeyJ0eXBlIjogInNsaWRlcyIsICJkYXRhIjogeyJjZWxscyI6IFt7InNob3dDb2RlIjogZmFsc2V9LCB7fSwge30sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7InR5cGUiOiAiZnJhZ21lbnQiLCAic2hvd0NvZGUiOiB0cnVlfSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQiLCAic2hvd0NvZGUiOiB0cnVlfSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwgeyJ0eXBlIjogImZyYWdtZW50IiwgInNob3dDb2RlIjogdHJ1ZX0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwge30sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7InR5cGUiOiAiZnJhZ21lbnQiLCAic2hvd0NvZGUiOiB0cnVlfSwge30sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50IiwgInNob3dDb2RlIjogdHJ1ZX0sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwge30sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwge31dfX0%3D%22%2C%0A%20%20%20%20css_file%3D%22custom.css%22%2C%0A%20%20%20%20html_head_file%3D%22..%2F..%2Fcolab_button.html%22%2C%0A)%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%20Nested%20Loops%0A%0A%20%20%20%20%23%23%23%20One%20Loop%20Inside%20Another%0A%0A%20%20%20%20*Class%206*%0A%0A%20%20%20%20%F0%9F%93%96%20%5BFull%20reading%3A%20Class%206%5D(https%3A%2F%2FBU-EK125.github.io%2FEK125%2Fclass%2FClass6.html)%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Nested%20%60for%60%20Loops%0A%0A%20%20%20%20A%20**nested%20loop**%20is%20one%20loop%20inside%20another%20%E2%80%94%20the%20*action*%20of%20the%0A%20%20%20%20outer%20loop%20contains%20a%20whole%20other%20loop.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20A%20list%20of%20words%2C%20printed%20character%20by%20character.%20The%20outer%20loop%20picks%0A%20%20%20%20each%20word%3B%20the%20inner%20loop%20picks%20each%20character%20in%20that%20word.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20wordlist%20%3D%20%5B'hello'%2C%20%22hi%22%2C%20'ciao'%5D%0A%20%20%20%20for%20myword%20in%20wordlist%3A%0A%20%20%20%20%20%20%20%20for%20c%20in%20myword%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20print(c%2C%20end%3D'%20')%0A%20%20%20%20%20%20%20%20print()%0A%20%20%20%20print(%22That's%20it!%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Takeaway%0A%0A%20%20%20%20The%20**outer%20loop**%20iterates%20over%20the%20*words*.%20For%20each%20word%2C%20the%0A%20%20%20%20**inner%20loop**%20iterates%20over%20its%20*characters*.%20The%20%60print()%60%20that%0A%20%20%20%20starts%20a%20new%20line%20belongs%20to%20the%20outer%20loop's%20action%2C%20not%20the%20inner%0A%20%20%20%20loop's%20%E2%80%94%20it%20runs%20once%20per%20word%2C%20not%20once%20per%20character.%0A%0A%20%20%20%20%F0%9F%9A%A9%20**Common%20mistake%3A**%20misplacing%20that%20newline%20%60print()%60.%20If%20it's%0A%20%20%20%20indented%20one%20level%20too%20far%20%E2%80%94%20inside%20the%20inner%20loop%20instead%20of%20after%0A%20%20%20%20it%20%E2%80%94%20you%20get%20a%20newline%20after%20*every%20character*%20instead%20of%20after%0A%20%20%20%20every%20*word*.%20When%20a%20nested%20loop's%20output%20looks%20%22off%20by%20one%0A%20%20%20%20indentation%20level%2C%22%20check%20exactly%20which%20loop%20each%20statement%20belongs%0A%20%20%20%20to.%0A%0A%20%20%20%20You'll%20practice%20this%20exact%20pattern%20in%20today's%20GPP%20%E2%80%94%20see%0A%20%20%20%20%5BProblem%205%5D(https%3A%2F%2FBU-EK125.github.io%2FEK125%2Fgpps%2FClass6_GPP.html%23problem-5-printing-characters-from-strings-with-separators).%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Building%20Up%3A%20Numbers%20and%20Stars%0A%0A%20%20%20%20Same%20shape%2C%20different%20content.%20The%20outer%20loop%20repeats%203%20times%2C%0A%20%20%20%20printing%20a%20number%20and%20a%20colon%3B%20the%20inner%20loop%20prints%20stars.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20for%20num%20in%20range(3)%3A%0A%20%20%20%20%20%20%20%20print(f'%7Bnum%7D%3A'%2C%20end%3D'%20')%0A%20%20%20%20%20%20%20%20for%20n%20in%20range(5)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20print('*'%2C%20end%3D'')%0A%20%20%20%20%20%20%20%20print()%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20Fixed%205%20stars%20every%20time.%20To%20make%20the%20star%20*count*%20track%20the%20outer%0A%20%20%20%20loop's%20number%2C%20the%20inner%20loop%20needs%20to%20depend%20on%20%60num%60%20too.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20for%20num2%20in%20range(3)%3A%0A%20%20%20%20%20%20%20%20print(f'%7Bnum2%7D%3A'%2C%20end%3D'%20')%0A%20%20%20%20%20%20%20%20for%20n2%20in%20range(num2%20%2B%201)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20print('*'%2C%20end%3D'')%0A%20%20%20%20%20%20%20%20print()%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20What%20if%20we%20want%20the%20*labels*%20to%20start%20at%201%20instead%20of%200%3F%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20for%20num3%20in%20range(3)%3A%0A%20%20%20%20%20%20%20%20print(f'%7Bnum3%20%2B%201%7D%3A'%2C%20end%3D'%20')%0A%20%20%20%20%20%20%20%20for%20n3%20in%20range(num3%20%2B%201)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20print('*'%2C%20end%3D'')%0A%20%20%20%20%20%20%20%20print()%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Takeaway%0A%0A%20%20%20%20%F0%9F%9A%A9%20**Common%20mistake%3A**%20updating%20what%20gets%20*displayed*%20without%0A%20%20%20%20updating%20what%20gets%20*counted*%2C%20or%20vice%20versa.%20Both%20%60%7Bnum%2B1%7D%60%20(the%0A%20%20%20%20printed%20label)%20and%20%60range(num%2B1)%60%20(the%20star%20count)%20had%20to%20change%0A%20%20%20%20*together*%20to%20stay%20in%20sync%20%E2%80%94%20if%20you%20only%20update%20one%2C%20your%20displayed%0A%20%20%20%20row%20number%20and%20its%20star%20count%20won't%20match.%0A%0A%20%20%20%20You'll%20practice%20this%20exact%20pattern%20in%20today's%20GPP%20%E2%80%94%20see%0A%20%20%20%20%5BProblem%202%5D(https%3A%2F%2FBU-EK125.github.io%2FEK125%2Fgpps%2FClass6_GPP.html%23problem-2-formatted-output-with-nested-loops)%0A%20%20%20%20and%0A%20%20%20%20%5BProblem%207%5D(https%3A%2F%2FBU-EK125.github.io%2FEK125%2Fgpps%2FClass6_GPP.html%23problem-7-triangle-of-stars).%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Nesting%20a%20%60while%60%20Loop%20Inside%20a%20%60for%60%20Loop%0A%0A%20%20%20%20Say%20we%20want%20the%20user%20to%20enter%20**3%20positive%20numbers**.%20A%20%60for%60%20loop%0A%20%20%20%20repeats%20the%20action%203%20times%3B%20each%20time%2C%20a%20%60while%60%20loop%20error-checks%0A%20%20%20%20until%20a%20positive%20number%20actually%20comes%20through.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%60%60%60python%0A%20%20%20%20for%20i%20in%20range(3)%3A%0A%20%20%20%20%20%20%20%20number%20%3D%20input('Enter%20a%20positive%20number%3A%20')%0A%20%20%20%20%20%20%20%20number%20%3D%20float(number)%0A%20%20%20%20%20%20%20%20while%20number%20%3C%3D%200%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20print('Please%20follow%20directions!')%0A%20%20%20%20%20%20%20%20%20%20%20%20number%20%3D%20input('Enter%20a%20positive%20number%3A%20')%0A%20%20%20%20%20%20%20%20%20%20%20%20number%20%3D%20float(number)%0A%20%20%20%20%20%20%20%20print('Thanks%20for%20entering'%2C%20number)%0A%20%20%20%20%20%20%20%20print()%0A%20%20%20%20%60%60%60%0A%0A%20%20%20%20%60%60%60%0A%20%20%20%20Enter%20a%20positive%20number%3A%204%0A%20%20%20%20Thanks%20for%20entering%204.0%0A%0A%20%20%20%20Enter%20a%20positive%20number%3A%20-3.3%0A%20%20%20%20Please%20follow%20directions!%0A%20%20%20%20Enter%20a%20positive%20number%3A%205.1%0A%20%20%20%20Thanks%20for%20entering%205.1%0A%0A%20%20%20%20Enter%20a%20positive%20number%3A%20-6%0A%20%20%20%20Please%20follow%20directions!%0A%20%20%20%20Enter%20a%20positive%20number%3A%2011%0A%20%20%20%20Thanks%20for%20entering%2011.0%0A%20%20%20%20%60%60%60%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Takeaway%0A%0A%20%20%20%20%F0%9F%9A%A9%20**Common%20mistake%20%231%3A**%20forgetting%20to%20re-read%20%60number%60%20inside%20the%0A%20%20%20%20%60while%60%20loop's%20body.%20Leave%20out%20that%20second%20%60number%20%3D%20input(...)%60%20and%0A%20%20%20%20%60number%60%20never%20changes%20%E2%80%94%20the%20condition%20%60number%20%3C%3D%200%60%20stays%20true%0A%20%20%20%20forever%2C%20and%20the%20program%20hangs%20in%20an%20infinite%20loop.%0A%0A%20%20%20%20%F0%9F%9A%A9%20**Common%20mistake%20%232%3A**%20confusing%20%22loop%203%20times%22%20with%20%223%20total%0A%20%20%20%20attempts.%22%20The%20outer%20%60for%60%20loop%20only%20counts%20*successful*%20entries%20%E2%80%94%20a%0A%20%20%20%20user%20who%20enters%20%60-5%2C%20-3%2C%207%60%20has%20used%203%20attempts%20but%20only%20filled%201%20of%0A%20%20%20%20the%203%20required%20slots.%20Rejected%20entries%20don't%20count%20toward%20the%203.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Nesting%20a%20%60while%60%20Loop%20Inside%20Another%20%60while%60%20Loop%0A%0A%20%20%20%20What%20if%20you%20don't%20know%20in%20advance%20how%20many%20times%20you'll%20need%20to%0A%20%20%20%20repeat%20something%3F%20Say%20you%20want%20to%20keep%20collecting%20positive%20numbers%0A%20%20%20%20*until%20their%20total%20reaches%20at%20least%2020*%20%E2%80%94%20that%20calls%20for%20a%20%60while%60%0A%20%20%20%20loop%20as%20the%20**outer**%20loop%20too.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%60%60%60python%0A%20%20%20%20total%20%3D%200%0A%0A%20%20%20%20while%20total%20%3C%2020%3A%0A%20%20%20%20%20%20%20%20number%20%3D%20input('Enter%20a%20positive%20number%3A%20')%0A%20%20%20%20%20%20%20%20number%20%3D%20float(number)%0A%20%20%20%20%20%20%20%20while%20number%20%3C%3D%200%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20print('Please%20follow%20directions!')%0A%20%20%20%20%20%20%20%20%20%20%20%20number%20%3D%20input('Enter%20a%20positive%20number%3A%20')%0A%20%20%20%20%20%20%20%20%20%20%20%20number%20%3D%20float(number)%0A%20%20%20%20%20%20%20%20print('Thanks%20for%20entering'%2C%20number)%0A%20%20%20%20%20%20%20%20total%20%3D%20total%20%2B%20number%0A%20%20%20%20%20%20%20%20print('Running%20total%3A'%2C%20total)%0A%20%20%20%20%20%20%20%20print()%0A%0A%20%20%20%20print('Reached%20the%20target!%20Final%20total%3A'%2C%20total)%0A%20%20%20%20%60%60%60%0A%0A%20%20%20%20%60%60%60%0A%20%20%20%20Enter%20a%20positive%20number%3A%208%0A%20%20%20%20Thanks%20for%20entering%208.0%0A%20%20%20%20Running%20total%3A%208.0%0A%0A%20%20%20%20Enter%20a%20positive%20number%3A%20-3%0A%20%20%20%20Please%20follow%20directions!%0A%20%20%20%20Enter%20a%20positive%20number%3A%209%0A%20%20%20%20Thanks%20for%20entering%209.0%0A%20%20%20%20Running%20total%3A%2017.0%0A%0A%20%20%20%20Enter%20a%20positive%20number%3A%205%0A%20%20%20%20Thanks%20for%20entering%205.0%0A%20%20%20%20Running%20total%3A%2022.0%0A%0A%20%20%20%20Reached%20the%20target!%20Final%20total%3A%2022.0%0A%20%20%20%20%60%60%60%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Takeaway%0A%0A%20%20%20%20The%20**inner**%20%60while%60%20is%20the%20same%20validation%20logic%20as%20before.%20What's%0A%20%20%20%20new%20is%20the%20**outer**%20%60while%60%3A%20instead%20of%20a%20fixed%20count%2C%20it%20keeps%0A%20%20%20%20going%20as%20long%20as%20%60total%60%20hasn't%20reached%2020%20%E2%80%94%20the%20same%20accumulator%0A%20%20%20%20pattern%20from%20Class%205's%0A%20%20%20%20%5BCalculating%20Running%20Sums%5D(https%3A%2F%2FBU-EK125.github.io%2FEK125%2Fclass%2FClass5.html%23calculating-running-sums).%0A%0A%20%20%20%20%F0%9F%9A%A9%20**Common%20mistake%3A**%20putting%20a%20statement%20that%20belongs%20to%20the%0A%20%20%20%20*outer*%20loop%20inside%20the%20*inner*%20loop%20by%20mistake%20(or%20vice%20versa)%20%E2%80%94%0A%20%20%20%20e.g.%20updating%20%60total%60%20inside%20the%20inner%20validation%20%60while%60%20instead%20of%0A%20%20%20%20after%20it%20finishes.%0A%0A%20%20%20%20Today's%20GPP%0A%20%20%20%20%5BProblem%206%5D(https%3A%2F%2FBU-EK125.github.io%2FEK125%2Fgpps%2FClass6_GPP.html%23problem-6-nested-while-and-for-loops)%0A%20%20%20%20builds%20on%20this%20%22keep%20going%20while%20valid%20input%20keeps%20coming%22%20idea.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Using%20%60if%60%20Inside%20a%20Loop%0A%0A%20%20%20%20So%20far%20every%20loop%20has%20repeated%20the%20*same*%20action%20every%20time.%20An%0A%20%20%20%20%60if%60%20statement%20inside%20a%20loop%20lets%20the%20action%20change%20depending%20on%0A%20%20%20%20the%20current%20value%20of%20the%20loop%20variable.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Example%3A%20Even%20and%20Odd%20Numbers%0A%0A%20%20%20%20The%20**modulus%20operator%20%60%25%60**%20gives%20the%20remainder%20after%20division.%20If%0A%20%20%20%20%60n%20%25%202%20%3D%3D%200%60%2C%20%60n%60%20is%20even%3B%20otherwise%20it's%20odd.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20for%20n%20in%20range(10)%3A%0A%20%20%20%20%20%20%20%20if%20n%20%25%202%20%3D%3D%200%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20print(n%2C%20%22is%20even%22)%0A%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20print(n%2C%20%22is%20odd%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Takeaway%0A%0A%20%20%20%20%F0%9F%9A%A9%20**Common%20mistake%3A**%20writing%20%60if%20n%20%3D%200%3A%60%20instead%20of%0A%20%20%20%20%60if%20n%20%25%202%20%3D%3D%200%3A%60%20%E2%80%94%20a%20single%20%60%3D%60%20*assigns*%20a%20value%2C%20%60%3D%3D%60%20*compares*%0A%20%20%20%20two%20values.%20Python%20raises%20a%20%60SyntaxError%60%20if%20you%20try%20this%20in%20an%0A%20%20%20%20%60if%60%20statement%2C%20so%20it's%20easy%20to%20catch%2C%20but%20it's%20still%20the%20single%0A%20%20%20%20most%20common%20typo%20when%20writing%20conditionals.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Randomness%20and%20Reproducibility%0A%0A%20%20%20%20Engineering%20results%20must%20be%20**repeatable**%20%E2%80%94%20but%20Python's%20%60random%60%0A%20%20%20%20module%20is%20exactly%20how%20you%20get%20simulation%2C%20testing%2C%20and%20sampling.%20How%0A%20%20%20%20do%20you%20make%20%22random%22%20reproducible%3F%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20Python's%20%60random%60%20module%20gives%20you%20**pseudo-random**%20numbers%3A%20they%0A%20%20%20%20look%20random%20but%20are%20generated%20by%20a%20formula%2C%20stepping%20forward%20in%20a%0A%20%20%20%20fixed%20sequence%20from%20a%20starting%20point%20called%20a%20**seed**.%20Run%20this%20a%0A%20%20%20%20few%20times%20%E2%80%94%20the%20result%20changes%20each%20time%2C%20since%20no%20seed%20is%20set.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20random%0A%0A%20%20%20%20print(random.randint(1%2C%206))%20%20%23%20simulates%20a%20die%20roll%0A%20%20%20%20return%20(random%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20Set%20a%20**seed**%2C%20and%20the%20sequence%20becomes%20reproducible%20%E2%80%94%20same%20seed%2C%0A%20%20%20%20same%20numbers%2C%20every%20run.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(random)%3A%0A%20%20%20%20random.seed(42)%0A%20%20%20%20print(random.randint(1%2C%206))%0A%20%20%20%20print(random.randint(1%2C%206))%0A%20%20%20%20print(random.randint(1%2C%206))%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Takeaway%0A%0A%20%20%20%20%F0%9F%9A%A9%20**Common%20mistake%3A**%20putting%20%60random.seed()%60%20*inside*%20a%20loop%0A%20%20%20%20instead%20of%20before%20it.%20Watch%20what%20happens%3A%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(random)%3A%0A%20%20%20%20print(%22Wrong%20--%20seed%20inside%20the%20loop%3A%22)%0A%20%20%20%20for%20_i%20in%20range(3)%3A%0A%20%20%20%20%20%20%20%20random.seed(99)%0A%20%20%20%20%20%20%20%20print(random.randint(1%2C%206))%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(random)%3A%0A%20%20%20%20print(%22Right%20--%20seed%20once%2C%20before%20the%20loop%3A%22)%0A%20%20%20%20random.seed(5)%0A%20%20%20%20for%20_j%20in%20range(3)%3A%0A%20%20%20%20%20%20%20%20print(random.randint(1%2C%206))%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20Seeding%20inside%20the%20loop%20resets%20the%20sequence%20back%20to%20the%20same%0A%20%20%20%20starting%20point%20on%20*every%20single%20iteration*%20%E2%80%94%20same%20number%2C%20three%0A%20%20%20%20times%20in%20a%20row%20%E2%80%94%20instead%20of%20three%20different%20ones.%20Seed%20once%2C%20at%20the%0A%20%20%20%20very%20top%20of%20your%20program%2C%20before%20any%20of%20the%20random%20calls%20you%0A%20%20%20%20actually%20want%20to%20vary.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Combining%20Loops%20with%20Random%20Numbers%0A%0A%20%20%20%20Now%20put%20loops%20and%20randomness%20together%20%E2%80%94%20simulate%20rolling%20a%20die%205%0A%20%20%20%20times.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(random)%3A%0A%20%20%20%20random.seed(10)%0A%20%20%20%20print(%22Rolling%20a%20die%205%20times%3A%22)%0A%20%20%20%20for%20_k%20in%20range(5)%3A%0A%20%20%20%20%20%20%20%20roll%20%3D%20random.randint(1%2C%206)%0A%20%20%20%20%20%20%20%20print(f%22Roll%20%7B_k%20%2B%201%7D%3A%20%7Broll%7D%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Takeaway%0A%0A%20%20%20%20-%20**Use%20a%20seed**%20when%20testing%2C%20debugging%2C%20building%20examples%2C%20or%0A%20%20%20%20%20%20submitting%20homework%20that%20needs%20a%20specific%20output.%0A%20%20%20%20-%20**Don't%20use%20a%20seed**%20for%20games%20or%20real%20applications%20where%20you%0A%20%20%20%20%20%20actually%20want%20different%20outcomes%20every%20time.%0A%0A%20%20%20%20You'll%20extend%20this%20into%20a%20nested%20loop%20in%20today's%20GPP%20%E2%80%94%20see%0A%20%20%20%20%5BProblem%208%5D(https%3A%2F%2FBU-EK125.github.io%2FEK125%2Fgpps%2FClass6_GPP.html%23problem-8-simulating-multiple-trials-with-random-numbers).%0A%20%20%20%20This%20is%20also%20exactly%20the%20bug%20behind%20Homework%204's%20*Seed%20Reset%20Bug*%0A%20%20%20%20problem%20%E2%80%94%20now%20you've%20seen%20it%20happen%20live.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Summary%0A%0A%20%20%20%20-%20A%20**nested%20loop**%20is%20one%20loop%20inside%20another's%20action%20%E2%80%94%20%60for%60%0A%20%20%20%20%20%20inside%20%60for%60%2C%20%60while%60%20inside%20%60for%60%2C%20%60while%60%20inside%20%60while%60%2C%20any%0A%20%20%20%20%20%20combination.%0A%20%20%20%20-%20The%20habit%20that%20matters%20most%3A%20**check%20which%20loop%20each%20line%20belongs%0A%20%20%20%20%20%20to.**%20Indentation%20is%20the%20only%20thing%20telling%20you.%0A%20%20%20%20-%20An%20%60if%60%20inside%20a%20loop%20lets%20the%20action%20*change*%20based%20on%20the%20loop%0A%20%20%20%20%20%20variable%2C%20instead%20of%20repeating%20identically%20every%20time.%0A%20%20%20%20-%20Python's%20randomness%20is%20**pseudo-random**%3A%20reproducible%20with%20a%0A%20%20%20%20%20%20seed%2C%20genuinely%20varying%20without%20one.%20Use%20a%20seed%20for%20testing%20and%0A%20%20%20%20%20%20debugging%3B%20skip%20it%20for%20real%20applications.%0A%0A%20%20%20%20%F0%9F%93%9D%20%5BToday's%20GPP%5D(https%3A%2F%2FBU-EK125.github.io%2FEK125%2Fgpps%2FClass6_GPP.html)%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <script data-marimo="true">
+      Object.defineProperty(window, "__MARIMO_MOUNT_CONFIG__", {
+        value: Object.freeze({
+            "filename": "notebook.py",
+            "cwd": "",
+            "lspWorkspace": null,
+            "mode": "read",
+            "version": "0.24.2",
+            "serverToken": "unused",
+            "config": {"ai": {"allow_provider_config": true, "custom_providers": {}, "enabled": true, "models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "auto_close_pairs": true, "copilot": false, "signature_hint_on_typing": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "code_lens": true, "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "medium", "reference_highlighting": true, "theme": "dark"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": false}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "pip"}, "runtime": {"auto_instantiate": false, "auto_reload": "off", "default_csv_encoding": "utf-8", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "show_tracebacks": false, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"css_file": "custom.css", "html_head_file": "../../colab_button.html", "layout_file": "data:application/json;base64,eyJ0eXBlIjogInNsaWRlcyIsICJkYXRhIjogeyJjZWxscyI6IFt7InNob3dDb2RlIjogZmFsc2V9LCB7fSwge30sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7InR5cGUiOiAiZnJhZ21lbnQiLCAic2hvd0NvZGUiOiB0cnVlfSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQiLCAic2hvd0NvZGUiOiB0cnVlfSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwgeyJ0eXBlIjogImZyYWdtZW50IiwgInNob3dDb2RlIjogdHJ1ZX0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwge30sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7InR5cGUiOiAiZnJhZ21lbnQiLCAic2hvd0NvZGUiOiB0cnVlfSwge30sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50IiwgInNob3dDb2RlIjogdHJ1ZX0sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwge30sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwge31dfX0=", "sql_output": "auto", "width": "full"},
+            "layout": {"data": {"cells": [{"showCode": false}, {}, {}, {"type": "fragment"}, {"showCode": true, "type": "fragment"}, {"type": "fragment"}, {}, {"showCode": true, "type": "fragment"}, {"type": "fragment"}, {"showCode": true, "type": "fragment"}, {"type": "fragment"}, {"showCode": true, "type": "fragment"}, {"type": "fragment"}, {}, {"type": "fragment"}, {"type": "fragment"}, {}, {"type": "fragment"}, {"type": "fragment"}, {}, {"type": "fragment"}, {"showCode": true, "type": "fragment"}, {"type": "fragment"}, {}, {"type": "fragment"}, {"showCode": true, "type": "fragment"}, {}, {"showCode": true, "type": "fragment"}, {}, {"showCode": true, "type": "fragment"}, {"showCode": true, "type": "fragment"}, {"type": "fragment"}, {}, {"showCode": true, "type": "fragment"}, {"type": "fragment"}, {}]}, "type": "slides"},
+            "view": {"showAppCode": true},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null
+        }),
+        writable: false,
+        configurable: false,
+      });
+    </script>
+  </body>
+</html>
