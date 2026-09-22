@@ -25,6 +25,8 @@ def _(mo):
         **Group Exercise (Teams of 3)**
 
         Work together to complete the following tasks!
+
+        📖 [Full reading: Class 4](https://BU-EK125.github.io/EK125/class/Class4.html)
         """
     )
     return

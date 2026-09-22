@@ -23,6 +23,8 @@ def _(mo):
         # Class 3 Morning Assignment: Boolean Logic Practice (GPP)
 
         **Group Work (Teams of 3)**
+
+        📖 [Full reading: Class 3](https://BU-EK125.github.io/EK125/class/Class3.html)
         """
     )
     return

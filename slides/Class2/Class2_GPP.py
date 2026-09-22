@@ -22,6 +22,8 @@ def _(mo):
     # Week 2A Morning Assignment: Working with Sequences
 
     **Group Exercise (Teams of 3)**
+
+    📖 [Full reading: Class 2](https://BU-EK125.github.io/EK125/class/Class2.html)
     """)
     return
 

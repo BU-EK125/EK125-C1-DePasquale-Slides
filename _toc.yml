@@ -23,3 +23,9 @@ parts:
         title: "Class 4: Lecture"
       - url: https://bu-ek125.github.io/EK125-slides/Class4_GPP/index.html
         title: "Class 4: GPP"
+  - caption: Class 6
+    chapters:
+      - url: https://bu-ek125.github.io/EK125-slides/Class6_Lecture/index.html
+        title: "Class 6: Lecture"
+      - url: https://bu-ek125.github.io/EK125-slides/Class6_GPP/index.html
+        title: "Class 6: GPP"

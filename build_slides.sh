@@ -28,4 +28,10 @@ for py_file in slides/*/*.py; do
     -f)
   echo "Exporting $py_file -> notebooks/$deck_name.ipynb"
   marimo export ipynb "$py_file" -o "notebooks/$deck_name.ipynb" -f
+  # The exporter flattens mo.md() into real markdown cells, but leaves
+  # the original `import marimo as mo` cell in place even though nothing
+  # downstream needs it -- and marimo isn't installed on Colab, where
+  # this notebook is meant to run. Strip it so the Colab button doesn't
+  # error on the very first cell.
+  python3 strip_marimo_import.py "notebooks/$deck_name.ipynb"
 done

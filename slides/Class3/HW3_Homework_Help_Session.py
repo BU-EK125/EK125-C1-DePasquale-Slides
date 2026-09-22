@@ -35,6 +35,8 @@ def _(mo):
 
     **Make a copy** of this notebook so you can refer back to it later!
 
+    📖 Readings: [Class 3 (Boolean Logic)](https://BU-EK125.github.io/EK125/class/Class3.html) and [Class 4 (Selection Statements)](https://BU-EK125.github.io/EK125/class/Class4.html)
+
     ---
     """)
     return

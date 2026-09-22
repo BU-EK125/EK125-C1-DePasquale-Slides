@@ -24,6 +24,8 @@ def _(mo):
     ### if, if-else, and elif
 
     *Class 4*
+
+    📖 [Full reading: Class 4](https://BU-EK125.github.io/EK125/class/Class4.html)
     """)
     return
 
