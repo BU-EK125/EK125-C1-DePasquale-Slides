@@ -42,6 +42,7 @@ jobs:
         # from this ephemeral CI build. git status (not git diff) so this
         # also catches a brand-new deck whose .ipynb was never committed
         # at all, not just an edited one that's now out of sync.
+        if: github.event.action != 'closed'
         run: |
           if [ -n "$(git status --porcelain notebooks/)" ]; then
             git status --porcelain notebooks/
