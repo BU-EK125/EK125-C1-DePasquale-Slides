@@ -8,6 +8,8 @@ on:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v3
@@ -20,7 +22,7 @@ jobs:
       - name: Install Jupyter Book, marimo, uv, and tools
         # uv is required by `marimo export html-wasm` to resolve each
         # deck's imports into a WASM-compatible dependency set.
-        run: pip install --force-reinstall --no-cache-dir jupyter-book==1.0.2 marimo uv ghp-import
+        run: pip install --force-reinstall --no-cache-dir jupyter-book==1.0.2 marimo uv
 
       - name: Export marimo slide decks
         run: ./build_slides.sh
@@ -29,4 +31,12 @@ jobs:
         run: jb build .
 
       - name: Deploy to GitHub Pages
-        run: ghp-import -n -p -f _build/html
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_build/html
+          # keep_files preserves anything already on gh-pages that this
+          # deploy doesn't touch -- specifically pr-preview/pr-N/
+          # directories from pr-check.yml's preview deploys, which a
+          # plain full-branch-replace (ghp-import -f) would wipe out.
+          keep_files: true
