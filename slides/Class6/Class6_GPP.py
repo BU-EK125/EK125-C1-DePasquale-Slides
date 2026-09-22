@@ -107,9 +107,17 @@ def _(mo):
 
         **D.** `for i in range(1, num):`
 
-        📝 **Submit your answer:**
-        [Class 6 GPP — Problem 2 Quick Check](https://docs.google.com/forms/d/1dmNSTjxT04ScdKiKySShJkAMEJCA_5AXJXkwAJ7J4nA/viewform)
+        📝 **Submit your answer below:**
         """
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.Html(
+        '<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeuAoyLtubfSinMFax9ZNpYQROztkgnQ0dr17WnwAyfb69-Cg/viewform?embedded=true" '
+        'width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>'
     )
     return
 
