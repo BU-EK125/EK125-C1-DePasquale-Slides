@@ -50,6 +50,121 @@ into the live page. **If a widget needs to react to a click, it must be
 and renders nothing. For a plain external embed (a URL), use
 `mo.Html('<iframe src="...">...</iframe>')` instead.
 
+## A bare `print()` cell silently vanishes from the slides layout
+
+This is the single most important gotcha in this file, because it fails
+**completely silently**: a code cell whose only effect is `print()` (no
+`mo.md()`/`mo.Html()`/`mo.iframe()` return value) executes correctly --
+its stdout shows up in the browser console, no error anywhere -- but is
+**entirely absent from the rendered slide**. Not hidden, not empty:
+absent. The cell's neighbors in the same slide's fragment sequence just
+close the gap and renumber, so nothing even looks obviously wrong
+without checking carefully.
+
+Root cause: the marimo slides layout renders a cell's **output** (its
+return value), not its **console output** (stdout/stderr). A cell that
+only prints has no return value, so the slides renderer has nothing to
+show for it. This is specific to the slides layout -- the exact same
+cell shows its printed output fine in marimo's normal (non-slides) `run`
+export, which is why this was easy to miss until a class that actually
+uses several live print()-based demos (Class 6) surfaced it.
+
+**The fix**: capture stdout and explicitly return it as markdown, wrapped
+in a code fence so it renders as one clean monospace block instead of
+losing all the `end=''`/`end=' '` formatting:
+```python
+@app.cell
+def _(mo):
+    with mo.capture_stdout() as some_name_buf:
+        for num in range(3):
+            print(f'{num}:', end=' ')
+            ...
+    mo.md(f"```\n{some_name_buf.getvalue()}\n```")
+    return
+```
+Two things about this pattern that matter:
+- **`mo.redirect_stdout()` is the wrong tool here** -- it looks like the
+  obvious choice (redirects prints straight to the cell's output area,
+  no buffer needed) and does fix the visibility bug, but it renders each
+  individual `print()` call as its **own separate paragraph**, ignoring
+  `end=''`/`end=' '` entirely -- a `0: *****` demo becomes an unreadable
+  vertical list of single characters. `mo.capture_stdout()` + one
+  `mo.md()` code-fence at the end is what actually preserves the
+  original terminal-style formatting. Verified both ways side by side
+  before picking this.
+- **The buffer variable name must be unique across the whole deck**
+  (`wordlist_buf`, `stars1_buf`, `stars2_buf`, ...) -- same reactive
+  redefinition rule as any other cell-local variable (see the next
+  section). Don't reuse a generic `buf` in more than one cell.
+
+This is not optional polish -- audit every new deck for bare-print demo
+cells and wrap all of them this way, or their content will just be
+missing with no error to catch it.
+
+### The Colab side needs the *opposite* fix
+
+`mo.capture_stdout()` doesn't exist without marimo installed, so once a
+cell uses it, it hits the exact same Colab-export problem as
+`mo.Html()`/`mo.iframe()` below -- except the right fix here is the
+reverse. Colab has no slides-layout bug to work around in the first
+place; a plain `print()` cell already displays completely normally
+there. So `strip_marimo_import.py` doesn't convert this pattern the way
+it does `mo.Html()`/`mo.iframe()` -- it **reverts** it: pulls the
+original body back out of the `with mo.capture_stdout(): ...` block,
+drops the block and the trailing `mo.md()` call, and leaves plain
+executable print() code. Any statements before the `with` block (an
+`import`, a `random.seed()` call) are preserved as-is.
+
+## The reactive redefinition rule (and how it fails)
+
+marimo requires every variable to be defined in exactly one cell across
+the whole deck -- reusing a name like a bare `for n in ...` loop variable,
+or a `capture_stdout` buffer, in two different cells throws "This cell
+redefines variables from other cells" and (worse) silently falls back
+from topological to file-order cell execution, which can itself change
+what actually renders (this is what caused the print-output bug above to
+surface differently before vs. after an unrelated variable-naming fix in
+the same deck -- fixing one bug changed the execution order, which
+exposed the other).
+
+Before trusting a new or edited deck, run marimo's own linter, and
+separately scan for accidental name reuse it might not catch (tuple
+unpacking, `with ... as x`, comprehension targets):
+```bash
+marimo check slides/ClassN/DeckN.py
+```
+```bash
+python3 -c "
+import ast
+from collections import defaultdict
+src = open('slides/ClassN/DeckN.py').read()
+tree = ast.parse(src)
+defsites = defaultdict(list)
+def collect(node, names):
+    if isinstance(node, ast.Name) and isinstance(node.ctx, ast.Store):
+        names.add(node.id)
+    elif isinstance(node, (ast.Tuple, ast.List)):
+        for e in node.elts: collect(e, names)
+for node in ast.walk(tree):
+    if isinstance(node, ast.FunctionDef) and node.name == '_':
+        names = set()
+        for n in ast.walk(node):
+            if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Store):
+                names.add(n.id)
+            elif isinstance(n, (ast.For, ast.comprehension)):
+                collect(n.target, names)
+            elif isinstance(n, ast.withitem) and n.optional_vars:
+                collect(n.optional_vars, names)
+        for name in names:
+            if not name.startswith('_'):
+                defsites[name].append(node.lineno)
+for name, lines in defsites.items():
+    if len(lines) > 1:
+        print(name, lines)
+"
+```
+An empty result from both means it's genuinely clean.
+
 ## The Colab-export trap, and how it's handled
 
 marimo's `marimo export ipynb` flattens every `mo.md()` call into a real

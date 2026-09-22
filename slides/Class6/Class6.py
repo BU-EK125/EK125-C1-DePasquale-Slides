@@ -51,13 +51,15 @@ def _(mo):
 
 
 @app.cell
-def _():
-    wordlist = ['hello', "hi", 'ciao']
-    for myword in wordlist:
-        for c in myword:
-            print(c, end=' ')
-        print()
-    print("That's it!")
+def _(mo):
+    with mo.capture_stdout() as wordlist_buf:
+        wordlist = ['hello', "hi", 'ciao']
+        for myword in wordlist:
+            for c in myword:
+                print(c, end=' ')
+            print()
+        print("That's it!")
+    mo.md(f"```\n{wordlist_buf.getvalue()}\n```")
     return
 
 
@@ -96,12 +98,14 @@ def _(mo):
 
 
 @app.cell
-def _():
-    for num in range(3):
-        print(f'{num}:', end=' ')
-        for n1 in range(5):
-            print('*', end='')
-        print()
+def _(mo):
+    with mo.capture_stdout() as stars1_buf:
+        for num in range(3):
+            print(f'{num}:', end=' ')
+            for n1 in range(5):
+                print('*', end='')
+            print()
+    mo.md(f"```\n{stars1_buf.getvalue()}\n```")
     return
 
 
@@ -115,12 +119,14 @@ def _(mo):
 
 
 @app.cell
-def _():
-    for num2 in range(3):
-        print(f'{num2}:', end=' ')
-        for n2 in range(num2 + 1):
-            print('*', end='')
-        print()
+def _(mo):
+    with mo.capture_stdout() as stars2_buf:
+        for num2 in range(3):
+            print(f'{num2}:', end=' ')
+            for n2 in range(num2 + 1):
+                print('*', end='')
+            print()
+    mo.md(f"```\n{stars2_buf.getvalue()}\n```")
     return
 
 
@@ -131,12 +137,14 @@ def _(mo):
 
 
 @app.cell
-def _():
-    for num3 in range(3):
-        print(f'{num3 + 1}:', end=' ')
-        for n3 in range(num3 + 1):
-            print('*', end='')
-        print()
+def _(mo):
+    with mo.capture_stdout() as stars3_buf:
+        for num3 in range(3):
+            print(f'{num3 + 1}:', end=' ')
+            for n3 in range(num3 + 1):
+                print('*', end='')
+            print()
+    mo.md(f"```\n{stars3_buf.getvalue()}\n```")
     return
 
 
@@ -468,12 +476,14 @@ def _(mo):
 
 
 @app.cell
-def _():
-    for n in range(10):
-        if n % 2 == 0:
-            print(n, "is even")
-        else:
-            print(n, "is odd")
+def _(mo):
+    with mo.capture_stdout() as evenodd_buf:
+        for n in range(10):
+            if n % 2 == 0:
+                print(n, "is even")
+            else:
+                print(n, "is odd")
+    mo.md(f"```\n{evenodd_buf.getvalue()}\n```")
     return
 
 
@@ -515,10 +525,12 @@ def _(mo):
 
 
 @app.cell
-def _():
+def _(mo):
     import random
 
-    print(random.randint(1, 6))  # simulates a die roll
+    with mo.capture_stdout() as random_buf:
+        print(random.randint(1, 6))  # simulates a die roll
+    mo.md(f"```\n{random_buf.getvalue()}\n```")
     return (random,)
 
 
@@ -532,11 +544,13 @@ def _(mo):
 
 
 @app.cell
-def _(random):
+def _(mo, random):
     random.seed(42)
-    print(random.randint(1, 6))
-    print(random.randint(1, 6))
-    print(random.randint(1, 6))
+    with mo.capture_stdout() as seed_buf:
+        print(random.randint(1, 6))
+        print(random.randint(1, 6))
+        print(random.randint(1, 6))
+    mo.md(f"```\n{seed_buf.getvalue()}\n```")
     return
 
 
@@ -552,20 +566,24 @@ def _(mo):
 
 
 @app.cell
-def _(random):
-    print("Wrong -- seed inside the loop:")
-    for _i in range(3):
-        random.seed(99)
-        print(random.randint(1, 6))
+def _(mo, random):
+    with mo.capture_stdout() as wrong_buf:
+        print("Wrong -- seed inside the loop:")
+        for _i in range(3):
+            random.seed(99)
+            print(random.randint(1, 6))
+    mo.md(f"```\n{wrong_buf.getvalue()}\n```")
     return
 
 
 @app.cell
-def _(random):
-    print("Right -- seed once, before the loop:")
+def _(mo, random):
     random.seed(5)
-    for _j in range(3):
-        print(random.randint(1, 6))
+    with mo.capture_stdout() as right_buf:
+        print("Right -- seed once, before the loop:")
+        for _j in range(3):
+            print(random.randint(1, 6))
+    mo.md(f"```\n{right_buf.getvalue()}\n```")
     return
 
 
@@ -593,12 +611,14 @@ def _(mo):
 
 
 @app.cell
-def _(random):
+def _(mo, random):
     random.seed(10)
-    print("Rolling a die 5 times:")
-    for _k in range(5):
-        roll = random.randint(1, 6)
-        print(f"Roll {_k + 1}: {roll}")
+    with mo.capture_stdout() as dice_buf:
+        print("Rolling a die 5 times:")
+        for _k in range(5):
+            roll = random.randint(1, 6)
+            print(f"Roll {_k + 1}: {roll}")
+    mo.md(f"```\n{dice_buf.getvalue()}\n```")
     return
 
 
