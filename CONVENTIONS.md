@@ -101,6 +101,41 @@ This is not optional polish -- audit every new deck for bare-print demo
 cells and wrap all of them this way, or their content will just be
 missing with no error to catch it.
 
+### Hide the wrapper -- it's not what a student should see as "the code"
+
+The `with mo.capture_stdout() as ...:` / `mo.md(f"```...")` wrapper is
+marimo-specific plumbing, not code a student should be learning from --
+showing it as "the example" is actively confusing (it's not what they'd
+actually write). Don't show that cell's source at all. Instead, split
+into two cells:
+
+1. A `hide_code=True` markdown cell right before it, showing the
+   **clean** version of the same code by hand, in an ordinary code fence
+   -- exactly what a student would actually write, no capture/mo.md
+   wrapper, variable names as they'd naturally be (this can even differ
+   from the internal names the real execution cell uses if a deck-wide
+   uniqueness rename was needed -- see the next section -- since this
+   fence is just static display text, not executed).
+2. The real `hide_code=True` capture_stdout/mo.md execution cell right
+   after it, code hidden entirely (`hide_code=True`, no `showCode`
+   override needed).
+
+This is the exact same pattern already used elsewhere in this deck for
+the `input()`-based examples (which can't run live in a WASM export at
+all): show clean, hand-typed code as markdown, keep the messy
+implementation detail out of view, but -- critically, unlike a fully
+hand-typed transcript -- the *output* underneath is still genuinely
+live and real, not a hardcoded string someone has to remember to keep in
+sync. Confirmed this doesn't drift out of sync with reality the way a
+fully hand-typed transcript can (this is exactly how the reading's own
+stale `random.seed()` output numbers were caught earlier).
+
+One minor, accepted tradeoff: the Colab-facing notebook (see below)
+ends up showing this same code twice in a row -- once as inert markdown
+text, once as the real executable cell right after it. Not broken, just
+slightly redundant there; not worth extra `strip_marimo_import.py`
+complexity to deduplicate.
+
 ### The Colab side needs the *opposite* fix
 
 `mo.capture_stdout()` doesn't exist without marimo installed, so once a
