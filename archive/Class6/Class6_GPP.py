@@ -360,5 +360,78 @@ def _(mo):
     return
 
 
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(
+        """
+        ## 🎯 Quick Check: Predict Before You Code
+
+        You need `random.seed(42)` to produce the exact 3 trials shown
+        above. Where should the seed call go?
+
+        **A.** Once, before the trials loop
+
+        **B.** Inside the trials loop, at the top of every trial
+
+        **C.** Inside the inner loop, before every single random number
+
+        **D.** Anywhere -- it doesn't affect the output
+
+        📝 **Submit your answer below:**
+        """
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .qc-row { display:flex; gap:12px; }
+          .qc-btn { flex:1; padding:14px; font-size:1.1em; font-family:monospace;
+                    border-radius:8px; border:1px solid #555; background:#2a2a2a;
+                    color:#eee; cursor:pointer; }
+          .qc-status { margin-top:10px; font-size:0.95em; color:#9c9; min-height:1.2em; }
+        </style>
+        <div class="qc-row">
+          <button class="qc-btn" data-choice="A">A</button>
+          <button class="qc-btn" data-choice="B">B</button>
+          <button class="qc-btn" data-choice="C">C</button>
+          <button class="qc-btn" data-choice="D">D</button>
+        </div>
+        <div class="qc-status"></div>
+        <script>
+        (function () {
+          var buttons = document.querySelectorAll('.qc-btn');
+          var status = document.querySelector('.qc-status');
+          var submitted = false;
+          buttons.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              submitted = true;
+              var choice = btn.getAttribute('data-choice');
+              buttons.forEach(function (b) { b.disabled = true; b.style.opacity = '0.5'; });
+              btn.style.opacity = '1';
+              btn.style.background = '#2d6a4f';
+              fetch('https://docs.google.com/forms/d/e/1FAIpQLSeuAoyLtubfSinMFax9ZNpYQROztkgnQ0dr17WnwAyfb69-Cg/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.1464395584=' + encodeURIComponent(choice),
+              });
+              status.textContent = 'Submitted: ' + choice;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="140px",
+    )
+    return
+
+
 if __name__ == "__main__":
     app.run()
