@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-CZceb_kH.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-Bam3NpBI.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-C_DwAp7Z.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-CEsLFVD9.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-D5MAsWEG.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-C6PDArdf.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        const scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          const element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          const newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((_entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>Class2 GPP</title>
+    <script type="module" crossorigin src="./assets/index-4n22QjCD.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/rolldown-runtime-B0Z9INg1.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-CBDbhulC.js">
+    <link rel="modulepreload" crossorigin href="./assets/compiler-runtime-CYIjoINj.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-xfs0Sn4r.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-BQrReHnR.js">
+    <link rel="modulepreload" crossorigin href="./assets/schemas-aTUejmFi.js">
+    <link rel="modulepreload" crossorigin href="./assets/isObject-BCaOs5rp.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-oX0TOjjx.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-Cmx0b_zA.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-aFmHgJZY.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DnwgSs_Z.js">
+    <link rel="modulepreload" crossorigin href="./assets/_initCloneObject-CM3WilQg.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseMerge-DLqSVasz.js">
+    <link rel="modulepreload" crossorigin href="./assets/objects-snlMn4yk.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-B74pBk57.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-92uWqz-P.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-Ci2dTZ72.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-D5Ywm7-q.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-BDbGiS7O.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-CrTnjj37.js">
+    <link rel="modulepreload" crossorigin href="./assets/session-Sz5nSFku.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-BlNM0caL.js">
+    <link rel="modulepreload" crossorigin href="./assets/clsx-DB0hHKMi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-ldLVeaqm.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-BH2jz-F4.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DzCQtGkt.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-BSRA2YI9.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-Dh8EwhsF.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-CA-2mBs3.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-B7HeEoG2.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-BoA6XBpj.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-Do8M9TDF.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-DHJ9s6Vk.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-nLt2y0Sw.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-ByJdIf5p.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-BUtPzKB4.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BtC9ym6k.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CZNULd6Z.js">
+    <link rel="modulepreload" crossorigin href="./assets/arrays-BqUx5USx.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-Haz_uxEL.js">
+    <link rel="modulepreload" crossorigin href="./assets/capabilities-D8kPgMKr.js">
+    <link rel="modulepreload" crossorigin href="./assets/cjs-C49f7GXV.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-B_XmHROl.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DiYjQAhI.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-B_3iMIUq.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-CReV1AYG.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-C6_IaFh7.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B8pdsUrS.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-BUaJcygz.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-hGYJX0Ha.js">
+    <link rel="modulepreload" crossorigin href="./assets/database-zap-CloO6gbw.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-Bc-r3jsC.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-DgpSQhrP.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-DEbY281O.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-k9DpjH68.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-DpWHUGuF.js">
+    <link rel="modulepreload" crossorigin href="./assets/write-secret-modal-D6zoZgLY.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-C4J9gIE1.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-D_HX-0qx.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-BSgtkC2e.js">
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-HclGiUj8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DkPPv0FB.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Dw9YRsCU.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B0RXffUm.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Cx4BE7jC.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CKUpxYGQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-Dc5bKD4z.js">
+    <link rel="modulepreload" crossorigin href="./assets/paths-zcL04qUW.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-C-ri8BtY.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-Buhk-UgR.js">
+    <link rel="modulepreload" crossorigin href="./assets/purify.es-DrVcFY1Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-Cp-G34Rz.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-DjNf4SIX.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasPath-BmRQipI0.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-yw4sIeJR.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-gX6o3Pih.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-Bs4cJfJU.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-DzO-nXy-.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-DjXr9Y9D.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BMXKNElG.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-CFuPxa9F.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-DlEomWzI.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-CvVTau-c.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-BHMOvJzM.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-DdB_uBif.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DpIyjHqY.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-LboTfNDv.js">
+    <link rel="modulepreload" crossorigin href="./assets/micromark-factory-space-D9Dr-k4J.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-5FQGJX7Z-CRg4xQWg.js">
+    <link rel="modulepreload" crossorigin href="./assets/markdown-renderer-BZKlbm2Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-z8fuTE3w.js">
+    <link rel="modulepreload" crossorigin href="./assets/useRunCells-CX7oW5zy.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-DwhMAd9l.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-B2d_dHwI.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-CPtBiNgr.js">
+    <link rel="modulepreload" crossorigin href="./assets/events-CbeVJ6OD.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-Di9TbuV9.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-CDVGFYfr.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-B-r81uZ6.js">
+    <link rel="modulepreload" crossorigin href="./assets/tabs-Cy1qXLzH.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-CKA5zVsM.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-C40jM9o4.js">
+    <link rel="modulepreload" crossorigin href="./assets/html-to-image-D6GUC5q6.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-DMxOzI7b.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CUK1W5bI.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-Bf-rx_aV.js">
+    <link rel="modulepreload" crossorigin href="./assets/tree-actions-CG5g7aUQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/ellipsis-Dfik_tuW.js">
+    <link rel="modulepreload" crossorigin href="./assets/external-link-Bp3BxyRA.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-Ck-Hgfvj.js">
+    <link rel="modulepreload" crossorigin href="./assets/message-circle-BQB1AIAg.js">
+    <link rel="modulepreload" crossorigin href="./assets/hat-glasses-C8LSY3HT.js">
+    <link rel="modulepreload" crossorigin href="./assets/package-DPlscLzt.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-DrODSIs0.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-Cwh96ZBE.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dmKwNsrp.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-DsD08SLK.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-B6AklCzD.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-6burT2XF.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-DqpoYOvw.js">
+    <link rel="modulepreload" crossorigin href="./assets/VisuallyHidden-CBMDmozt.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-BiqAQ-zI.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-yTIMUO13.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-nQ3Iam8J.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-B58T85Jq.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-CNPGWpMu.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-Bq_nmf5u.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-Dm4DaIgg.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser-AQmjV9CX.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-BG35uS_N.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-icons.esm-hr79-MCS.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-nLO-SoUf.js">
+    <link rel="modulepreload" crossorigin href="./assets/useIframeCapabilities-C7Di8f2y.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-Dw5YY9wq.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-49LGK4zG.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-C6s96nu2.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-DmqOOjfe.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-resizable-panels.browser.esm-BSRAHC4P.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-CzIGPEZQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-ChZdjJhj.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-DkZweMAs.js">
+    <link rel="modulepreload" crossorigin href="./assets/spec-DKsAmLTi.js">
+    <link rel="modulepreload" crossorigin href="./assets/semaphore-BjoL5P0h.js">
+    <link rel="modulepreload" crossorigin href="./assets/fileToBase64-NhpNrK5l.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-BXC4CItZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/code-xml-B7x62Eeh.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-headphone-rFCxFRI8.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-DF8n85RA.js">
+    <link rel="modulepreload" crossorigin href="./assets/image-ab13yGv4.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-icons-DdGYuADJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/globe-BQf75qV_.js">
+    <link rel="modulepreload" crossorigin href="./assets/markdown-export-0rLbaq8b.js">
+    <link rel="modulepreload" crossorigin href="./assets/data-grid-types-DgHVN_Zz.js">
+    <link rel="modulepreload" crossorigin href="./assets/glide-utils-UGsrRHYj.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-riSXbYe_.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-B58Ib8Ir.js">
+    <link rel="modulepreload" crossorigin href="./assets/triangle-alert-MihykDYG.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-Djf4O40e.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-CrFhA96G.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-X-CJUSM8.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-DzY74mzC.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-CjLa9BiH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-CLytDdMl.js">
+    <link rel="modulepreload" crossorigin href="./assets/pathUtils-Cryrlpma.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-DaUHnl_e.js">
+    <link rel="stylesheet" crossorigin href="./assets/cells-D-c15Ks-.css">
+    <link rel="stylesheet" crossorigin href="./assets/markdown-renderer-B7zTpxjS.css">
+    <link rel="stylesheet" crossorigin href="./assets/JsonOutput-BQtz7-np.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-C7yAojRA.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <style title='marimo-custom'>/* Slightly bigger code font when presenting in Slides layout, sized to still fit on one slide */
+.reveal .cm-editor,
+.reveal .cm-content,
+.reveal .cm-line {
+  font-size: 1.05em !important;
+  line-height: 1.3 !important;
+}
+
+/* Slightly bigger code/output text (e.g. print results) on slides */
+.reveal pre,
+.reveal code,
+.reveal .text-xs,
+.reveal .text-sm,
+.reveal .output {
+  font-size: 1.2em !important;
+  line-height: 1.25 !important;
+}
+</style><script>
+(function () {
+  function addColabButton() {
+    var parts = window.location.pathname.split('/').filter(Boolean);
+    // Path is .../EK125-slides/<DeckName>/index.html -- deck name is the
+    // second-to-last segment regardless of trailing slash/filename.
+    var deckName = parts[parts.length - 2] || parts[parts.length - 1];
+    if (!deckName) return;
+
+    var colabUrl =
+      'https://colab.research.google.com/github/BU-EK125/EK125-slides/blob/main/notebooks/' +
+      deckName + '.ipynb';
+
+    var btn = document.createElement('a');
+    btn.href = colabUrl;
+    btn.target = '_blank';
+    btn.rel = 'noopener';
+    btn.title = 'Open this deck as a notebook in Google Colab';
+    btn.textContent = '🚀 Open in Colab';
+    btn.style.cssText = [
+      'position:fixed', 'top:12px', 'right:12px', 'z-index:99999',
+      'background:#fff', 'color:#111', 'padding:8px 14px',
+      'border-radius:8px', 'text-decoration:none',
+      'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif',
+      'font-size:14px', 'font-weight:600',
+      'box-shadow:0 2px 8px rgba(0,0,0,0.25)', 'border:1px solid #ddd',
+    ].join(';');
+    document.body.appendChild(btn);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', addColabButton);
+  } else {
+    addColabButton();
+  }
+})();
+</script>
+
+<script data-marimo="true">
+    Object.defineProperty(window, "__MARIMO_EXPORT_CONTEXT__", {
+        value: Object.freeze({
+            trusted: true,
+            notebookCode: "import marimo\n\n__generated_with = \"0.24.2\"\napp = marimo.App(\n    width=\"full\",\n    layout_file=\"data:application/json;base64,eyJ0eXBlIjogInNsaWRlcyIsICJkYXRhIjogeyJjZWxscyI6IFt7InNob3dDb2RlIjogZmFsc2V9LCB7fSwge30sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQiLCAic2hvd0NvZGUiOiB0cnVlfSwge30sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwge30sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7fSwge30sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50IiwgInNob3dDb2RlIjogdHJ1ZX0sIHt9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50IiwgInNob3dDb2RlIjogdHJ1ZX0sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQiLCAic2hvd0NvZGUiOiB0cnVlfSwge30sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9XSwgImRlY2siOiB7fX19\",\n    css_file=\"custom.css\",\n    html_head_file=\"../../colab_button.html\",\n)\n\n\n@app.cell\ndef _():\n    import marimo as mo\n\n    return (mo,)\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    # Week 2A Morning Assignment: Working with Sequences\n\n    **Group Exercise (Teams of 3)**\n\n    \ud83d\udcd6 [Full reading: Class 2](https://BU-EK125.github.io/EK125/class/Class2.html)\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## Part 1: String Exploration\n\n    Work together to complete the following tasks:\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Task 1.1: String Basics\n    \"\"\")\n    return\n\n\n@app.cell\ndef _():\n    # Given this string:\n    sentence = \"The quick brown fox jumps over the lazy dog\"\n\n    # Write code to:\n    # 1. Print the first character\n    # 2. Print the last character\n    # 3. Print the length of the sentence\n    # 4. Check if the word \"fox\" is in the sentenc\n    sentence[1]\n    return (sentence,)\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Bonus: Slicing (from the reading)\n    \"\"\")\n    return\n\n\n@app.cell\ndef _(sentence):\n    # Bonus from the reading \u2014 \"Slicing\" (Class2.html)\n    sentence[0:9]  # a *range* of positions, not just one\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    Slicing works on lists too \u2014 same `[start:stop]` syntax. \"\n        \"Try `sentence[-9:]` next.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Task 1.2: String Manipulation\n    \"\"\")\n    return\n\n\n@app.cell\ndef _():\n    # Given this string:\n    name = \"john doe\"\n\n    # Write code to do each of the following (create a new variable for each, always starting from the original `name`):\n    # 1. Convert it to title case (John Doe) and print the result\n    # 2. Replace all spaces with underscores and print the result\n    # 3. Convert to uppercase and print the result\n    # 4. Count how many times the letter 'o' appears and print the count\n    name.title()\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## Part 2: List Operations\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Task 2.1: List Creation and Access\n    \"\"\")\n    return\n\n\n@app.cell\ndef _():\n    # Create a list containing the names of your three team members\n    teamNames = [\"bob\", \"sally\", \"george\"]  # Fill this in\n\n    # Write code to:\n    # 1. Print the first team member's name\n    # 2. Print the last team member's name\n    # 3. Print how many people are on your team\n    # 4. Add a fourth name \"TA Helper\" to the list\n\n    teamNames\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Task 2.2: List Modification Challenge\n    \"\"\")\n    return\n\n\n@app.cell\ndef _():\n    # Start with this list:\n    numbers = [10, 20, 30, 40, 50]\n\n    # Without retyping the entire list, use list methods to:\n    # 1. Change the third number from `30` to `35`\n    # 2. Add the number 60 to the end\n    # 3. Insert the number 5 at the beginning (Careful, this is a little harder!)\n    # 4. Remove the number 40 from the list\n    # 5. Remove the last number from the list\n    # Print the final list - it should be [5, 10, 20, 35, 50]\n\n    numbers\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## Part 3: Mixed Practice\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Task 3.1: Data Processing\n\n    Your team has collected some survey data. Help clean and process it:\n    \"\"\")\n    return\n\n\n@app.cell\ndef _():\n    # Raw survey responses (some have extra spaces, inconsistent capitalization)\n    responses = [\"yes\", \"NO\", \"maybe\", \"YES\", \"no\", \"Maybe\", \"yes\"]\n\n    # Write code to:\n    # 1. Clean each response (convert to lowercase)\n    # 2. Count how many \"yes\", \"no\", and \"maybe\" responses there are\n    # 3. Create separate lists for each type of response\n    # 4. Create separate tuples for each type of response\n\n    responses\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Task 3.2: Text Analysis\n    \"\"\")\n    return\n\n\n@app.cell\ndef _():\n    # Analyze this text:\n    text = \"\"\"Monty Python's sketch on spam https://en.wikipedia.org/wiki/Spam_(Monty_Python_sketch)\n    directly led to the use of spam to describe unwanted email. As a joke, and in reference\n    to the repetitive and unwanted presence of spam in the sketch, early internet users\n    flooded forums with the word SPAM . This came to describe the equally unwanted marketing\n    and repetetive emails which flood our inbox daily.\"\"\"\n\n    # Write code to:\n    # 1. Split the text into individual words\n    # 2. Count how many words there are total\n    # 3. Count how many times \"spam\" appears, both upper and lowercase\n\n    text\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## Part 4: Challenge Problem\n\n    This is a bit of a stretch. You will have to do some work on your own to\n    find the additional command necessary to test if something is a string or\n    a number.\n    \"\"\")\n    return\n\n\n@app.cell\ndef _():\n    # You have a list of mixed data types:\n    mixed_data = [1, \"hello\", 2.5, \"world\", 42, \"python\", 3.14]\n\n    # Write code to:\n    # 1. Create two separate lists: one for numbers, one for strings\n    # 2. Calculate the sum of all numbers\n    # 3. Join all strings together with spaces between them\n\n    mixed_data\n    return\n\n\nif __name__ == \"__main__\":\n    app.run()\n",
+        }),
+        writable: false,
+        configurable: false,
+    });
+</script>
+<marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.24.2%22%0Aapp%20%3D%20marimo.App(%0A%20%20%20%20width%3D%22full%22%2C%0A%20%20%20%20layout_file%3D%22data%3Aapplication%2Fjson%3Bbase64%2CeyJ0eXBlIjogInNsaWRlcyIsICJkYXRhIjogeyJjZWxscyI6IFt7InNob3dDb2RlIjogZmFsc2V9LCB7fSwge30sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQiLCAic2hvd0NvZGUiOiB0cnVlfSwge30sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwge30sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7fSwge30sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50IiwgInNob3dDb2RlIjogdHJ1ZX0sIHt9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50IiwgInNob3dDb2RlIjogdHJ1ZX0sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQiLCAic2hvd0NvZGUiOiB0cnVlfSwge30sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9XSwgImRlY2siOiB7fX19%22%2C%0A%20%20%20%20css_file%3D%22custom.css%22%2C%0A%20%20%20%20html_head_file%3D%22..%2F..%2Fcolab_button.html%22%2C%0A)%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%20Week%202A%20Morning%20Assignment%3A%20Working%20with%20Sequences%0A%0A%20%20%20%20**Group%20Exercise%20(Teams%20of%203)**%0A%0A%20%20%20%20%F0%9F%93%96%20%5BFull%20reading%3A%20Class%202%5D(https%3A%2F%2FBU-EK125.github.io%2FEK125%2Fclass%2FClass2.html)%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Part%201%3A%20String%20Exploration%0A%0A%20%20%20%20Work%20together%20to%20complete%20the%20following%20tasks%3A%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Task%201.1%3A%20String%20Basics%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20Given%20this%20string%3A%0A%20%20%20%20sentence%20%3D%20%22The%20quick%20brown%20fox%20jumps%20over%20the%20lazy%20dog%22%0A%0A%20%20%20%20%23%20Write%20code%20to%3A%0A%20%20%20%20%23%201.%20Print%20the%20first%20character%0A%20%20%20%20%23%202.%20Print%20the%20last%20character%0A%20%20%20%20%23%203.%20Print%20the%20length%20of%20the%20sentence%0A%20%20%20%20%23%204.%20Check%20if%20the%20word%20%22fox%22%20is%20in%20the%20sentenc%0A%20%20%20%20sentence%5B1%5D%0A%20%20%20%20return%20(sentence%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Bonus%3A%20Slicing%20(from%20the%20reading)%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(sentence)%3A%0A%20%20%20%20%23%20Bonus%20from%20the%20reading%20%E2%80%94%20%22Slicing%22%20(Class2.html)%0A%20%20%20%20sentence%5B0%3A9%5D%20%20%23%20a%20*range*%20of%20positions%2C%20not%20just%20one%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20Slicing%20works%20on%20lists%20too%20%E2%80%94%20same%20%60%5Bstart%3Astop%5D%60%20syntax.%20%22%0A%20%20%20%20%20%20%20%20%22Try%20%60sentence%5B-9%3A%5D%60%20next.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Task%201.2%3A%20String%20Manipulation%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20Given%20this%20string%3A%0A%20%20%20%20name%20%3D%20%22john%20doe%22%0A%0A%20%20%20%20%23%20Write%20code%20to%20do%20each%20of%20the%20following%20(create%20a%20new%20variable%20for%20each%2C%20always%20starting%20from%20the%20original%20%60name%60)%3A%0A%20%20%20%20%23%201.%20Convert%20it%20to%20title%20case%20(John%20Doe)%20and%20print%20the%20result%0A%20%20%20%20%23%202.%20Replace%20all%20spaces%20with%20underscores%20and%20print%20the%20result%0A%20%20%20%20%23%203.%20Convert%20to%20uppercase%20and%20print%20the%20result%0A%20%20%20%20%23%204.%20Count%20how%20many%20times%20the%20letter%20'o'%20appears%20and%20print%20the%20count%0A%20%20%20%20name.title()%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Part%202%3A%20List%20Operations%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Task%202.1%3A%20List%20Creation%20and%20Access%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20Create%20a%20list%20containing%20the%20names%20of%20your%20three%20team%20members%0A%20%20%20%20teamNames%20%3D%20%5B%22bob%22%2C%20%22sally%22%2C%20%22george%22%5D%20%20%23%20Fill%20this%20in%0A%0A%20%20%20%20%23%20Write%20code%20to%3A%0A%20%20%20%20%23%201.%20Print%20the%20first%20team%20member's%20name%0A%20%20%20%20%23%202.%20Print%20the%20last%20team%20member's%20name%0A%20%20%20%20%23%203.%20Print%20how%20many%20people%20are%20on%20your%20team%0A%20%20%20%20%23%204.%20Add%20a%20fourth%20name%20%22TA%20Helper%22%20to%20the%20list%0A%0A%20%20%20%20teamNames%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Task%202.2%3A%20List%20Modification%20Challenge%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20Start%20with%20this%20list%3A%0A%20%20%20%20numbers%20%3D%20%5B10%2C%2020%2C%2030%2C%2040%2C%2050%5D%0A%0A%20%20%20%20%23%20Without%20retyping%20the%20entire%20list%2C%20use%20list%20methods%20to%3A%0A%20%20%20%20%23%201.%20Change%20the%20third%20number%20from%20%6030%60%20to%20%6035%60%0A%20%20%20%20%23%202.%20Add%20the%20number%2060%20to%20the%20end%0A%20%20%20%20%23%203.%20Insert%20the%20number%205%20at%20the%20beginning%20(Careful%2C%20this%20is%20a%20little%20harder!)%0A%20%20%20%20%23%204.%20Remove%20the%20number%2040%20from%20the%20list%0A%20%20%20%20%23%205.%20Remove%20the%20last%20number%20from%20the%20list%0A%20%20%20%20%23%20Print%20the%20final%20list%20-%20it%20should%20be%20%5B5%2C%2010%2C%2020%2C%2035%2C%2050%5D%0A%0A%20%20%20%20numbers%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Part%203%3A%20Mixed%20Practice%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Task%203.1%3A%20Data%20Processing%0A%0A%20%20%20%20Your%20team%20has%20collected%20some%20survey%20data.%20Help%20clean%20and%20process%20it%3A%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20Raw%20survey%20responses%20(some%20have%20extra%20spaces%2C%20inconsistent%20capitalization)%0A%20%20%20%20responses%20%3D%20%5B%22yes%22%2C%20%22NO%22%2C%20%22maybe%22%2C%20%22YES%22%2C%20%22no%22%2C%20%22Maybe%22%2C%20%22yes%22%5D%0A%0A%20%20%20%20%23%20Write%20code%20to%3A%0A%20%20%20%20%23%201.%20Clean%20each%20response%20(convert%20to%20lowercase)%0A%20%20%20%20%23%202.%20Count%20how%20many%20%22yes%22%2C%20%22no%22%2C%20and%20%22maybe%22%20responses%20there%20are%0A%20%20%20%20%23%203.%20Create%20separate%20lists%20for%20each%20type%20of%20response%0A%20%20%20%20%23%204.%20Create%20separate%20tuples%20for%20each%20type%20of%20response%0A%0A%20%20%20%20responses%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Task%203.2%3A%20Text%20Analysis%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20Analyze%20this%20text%3A%0A%20%20%20%20text%20%3D%20%22%22%22Monty%20Python's%20sketch%20on%20spam%20https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FSpam_(Monty_Python_sketch)%0A%20%20%20%20directly%20led%20to%20the%20use%20of%20spam%20to%20describe%20unwanted%20email.%20As%20a%20joke%2C%20and%20in%20reference%0A%20%20%20%20to%20the%20repetitive%20and%20unwanted%20presence%20of%20spam%20in%20the%20sketch%2C%20early%20internet%20users%0A%20%20%20%20flooded%20forums%20with%20the%20word%20SPAM%20.%20This%20came%20to%20describe%20the%20equally%20unwanted%20marketing%0A%20%20%20%20and%20repetetive%20emails%20which%20flood%20our%20inbox%20daily.%22%22%22%0A%0A%20%20%20%20%23%20Write%20code%20to%3A%0A%20%20%20%20%23%201.%20Split%20the%20text%20into%20individual%20words%0A%20%20%20%20%23%202.%20Count%20how%20many%20words%20there%20are%20total%0A%20%20%20%20%23%203.%20Count%20how%20many%20times%20%22spam%22%20appears%2C%20both%20upper%20and%20lowercase%0A%0A%20%20%20%20text%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Part%204%3A%20Challenge%20Problem%0A%0A%20%20%20%20This%20is%20a%20bit%20of%20a%20stretch.%20You%20will%20have%20to%20do%20some%20work%20on%20your%20own%20to%0A%20%20%20%20find%20the%20additional%20command%20necessary%20to%20test%20if%20something%20is%20a%20string%20or%0A%20%20%20%20a%20number.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20You%20have%20a%20list%20of%20mixed%20data%20types%3A%0A%20%20%20%20mixed_data%20%3D%20%5B1%2C%20%22hello%22%2C%202.5%2C%20%22world%22%2C%2042%2C%20%22python%22%2C%203.14%5D%0A%0A%20%20%20%20%23%20Write%20code%20to%3A%0A%20%20%20%20%23%201.%20Create%20two%20separate%20lists%3A%20one%20for%20numbers%2C%20one%20for%20strings%0A%20%20%20%20%23%202.%20Calculate%20the%20sum%20of%20all%20numbers%0A%20%20%20%20%23%203.%20Join%20all%20strings%20together%20with%20spaces%20between%20them%0A%0A%20%20%20%20mixed_data%0A%20%20%20%20return%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <script data-marimo="true">
+      Object.defineProperty(window, "__MARIMO_MOUNT_CONFIG__", {
+        value: Object.freeze({
+            "filename": "notebook.py",
+            "cwd": "",
+            "lspWorkspace": null,
+            "mode": "read",
+            "version": "0.24.2",
+            "serverToken": "unused",
+            "config": {"ai": {"allow_provider_config": true, "custom_providers": {}, "enabled": true, "models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "auto_close_pairs": true, "copilot": false, "signature_hint_on_typing": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "code_lens": true, "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "medium", "reference_highlighting": true, "theme": "dark"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": false}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "pip"}, "runtime": {"auto_instantiate": false, "auto_reload": "off", "default_csv_encoding": "utf-8", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "show_tracebacks": false, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"css_file": "custom.css", "html_head_file": "../../colab_button.html", "layout_file": "data:application/json;base64,eyJ0eXBlIjogInNsaWRlcyIsICJkYXRhIjogeyJjZWxscyI6IFt7InNob3dDb2RlIjogZmFsc2V9LCB7fSwge30sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQiLCAic2hvd0NvZGUiOiB0cnVlfSwge30sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwge30sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7fSwge30sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50IiwgInNob3dDb2RlIjogdHJ1ZX0sIHt9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50IiwgInNob3dDb2RlIjogdHJ1ZX0sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQiLCAic2hvd0NvZGUiOiB0cnVlfSwge30sIHsidHlwZSI6ICJmcmFnbWVudCIsICJzaG93Q29kZSI6IHRydWV9XSwgImRlY2siOiB7fX19", "sql_output": "auto", "width": "full"},
+            "layout": {"data": {"cells": [{"showCode": false}, {}, {}, {}, {"showCode": true, "type": "fragment"}, {}, {"showCode": true, "type": "fragment"}, {"type": "fragment"}, {}, {"showCode": true, "type": "fragment"}, {}, {}, {"showCode": true, "type": "fragment"}, {}, {"showCode": true, "type": "fragment"}, {}, {}, {"showCode": true, "type": "fragment"}, {}, {"showCode": true, "type": "fragment"}, {}, {"showCode": true, "type": "fragment"}], "deck": {}}, "type": "slides"},
+            "view": {"showAppCode": true},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null
+        }),
+        writable: false,
+        configurable: false,
+      });
+    </script>
+  </body>
+</html>
