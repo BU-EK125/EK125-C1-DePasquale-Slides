@@ -117,8 +117,22 @@ into two cells:
    uniqueness rename was needed -- see the next section -- since this
    fence is just static display text, not executed).
 2. The real `hide_code=True` capture_stdout/mo.md execution cell right
-   after it, code hidden entirely (`hide_code=True`, no `showCode`
-   override needed).
+   after it, with its layout entry given an **explicit**
+   `"showCode": false`.
+
+   **`hide_code=True` alone does not hide a code cell's source in the
+   exported "run" HTML** -- it only affects the editor UI. What actually
+   controls source visibility there is the `--show-code` CLI flag
+   (`build_slides.sh` always passes it) crossed with each cell's own
+   `showCode` entry in the layout json; omitting `showCode` falls back
+   to the global `--show-code` default, not to `hide_code`. Confirmed
+   this the hard way: shipping a version that relied on `hide_code=True`
+   alone still showed the raw `with mo.capture_stdout() as
+   stars1_buf:` wrapper live on the site. The layout's cell 0 (the
+   `import marimo as mo` cell, which has no `hide_code` decorator at
+   all) has always been hidden correctly for the same reason -- it has
+   an explicit `{"showCode": false}` entry, not because of anything in
+   the `.py` source.
 
 This is the exact same pattern already used elsewhere in this deck for
 the `input()`-based examples (which can't run live in a WASM export at
