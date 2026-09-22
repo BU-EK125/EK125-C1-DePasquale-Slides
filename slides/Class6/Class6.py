@@ -11,9 +11,12 @@ app = marimo.App(
 
 @app.cell
 def _():
+    import contextlib
+    import io
+
     import marimo as mo
 
-    return (mo,)
+    return contextlib, io, mo
 
 
 @app.cell(hide_code=True)
@@ -50,24 +53,10 @@ def _(mo):
     return
 
 
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
-    wordlist = ['hello', "hi", 'ciao']
-    for myword in wordlist:
-        for c in myword:
-            print(c, end=' ')
-        print()
-    print("That's it!")
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    with mo.capture_stdout() as wordlist_buf:
+@app.cell
+def _(contextlib, io, mo):
+    wordlist_buf = io.StringIO()
+    with contextlib.redirect_stdout(wordlist_buf):
         wordlist = ['hello', "hi", 'ciao']
         for myword in wordlist:
             for c in myword:
@@ -112,23 +101,10 @@ def _(mo):
     return
 
 
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
-    for num in range(3):
-        print(f'{num}:', end=' ')
-        for n in range(5):
-            print('*', end='')
-        print()
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    with mo.capture_stdout() as stars1_buf:
+@app.cell
+def _(contextlib, io, mo):
+    stars1_buf = io.StringIO()
+    with contextlib.redirect_stdout(stars1_buf):
         for num in range(3):
             print(f'{num}:', end=' ')
             for n1 in range(5):
@@ -147,23 +123,10 @@ def _(mo):
     return
 
 
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
-    for num in range(3):
-        print(f'{num}:', end=' ')
-        for n in range(num + 1):
-            print('*', end='')
-        print()
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    with mo.capture_stdout() as stars2_buf:
+@app.cell
+def _(contextlib, io, mo):
+    stars2_buf = io.StringIO()
+    with contextlib.redirect_stdout(stars2_buf):
         for num2 in range(3):
             print(f'{num2}:', end=' ')
             for n2 in range(num2 + 1):
@@ -179,23 +142,10 @@ def _(mo):
     return
 
 
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
-    for num in range(3):
-        print(f'{num + 1}:', end=' ')
-        for n in range(num + 1):
-            print('*', end='')
-        print()
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    with mo.capture_stdout() as stars3_buf:
+@app.cell
+def _(contextlib, io, mo):
+    stars3_buf = io.StringIO()
+    with contextlib.redirect_stdout(stars3_buf):
         for num3 in range(3):
             print(f'{num3 + 1}:', end=' ')
             for n3 in range(num3 + 1):
@@ -532,23 +482,10 @@ def _(mo):
     return
 
 
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
-    for n in range(10):
-        if n % 2 == 0:
-            print(n, "is even")
-        else:
-            print(n, "is odd")
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    with mo.capture_stdout() as evenodd_buf:
+@app.cell
+def _(contextlib, io, mo):
+    evenodd_buf = io.StringIO()
+    with contextlib.redirect_stdout(evenodd_buf):
         for n in range(10):
             if n % 2 == 0:
                 print(n, "is even")
@@ -595,23 +532,12 @@ def _(mo):
     return
 
 
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
+@app.cell
+def _(contextlib, io, mo):
     import random
 
-    print(random.randint(1, 6))  # simulates a die roll
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    import random
-
-    with mo.capture_stdout() as random_buf:
+    random_buf = io.StringIO()
+    with contextlib.redirect_stdout(random_buf):
         print(random.randint(1, 6))  # simulates a die roll
     mo.md(f"```\n{random_buf.getvalue()}\n```")
     return (random,)
@@ -626,23 +552,11 @@ def _(mo):
     return
 
 
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
+@app.cell
+def _(contextlib, io, mo, random):
     random.seed(42)
-    print(random.randint(1, 6))
-    print(random.randint(1, 6))
-    print(random.randint(1, 6))
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo, random):
-    random.seed(42)
-    with mo.capture_stdout() as seed_buf:
+    seed_buf = io.StringIO()
+    with contextlib.redirect_stdout(seed_buf):
         print(random.randint(1, 6))
         print(random.randint(1, 6))
         print(random.randint(1, 6))
@@ -661,49 +575,25 @@ def _(mo):
     return
 
 
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
-    print("Wrong -- seed inside the loop:")
-    for i in range(3):
-        random.seed(99)
-        print(random.randint(1, 6))
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo, random):
-    with mo.capture_stdout() as wrong_buf:
+@app.cell
+def _(contextlib, io, mo, random):
+    wrong_buf = io.StringIO()
+    with contextlib.redirect_stdout(wrong_buf):
         print("Wrong -- seed inside the loop:")
-        for _i in range(3):
+        for i in range(3):
             random.seed(99)
             print(random.randint(1, 6))
     mo.md(f"```\n{wrong_buf.getvalue()}\n```")
     return
 
 
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
+@app.cell
+def _(contextlib, io, mo, random):
     random.seed(5)
-    print("Right -- seed once, before the loop:")
-    for j in range(3):
-        print(random.randint(1, 6))
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo, random):
-    random.seed(5)
-    with mo.capture_stdout() as right_buf:
+    right_buf = io.StringIO()
+    with contextlib.redirect_stdout(right_buf):
         print("Right -- seed once, before the loop:")
-        for _j in range(3):
+        for j in range(3):
             print(random.randint(1, 6))
     mo.md(f"```\n{right_buf.getvalue()}\n```")
     return
@@ -732,28 +622,15 @@ def _(mo):
     return
 
 
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
+@app.cell
+def _(contextlib, io, mo, random):
     random.seed(10)
-    print("Rolling a die 5 times:")
-    for k in range(5):
-        roll = random.randint(1, 6)
-        print(f"Roll {k + 1}: {roll}")
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo, random):
-    random.seed(10)
-    with mo.capture_stdout() as dice_buf:
+    dice_buf = io.StringIO()
+    with contextlib.redirect_stdout(dice_buf):
         print("Rolling a die 5 times:")
-        for _k in range(5):
+        for k in range(5):
             roll = random.randint(1, 6)
-            print(f"Roll {_k + 1}: {roll}")
+            print(f"Roll {k + 1}: {roll}")
     mo.md(f"```\n{dice_buf.getvalue()}\n```")
     return
 

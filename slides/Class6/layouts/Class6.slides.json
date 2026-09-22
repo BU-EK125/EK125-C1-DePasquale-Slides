@@ -11,42 +11,30 @@
         "type": "fragment"
       },
       {
-        "type": "fragment"
-      },
-      {
         "type": "fragment",
-        "showCode": false
+        "showCode": true
       },
       {
         "type": "fragment"
       },
       {},
       {
-        "type": "fragment"
-      },
-      {
         "type": "fragment",
-        "showCode": false
-      },
-      {
-        "type": "fragment"
+        "showCode": true
       },
       {
         "type": "fragment"
       },
       {
         "type": "fragment",
-        "showCode": false
-      },
-      {
-        "type": "fragment"
+        "showCode": true
       },
       {
         "type": "fragment"
       },
       {
         "type": "fragment",
-        "showCode": false
+        "showCode": true
       },
       {
         "type": "fragment"
@@ -78,48 +66,8 @@
         "type": "fragment"
       },
       {
-        "type": "fragment"
-      },
-      {
         "type": "fragment",
-        "showCode": false
-      },
-      {
-        "type": "fragment"
-      },
-      {},
-      {
-        "type": "fragment"
-      },
-      {
-        "type": "fragment"
-      },
-      {
-        "type": "fragment",
-        "showCode": false
-      },
-      {},
-      {
-        "type": "fragment"
-      },
-      {
-        "type": "fragment",
-        "showCode": false
-      },
-      {},
-      {
-        "type": "fragment"
-      },
-      {
-        "type": "fragment",
-        "showCode": false
-      },
-      {
-        "type": "fragment"
-      },
-      {
-        "type": "fragment",
-        "showCode": false
+        "showCode": true
       },
       {
         "type": "fragment"
@@ -130,7 +78,29 @@
       },
       {
         "type": "fragment",
-        "showCode": false
+        "showCode": true
+      },
+      {},
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {},
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "fragment",
+        "showCode": true
+      },
+      {
+        "type": "fragment"
+      },
+      {},
+      {
+        "type": "fragment",
+        "showCode": true
       },
       {
         "type": "fragment"
