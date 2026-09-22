@@ -6,12 +6,16 @@ anymore -- except three places this script cleans up:
 
 1. The untouched first cell, which still imports marimo. Since marimo
    isn't installed on Colab (and Colab is exactly where this notebook is
-   meant to run via the rocket-button link), that leftover import cell
+   meant to run via the rocket-button link), that leftover import
    throws ModuleNotFoundError as soon as a student runs it, even though
-   nothing downstream needs it. Removed only when a cell's source is
-   *exactly* `import marimo as mo` (nothing else) -- if a deck's first
-   cell ever grows real setup code alongside the marimo import, this
-   leaves it alone rather than guessing.
+   nothing downstream needs it. Handles two shapes: a cell that is
+   *only* `import marimo as mo` gets dropped entirely; a cell that
+   imports marimo alongside other, genuinely-needed stdlib imports
+   (e.g. `import contextlib` / `import io`, needed by #4 below on the
+   slides side but not referenced at all once #4 is reverted for Colab)
+   has just the `import marimo as mo` statement removed, keeping the
+   rest -- found by parsing the cell's AST and filtering out exactly
+   that one import statement, not by guessing at cell layout.
 
 2. Any `mo.Html(...)` call left over as a code cell. Unlike mo.md(),
    the exporter does NOT flatten these into markdown -- they're kept as
@@ -41,20 +45,26 @@ anymore -- except three places this script cleans up:
    document, still executes its own script the same way it does on the
    live slide.
 
-4. Any `with mo.capture_stdout() as buf: ...` block followed by
-   `mo.md(f"​```\n{buf.getvalue()}\n​```")`. This pattern exists purely to
-   work around a marimo *slides*-layout bug: a code cell whose only
+4. `<buf> = io.StringIO()` followed by
+   `with contextlib.redirect_stdout(<buf>): <body>` followed by
+   `mo.md(f"​```\n{<buf>.getvalue()}\n​```")`. This pattern exists purely
+   to work around a marimo *slides*-layout bug: a code cell whose only
    effect is print() (no returned value) is silently dropped from the
    rendered slide entirely -- the code runs, but nothing shows, not even
    an empty space. Capturing stdout and re-returning it via mo.md() is
-   the fix on the slides side. But that fix is itself marimo-specific
-   (`mo.capture_stdout` doesn't exist without marimo installed), and
-   Colab has no such bug in the first place -- a plain print() cell
-   already displays its output completely normally there. So this cell
-   type doesn't get converted like the others; it gets *reverted*: pull
-   out the original body from inside the `with` block and drop the
-   capture/mo.md wrapping entirely, leaving plain executable print()
-   code, unindented, as its own code cell.
+   the fix on the slides side. `contextlib.redirect_stdout` (not
+   `mo.capture_stdout`) is used deliberately so the visible, live code
+   on the slide is standard-library Python, not marimo-specific -- but
+   redirecting stdout into a buffer and never printing that buffer back
+   out would show *no* output at all on Colab (a real
+   `contextlib.redirect_stdout` silences the terminal, same as it does
+   anywhere else), and the trailing `mo.md()` call fails outright
+   without marimo installed regardless. So, same as the fix below, this
+   cell type gets *reverted* for Colab: pull the original body back out
+   from inside the `with` block, drop the `io.StringIO()` assignment,
+   the `with` wrapper, and the trailing `mo.md()` call entirely, leaving
+   plain executable print() code, unindented, as its own code cell --
+   exactly what it looked like before this workaround existed.
 """
 
 import ast
@@ -131,28 +141,48 @@ def as_iframe_cell(source: str):
     )
 
 
+def _is_call_to(node, module: str, attr: str) -> bool:
+    return (
+        isinstance(node, ast.Call)
+        and isinstance(node.func, ast.Attribute)
+        and node.func.attr == attr
+        and isinstance(node.func.value, ast.Name)
+        and node.func.value.id == module
+    )
+
+
 def as_unwrapped_print_cell(source: str):
-    """`with mo.capture_stdout() as buf: <body>` + `mo.md(f"```\n{buf.getvalue()}\n```")`,
-    optionally preceded by other top-level statements (an import, a
-    random.seed() call, ...) -- -> those leading statements plus the
-    unindented with-body as plain code, or None if it doesn't match."""
+    """`<buf> = io.StringIO()` + `with contextlib.redirect_stdout(<buf>): <body>`
+    + `mo.md(f"```\n{<buf>.getvalue()}\n```")`, optionally preceded by other
+    top-level statements (an import, a random.seed() call, ...) -- ->
+    those leading statements plus the unindented with-body as plain code,
+    or None if it doesn't match."""
     try:
         tree = ast.parse(source.strip())
     except SyntaxError:
         return None
-    if len(tree.body) < 2:
+    if len(tree.body) < 3:
         return None
-    *leading_stmts, with_stmt, md_stmt = tree.body
+    *leading_stmts, assign_stmt, with_stmt, md_stmt = tree.body
+    if not (
+        isinstance(assign_stmt, ast.Assign)
+        and len(assign_stmt.targets) == 1
+        and isinstance(assign_stmt.targets[0], ast.Name)
+        and _is_call_to(assign_stmt.value, "io", "StringIO")
+    ):
+        return None
+    buf_name = assign_stmt.targets[0].id
     if not isinstance(with_stmt, ast.With) or len(with_stmt.items) != 1:
         return None
     item = with_stmt.items[0]
     if not (
-        isinstance(item.context_expr, ast.Call)
-        and _is_mo_attr(item.context_expr.func, "capture_stdout")
-        and isinstance(item.optional_vars, ast.Name)
+        _is_call_to(item.context_expr, "contextlib", "redirect_stdout")
+        and len(item.context_expr.args) == 1
+        and isinstance(item.context_expr.args[0], ast.Name)
+        and item.context_expr.args[0].id == buf_name
+        and item.optional_vars is None
     ):
         return None
-    buf_name = item.optional_vars.id
     if not isinstance(md_stmt, ast.Expr) or not isinstance(md_stmt.value, ast.Call):
         return None
     md_call = md_stmt.value
@@ -180,12 +210,45 @@ def as_unwrapped_print_cell(source: str):
     )
 
 
+def _is_import_marimo_as_mo(stmt) -> bool:
+    return (
+        isinstance(stmt, ast.Import)
+        and len(stmt.names) == 1
+        and stmt.names[0].name == "marimo"
+        and stmt.names[0].asname == "mo"
+    )
+
+
+def without_marimo_import(source: str):
+    """Drop an `import marimo as mo` statement from a cell's top level,
+    keeping any other statements as-is. Returns None when the cell has
+    no such import at all (caller should leave the cell untouched);
+    otherwise returns the reconstructed source with that one import
+    removed, or "" when nothing else was left in the cell (caller
+    should drop the whole cell)."""
+    try:
+        tree = ast.parse(source.strip())
+    except SyntaxError:
+        return None
+    if not any(_is_import_marimo_as_mo(stmt) for stmt in tree.body):
+        return None
+    remaining = [stmt for stmt in tree.body if not _is_import_marimo_as_mo(stmt)]
+    if not remaining:
+        return ""
+    return "\n".join(ast.unparse(stmt) for stmt in remaining)
+
+
 new_cells = []
 for cell in nb["cells"]:
     source = "".join(cell["source"])
-    if cell["cell_type"] == "code" and source.strip() == "import marimo as mo":
-        continue
     if cell["cell_type"] == "code":
+        without_mo = without_marimo_import(source)
+        if without_mo is not None:
+            if without_mo == "":
+                continue
+            cell = {**cell, "source": without_mo}
+            new_cells.append(cell)
+            continue
         unwrapped = as_unwrapped_print_cell(source)
         if unwrapped is not None:
             cell = {**cell, "source": unwrapped}

@@ -71,27 +71,52 @@ uses several live print()-based demos (Class 6) surfaced it.
 
 **The fix**: capture stdout and explicitly return it as markdown, wrapped
 in a code fence so it renders as one clean monospace block instead of
-losing all the `end=''`/`end=' '` formatting:
+losing all the `end=''`/`end=' '` formatting -- **as one single visible
+cell**, using only the standard library, not a marimo-specific call:
 ```python
 @app.cell
-def _(mo):
-    with mo.capture_stdout() as some_name_buf:
+def _(contextlib, io, mo):
+    some_name_buf = io.StringIO()
+    with contextlib.redirect_stdout(some_name_buf):
         for num in range(3):
             print(f'{num}:', end=' ')
             ...
     mo.md(f"```\n{some_name_buf.getvalue()}\n```")
     return
 ```
-Two things about this pattern that matter:
-- **`mo.redirect_stdout()` is the wrong tool here** -- it looks like the
-  obvious choice (redirects prints straight to the cell's output area,
-  no buffer needed) and does fix the visibility bug, but it renders each
-  individual `print()` call as its **own separate paragraph**, ignoring
-  `end=''`/`end=' '` entirely -- a `0: *****` demo becomes an unreadable
-  vertical list of single characters. `mo.capture_stdout()` + one
-  `mo.md()` code-fence at the end is what actually preserves the
-  original terminal-style formatting. Verified both ways side by side
-  before picking this.
+`contextlib` and `io` come from the shared setup cell at the top of the
+deck (alongside `import marimo as mo`) -- import them there once, not
+per-cell, same reactive-uniqueness reason as everything else here.
+
+Several things about this pattern that matter, each found the hard way:
+
+- **This is a deliberate tradeoff, not a hidden implementation detail.**
+  An earlier version of this fix hid the wrapper entirely (a duplicate
+  "clean-looking" markdown cell shown in its place, the real executing
+  cell hidden via the slides layout's `showCode: false`). That's *more*
+  polished-looking, but it means the visible "example" isn't the code
+  that's actually running, and there's a second, invisible cell a reader
+  can't inspect -- rejected in favor of one real, visible, honest cell,
+  even though that cell has to contain a few lines of plumbing to work
+  around the bug above. **Don't hide these cells** -- if in doubt about
+  which way this project wants it, this is it.
+- **`mo.capture_stdout()` was tried and rejected too** -- it puts a
+  marimo-specific call in the middle of what's supposed to look like an
+  ordinary Python example. `contextlib.redirect_stdout` +
+  `io.StringIO()` is the same fix using only the standard library, so
+  the visible code stays free of marimo-only names (`mo.md()` at the
+  very end is unavoidable -- it's the only way to get the captured text
+  back onto the slide -- but that's a single trailing line, not
+  something woven through the loop logic itself).
+- **`mo.redirect_stdout()` is the wrong tool regardless of which of the
+  above you pick** -- it looks like the obvious choice (redirects prints
+  straight to the cell's output area, no buffer needed) and does fix the
+  visibility bug, but it renders each individual `print()` call as its
+  **own separate paragraph**, ignoring `end=''`/`end=' '` entirely -- a
+  `0: *****` demo becomes an unreadable vertical list of single
+  characters. Capturing into one buffer and emitting one `mo.md()`
+  code-fence at the end is what actually preserves the original
+  terminal-style formatting. Verified side by side before picking this.
 - **The buffer variable name must be unique across the whole deck**
   (`wordlist_buf`, `stars1_buf`, `stars2_buf`, ...) -- same reactive
   redefinition rule as any other cell-local variable (see the next
@@ -101,68 +126,32 @@ This is not optional polish -- audit every new deck for bare-print demo
 cells and wrap all of them this way, or their content will just be
 missing with no error to catch it.
 
-### Hide the wrapper -- it's not what a student should see as "the code"
-
-The `with mo.capture_stdout() as ...:` / `mo.md(f"```...")` wrapper is
-marimo-specific plumbing, not code a student should be learning from --
-showing it as "the example" is actively confusing (it's not what they'd
-actually write). Don't show that cell's source at all. Instead, split
-into two cells:
-
-1. A `hide_code=True` markdown cell right before it, showing the
-   **clean** version of the same code by hand, in an ordinary code fence
-   -- exactly what a student would actually write, no capture/mo.md
-   wrapper, variable names as they'd naturally be (this can even differ
-   from the internal names the real execution cell uses if a deck-wide
-   uniqueness rename was needed -- see the next section -- since this
-   fence is just static display text, not executed).
-2. The real `hide_code=True` capture_stdout/mo.md execution cell right
-   after it, with its layout entry given an **explicit**
-   `"showCode": false`.
-
-   **`hide_code=True` alone does not hide a code cell's source in the
-   exported "run" HTML** -- it only affects the editor UI. What actually
-   controls source visibility there is the `--show-code` CLI flag
-   (`build_slides.sh` always passes it) crossed with each cell's own
-   `showCode` entry in the layout json; omitting `showCode` falls back
-   to the global `--show-code` default, not to `hide_code`. Confirmed
-   this the hard way: shipping a version that relied on `hide_code=True`
-   alone still showed the raw `with mo.capture_stdout() as
-   stars1_buf:` wrapper live on the site. The layout's cell 0 (the
-   `import marimo as mo` cell, which has no `hide_code` decorator at
-   all) has always been hidden correctly for the same reason -- it has
-   an explicit `{"showCode": false}` entry, not because of anything in
-   the `.py` source.
-
-This is the exact same pattern already used elsewhere in this deck for
-the `input()`-based examples (which can't run live in a WASM export at
-all): show clean, hand-typed code as markdown, keep the messy
-implementation detail out of view, but -- critically, unlike a fully
-hand-typed transcript -- the *output* underneath is still genuinely
-live and real, not a hardcoded string someone has to remember to keep in
-sync. Confirmed this doesn't drift out of sync with reality the way a
-fully hand-typed transcript can (this is exactly how the reading's own
-stale `random.seed()` output numbers were caught earlier).
-
-One minor, accepted tradeoff: the Colab-facing notebook (see below)
-ends up showing this same code twice in a row -- once as inert markdown
-text, once as the real executable cell right after it. Not broken, just
-slightly redundant there; not worth extra `strip_marimo_import.py`
-complexity to deduplicate.
-
 ### The Colab side needs the *opposite* fix
 
-`mo.capture_stdout()` doesn't exist without marimo installed, so once a
-cell uses it, it hits the exact same Colab-export problem as
-`mo.Html()`/`mo.iframe()` below -- except the right fix here is the
-reverse. Colab has no slides-layout bug to work around in the first
-place; a plain `print()` cell already displays completely normally
-there. So `strip_marimo_import.py` doesn't convert this pattern the way
-it does `mo.Html()`/`mo.iframe()` -- it **reverts** it: pulls the
-original body back out of the `with mo.capture_stdout(): ...` block,
-drops the block and the trailing `mo.md()` call, and leaves plain
-executable print() code. Any statements before the `with` block (an
-`import`, a `random.seed()` call) are preserved as-is.
+Redirecting stdout into a buffer and never printing that buffer back out
+would show **no output at all** if this code ran as-is on Colab (a real
+`contextlib.redirect_stdout` silences the terminal there too), and the
+trailing `mo.md()` call fails outright without marimo installed
+regardless. Colab has no slides-layout bug to work around in the first
+place, though -- a plain `print()` cell already displays completely
+normally there. So `strip_marimo_import.py` doesn't convert this pattern
+the way it does `mo.Html()`/`mo.iframe()` below -- it **reverts** it:
+pulls the original body back out of the `with
+contextlib.redirect_stdout(...): ...` block, drops the `io.StringIO()`
+assignment, the `with` wrapper, and the trailing `mo.md()` call
+entirely, and leaves plain executable print() code -- exactly what it
+looked like before this workaround existed. Any statements before the
+buffer assignment (an `import`, a `random.seed()` call) are preserved
+as-is.
+
+The shared setup cell (`import contextlib, io, marimo as mo`) needs the
+same treatment but can't just be dropped wholesale the way a
+marimo-only import cell is -- `contextlib`/`io` are real stdlib imports
+nothing downstream needs anymore once the cells above are reverted, but
+removing the *whole* cell would be wrong if a deck's setup cell ever
+grows other real, still-needed imports alongside marimo's. The script
+parses the cell's AST and removes only the `import marimo as mo`
+statement specifically, keeping everything else in that cell as-is.
 
 ## The reactive redefinition rule (and how it fails)
 
