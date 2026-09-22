@@ -99,7 +99,7 @@ def _(mo):
 def _():
     for num in range(3):
         print(f'{num}:', end=' ')
-        for n in range(5):
+        for n1 in range(5):
             print('*', end='')
         print()
     return
