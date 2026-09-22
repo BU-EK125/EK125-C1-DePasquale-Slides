@@ -115,9 +115,50 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.Html(
-        '<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeuAoyLtubfSinMFax9ZNpYQROztkgnQ0dr17WnwAyfb69-Cg/viewform?embedded=true" '
-        'width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>'
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .qc-row { display:flex; gap:12px; }
+          .qc-btn { flex:1; padding:14px; font-size:1.1em; font-family:monospace;
+                    border-radius:8px; border:1px solid #555; background:#2a2a2a;
+                    color:#eee; cursor:pointer; }
+          .qc-status { margin-top:10px; font-size:0.95em; color:#9c9; min-height:1.2em; }
+        </style>
+        <div class="qc-row">
+          <button class="qc-btn" data-choice="A">A</button>
+          <button class="qc-btn" data-choice="B">B</button>
+          <button class="qc-btn" data-choice="C">C</button>
+          <button class="qc-btn" data-choice="D">D</button>
+        </div>
+        <div class="qc-status"></div>
+        <script>
+        (function () {
+          var buttons = document.querySelectorAll('.qc-btn');
+          var status = document.querySelector('.qc-status');
+          var submitted = false;
+          buttons.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              submitted = true;
+              var choice = btn.getAttribute('data-choice');
+              buttons.forEach(function (b) { b.disabled = true; b.style.opacity = '0.5'; });
+              btn.style.opacity = '1';
+              btn.style.background = '#2d6a4f';
+              fetch('https://docs.google.com/forms/d/e/1FAIpQLSeuAoyLtubfSinMFax9ZNpYQROztkgnQ0dr17WnwAyfb69-Cg/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.1109327713=' + encodeURIComponent(choice),
+              });
+              status.textContent = 'Submitted: ' + choice;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="140px",
     )
     return
 
