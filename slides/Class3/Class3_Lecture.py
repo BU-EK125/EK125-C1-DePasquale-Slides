@@ -24,6 +24,8 @@ def _(mo):
     ### Naming, Operators, and Truth Tables
 
     *Class 3*
+
+    📖 [Full reading: Class 3](https://BU-EK125.github.io/EK125/class/Class3.html)
     """)
     return
 

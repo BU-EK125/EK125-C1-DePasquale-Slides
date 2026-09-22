@@ -24,6 +24,8 @@ def _(mo):
     ### Strings, Lists, and Tuples
 
     *Class 2*
+
+    📖 [Full reading: Class 2](https://BU-EK125.github.io/EK125/class/Class2.html)
     """)
     return
 
