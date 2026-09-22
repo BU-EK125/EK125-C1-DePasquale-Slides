@@ -40,6 +40,21 @@ anymore -- except three places this script cleans up:
    embed already works there) and, because it's a genuine iframe
    document, still executes its own script the same way it does on the
    live slide.
+
+4. Any `with mo.capture_stdout() as buf: ...` block followed by
+   `mo.md(f"​```\n{buf.getvalue()}\n​```")`. This pattern exists purely to
+   work around a marimo *slides*-layout bug: a code cell whose only
+   effect is print() (no returned value) is silently dropped from the
+   rendered slide entirely -- the code runs, but nothing shows, not even
+   an empty space. Capturing stdout and re-returning it via mo.md() is
+   the fix on the slides side. But that fix is itself marimo-specific
+   (`mo.capture_stdout` doesn't exist without marimo installed), and
+   Colab has no such bug in the first place -- a plain print() cell
+   already displays its output completely normally there. So this cell
+   type doesn't get converted like the others; it gets *reverted*: pull
+   out the original body from inside the `with` block and drop the
+   capture/mo.md wrapping entirely, leaving plain executable print()
+   code, unindented, as its own code cell.
 """
 
 import ast
@@ -116,12 +131,66 @@ def as_iframe_cell(source: str):
     )
 
 
+def as_unwrapped_print_cell(source: str):
+    """`with mo.capture_stdout() as buf: <body>` + `mo.md(f"```\n{buf.getvalue()}\n```")`,
+    optionally preceded by other top-level statements (an import, a
+    random.seed() call, ...) -- -> those leading statements plus the
+    unindented with-body as plain code, or None if it doesn't match."""
+    try:
+        tree = ast.parse(source.strip())
+    except SyntaxError:
+        return None
+    if len(tree.body) < 2:
+        return None
+    *leading_stmts, with_stmt, md_stmt = tree.body
+    if not isinstance(with_stmt, ast.With) or len(with_stmt.items) != 1:
+        return None
+    item = with_stmt.items[0]
+    if not (
+        isinstance(item.context_expr, ast.Call)
+        and _is_mo_attr(item.context_expr.func, "capture_stdout")
+        and isinstance(item.optional_vars, ast.Name)
+    ):
+        return None
+    buf_name = item.optional_vars.id
+    if not isinstance(md_stmt, ast.Expr) or not isinstance(md_stmt.value, ast.Call):
+        return None
+    md_call = md_stmt.value
+    if not _is_mo_attr(md_call.func, "md") or len(md_call.args) != 1:
+        return None
+    fstring = md_call.args[0]
+    if not isinstance(fstring, ast.JoinedStr):
+        return None
+    # Confirm the f-string is exactly the capture-and-fence pattern this
+    # script generates (```\n{buf.getvalue()}\n```) -- not some other,
+    # more dynamic use of mo.md() this script shouldn't touch.
+    uses_expected_buf = any(
+        isinstance(v, ast.FormattedValue)
+        and isinstance(v.value, ast.Call)
+        and isinstance(v.value.func, ast.Attribute)
+        and v.value.func.attr == "getvalue"
+        and isinstance(v.value.func.value, ast.Name)
+        and v.value.func.value.id == buf_name
+        for v in fstring.values
+    )
+    if not uses_expected_buf:
+        return None
+    return "\n".join(
+        ast.unparse(stmt) for stmt in [*leading_stmts, *with_stmt.body]
+    )
+
+
 new_cells = []
 for cell in nb["cells"]:
     source = "".join(cell["source"])
     if cell["cell_type"] == "code" and source.strip() == "import marimo as mo":
         continue
     if cell["cell_type"] == "code":
+        unwrapped = as_unwrapped_print_cell(source)
+        if unwrapped is not None:
+            cell = {**cell, "source": unwrapped}
+            new_cells.append(cell)
+            continue
         html = as_html_cell(source)
         if html is None:
             html = as_iframe_cell(source)
