@@ -205,18 +205,18 @@ def _(mo):
     mo.iframe(
         """
         <style>
-          body { margin:0; padding:12px 20px; background:#1a1a1a; color:#eee;
-                 font-family:-apple-system,sans-serif; }
-          h2 { font-size:1.3em; margin:0 0 0.6em 0; }
-          p { margin:0.6em 0; }
-          .gpp-output { background:#111; border-radius:6px; padding:10px 16px;
-                        font-family:monospace; white-space:pre-line; margin:0.8em 0; }
-          .choices p { margin:0.4em 0; font-family:monospace; }
-          .qc-row { display:flex; gap:12px; margin-top:1em; }
-          .qc-btn { flex:1; padding:14px; font-size:1.1em; font-family:monospace;
+          body { margin:0; padding:16px 24px; background:#1a1a1a; color:#eee;
+                 font-family:-apple-system,sans-serif; font-size:26px; line-height:1.4; }
+          h2 { font-size:1.4em; margin:0 0 0.5em 0; }
+          p { margin:0.5em 0; }
+          .gpp-output { background:#111; border-radius:6px; padding:12px 20px;
+                        font-family:monospace; white-space:pre-line; margin:0.6em 0; }
+          .choices p { margin:0.35em 0; font-family:monospace; }
+          .qc-row { display:flex; gap:12px; margin-top:0.8em; }
+          .qc-btn { flex:1; padding:18px; font-size:1.1em; font-family:monospace;
                     border-radius:8px; border:1px solid #555; background:#2a2a2a;
                     color:#eee; cursor:pointer; }
-          .qc-status { margin-top:10px; font-size:0.95em; color:#9c9; min-height:1.2em; }
+          .qc-status { margin-top:10px; font-size:0.85em; color:#9c9; min-height:1.2em; }
         </style>
         <h2>🎯 Quick Check: Predict Before You Code</h2>
         <p><strong>GPP Problem 2</strong> asks for exactly this output:</p>
@@ -233,7 +233,6 @@ def _(mo):
           <p><strong>D.</strong> <code>for i in range(1, num):</code></p>
         </div>
         <p>📝 <strong>Submit your answer below:</strong></p>
-        <!-- colab-split -->
         <div class="qc-row">
           <button class="qc-btn" data-choice="A">A</button>
           <button class="qc-btn" data-choice="B">B</button>
@@ -267,7 +266,7 @@ def _(mo):
         </script>
         """,
         width="100%",
-        height="480px",
+        height="620px",
     )
     return
 
@@ -550,18 +549,18 @@ def _(mo):
     mo.iframe(
         """
         <style>
-          body { margin:0; padding:12px 20px; background:#1a1a1a; color:#eee;
-                 font-family:-apple-system,sans-serif; }
-          h2 { font-size:1.3em; margin:0 0 0.6em 0; }
-          p { margin:0.6em 0; }
-          .gpp-output { background:#111; border-radius:6px; padding:10px 16px;
-                        font-family:monospace; white-space:pre-line; margin:0.8em 0; }
-          .choices p { margin:0.4em 0; font-family:monospace; }
-          .qc-row { display:flex; gap:12px; margin-top:1em; }
-          .qc-btn { flex:1; padding:14px; font-size:1.1em; font-family:monospace;
+          body { margin:0; padding:16px 24px; background:#1a1a1a; color:#eee;
+                 font-family:-apple-system,sans-serif; font-size:26px; line-height:1.4; }
+          h2 { font-size:1.4em; margin:0 0 0.5em 0; }
+          p { margin:0.5em 0; }
+          .gpp-output { background:#111; border-radius:6px; padding:12px 20px;
+                        font-family:monospace; white-space:pre-line; margin:0.6em 0; }
+          .choices p { margin:0.35em 0; font-family:monospace; }
+          .qc-row { display:flex; gap:12px; margin-top:0.8em; }
+          .qc-btn { flex:1; padding:18px; font-size:1.1em; font-family:monospace;
                     border-radius:8px; border:1px solid #555; background:#2a2a2a;
                     color:#eee; cursor:pointer; }
-          .qc-status { margin-top:10px; font-size:0.95em; color:#9c9; min-height:1.2em; }
+          .qc-status { margin-top:10px; font-size:0.85em; color:#9c9; min-height:1.2em; }
         </style>
         <h2>🎯 Quick Check: Predict Before You Code</h2>
         <p><strong>GPP Problem 8</strong> asks you to reproduce this exact output
@@ -577,7 +576,6 @@ def _(mo):
           <p><strong>D.</strong> Anywhere -- it doesn't affect the output</p>
         </div>
         <p>📝 <strong>Submit your answer below:</strong></p>
-        <!-- colab-split -->
         <div class="qc-row">
           <button class="qc-btn" data-choice="A">A</button>
           <button class="qc-btn" data-choice="B">B</button>
@@ -611,7 +609,7 @@ def _(mo):
         </script>
         """,
         width="100%",
-        height="520px",
+        height="660px",
     )
     return
 

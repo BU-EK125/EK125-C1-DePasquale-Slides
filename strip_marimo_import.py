@@ -31,32 +31,21 @@ anymore -- except two places this script cleans up:
 3. Any `mo.iframe(...)` call left over as a code cell -- this is always
    a quick-check widget (the only thing this deck uses `mo.iframe()`
    for): the question text, the GPP-quoted example, the A/B/C/D
-   choices, and the actual clickable buttons all live in *one* cell
-   now (merged so the buttons render immediately alongside the
-   question on the slide, instead of needing an extra advance to
-   reveal a separate fragment -- reveal.js/marimo's layout format has
-   no "same slide, already visible" option for a second cell, only
-   "starts a new slide" or "hidden fragment," confirmed by testing
-   both). Only the *interactive* half belongs on Colab's chopping
-   block -- the buttons POST to a live Google Form tied to a specific
-   lecture's polling, meaningful for a student watching the slide
-   during class, not for someone opening this notebook later,
-   disconnected from that lecture. The question text is still real
-   content worth keeping.
-
-   So the html is split on a literal `<!-- colab-split -->` marker
-   placed in the source right before the button row: everything
-   *before* it becomes a markdown cell (question, GPP quote, choices --
-   the same informational content a plain `mo.md()` cell would have
-   flattened to, just extracted from inside the iframe's html string
-   instead); everything from the marker onward (the buttons and their
-   submit script) is dropped. An `mo.iframe(...)` cell with no marker
-   in its html -- i.e. one that's *only* the interactive part, the
-   shape this deck used before the merge -- is dropped in full, same
-   as always. (Two earlier versions tried keeping the button alive on
-   Colab too -- first as a markdown `<iframe srcdoc="...">`, which
-   silently rendered blank there since Colab's markdown sanitizer
-   strips `<iframe>`/`<script>` tags; then as a code cell calling
+   choices, and the actual clickable buttons all live in one cell
+   (merged so the buttons render immediately alongside the question on
+   the slide, instead of needing an extra advance to reveal a separate
+   fragment). The whole cell is **dropped from the Colab export**, not
+   converted. Tried splitting the html on a marker to keep just the
+   question text as a Colab markdown cell (extracting everything before
+   the button row) -- worked mechanically, but the result looked
+   broken in practice: raw hand-written HTML/CSS meant for a
+   full-slide-sized iframe rendered oddly as a plain markdown cell, and
+   on review it wasn't worth keeping just for this. Simpler to drop the
+   whole thing, same as the version before the split existed. (Two
+   earlier versions also tried keeping the *button* alive on Colab --
+   first as a markdown `<iframe srcdoc="...">`, which silently rendered
+   blank there since Colab's markdown sanitizer strips
+   `<iframe>`/`<script>` tags; then as a code cell calling
    `IPython.display.HTML(...)`, which worked, but was machinery for a
    widget that doesn't actually belong in an async notebook.)
 
@@ -120,30 +109,12 @@ def as_html_cell(source: str):
     return value if isinstance(value, str) else None
 
 
-_COLAB_SPLIT_MARKER = "<!-- colab-split -->"
-
-
-def as_iframe_colab_cell(source: str):
-    """mo.iframe(<literal>, ...) -> see docstring case 3. Returns None if
-    `source` isn't an mo.iframe() call at all (caller should leave it
-    alone); otherwise ("markdown", html) with the informational html
-    before the colab-split marker, or ("drop", None) if there's no
-    marker (the whole cell is purely the interactive button widget)."""
+def is_iframe_cell(source: str) -> bool:
+    """True if `source` is exactly one `mo.iframe(...)` call -- see
+    docstring case 3. Used only to drop the cell from the Colab export;
+    unlike `as_html_cell`, nothing is extracted from it."""
     call = _parse_call(source)
-    if call is None or not _is_mo_attr(call.func, "iframe"):
-        return None
-    if len(call.args) != 1:
-        return None
-    try:
-        html = ast.literal_eval(call.args[0])
-    except ValueError:
-        return None
-    if not isinstance(html, str):
-        return None
-    if _COLAB_SPLIT_MARKER in html:
-        before, _, _ = html.partition(_COLAB_SPLIT_MARKER)
-        return ("markdown", before.strip())
-    return ("drop", None)
+    return call is not None and _is_mo_attr(call.func, "iframe")
 
 
 _HANDTYPED_CODE_OUTPUT_RE = re.compile(
@@ -202,14 +173,7 @@ for cell in nb["cells"]:
             cell = {**cell, "source": without_mo}
             new_cells.append(cell)
             continue
-        iframe_result = as_iframe_colab_cell(source)
-        if iframe_result is not None:
-            kind, content = iframe_result
-            if kind == "markdown":
-                cell = {**cell, "cell_type": "markdown", "source": content}
-                cell.pop("outputs", None)
-                cell.pop("execution_count", None)
-                new_cells.append(cell)
+        if is_iframe_cell(source):
             continue
         html = as_html_cell(source)
         if html is not None:
