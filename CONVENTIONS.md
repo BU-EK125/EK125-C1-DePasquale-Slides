@@ -206,12 +206,28 @@ after each `marimo export ipynb`) and fixes both:
   imported alongside other, genuinely-needed stdlib imports, only the
   marimo import statement is removed (found via the cell's AST, not by
   assuming cell layout), keeping the rest of the cell as-is.
-- Rewrites `mo.Html("<literal>")` and `mo.iframe("<literal>", width=,
-  height=)` calls into a plain markdown cell containing the equivalent raw
-  HTML (an `mo.iframe` call gets reconstructed as an explicit
-  `<iframe srcdoc="...">`, HTML-escaped) -- confirmed this renders and
-  still executes its script when opened in Colab, the same way a plain
-  `<iframe src="...">` already does there.
+- Rewrites `mo.Html("<literal>")` into a plain markdown cell containing
+  the equivalent raw HTML -- fine for static content with no `<script>`.
+- Rewrites `mo.iframe("<literal>", width=, height=)` into a **code**
+  cell that calls `display(HTML(<literal>))` (`width`/`height` are
+  dropped -- meaningless without the `<iframe>` wrapper this no longer
+  builds). Not a markdown cell: see the next section for why.
+
+**Don't put `mo.iframe()`'s HTML into a markdown cell on the Colab
+side, even though that's what a literal `<iframe srcdoc="...">` tag
+looks like it should be.** An earlier version did exactly that --
+reconstructed the `<iframe srcdoc="...">` tag and turned the cell into
+markdown -- and it rendered as a **silently blank cell** on Colab, no
+error, confirmed by a real report after it shipped. Colab's
+markdown-cell sanitizer strips `<iframe>`/`<script>` tags out of
+markdown *source*; a code cell's *output*, by contrast, is trusted and
+unsanitized -- Colab already hosts every cell's output in its own
+sandboxed iframe with script execution enabled (confirmed against
+Colab's own official `advanced_outputs.ipynb` sample, which uses this
+exact `display(HTML('...<script>...'))` pattern for a clickable
+button). Markdown source and code-cell output go through genuinely
+different rendering paths in Colab -- picking the wrong one fails
+exactly as silently as the bare-`print()` slides bug above.
 
 **If you introduce a new marimo call pattern that ends up in a code cell
 after `ipynb` export** (anything other than `mo.md()`), check whether it
