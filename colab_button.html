@@ -2,13 +2,13 @@
 (function () {
   function addColabButton() {
     var parts = window.location.pathname.split('/').filter(Boolean);
-    // Path is .../EK125-slides/<DeckName>/index.html -- deck name is the
+    // Path is .../EK125-C1-DePasquale-Slides/<DeckName>/index.html -- deck name is the
     // second-to-last segment regardless of trailing slash/filename.
     var deckName = parts[parts.length - 2] || parts[parts.length - 1];
     if (!deckName) return;
 
     var colabUrl =
-      'https://colab.research.google.com/github/BU-EK125/EK125-slides/blob/main/notebooks/' +
+      'https://colab.research.google.com/github/BU-EK125/EK125-C1-DePasquale-Slides/blob/main/notebooks/' +
       deckName + '.ipynb';
 
     var btn = document.createElement('a');
