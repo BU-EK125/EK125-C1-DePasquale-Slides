@@ -2,10 +2,10 @@ format: jb-book
 root: intro
 chapters:
   - url: https://bu-ek125.github.io/EK125-C1-DePasquale-Slides/Class2_Lecture/index.html
-    title: "Class 2"
+    title: "Class 2: Sequences"
   - url: https://bu-ek125.github.io/EK125-C1-DePasquale-Slides/Class3_Lecture/index.html
-    title: "Class 3"
+    title: "Class 3: Booleans"
   - url: https://bu-ek125.github.io/EK125-C1-DePasquale-Slides/Class4_Lecture/index.html
-    title: "Class 4"
+    title: "Class 4: Selection"
   - url: https://bu-ek125.github.io/EK125-C1-DePasquale-Slides/Class6/index.html
-    title: "Class 6"
+    title: "Class 6: Loops"
