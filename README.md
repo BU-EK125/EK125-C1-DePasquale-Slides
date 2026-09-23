@@ -2,7 +2,7 @@
 
 This site is a public, permanent companion to the main [EK125 site](https://github.com/BU-EK125/EK125). It publishes interactive [marimo](https://marimo.io) slide decks as live, runnable apps that execute in the browser via WebAssembly (Pyodide). No server, no sign-in, nothing for a student to install.
 
-**Starting with Class 6, each class gets one deck**: a lecture through that class's reading, with code examples and three GPP-sourced multiple-choice quick-checks built in -- not a separate Lecture deck and GPP deck. See [CONVENTIONS.md](CONVENTIONS.md) for the deck format, the quick-check mechanism, and everything else non-obvious about building one. Classes 2-4 predate this and still use the older Lecture+GPP split.
+**Starting with Class 6, each class gets one deck**: a lecture through that class's reading, with code examples and three GPP-sourced multiple-choice quick-checks built in -- not a separate Lecture deck and GPP deck. See [CONVENTIONS.md](CONVENTIONS.md) for the deck format, the quick-check mechanism, and everything else non-obvious about building one. Classes 2-4 predate this: their old GPP and homework-help decks are archived (not built), leaving just a single Lecture deck each -- built with the same code-example conventions as Class 6, but without quick-checks (that mechanism hadn't started yet for these classes).
 
 This repo works differently from the other EK125 sites, which are jupyter-book notebooks that execute directly. Here, jupyter-book only builds the intro page and the sidebar; each deck in the sidebar is a plain external link straight to its own exported marimo page -- clicking it navigates you there directly (full page, no iframe), the same as clicking any other external link.
 

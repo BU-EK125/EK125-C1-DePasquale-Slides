@@ -5,24 +5,14 @@ parts:
     chapters:
       - url: https://bu-ek125.github.io/EK125-slides/Class2_Lecture/index.html
         title: "Class 2: Lecture"
-      - url: https://bu-ek125.github.io/EK125-slides/Class2_GPP/index.html
-        title: "Class 2: GPP"
-      - url: https://bu-ek125.github.io/EK125-slides/HW2_Monday_Help_Session/index.html
-        title: "Homework 2 Help Session"
   - caption: Class 3
     chapters:
       - url: https://bu-ek125.github.io/EK125-slides/Class3_Lecture/index.html
         title: "Class 3: Lecture"
-      - url: https://bu-ek125.github.io/EK125-slides/Class3_GPP/index.html
-        title: "Class 3: GPP"
-      - url: https://bu-ek125.github.io/EK125-slides/HW3_Homework_Help_Session/index.html
-        title: "Homework 3 Help Session"
   - caption: Class 4
     chapters:
       - url: https://bu-ek125.github.io/EK125-slides/Class4_Lecture/index.html
         title: "Class 4: Lecture"
-      - url: https://bu-ek125.github.io/EK125-slides/Class4_GPP/index.html
-        title: "Class 4: GPP"
   - caption: Class 6
     chapters:
       - url: https://bu-ek125.github.io/EK125-slides/Class6/index.html

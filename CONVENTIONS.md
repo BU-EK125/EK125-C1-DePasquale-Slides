@@ -23,9 +23,21 @@ separate Lecture deck and GPP deck. That deck is:
   problem, placed right after the lecture section that problem depends on
   (not clustered at the end) -- see "Quick-check widgets" below.
 
-Classes 2-4 predate this format and still use the old Lecture+GPP split;
-they haven't been retrofitted. Don't take them as the pattern for a new
-class -- follow Class 6 (`slides/Class6/Class6.py`) instead.
+Classes 2-4 predate this format. Their old GPP and homework-help decks
+are archived (`archive/ClassN/`, excluded from the build) rather than
+retrofitted into the one-deck-with-quick-checks format -- each of
+those classes now has just its original Lecture deck, still under its
+own topic (not a full walk through that class's reading the way Class
+6 is), and **without quick-checks** -- that mechanism hadn't started
+yet for these classes, and there's no GPP deck alongside them anymore
+to source questions from. What *did* get retrofitted onto them: the
+code-example convention below (hand-typed code+output, no live
+execution) -- Classes 2-4 had the exact same bare-`print()`-vanishes
+bug as Class 6 did before that convention existed, just never
+noticed/fixed until it was. Don't take Classes 2-4 as the structural
+pattern for a new deck -- follow Class 6 (`slides/Class6/Class6.py`)
+for that -- but their code-example cells now follow the same
+convention as Class 6's.
 
 ## marimo output calls: which one actually runs your content
 

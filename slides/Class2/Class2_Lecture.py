@@ -112,16 +112,28 @@ def _(mo):
     return
 
 
-@app.cell
-def _():
-    # From the reading's "Common String Operations" (Class2.html)
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
     text = "Hello World"
-    print(text.upper())  # "HELLO WORLD"
-    print(text.replace("o", "0"))  # "Hell0 W0rld"
-    print(text.split())  # ["Hello", "World"]
-    "World" in text  # True
+    print(text.upper())
+    print(text.replace("o", "0"))
+    print(text.split())
+    "World" in text
     text.upper()
     text
+    ```
+
+    ```
+    HELLO WORLD
+    Hell0 W0rld
+    ['Hello', 'World']
+    True
+    'HELLO WORLD'
+    'Hello World'
+    ```
+    ''')
     return
 
 
@@ -232,15 +244,25 @@ def _(mo):
     return
 
 
-@app.cell
-def _():
-    # From the reading's "Common Tuple Operations" (Class2.html)
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
     colors = ("red", "green", "blue")
-    print(colors[1])  # "green"
-    print("red" in colors)  # True
-    colors2 = colors + ("yellow",)  # a *new* tuple
+    print(colors[1])
+    print("red" in colors)
+    colors2 = colors + ("yellow",)
     colors2
     colors
+    ```
+
+    ```
+    green
+    True
+    ('red', 'green', 'blue', 'yellow')
+    ('red', 'green', 'blue')
+    ```
+    ''')
     return
 
 
@@ -262,12 +284,20 @@ def _(mo):
     return
 
 
-@app.cell
-def _():
-    # From Class-2.pdf, "Tuples" slide (raises an error on purpose)
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
     semester_tuple = ("Spring2025", "Fall2025")
     print(semester_tuple)
     semester_tuple.append("Spring2027")
+    ```
+
+    ```
+    ('Spring2025', 'Fall2025')
+    AttributeError: 'tuple' object has no attribute 'append'
+    ```
+    ''')
     return
 
 

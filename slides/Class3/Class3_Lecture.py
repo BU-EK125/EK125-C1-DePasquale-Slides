@@ -38,16 +38,25 @@ def _(mo):
     return
 
 
-@app.cell
-def _():
-    # From the reading's "Introduction to Booleans" (Class3.html)
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
     flagA = True
     flagB = False
-    print(type(flagA))  # <class 'bool'>
-    print(isinstance(flagA, bool))  # True
-    print(int(flagA))  # 1
-    print(int(flagB))  # 0
-    (flagA, flagB)
+    print(type(flagA))
+    print(isinstance(flagA, bool))
+    print(int(flagA))
+    print(int(flagB))
+    ```
+
+    ```
+    <class 'bool'>
+    True
+    1
+    0
+    ```
+    ''')
     return
 
 
@@ -165,18 +174,34 @@ def _(mo):
 
 @app.cell
 def _():
-    # From the reading's "Comparing Numbers" / "Chaining Comparisons" (Class3.html)
     age = 20
-    print(age >= 18)  # True
-
-    name1, name2 = "Alice", "Bob"
-    print(name1 < name2)  # True — alphabetical
-
     score = 85
-    print(80 <= score < 90)  # True — a chained comparison
-
     (age, score)
     return age, score
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    age = 20
+    print(age >= 18)
+
+    name1, name2 = "Alice", "Bob"
+    print(name1 < name2)
+
+    score = 85
+    print(80 <= score < 90)
+    ```
+
+    ```
+    True
+    True
+    True
+    ```
+    (`name1 < name2` compares the strings alphabetically)
+    ''')
+    return
 
 
 @app.cell(hide_code=True)
@@ -361,16 +386,28 @@ def _(mo):
     return
 
 
-@app.cell
-def _(score):
-    # From the reading's "Truthy and Falsy Values" (Class3.html)
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
     items = []
-    print(items == [])  # explicit — always correct
+    print(items == [])
 
     name = ""
-    print(not name)  # True — an empty string is falsy
+    print(not name)
 
-    bool(score)  # True — but why leave it implicit?
+    bool(score)
+    ```
+
+    ```
+    True
+    True
+    True
+    ```
+    (`items == []` and `not name` state the check explicitly instead of
+    leaning on truthiness; `bool(score)` shows what the implicit check
+    would evaluate to.)
+    ''')
     return
 
 
@@ -489,9 +526,10 @@ def _(mo):
     return
 
 
-@app.cell
-def _():
-    # From this week's Homework Help Session — Technique 1
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
     aliceScore = 85
     bobScore = 78
 
@@ -504,8 +542,13 @@ def _():
         winner = "Bob"
 
     print(f"Winner: {winner}")
+    ```
 
-    (aliceWon, winner)
+    ```
+    Alice wins?: True
+    Winner: Alice
+    ```
+    ''')
     return
 
 
