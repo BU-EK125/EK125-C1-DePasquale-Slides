@@ -283,6 +283,18 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ### ✅ Answer: A
+
+    `for i in range(num):` — row `num` needs exactly `num` stars (row
+    0 gets 0 stars, row 4 gets 4 stars), and `range(num)` produces
+    exactly `num` iterations.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Nesting a `while` Loop Inside Another `while` Loop
 
     What if you don't know in advance how many times you'll need to
@@ -617,6 +629,19 @@ def _(mo):
         width="100%",
         height="140px",
     )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### ✅ Answer: A
+
+    Once, before the trials loop. Seeding resets the sequence back to
+    the same starting point — do it inside the loop instead (as in
+    the earlier mistake) and every trial restarts from that same
+    point rather than continuing forward.
+    """)
     return
 
 
