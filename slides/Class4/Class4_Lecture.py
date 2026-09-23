@@ -43,13 +43,24 @@ def _(mo):
     return
 
 
-@app.cell
-def _():
-    # From the reading's "Escape Characters" section (Class4.html)
-    print("Hello\nWorld")
-    print("Column1\tColumn2")
-    print("A backslash looks like this: \\")
-    "Column1\tColumn2"
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    print("Hello\\nWorld")
+    print("Column1\\tColumn2")
+    print("A backslash looks like this: \\\\")
+    "Column1\\tColumn2"
+    ```
+
+    ```
+    Hello
+    World
+    Column1\tColumn2
+    A backslash looks like this: \\
+    'Column1\\tColumn2'
+    ```
+    ''')
     return
 
 
@@ -85,13 +96,22 @@ def _(mo):
     return
 
 
-@app.cell
-def _():
-    # From the reading's "Indexing" section (Class4.html)
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
     word2 = "Python"
-    print(word2[0])  # 'P'
-    print(word2[-1])  # 'n'
+    print(word2[0])
+    print(word2[-1])
     word2[-1]
+    ```
+
+    ```
+    P
+    n
+    'n'
+    ```
+    ''')
     return
 
 
@@ -119,14 +139,24 @@ def _(mo):
     return
 
 
-@app.cell
-def _():
-    # From the reading's "Slicing" section (Class4.html)
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
     word = "Python"
-    print(word[0:2])  # 'Py'
-    print(word[:3])  # 'Pyt'
-    print(word[3:])  # 'hon'
+    print(word[0:2])
+    print(word[:3])
+    print(word[3:])
     word[0:2]
+    ```
+
+    ```
+    Py
+    Pyt
+    hon
+    'Py'
+    ```
+    ''')
     return
 
 
@@ -214,14 +244,24 @@ def _(mo):
     return
 
 
-@app.cell
-def _():
-    # From the reading's "Methods for Strings" (Class4.html)
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
     word3 = "python"
-    print(word3.upper())  # 'PYTHON'
-    print(word3.capitalize())  # 'Python'
-    print(word3.replace("py", "java"))  # 'javathon'
+    print(word3.upper())
+    print(word3.capitalize())
+    print(word3.replace("py", "java"))
     word3.find("th")
+    ```
+
+    ```
+    PYTHON
+    Python
+    javathon
+    2
+    ```
+    ''')
     return
 
 
@@ -458,14 +498,24 @@ def _(mo):
     return
 
 
-@app.cell
-def _():
-    # From the reading's "Field Width and Alignment" section (Class4.html)
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
     width_num = 1234
-    print(f"{width_num:8d}")  # right-aligned (default)
-    print(f"{width_num:<8d}")  # left-aligned
-    print(f"{width_num:^8d}")  # centered
+    print(f"{width_num:8d}")
+    print(f"{width_num:<8d}")
+    print(f"{width_num:^8d}")
     f"{width_num:^8d}"
+    ```
+
+    ```
+        1234
+    1234    
+      1234  
+    '  1234  '
+    ```
+    ''')
     return
 
 
@@ -569,14 +619,23 @@ def _(mo):
     return
 
 
-@app.cell
-def _():
-    # From the reading's "If Statements" section (Class4.html)
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
     num = 33
     if num < 50:
         print('It is smaller')
     print('And that is it')
     num
+    ```
+
+    ```
+    It is smaller
+    And that is it
+    33
+    ```
+    ''')
     return
 
 
@@ -603,15 +662,23 @@ def _(mo):
     return
 
 
-@app.cell
-def _():
-    # From the reading's "If-else Statements" section (Class4.html)
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
     num2 = -4.0
     if num2 < 0:
         print(f'{num2} is a negative number')
     else:
         print(f'{num2} is a nonnegative number')
     num2
+    ```
+
+    ```
+    -4.0 is a negative number
+    -4.0
+    ```
+    ''')
     return
 
 
@@ -625,9 +692,10 @@ def _(mo):
     return
 
 
-@app.cell
-def _():
-    # From the reading's "If-else Statements" section (Class4.html)
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
     num3 = 0.0
     if num3 < 0:
         print(f'{num3} is a negative number')
@@ -636,6 +704,13 @@ def _():
     else:
         print(f'{num3} is a positive number')
     num3
+    ```
+
+    ```
+    It is a zero
+    0.0
+    ```
+    ''')
     return
 
 
@@ -650,15 +725,23 @@ def _(mo):
     return
 
 
-@app.cell
-def _():
-    # From the reading's "If-else Statements" section (Class4.html)
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
     num4 = 7
     if 5 <= num4 <= 10:
         print('In range')
     else:
         print('Not in range')
     num4
+    ```
+
+    ```
+    In range
+    7
+    ```
+    ''')
     return
 
 
