@@ -220,26 +220,28 @@ after each `marimo export ipynb`) and fixes both:
   assuming cell layout), keeping the rest of the cell as-is.
 - Rewrites `mo.Html("<literal>")` into a plain markdown cell containing
   the equivalent raw HTML -- fine for static content with no `<script>`.
-- Rewrites `mo.iframe("<literal>", width=, height=)` into a **code**
-  cell that calls `display(HTML(<literal>))` (`width`/`height` are
-  dropped -- meaningless without the `<iframe>` wrapper this no longer
-  builds). Not a markdown cell: see the next section for why.
+- **Drops `mo.iframe(...)` cells entirely.** In this deck `mo.iframe()`
+  is only ever a quick-check's A/B/C/D button widget, and the widget
+  doesn't belong in the Colab notebook: it POSTs to a live Google Form
+  tied to that lecture's polling, which is meaningful for a student
+  watching the slide during class and meaningless for someone opening
+  this notebook on their own, later, disconnected from that lecture.
+  The quick-check *question* is a separate `mo.md()` cell and survives
+  as ordinary markdown -- only the button beneath it disappears.
 
-**Don't put `mo.iframe()`'s HTML into a markdown cell on the Colab
-side, even though that's what a literal `<iframe srcdoc="...">` tag
-looks like it should be.** An earlier version did exactly that --
-reconstructed the `<iframe srcdoc="...">` tag and turned the cell into
-markdown -- and it rendered as a **silently blank cell** on Colab, no
-error, confirmed by a real report after it shipped. Colab's
-markdown-cell sanitizer strips `<iframe>`/`<script>` tags out of
-markdown *source*; a code cell's *output*, by contrast, is trusted and
-unsanitized -- Colab already hosts every cell's output in its own
-sandboxed iframe with script execution enabled (confirmed against
-Colab's own official `advanced_outputs.ipynb` sample, which uses this
-exact `display(HTML('...<script>...'))` pattern for a clickable
-button). Markdown source and code-cell output go through genuinely
-different rendering paths in Colab -- picking the wrong one fails
-exactly as silently as the bare-`print()` slides bug above.
+Two earlier versions tried to keep the button alive on Colab instead of
+dropping it, both worth knowing about if you're tempted to redo this:
+- Reconstructing an `<iframe srcdoc="...">` tag and turning the cell
+  into markdown rendered as a **silently blank cell**, no error --
+  confirmed by a real report after it shipped. Colab's markdown-cell
+  sanitizer strips `<iframe>`/`<script>` tags out of markdown *source*.
+- Calling `display(HTML(<literal>))` from a **code** cell instead
+  actually worked -- Colab's code-cell *output* is trusted and
+  unsanitized (confirmed against Colab's own official
+  `advanced_outputs.ipynb` sample, which uses this exact pattern for a
+  clickable button) -- but it was still machinery for a widget that,
+  on reflection, doesn't belong in an async notebook at all. Dropping
+  the cell is simpler and was what was actually wanted.
 
 **If you introduce a new marimo call pattern that ends up in a code cell
 after `ipynb` export** (anything other than `mo.md()`), check whether it
