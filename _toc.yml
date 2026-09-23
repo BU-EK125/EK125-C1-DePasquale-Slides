@@ -1,19 +1,11 @@
 format: jb-book
 root: intro
-parts:
-  - caption: Class 2
-    chapters:
-      - url: https://bu-ek125.github.io/EK125-slides/Class2_Lecture/index.html
-        title: "Class 2: Lecture"
-  - caption: Class 3
-    chapters:
-      - url: https://bu-ek125.github.io/EK125-slides/Class3_Lecture/index.html
-        title: "Class 3: Lecture"
-  - caption: Class 4
-    chapters:
-      - url: https://bu-ek125.github.io/EK125-slides/Class4_Lecture/index.html
-        title: "Class 4: Lecture"
-  - caption: Class 6
-    chapters:
-      - url: https://bu-ek125.github.io/EK125-slides/Class6/index.html
-        title: "Class 6"
+chapters:
+  - url: https://bu-ek125.github.io/EK125-slides/Class2_Lecture/index.html
+    title: "Class 2"
+  - url: https://bu-ek125.github.io/EK125-slides/Class3_Lecture/index.html
+    title: "Class 3"
+  - url: https://bu-ek125.github.io/EK125-slides/Class4_Lecture/index.html
+    title: "Class 4"
+  - url: https://bu-ek125.github.io/EK125-slides/Class6/index.html
+    title: "Class 6"
