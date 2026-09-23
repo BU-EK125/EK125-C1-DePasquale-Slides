@@ -29,25 +29,33 @@ anymore -- except two places this script cleans up:
    argument; anything more dynamic is left alone rather than guessing.
 
 3. Any `mo.iframe(...)` call left over as a code cell -- this is always
-   a quick-check widget (the only thing this deck uses `mo.iframe()`
-   for): the question text, the GPP-quoted example, the A/B/C/D
-   choices, and the actual clickable buttons all live in one cell
-   (merged so the buttons render immediately alongside the question on
-   the slide, instead of needing an extra advance to reveal a separate
-   fragment). The whole cell is **dropped from the Colab export**, not
-   converted. Tried splitting the html on a marker to keep just the
-   question text as a Colab markdown cell (extracting everything before
-   the button row) -- worked mechanically, but the result looked
-   broken in practice: raw hand-written HTML/CSS meant for a
-   full-slide-sized iframe rendered oddly as a plain markdown cell, and
-   on review it wasn't worth keeping just for this. Simpler to drop the
-   whole thing, same as the version before the split existed. (Two
-   earlier versions also tried keeping the *button* alive on Colab --
-   first as a markdown `<iframe srcdoc="...">`, which silently rendered
-   blank there since Colab's markdown sanitizer strips
-   `<iframe>`/`<script>` tags; then as a code cell calling
-   `IPython.display.HTML(...)`, which worked, but was machinery for a
-   widget that doesn't actually belong in an async notebook.)
+   a quick-check's A/B/C/D button widget (the only thing this deck uses
+   `mo.iframe()` for), and it's **dropped from the Colab export
+   entirely**, not converted. The widget POSTs to a live Google Form
+   tied to a specific lecture's polling -- meaningful for a student
+   watching the slide during class, not for someone opening this
+   notebook on their own, later, disconnected from that lecture. The
+   quick-check *question* is a separate `mo.md()` cell and is
+   unaffected -- it flattens to an ordinary markdown cell like any
+   other prose, same as always; only the button beneath it disappears.
+
+   (Several earlier versions of this widget are worth knowing about if
+   you're tempted to redo any of them: reconstructing an `<iframe
+   srcdoc="...">` tag and turning the cell into markdown rendered as a
+   silently blank cell on Colab, since Colab's markdown sanitizer
+   strips `<iframe>`/`<script>` tags out of markdown source. Calling
+   `display(HTML(<literal>))` from a code cell instead actually worked,
+   but was machinery for a widget that doesn't belong in an async
+   notebook. And merging the question *into* the same cell as the
+   button -- so both rendered together immediately on the slide instead
+   of the button needing an extra advance -- fixed that one interaction
+   problem but caused two new ones: the merged cell's hand-written
+   HTML/CSS looked smaller than the rest of the deck's native
+   typography no matter how it was resized, and splitting the merged
+   html back apart for Colab left the question looking broken there
+   too. Reverted back to two separate cells, matching this
+   docstring -- if the "extra advance" UX problem needs solving again,
+   it needs a different fix than merging cells.)
 
 4. A markdown cell whose *entire* content is a hand-typed ```python
    fence immediately followed by a hand-typed plain ``` output fence

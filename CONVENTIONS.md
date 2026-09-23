@@ -221,16 +221,16 @@ after each `marimo export ipynb`) and fixes both:
 - Rewrites `mo.Html("<literal>")` into a plain markdown cell containing
   the equivalent raw HTML -- fine for static content with no `<script>`.
 - **Drops `mo.iframe(...)` cells entirely.** In this deck `mo.iframe()`
-  is only ever a quick-check widget -- question text, GPP-quoted
-  example, A/B/C/D choices, and the actual clickable buttons, all in
-  one cell (see "Quick-check widgets" below for why they're merged).
-  None of it belongs in the Colab notebook: the buttons POST to a live
-  Google Form tied to that lecture's polling, meaningless once
-  disconnected from the actual lecture, and the question text -- while
-  real content -- is hand-written HTML/CSS sized and styled for a
-  full-slide iframe, not a plain markdown cell.
+  is only ever a quick-check's A/B/C/D button widget, and the widget
+  doesn't belong in the Colab notebook: it POSTs to a live Google Form
+  tied to a specific lecture's polling, meaningful for a student
+  watching the slide during class and meaningless for someone opening
+  this notebook on their own, later, disconnected from that lecture.
+  The quick-check *question* is a separate `mo.md()` cell and is
+  unaffected -- it flattens to an ordinary markdown cell like any
+  other prose, same as always; only the button beneath it disappears.
 
-Three earlier versions tried to keep some or all of the widget alive
+Three earlier versions tried keeping some or all of the widget alive
 on Colab instead, each worth knowing about if you're tempted to redo
 this:
 - Reconstructing an `<iframe srcdoc="...">` tag and turning the cell
@@ -243,15 +243,15 @@ this:
   `advanced_outputs.ipynb` sample, which uses this exact pattern for a
   clickable button) -- but it was still machinery for a widget that,
   on reflection, doesn't belong in an async notebook at all.
-- After the question and buttons were merged into one cell (below),
-  tried splitting the html on a `<!-- colab-split -->` marker to keep
-  just the question as a Colab markdown cell -- worked mechanically
-  (verified: question text present, zero button/script content
-  leaked), but looked genuinely broken once actually rendered: raw
-  HTML/CSS built for a large iframe doesn't translate to a plain
-  markdown cell. Dropping the whole thing turned out simpler and was
-  what was actually wanted -- don't re-add this without a concrete plan
-  for making the extracted HTML look right outside its iframe.
+- Merging the question *into* the same cell as the button (so both
+  rendered together immediately on the slide, instead of the button
+  needing an extra advance -- see "Quick-check widgets" below), then
+  splitting the merged html back apart on a `<!-- colab-split -->`
+  marker to keep just the question as a Colab markdown cell. Worked
+  mechanically, but looked genuinely broken once actually rendered:
+  raw HTML/CSS built for a large iframe doesn't translate to a plain
+  markdown cell. The whole merge-cells approach was reverted (see
+  below) once it turned out to cause more problems than it solved.
 
 **If you introduce a new marimo call pattern that ends up in a code cell
 after `ipynb` export** (anything other than `mo.md()`), check whether it
@@ -335,56 +335,13 @@ matter how many others share the form.
    range() bound"), not the default "Question N" -- otherwise the pie
    charts are meaningless out of context.
 
-**The question and the buttons are one cell, not two.** An earlier
-version had a separate `mo.md()` cell for the question (its own new
-slide) followed by the `mo.iframe()` button widget marked as a
-`{"type": "fragment"}` in the layout -- which meant the buttons stayed
-hidden until the class advanced one more time past the question, an
-extra step nobody asked for and a real report flagged directly ("make
-the abcd appear w the question"). Tested directly rather than assumed:
-marimo's slides layout format has exactly two states per cell --
-`{}` (starts a brand new slide) or `{"type": "fragment"}` (hidden until
-advanced) -- there's no third "part of the current slide, already
-visible" option for a *second* cell. The only way to get the question
-and the buttons to render together, immediately, is to put them in the
-same cell.
-
-**Set an explicit base `font-size` on the iframe's `body` -- don't
-rely on the browser default.** An iframe is its own document with no
-access to the surrounding page's CSS, so unstyled text renders at the
-browser default (16px) while the rest of this deck's slide content
-renders around 32-39px (measured directly, not assumed -- inspect a
-neighboring slide's computed `font-size` in devtools before picking a
-number for a new widget). The first version of this merged widget used
-`em`-only sizing with no explicit base, and the result looked
-noticeably small next to everything else on the slide -- confirmed
-against a real report, then fixed by setting `body { font-size:26px }`
-and sizing everything else in `em` off of that. Bump the iframe's own
-`height` to match once the text is bigger; content that used to fit in
-140px needs closer to 600-650px at this scale.
-
 **Widget markup** (the exact pattern used twice in
-`slides/Class6/Class6.py` -- copy it for a new quick-check, only
-changing the question text, the `entry.<FIELD_ID>`, and the answer
-copy). The question/example/choices come first as hand-written HTML
-(no marimo markdown rendering inside an iframe -- write the equivalent
-tags directly), then the buttons:
+`slides/Class6/Class6.py` -- copy it for a new quick-check, only changing
+the question text, the `entry.<FIELD_ID>`, and the answer copy):
 ```python
 mo.iframe(
     """
-    <style>
-      body { font-size:26px; ... } /* explicit base -- see above */
-      ...dark-theme styling for both the text and the buttons...
-    </style>
-    <h2>🎯 Quick Check: Predict Before You Code</h2>
-    <p><strong>GPP Problem N</strong> asks for exactly this output:</p>
-    <div class="gpp-output">...</div>
-    <p>Which choice is correct?</p>
-    <div class="choices">
-      <p><strong>A.</strong> ...</p>
-      ...
-    </div>
-    <p>📝 <strong>Submit your answer below:</strong></p>
+    <style> ...dark-theme button styling... </style>
     <div class="qc-row">
       <button class="qc-btn" data-choice="A">A</button>
       ...
@@ -406,17 +363,28 @@ mo.iframe(
     })();
     </script>
     """,
-    width="100%", height="620px",
+    width="100%", height="140px",
 )
 ```
-This whole cell is dropped from the Colab export (see "The Colab-export
-trap" above) -- don't add a `<!-- colab-split -->`-style marker back in
-without re-reading why that was tried and reverted there first.
-
-The answer reveal (`### ✅ Answer: ...`) stays a **separate**, ordinary
-`mo.md()` cell marked as a fragment right after the widget -- unlike
-the buttons, it's *supposed* to stay hidden until the instructor
-chooses to advance past it, so the same fix doesn't apply there.
+This is a **separate cell** from the question's `mo.md()` cell, marked
+as a `{"type": "fragment"}` in the layout right after the question's
+own (new-slide) entry -- so the buttons stay hidden until the class
+advances one more time past the question. An experiment merging the
+question and buttons into one cell to remove that extra advance is
+worth knowing about if you're tempted to try it again: it worked for
+that one goal, but caused two new problems that took a full
+iteration each to diagnose -- the merged cell's hand-written HTML/CSS
+never looked right next to the rest of the deck's native marimo
+typography (tuning font sizes over and over didn't fix it, because
+the underlying issue is that an iframe can't just *inherit* the
+surrounding page's actual styling, only approximate it by hand), and
+splitting that merged html back apart for the Colab export left the
+question looking broken there too. Reverted back to two cells,
+matching the markup above. If the "extra advance" UX problem needs
+solving again, it needs an approach that doesn't route the question
+text through a hand-styled iframe -- e.g. a genuine marimo UI element
+(`mo.ui.button()`) embedded directly in the `mo.md()` question itself,
+which hasn't been tried.
 
 **What was ruled out, and why** (don't re-litigate these without a reason
 to revisit them):
