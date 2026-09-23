@@ -220,17 +220,23 @@ after each `marimo export ipynb`) and fixes both:
   assuming cell layout), keeping the rest of the cell as-is.
 - Rewrites `mo.Html("<literal>")` into a plain markdown cell containing
   the equivalent raw HTML -- fine for static content with no `<script>`.
-- **Drops `mo.iframe(...)` cells entirely.** In this deck `mo.iframe()`
-  is only ever a quick-check's A/B/C/D button widget, and the widget
-  doesn't belong in the Colab notebook: it POSTs to a live Google Form
-  tied to that lecture's polling, which is meaningful for a student
-  watching the slide during class and meaningless for someone opening
-  this notebook on their own, later, disconnected from that lecture.
-  The quick-check *question* is a separate `mo.md()` cell and survives
-  as ordinary markdown -- only the button beneath it disappears.
+- **Splits `mo.iframe(...)` cells on a `<!-- colab-split -->` marker.**
+  In this deck `mo.iframe()` is only ever a quick-check widget -- and
+  since the question text and the A/B/C/D buttons now live in the
+  *same* cell (see "Quick-check widgets" below for why), only the
+  interactive half should disappear on Colab: the buttons POST to a
+  live Google Form tied to that lecture's polling, meaningful for a
+  student watching the slide during class and meaningless for someone
+  opening this notebook later, disconnected from that lecture. The
+  question text is real content worth keeping. So the html is split on
+  a literal `<!-- colab-split -->` comment placed right before the
+  button row: everything before it becomes a markdown cell; everything
+  from the marker onward (buttons + submit script) is dropped. An
+  `mo.iframe(...)` cell with no marker at all -- i.e. purely
+  interactive, no question text merged in -- is dropped in full.
 
-Two earlier versions tried to keep the button alive on Colab instead of
-dropping it, both worth knowing about if you're tempted to redo this:
+Two earlier versions tried to keep the button alive on Colab in some
+form, both worth knowing about if you're tempted to redo this:
 - Reconstructing an `<iframe srcdoc="...">` tag and turning the cell
   into markdown rendered as a **silently blank cell**, no error --
   confirmed by a real report after it shipped. Colab's markdown-cell
@@ -241,7 +247,8 @@ dropping it, both worth knowing about if you're tempted to redo this:
   `advanced_outputs.ipynb` sample, which uses this exact pattern for a
   clickable button) -- but it was still machinery for a widget that,
   on reflection, doesn't belong in an async notebook at all. Dropping
-  the cell is simpler and was what was actually wanted.
+  the cell (later, splitting it) turned out simpler and was what was
+  actually wanted.
 
 **If you introduce a new marimo call pattern that ends up in a code cell
 after `ipynb` export** (anything other than `mo.md()`), check whether it
@@ -325,13 +332,40 @@ matter how many others share the form.
    range() bound"), not the default "Question N" -- otherwise the pie
    charts are meaningless out of context.
 
-**Widget markup** (the exact pattern used three times in
-`slides/Class6/Class6.py` -- copy it for a new quick-check, only changing
-the question text, the `entry.<FIELD_ID>`, and the answer copy):
+**The question and the buttons are one cell, not two.** An earlier
+version had a separate `mo.md()` cell for the question (its own new
+slide) followed by the `mo.iframe()` button widget marked as a
+`{"type": "fragment"}` in the layout -- which meant the buttons stayed
+hidden until the class advanced one more time past the question, an
+extra step nobody asked for and a real report flagged directly ("make
+the abcd appear w the question"). Tested directly rather than assumed:
+marimo's slides layout format has exactly two states per cell --
+`{}` (starts a brand new slide) or `{"type": "fragment"}` (hidden until
+advanced) -- there's no third "part of the current slide, already
+visible" option for a *second* cell. The only way to get the question
+and the buttons to render together, immediately, is to put them in the
+same cell.
+
+**Widget markup** (the exact pattern used twice in
+`slides/Class6/Class6.py` -- copy it for a new quick-check, only
+changing the question text, the `entry.<FIELD_ID>`, and the answer
+copy). The question/example/choices come first as hand-written HTML
+(no marimo markdown rendering inside an iframe -- write the equivalent
+tags directly), then a `<!-- colab-split -->` marker, then the buttons:
 ```python
 mo.iframe(
     """
-    <style> ...dark-theme button styling... </style>
+    <style> ...dark-theme styling for both the text and the buttons... </style>
+    <h2>🎯 Quick Check: Predict Before You Code</h2>
+    <p><strong>GPP Problem N</strong> asks for exactly this output:</p>
+    <div class="gpp-output">...</div>
+    <p>Which choice is correct?</p>
+    <div class="choices">
+      <p><strong>A.</strong> ...</p>
+      ...
+    </div>
+    <p>📝 <strong>Submit your answer below:</strong></p>
+    <!-- colab-split -->
     <div class="qc-row">
       <button class="qc-btn" data-choice="A">A</button>
       ...
@@ -353,9 +387,18 @@ mo.iframe(
     })();
     </script>
     """,
-    width="100%", height="140px",
+    width="100%", height="480px",
 )
 ```
+The `<!-- colab-split -->` marker isn't decorative -- `strip_marimo_import.py`
+looks for it verbatim to know where the interactive half starts (see
+"The Colab-export trap" above). Forget it and the whole widget,
+question text included, silently vanishes from the Colab export.
+
+The answer reveal (`### ✅ Answer: ...`) stays a **separate**, ordinary
+`mo.md()` cell marked as a fragment right after the widget -- unlike
+the buttons, it's *supposed* to stay hidden until the instructor
+chooses to advance past it, so the same fix doesn't apply there.
 
 **What was ruled out, and why** (don't re-litigate these without a reason
 to revisit them):
