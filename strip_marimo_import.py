@@ -42,11 +42,25 @@ anymore -- except two places this script cleans up:
    embed already works there) and, because it's a genuine iframe
    document, still executes its own script the same way it does on the
    live slide.
+
+4. A markdown cell whose *entire* content is a hand-typed ```python
+   fence immediately followed by a hand-typed plain ``` output fence
+   (optionally with a short trailing caption after it) -- the
+   slides-side convention for a demo cell that shouldn't visibly
+   execute on the slide (see CONVENTIONS.md). On Colab there's no
+   reason to leave this as inert text: Colab runs `print()`/`input()`
+   cells completely normally (no slides-layout bug to dodge), so this
+   splits the cell back into a real, runnable code cell (the extracted
+   ```python body, unindented) followed by a markdown cell for any
+   trailing caption -- the hand-typed *output* fence is dropped
+   entirely, since running the cell for real produces its own output.
 """
 
 import ast
+import hashlib
 import html as html_module
 import json
+import re
 import sys
 
 path = sys.argv[1]
@@ -118,6 +132,23 @@ def as_iframe_cell(source: str):
     )
 
 
+_HANDTYPED_CODE_OUTPUT_RE = re.compile(
+    r"\A```python\n(?P<code>.*?)\n```\n\n```\n(?:.*?)\n```\n?(?P<trailing>.*)\Z",
+    re.DOTALL,
+)
+
+
+def split_handtyped_code_cell(source: str):
+    """A markdown cell that is *only* a ```python fence followed by a
+    plain ``` output fence (see docstring case 4) -> (code, trailing)
+    where `trailing` is any caption text after the output fence (or ""
+    if none), or None if the cell doesn't match this exact shape."""
+    match = _HANDTYPED_CODE_OUTPUT_RE.match(source.strip())
+    if match is None:
+        return None
+    return match.group("code"), match.group("trailing").strip()
+
+
 def _is_import_marimo_as_mo(stmt) -> bool:
     return (
         isinstance(stmt, ast.Import)
@@ -164,6 +195,23 @@ for cell in nb["cells"]:
             cell = {**cell, "cell_type": "markdown", "source": html}
             cell.pop("outputs", None)
             cell.pop("execution_count", None)
+    elif cell["cell_type"] == "markdown":
+        split = split_handtyped_code_cell(source)
+        if split is not None:
+            code, trailing = split
+            new_cells.append(
+                {**cell, "cell_type": "code", "source": code, "outputs": [], "execution_count": None}
+            )
+            if trailing:
+                # Derived deterministically from the original cell's id (not
+                # random) -- build_slides.sh's CI check re-runs this script
+                # and diffs the result against what's committed, so a fresh
+                # id on every run would never match.
+                caption_id = hashlib.sha1(f"{cell['id']}-caption".encode()).hexdigest()[:8]
+                new_cells.append(
+                    {**cell, "cell_type": "markdown", "source": trailing, "id": caption_id}
+                )
+            continue
     new_cells.append(cell)
 
 nb["cells"] = new_cells
