@@ -558,8 +558,10 @@ def _(mo):
     mo.md("""
     ## 🎯 Quick Check: Predict Before You Code
 
-    **GPP Problem 8** asks you to reproduce this exact output using
-    `random.seed(42)`:
+    **GPP Problem 8** asks you to simulate 3 trials, generating 4
+    random integers between -5 and 5 in each one, using
+    `random.seed(42)` for reproducibility -- producing exactly this
+    output:
 
     ```
     Trial 1: 0 -4 -1 3
