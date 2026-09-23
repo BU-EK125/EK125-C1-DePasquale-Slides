@@ -202,46 +202,38 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md("""
-    ## 🎯 Quick Check: Predict Before You Code
-
-    **GPP Problem 2** asks for exactly this output:
-
-    ```
-    0:
-    1:*
-    2:**
-    3:***
-    4:****
-    ```
-
-    Which inner loop produces it?
-
-    **A.** `for i in range(num):`
-
-    **B.** `for i in range(num + 1):`
-
-    **C.** `for i in range(num - 1):`
-
-    **D.** `for i in range(1, num):`
-
-    📝 **Submit your answer below:**
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
     mo.iframe(
         """
         <style>
-          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
-          .qc-row { display:flex; gap:12px; }
+          body { margin:0; padding:12px 20px; background:#1a1a1a; color:#eee;
+                 font-family:-apple-system,sans-serif; }
+          h2 { font-size:1.3em; margin:0 0 0.6em 0; }
+          p { margin:0.6em 0; }
+          .gpp-output { background:#111; border-radius:6px; padding:10px 16px;
+                        font-family:monospace; white-space:pre-line; margin:0.8em 0; }
+          .choices p { margin:0.4em 0; font-family:monospace; }
+          .qc-row { display:flex; gap:12px; margin-top:1em; }
           .qc-btn { flex:1; padding:14px; font-size:1.1em; font-family:monospace;
                     border-radius:8px; border:1px solid #555; background:#2a2a2a;
                     color:#eee; cursor:pointer; }
           .qc-status { margin-top:10px; font-size:0.95em; color:#9c9; min-height:1.2em; }
         </style>
+        <h2>🎯 Quick Check: Predict Before You Code</h2>
+        <p><strong>GPP Problem 2</strong> asks for exactly this output:</p>
+        <div class="gpp-output">0:
+        1:*
+        2:**
+        3:***
+        4:****</div>
+        <p>Which inner loop produces it?</p>
+        <div class="choices">
+          <p><strong>A.</strong> <code>for i in range(num):</code></p>
+          <p><strong>B.</strong> <code>for i in range(num + 1):</code></p>
+          <p><strong>C.</strong> <code>for i in range(num - 1):</code></p>
+          <p><strong>D.</strong> <code>for i in range(1, num):</code></p>
+        </div>
+        <p>📝 <strong>Submit your answer below:</strong></p>
+        <!-- colab-split -->
         <div class="qc-row">
           <button class="qc-btn" data-choice="A">A</button>
           <button class="qc-btn" data-choice="B">B</button>
@@ -275,7 +267,7 @@ def _(mo):
         </script>
         """,
         width="100%",
-        height="140px",
+        height="480px",
     )
     return
 
@@ -555,45 +547,37 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md("""
-    ## 🎯 Quick Check: Predict Before You Code
-
-    **GPP Problem 8** asks you to reproduce this exact output using
-    `random.seed(42)`:
-
-    ```
-    Trial 1: 0 -4 -1 3
-    Trial 2: 3 -5 3 -4
-    Trial 3: -5 4 1 -3
-    ```
-
-    Where should the `random.seed(42)` call go?
-
-    **A.** Once, before the trials loop
-
-    **B.** Inside the trials loop, at the top of every trial
-
-    **C.** Inside the inner loop, before every single random number
-
-    **D.** Anywhere -- it doesn't affect the output
-
-    📝 **Submit your answer below:**
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
     mo.iframe(
         """
         <style>
-          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
-          .qc-row { display:flex; gap:12px; }
+          body { margin:0; padding:12px 20px; background:#1a1a1a; color:#eee;
+                 font-family:-apple-system,sans-serif; }
+          h2 { font-size:1.3em; margin:0 0 0.6em 0; }
+          p { margin:0.6em 0; }
+          .gpp-output { background:#111; border-radius:6px; padding:10px 16px;
+                        font-family:monospace; white-space:pre-line; margin:0.8em 0; }
+          .choices p { margin:0.4em 0; font-family:monospace; }
+          .qc-row { display:flex; gap:12px; margin-top:1em; }
           .qc-btn { flex:1; padding:14px; font-size:1.1em; font-family:monospace;
                     border-radius:8px; border:1px solid #555; background:#2a2a2a;
                     color:#eee; cursor:pointer; }
           .qc-status { margin-top:10px; font-size:0.95em; color:#9c9; min-height:1.2em; }
         </style>
+        <h2>🎯 Quick Check: Predict Before You Code</h2>
+        <p><strong>GPP Problem 8</strong> asks you to reproduce this exact output
+        using <code>random.seed(42)</code>:</p>
+        <div class="gpp-output">Trial 1: 0 -4 -1 3
+        Trial 2: 3 -5 3 -4
+        Trial 3: -5 4 1 -3</div>
+        <p>Where should the <code>random.seed(42)</code> call go?</p>
+        <div class="choices">
+          <p><strong>A.</strong> Once, before the trials loop</p>
+          <p><strong>B.</strong> Inside the trials loop, at the top of every trial</p>
+          <p><strong>C.</strong> Inside the inner loop, before every single random number</p>
+          <p><strong>D.</strong> Anywhere -- it doesn't affect the output</p>
+        </div>
+        <p>📝 <strong>Submit your answer below:</strong></p>
+        <!-- colab-split -->
         <div class="qc-row">
           <button class="qc-btn" data-choice="A">A</button>
           <button class="qc-btn" data-choice="B">B</button>
@@ -627,7 +611,7 @@ def _(mo):
         </script>
         """,
         width="100%",
-        height="140px",
+        height="520px",
     )
     return
 
