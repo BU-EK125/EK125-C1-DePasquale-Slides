@@ -205,8 +205,17 @@ def _(mo):
     mo.md("""
     ## 🎯 Quick Check: Predict Before You Code
 
-    For row `num = 3` (which should print `3:***`), which inner loop
-    is correct?
+    **GPP Problem 2** asks for exactly this output:
+
+    ```
+    0:
+    1:*
+    2:**
+    3:***
+    4:****
+    ```
+
+    Which inner loop produces it?
 
     **A.** `for i in range(num):`
 
@@ -339,10 +348,14 @@ def _(mo):
     mo.md("""
     ## 🎯 Quick Check: Predict Before You Code
 
-    In Problem 6, you'll write a script that prompts for positive
-    numbers and validates each one with a `while` loop, same pattern as
-    above. If you forget to re-read the input inside that validation
-    loop, what happens when the user enters a negative number?
+    **GPP Problem 6** says: *"Write a script that will prompt the user
+    for positive numbers. As long as the user is entering positive
+    numbers, print `Ni!` that many times."*
+
+    You'll validate each number with a `while` loop, same pattern as
+    the demo above. If you forget to re-read the input inside that
+    validation loop, what happens when the user enters a negative
+    number?
 
     **A.** The program crashes immediately
 
@@ -737,8 +750,16 @@ def _(mo):
     mo.md("""
     ## 🎯 Quick Check: Predict Before You Code
 
-    You need `random.seed(42)` to produce the exact 3 trials shown
-    above. Where should the seed call go?
+    **GPP Problem 8** asks you to reproduce this exact output using
+    `random.seed(42)`:
+
+    ```
+    Trial 1: 0 -4 -1 3
+    Trial 2: 3 -5 3 -4
+    Trial 3: -5 4 1 -3
+    ```
+
+    Where should the `random.seed(42)` call go?
 
     **A.** Once, before the trials loop
 
