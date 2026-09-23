@@ -201,9 +201,11 @@ Jupyter markdown cell, so nothing in the exported notebook still calls
 `strip_marimo_import.py` runs automatically (via `build_slides.sh`, right
 after each `marimo export ipynb`) and fixes both:
 
-- Removes the leftover `import marimo as mo` cell, but *only* when a
-  cell's source is exactly that line -- won't touch it if a deck's first
-  cell ever grows real setup code alongside the import.
+- Removes the `import marimo as mo` statement. If a cell's source is
+  exactly that one line, the whole cell is dropped; if marimo is
+  imported alongside other, genuinely-needed stdlib imports, only the
+  marimo import statement is removed (found via the cell's AST, not by
+  assuming cell layout), keeping the rest of the cell as-is.
 - Rewrites `mo.Html("<literal>")` and `mo.iframe("<literal>", width=,
   height=)` calls into a plain markdown cell containing the equivalent raw
   HTML (an `mo.iframe` call gets reconstructed as an explicit
@@ -219,6 +221,37 @@ and look for any cell still calling `mo.` after
 extend that script the same way -- match the literal call via `ast`, only
 convert cells that are *exactly* that one call with literal arguments, and
 leave anything more dynamic alone rather than guessing.
+
+### Hand-typed code+output cells become real code cells on Colab
+
+The hand-typed `mo.md('''```python ... ``` \n\n ``` ... ```''')` cells
+(see "A bare `print()` cell silently vanishes from the slides layout"
+above) exist to dodge a **slides-layout-specific** bug -- Colab has no
+such bug, and flattening one of these into an inert markdown block with
+a fenced code snippet a student can't actually run would just be a
+worse experience for no reason: Colab runs `print()`/`input()` cells
+completely normally.
+
+So `strip_marimo_import.py` treats this shape as a fifth case: a
+markdown cell whose *entire* content is exactly a ```python fence
+followed by a plain ``` output fence (optionally with a short trailing
+caption after it, e.g. the "(unseeded -- yours will be different...)"
+note) gets split back into a **real, runnable code cell** -- just the
+extracted ```python body, unindented -- plus a separate trailing
+markdown cell for any caption. The hand-typed *output* fence is dropped
+entirely; running the cell for real produces its own output, and for
+every seeded-random example in this deck that output is verified to
+match what was hand-typed on the slide (run the equivalent code once
+before writing the output block, same rule as writing the slide text in
+the first place).
+
+This means the two code shapes genuinely diverge on Colab vs. the
+slide: the slide shows static text (because live execution isn't an
+option there), Colab gets a live cell (because it is). Both show the
+same code and the same output when nothing goes wrong -- verify that
+stays true after editing one of these cells, by re-running the affected
+Colab cell locally (or via `python3 -c "..."`) and diffing against the
+slide's hand-typed output block.
 
 ## Quick-check widgets: how they work
 
