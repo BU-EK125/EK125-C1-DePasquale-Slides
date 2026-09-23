@@ -29,19 +29,29 @@ anymore -- except two places this script cleans up:
    argument; anything more dynamic is left alone rather than guessing.
 
 3. Any `mo.iframe(...)` call left over as a code cell -- same failure,
-   same fix in spirit, but mo.iframe's `html` argument is content
-   rendered inside a real sandboxed <iframe srcdoc="...">, not raw page
-   HTML, specifically because scripts DO execute inside an iframe's own
-   document (used for interactive widgets, e.g. a quick-check with a
-   button that POSTs a response). Converting this to a plain markdown
-   cell containing the raw HTML+<script> wouldn't work the same way --
-   Jupyter/Colab's markdown renderer doesn't execute inline <script>
-   tags either. So instead this reconstructs the same <iframe
-   srcdoc="..."> wrapper explicitly (srcdoc-escaping the HTML), which
-   already renders fine in Colab's markdown (confirmed: a plain iframe
-   embed already works there) and, because it's a genuine iframe
-   document, still executes its own script the same way it does on the
-   live slide.
+   same fix in spirit, but mo.iframe's `html` argument is content that
+   needs its own `<script>` to actually execute (used for interactive
+   widgets, e.g. a quick-check with a button that POSTs a response).
+   An earlier version of this fix reconstructed an explicit
+   `<iframe srcdoc="...">` wrapper and turned the cell into markdown --
+   that renders as a **blank cell on Colab**, no error: Colab's
+   markdown-cell sanitizer silently strips `<iframe>` (and `<script>`)
+   tags out of markdown *source*, confirmed by a live report of exactly
+   this ("the marimo button cell is in the export notebook but it's
+   blank") after that version shipped.
+
+   The fix instead turns the cell into a **code cell** that calls
+   `IPython.display.HTML(...)` on the widget's HTML directly (no manual
+   `<iframe>` wrapper at all -- Colab already hosts every cell's
+   *output* in its own sandboxed iframe with script execution enabled,
+   confirmed against Colab's own official `advanced_outputs.ipynb`
+   sample, which uses this exact `display(HTML('...<script>...'))`
+   pattern for a clickable button). Code-cell output and markdown-cell
+   source go through different rendering paths in Colab -- output
+   produced by the notebook's own kernel is trusted and unsanitized,
+   raw HTML pasted in markdown source is not -- so the same HTML that
+   silently vanished as markdown works as a code cell's displayed
+   output.
 
 4. A markdown cell whose *entire* content is a hand-typed ```python
    fence immediately followed by a hand-typed plain ``` output fence
@@ -58,7 +68,6 @@ anymore -- except two places this script cleans up:
 
 import ast
 import hashlib
-import html as html_module
 import json
 import re
 import sys
@@ -105,8 +114,11 @@ def as_html_cell(source: str):
 
 
 def as_iframe_cell(source: str):
-    """mo.iframe(<literal>, width=..., height=...) -> a reconstructed
-    <iframe srcdoc="..."> tag, or None if it doesn't match."""
+    """mo.iframe(<literal>, width=..., height=...) -> Python source for a
+    code cell that displays the same HTML via `display(HTML(...))`, or
+    None if it doesn't match. `width`/`height` are dropped -- Colab
+    sizes a code cell's output to its content automatically, and they
+    only meant anything for the `<iframe>` wrapper this no longer uses."""
     call = _parse_call(source)
     if call is None or not _is_mo_attr(call.func, "iframe"):
         return None
@@ -114,22 +126,14 @@ def as_iframe_cell(source: str):
         return None
     try:
         inner_html = ast.literal_eval(call.args[0])
-        kwargs = {}
         for kw in call.keywords:
             if kw.arg not in ("width", "height"):
                 return None
-            kwargs[kw.arg] = ast.literal_eval(kw.value)
     except ValueError:
         return None
     if not isinstance(inner_html, str):
         return None
-    width = kwargs.get("width", "100%")
-    height = kwargs.get("height", "400px")
-    escaped = html_module.escape(inner_html, quote=True)
-    return (
-        f'<iframe srcdoc="{escaped}" width="{width}" height="{height}" '
-        'frameborder="0"></iframe>'
-    )
+    return f"from IPython.display import HTML, display\n\ndisplay(HTML({inner_html!r}))"
 
 
 _HANDTYPED_CODE_OUTPUT_RE = re.compile(
@@ -189,12 +193,14 @@ for cell in nb["cells"]:
             new_cells.append(cell)
             continue
         html = as_html_cell(source)
-        if html is None:
-            html = as_iframe_cell(source)
         if html is not None:
             cell = {**cell, "cell_type": "markdown", "source": html}
             cell.pop("outputs", None)
             cell.pop("execution_count", None)
+        else:
+            iframe_code = as_iframe_cell(source)
+            if iframe_code is not None:
+                cell = {**cell, "source": iframe_code, "outputs": [], "execution_count": None}
     elif cell["cell_type"] == "markdown":
         split = split_handtyped_code_cell(source)
         if split is not None:
