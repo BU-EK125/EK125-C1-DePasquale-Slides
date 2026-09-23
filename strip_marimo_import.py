@@ -113,6 +113,20 @@ def as_html_cell(source: str):
     return value if isinstance(value, str) else None
 
 
+def _as_triple_quoted(text: str) -> str:
+    """Render `text` as a triple-quoted Python string literal, picking
+    whichever quote style the text itself doesn't contain (and doesn't
+    end with, to avoid a 4-quote-in-a-row ambiguity at the close) --
+    keeps generated source as multi-line, readable text instead of one
+    long backslash-escaped repr() line. Falls back to repr() in the
+    (here, never hit) case where the text contains both."""
+    if '"""' not in text and not text.endswith('"'):
+        return f'"""{text}"""'
+    if "'''" not in text and not text.endswith("'"):
+        return f"'''{text}'''"
+    return repr(text)
+
+
 def as_iframe_cell(source: str):
     """mo.iframe(<literal>, width=..., height=...) -> Python source for a
     code cell that displays the same HTML via `display(HTML(...))`, or
@@ -133,7 +147,8 @@ def as_iframe_cell(source: str):
         return None
     if not isinstance(inner_html, str):
         return None
-    return f"from IPython.display import HTML, display\n\ndisplay(HTML({inner_html!r}))"
+    html_literal = _as_triple_quoted(inner_html)
+    return f"from IPython.display import HTML, display\n\ndisplay(HTML({html_literal}))"
 
 
 _HANDTYPED_CODE_OUTPUT_RE = re.compile(
