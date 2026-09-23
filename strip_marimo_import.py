@@ -28,30 +28,22 @@ anymore -- except two places this script cleans up:
    whose sole content is a `mo.Html("...")` call with a literal string
    argument; anything more dynamic is left alone rather than guessing.
 
-3. Any `mo.iframe(...)` call left over as a code cell -- same failure,
-   same fix in spirit, but mo.iframe's `html` argument is content that
-   needs its own `<script>` to actually execute (used for interactive
-   widgets, e.g. a quick-check with a button that POSTs a response).
-   An earlier version of this fix reconstructed an explicit
-   `<iframe srcdoc="...">` wrapper and turned the cell into markdown --
-   that renders as a **blank cell on Colab**, no error: Colab's
-   markdown-cell sanitizer silently strips `<iframe>` (and `<script>`)
-   tags out of markdown *source*, confirmed by a live report of exactly
-   this ("the marimo button cell is in the export notebook but it's
-   blank") after that version shipped.
-
-   The fix instead turns the cell into a **code cell** that calls
-   `IPython.display.HTML(...)` on the widget's HTML directly (no manual
-   `<iframe>` wrapper at all -- Colab already hosts every cell's
-   *output* in its own sandboxed iframe with script execution enabled,
-   confirmed against Colab's own official `advanced_outputs.ipynb`
-   sample, which uses this exact `display(HTML('...<script>...'))`
-   pattern for a clickable button). Code-cell output and markdown-cell
-   source go through different rendering paths in Colab -- output
-   produced by the notebook's own kernel is trusted and unsanitized,
-   raw HTML pasted in markdown source is not -- so the same HTML that
-   silently vanished as markdown works as a code cell's displayed
-   output.
+3. Any `mo.iframe(...)` call left over as a code cell -- this is always
+   a quick-check's A/B/C/D button widget (the only thing this deck uses
+   `mo.iframe()` for), and it's **dropped from the Colab export
+   entirely**, not converted. The widget POSTs to a live Google Form
+   tied to a specific lecture's polling -- meaningful for a student
+   watching the slide during class, not for someone opening this
+   notebook on their own, later, disconnected from that lecture. (Two
+   earlier versions kept the button alive on Colab -- first as a
+   markdown `<iframe srcdoc="...">`, which silently rendered blank
+   there since Colab's markdown sanitizer strips `<iframe>`/`<script>`
+   tags; then as a code cell calling `IPython.display.HTML(...)`, which
+   worked, but was machinery for a widget that doesn't actually belong
+   in an async notebook.) The quick-check *question* is a separate
+   `mo.md()` cell and is unaffected -- it flattens to an ordinary
+   markdown cell like any other prose, same as always; only the button
+   beneath it disappears.
 
 4. A markdown cell whose *entire* content is a hand-typed ```python
    fence immediately followed by a hand-typed plain ``` output fence
@@ -113,42 +105,12 @@ def as_html_cell(source: str):
     return value if isinstance(value, str) else None
 
 
-def _as_triple_quoted(text: str) -> str:
-    """Render `text` as a triple-quoted Python string literal, picking
-    whichever quote style the text itself doesn't contain (and doesn't
-    end with, to avoid a 4-quote-in-a-row ambiguity at the close) --
-    keeps generated source as multi-line, readable text instead of one
-    long backslash-escaped repr() line. Falls back to repr() in the
-    (here, never hit) case where the text contains both."""
-    if '"""' not in text and not text.endswith('"'):
-        return f'"""{text}"""'
-    if "'''" not in text and not text.endswith("'"):
-        return f"'''{text}'''"
-    return repr(text)
-
-
-def as_iframe_cell(source: str):
-    """mo.iframe(<literal>, width=..., height=...) -> Python source for a
-    code cell that displays the same HTML via `display(HTML(...))`, or
-    None if it doesn't match. `width`/`height` are dropped -- Colab
-    sizes a code cell's output to its content automatically, and they
-    only meant anything for the `<iframe>` wrapper this no longer uses."""
+def is_iframe_cell(source: str) -> bool:
+    """True if `source` is exactly one `mo.iframe(...)` call -- see
+    docstring case 3. Used only to drop the cell from the Colab export;
+    unlike `as_html_cell`, nothing is extracted from it."""
     call = _parse_call(source)
-    if call is None or not _is_mo_attr(call.func, "iframe"):
-        return None
-    if len(call.args) != 1:
-        return None
-    try:
-        inner_html = ast.literal_eval(call.args[0])
-        for kw in call.keywords:
-            if kw.arg not in ("width", "height"):
-                return None
-    except ValueError:
-        return None
-    if not isinstance(inner_html, str):
-        return None
-    html_literal = _as_triple_quoted(inner_html)
-    return f"from IPython.display import HTML, display\n\ndisplay(HTML({html_literal}))"
+    return call is not None and _is_mo_attr(call.func, "iframe")
 
 
 _HANDTYPED_CODE_OUTPUT_RE = re.compile(
@@ -207,15 +169,13 @@ for cell in nb["cells"]:
             cell = {**cell, "source": without_mo}
             new_cells.append(cell)
             continue
+        if is_iframe_cell(source):
+            continue
         html = as_html_cell(source)
         if html is not None:
             cell = {**cell, "cell_type": "markdown", "source": html}
             cell.pop("outputs", None)
             cell.pop("execution_count", None)
-        else:
-            iframe_code = as_iframe_cell(source)
-            if iframe_code is not None:
-                cell = {**cell, "source": iframe_code, "outputs": [], "execution_count": None}
     elif cell["cell_type"] == "markdown":
         split = split_handtyped_code_cell(source)
         if split is not None:
