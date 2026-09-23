@@ -13,12 +13,12 @@ You only need to do this once, ever, on a given computer.
    - Windows: download and install [Git for Windows](https://git-scm.com/download/win). This also gives you "Git Bash," a terminal you'll use for the commands below.
 2. **Install marimo** (to actually edit slide decks): `pip install marimo`.
 3. **Get a GitHub account** if you don't have one already, at [github.com](https://github.com).
-4. **Ask to be added as a collaborator** on `BU-EK125/EK125-slides` (whoever manages the repo can add your GitHub username under the repo's Settings → Collaborators). Without this, you won't be able to push changes.
+4. **Ask to be added as a collaborator** on `BU-EK125/EK125-C1-DePasquale-Slides` (whoever manages the repo can add your GitHub username under the repo's Settings → Collaborators). Without this, you won't be able to push changes.
 5. **Download ("clone") the repo to your computer.** Open Terminal (or Git Bash on Windows), navigate to wherever you'd like the folder to live (e.g., `cd Documents`), then run:
    ```
-   git clone https://github.com/BU-EK125/EK125-slides.git
+   git clone https://github.com/BU-EK125/EK125-C1-DePasquale-Slides.git
    ```
-   This creates a folder called `EK125-slides` with a full copy of the repo. You only do this once -- from now on you'll just update this same folder.
+   This creates a folder called `EK125-C1-DePasquale-Slides` with a full copy of the repo. You only do this once -- from now on you'll just update this same folder.
 
 ## Every time you want to make a change
 
@@ -28,7 +28,7 @@ Think of this as a 5-step recipe: **update → branch → edit → commit/push �
 
 Open a terminal, move into the repo folder, and pull the latest changes:
 ```
-cd EK125-slides
+cd EK125-C1-DePasquale-Slides
 git checkout main
 git pull
 ```
@@ -70,7 +70,7 @@ git push -u origin update-class5-slides
 A pull request is a request to merge your branch into the live site. After you push, GitHub will print a URL in the terminal like:
 ```
 remote: Create a pull request for 'update-class5-slides' on GitHub by visiting:
-remote:      https://github.com/BU-EK125/EK125-slides/pull/new/update-class5-slides
+remote:      https://github.com/BU-EK125/EK125-C1-DePasquale-Slides/pull/new/update-class5-slides
 ```
 Open that link in your browser (or go to the repo on github.com -- it'll show a yellow banner offering to create the PR for your recently-pushed branch). Give it a title, optionally a description, and click **Create pull request**.
 
