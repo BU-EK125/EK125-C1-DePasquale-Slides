@@ -220,23 +220,19 @@ after each `marimo export ipynb`) and fixes both:
   assuming cell layout), keeping the rest of the cell as-is.
 - Rewrites `mo.Html("<literal>")` into a plain markdown cell containing
   the equivalent raw HTML -- fine for static content with no `<script>`.
-- **Splits `mo.iframe(...)` cells on a `<!-- colab-split -->` marker.**
-  In this deck `mo.iframe()` is only ever a quick-check widget -- and
-  since the question text and the A/B/C/D buttons now live in the
-  *same* cell (see "Quick-check widgets" below for why), only the
-  interactive half should disappear on Colab: the buttons POST to a
-  live Google Form tied to that lecture's polling, meaningful for a
-  student watching the slide during class and meaningless for someone
-  opening this notebook later, disconnected from that lecture. The
-  question text is real content worth keeping. So the html is split on
-  a literal `<!-- colab-split -->` comment placed right before the
-  button row: everything before it becomes a markdown cell; everything
-  from the marker onward (buttons + submit script) is dropped. An
-  `mo.iframe(...)` cell with no marker at all -- i.e. purely
-  interactive, no question text merged in -- is dropped in full.
+- **Drops `mo.iframe(...)` cells entirely.** In this deck `mo.iframe()`
+  is only ever a quick-check widget -- question text, GPP-quoted
+  example, A/B/C/D choices, and the actual clickable buttons, all in
+  one cell (see "Quick-check widgets" below for why they're merged).
+  None of it belongs in the Colab notebook: the buttons POST to a live
+  Google Form tied to that lecture's polling, meaningless once
+  disconnected from the actual lecture, and the question text -- while
+  real content -- is hand-written HTML/CSS sized and styled for a
+  full-slide iframe, not a plain markdown cell.
 
-Two earlier versions tried to keep the button alive on Colab in some
-form, both worth knowing about if you're tempted to redo this:
+Three earlier versions tried to keep some or all of the widget alive
+on Colab instead, each worth knowing about if you're tempted to redo
+this:
 - Reconstructing an `<iframe srcdoc="...">` tag and turning the cell
   into markdown rendered as a **silently blank cell**, no error --
   confirmed by a real report after it shipped. Colab's markdown-cell
@@ -246,9 +242,16 @@ form, both worth knowing about if you're tempted to redo this:
   unsanitized (confirmed against Colab's own official
   `advanced_outputs.ipynb` sample, which uses this exact pattern for a
   clickable button) -- but it was still machinery for a widget that,
-  on reflection, doesn't belong in an async notebook at all. Dropping
-  the cell (later, splitting it) turned out simpler and was what was
-  actually wanted.
+  on reflection, doesn't belong in an async notebook at all.
+- After the question and buttons were merged into one cell (below),
+  tried splitting the html on a `<!-- colab-split -->` marker to keep
+  just the question as a Colab markdown cell -- worked mechanically
+  (verified: question text present, zero button/script content
+  leaked), but looked genuinely broken once actually rendered: raw
+  HTML/CSS built for a large iframe doesn't translate to a plain
+  markdown cell. Dropping the whole thing turned out simpler and was
+  what was actually wanted -- don't re-add this without a concrete plan
+  for making the extracted HTML look right outside its iframe.
 
 **If you introduce a new marimo call pattern that ends up in a code cell
 after `ipynb` export** (anything other than `mo.md()`), check whether it
@@ -346,16 +349,33 @@ visible" option for a *second* cell. The only way to get the question
 and the buttons to render together, immediately, is to put them in the
 same cell.
 
+**Set an explicit base `font-size` on the iframe's `body` -- don't
+rely on the browser default.** An iframe is its own document with no
+access to the surrounding page's CSS, so unstyled text renders at the
+browser default (16px) while the rest of this deck's slide content
+renders around 32-39px (measured directly, not assumed -- inspect a
+neighboring slide's computed `font-size` in devtools before picking a
+number for a new widget). The first version of this merged widget used
+`em`-only sizing with no explicit base, and the result looked
+noticeably small next to everything else on the slide -- confirmed
+against a real report, then fixed by setting `body { font-size:26px }`
+and sizing everything else in `em` off of that. Bump the iframe's own
+`height` to match once the text is bigger; content that used to fit in
+140px needs closer to 600-650px at this scale.
+
 **Widget markup** (the exact pattern used twice in
 `slides/Class6/Class6.py` -- copy it for a new quick-check, only
 changing the question text, the `entry.<FIELD_ID>`, and the answer
 copy). The question/example/choices come first as hand-written HTML
 (no marimo markdown rendering inside an iframe -- write the equivalent
-tags directly), then a `<!-- colab-split -->` marker, then the buttons:
+tags directly), then the buttons:
 ```python
 mo.iframe(
     """
-    <style> ...dark-theme styling for both the text and the buttons... </style>
+    <style>
+      body { font-size:26px; ... } /* explicit base -- see above */
+      ...dark-theme styling for both the text and the buttons...
+    </style>
     <h2>🎯 Quick Check: Predict Before You Code</h2>
     <p><strong>GPP Problem N</strong> asks for exactly this output:</p>
     <div class="gpp-output">...</div>
@@ -365,7 +385,6 @@ mo.iframe(
       ...
     </div>
     <p>📝 <strong>Submit your answer below:</strong></p>
-    <!-- colab-split -->
     <div class="qc-row">
       <button class="qc-btn" data-choice="A">A</button>
       ...
@@ -387,13 +406,12 @@ mo.iframe(
     })();
     </script>
     """,
-    width="100%", height="480px",
+    width="100%", height="620px",
 )
 ```
-The `<!-- colab-split -->` marker isn't decorative -- `strip_marimo_import.py`
-looks for it verbatim to know where the interactive half starts (see
-"The Colab-export trap" above). Forget it and the whole widget,
-question text included, silently vanishes from the Colab export.
+This whole cell is dropped from the Colab export (see "The Colab-export
+trap" above) -- don't add a `<!-- colab-split -->`-style marker back in
+without re-reading why that was tried and reverted there first.
 
 The answer reveal (`### ✅ Answer: ...`) stays a **separate**, ordinary
 `mo.md()` cell marked as a fragment right after the widget -- unlike
