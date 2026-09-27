@@ -789,5 +789,73 @@ def _(mo):
     return
 
 
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Exam 1 Review: Practice for Paper Exams
+
+    The main EK125 site has a companion page —
+    [Exam 1 Review: Top 30 GPP Problems](https://BU-EK125.github.io/EK125/gpps/Exam1_Review.html) —
+    pulling 30 problems from Classes 1-6 into a 5-day, on-paper practice
+    plan. Since the real exam is on paper, no laptop, it also has an
+    exam-strategy guide and a list of the most common paper-exam
+    mistakes (missing colons, `=` vs `==`, off-by-one `range()` errors,
+    uninitialized accumulators).
+
+    📖 [Exam 1 Review](https://BU-EK125.github.io/EK125/gpps/Exam1_Review.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ## 📝 Exam 1 Review Example: Try This on Paper
+
+    **Problem 23** (Class 5, Problem 1.7) — this code is supposed to
+    calculate the running product of the integers from 1 to 5, but it
+    has a bug:
+
+    ```python
+    runprod = 1
+    for i in range(6):
+        runprod = runprod * i
+        print('The product so far is', runprod)
+    ```
+
+    Find and fix it — then check the reveal.
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ### ✅ Fix
+
+    `range(6)` starts at `i = 0`, and multiplying by 0 zeroes out
+    `runprod` on the very first iteration — every later `print()` just
+    repeats 0. Start the range at 1 instead:
+
+    ```python
+    runprod = 1
+    for i in range(1, 6):
+        runprod = runprod * i
+        print('The product so far is', runprod)
+    ```
+
+    ```
+    The product so far is 1
+    The product so far is 2
+    The product so far is 6
+    The product so far is 24
+    The product so far is 120
+    ```
+
+    📝 [Problem 23: Debug the Running Product](https://BU-EK125.github.io/EK125/gpps/Exam1_Review.html#problem-23-debug-the-running-product)
+    ''')
+    return
+
+
 if __name__ == "__main__":
     app.run()
