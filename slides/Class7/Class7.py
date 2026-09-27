@@ -166,11 +166,11 @@ def _(mo):
               buttons.forEach(function (b) { b.disabled = true; b.style.opacity = '0.5'; });
               btn.style.opacity = '1';
               btn.style.background = '#2d6a4f';
-              fetch('https://docs.google.com/forms/d/e/CLASS7_FORM_ID/formResponse', {
+              fetch('https://docs.google.com/forms/d/e/1FAIpQLSdHU67IBnwYojEj6Z_YCwHnZdh7-vK4RxDPVcPCzfFGfSOyow/formResponse', {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                body: 'entry.CLASS7_QC1_FIELD_ID=' + encodeURIComponent(choice),
+                body: 'entry.1109327713=' + encodeURIComponent(choice),
               });
               status.textContent = 'Submitted: ' + choice;
             });
@@ -513,11 +513,11 @@ def _(mo):
               buttons.forEach(function (b) { b.disabled = true; b.style.opacity = '0.5'; });
               btn.style.opacity = '1';
               btn.style.background = '#2d6a4f';
-              fetch('https://docs.google.com/forms/d/e/CLASS7_FORM_ID/formResponse', {
+              fetch('https://docs.google.com/forms/d/e/1FAIpQLSdHU67IBnwYojEj6Z_YCwHnZdh7-vK4RxDPVcPCzfFGfSOyow/formResponse', {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                body: 'entry.CLASS7_QC2_FIELD_ID=' + encodeURIComponent(choice),
+                body: 'entry.1464395584=' + encodeURIComponent(choice),
               });
               status.textContent = 'Submitted: ' + choice;
             });
@@ -997,11 +997,11 @@ def _(mo):
               buttons.forEach(function (b) { b.disabled = true; b.style.opacity = '0.5'; });
               btn.style.opacity = '1';
               btn.style.background = '#2d6a4f';
-              fetch('https://docs.google.com/forms/d/e/CLASS7_FORM_ID/formResponse', {
+              fetch('https://docs.google.com/forms/d/e/1FAIpQLSdHU67IBnwYojEj6Z_YCwHnZdh7-vK4RxDPVcPCzfFGfSOyow/formResponse', {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                body: 'entry.CLASS7_QC3_FIELD_ID=' + encodeURIComponent(choice),
+                body: 'entry.305172968=' + encodeURIComponent(choice),
               });
               status.textContent = 'Submitted: ' + choice;
             });
