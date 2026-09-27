@@ -851,6 +851,8 @@ def _(mo):
     The product so far is 24
     The product so far is 120
     ```
+
+    📝 [Problem 23: Debug the Running Product](https://BU-EK125.github.io/EK125/gpps/Exam1_Review.html#problem-23-debug-the-running-product)
     ''')
     return
 
