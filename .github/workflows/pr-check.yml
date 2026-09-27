@@ -30,7 +30,7 @@ jobs:
         # uv is required by `marimo export html-wasm` to resolve each
         # deck's imports into a WASM-compatible dependency set.
         if: github.event.action != 'closed'
-        run: pip install --force-reinstall --no-cache-dir jupyter-book==1.0.2 marimo uv
+        run: pip install --force-reinstall --no-cache-dir jupyter-book==1.0.2 marimo==0.25.0 uv
 
       - name: Export marimo slide decks
         if: github.event.action != 'closed'
