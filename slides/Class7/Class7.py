@@ -116,10 +116,22 @@ def _(mo):
     mo.md("""
     ## 🎯 Quick Check: Predict Before You Code
 
-    **GPP Problem 1.1** asks for a single `range()` call that prints
-    the numbers from 10 down to 1 (inclusive), each on its own line.
+    **GPP Problem 1.1: Counting Backwards**
 
-    Which call produces exactly `10, 9, 8, ..., 2, 1`?
+    > Use `range()` to print the numbers from 10 down to 1 (inclusive),
+    > each on a new line.
+
+    **Expected output:**
+    ```
+    10
+    9
+    8
+    ...
+    2
+    1
+    ```
+
+    Which `range()` call produces this?
 
     **A.** `range(10, 1)`
 
@@ -463,10 +475,18 @@ def _(mo):
     mo.md("""
     ## 🎯 Quick Check: Predict Before You Code
 
-    **GPP Problem 2.3** asks for a comprehension that keeps only the
-    even numbers from `numbers = [1, 2, ..., 10]`.
+    **GPP Problem 2.3: Filtering Even Numbers**
 
-    Which one actually does that?
+    > Use a conditional list comprehension to create a new list
+    > containing only the even numbers from the given list.
+
+    ```python
+    numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    ```
+
+    **Expected result:** `[2, 4, 6, 8, 10]`
+
+    Which comprehension produces it?
 
     **A.** `[x for x in numbers if x % 2 == 0]`
 
@@ -946,9 +966,16 @@ def _(mo):
     mo.md("""
     ## 🎯 Quick Check: Predict Before You Code
 
-    **GPP Problem 4.2** asks you to reverse
-    `values = [10, 20, 30, 40, 50]` using **slicing only** — no
-    `.reverse()` method, no `reversed()` function.
+    **GPP Problem 4.2: Reverse a List**
+
+    > Use slicing to reverse this list without using the `.reverse()`
+    > method or `reversed()` function.
+
+    ```python
+    values = [10, 20, 30, 40, 50]
+    ```
+
+    **Expected result:** `[50, 40, 30, 20, 10]`
 
     Which slice does it?
 
