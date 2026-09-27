@@ -21,7 +21,7 @@ def _(mo):
     mo.md("""
     # Advanced Iteration and Nested Structures
 
-    ### Range, Enumerate, Tuples, Comprehensions, Indexing & Slicing
+    ### Range, Enumerate, Comprehensions, Indexing & Slicing
 
     *Class 7*
 
@@ -254,114 +254,6 @@ def _(mo):
 
     You'll practice this exact pattern in today's GPP — see
     [Problem 1.2: Sensor Readings with Indices](https://BU-EK125.github.io/EK125/gpps/Class7_GPP.html#problem-1-2-sensor-readings-with-indices).
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## Tuples: A Quick Refresher
-
-    Tuples are similar to lists — `len()`, indexing, and slicing all
-    work the same way — but they're **immutable**: once created, a
-    tuple can't be changed.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
-    mytup = (2, 11, 33)
-    print(len(mytup))
-    print(mytup[1])
-    ```
-
-    ```
-    3
-    11
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
-    newtuple = 5, 19               # parentheses aren't required
-    print(mytup + newtuple)        # concatenation
-    print(len(()))                 # empty tuple
-    print(type((7,)), type((7)))   # one-element tuple needs a comma
-    ```
-
-    ```
-    (2, 11, 33, 5, 19)
-    0
-    <class 'tuple'> <class 'int'>
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ### Takeaway
-
-    🚩 **Common mistake #1:** trying to modify a tuple like a list, e.g.
-    `mytup[0] = 5` — raises a `TypeError`. To get a changed version, you
-    have to build a *new* tuple (or convert to a list, edit it, and
-    convert back).
-
-    🚩 **Common mistake #2:** writing `(7)` when you meant a one-element
-    tuple. Without the trailing comma, `(7)` is just the integer `7` in
-    parentheses — you need `(7,)`.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
-    coordinates = [(0, 5), (10, 15), (20, 25)]
-
-    # Without unpacking:
-    for coord in coordinates:
-        x_value = coord[0]
-        y_value = coord[1]
-        print(f"x: {x_value}, y: {y_value}")
-
-    # With unpacking:
-    for x, y in coordinates:
-        print(f"x: {x}, y: {y}")
-    ```
-
-    ```
-    x: 0, y: 5
-    x: 10, y: 15
-    x: 20, y: 25
-    x: 0, y: 5
-    x: 10, y: 15
-    x: 20, y: 25
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ### Takeaway
-
-    **Unpacking** — assigning a tuple's values straight into named
-    variables — makes code more readable and less error-prone. Instead
-    of remembering "index 0 is x and index 1 is y," you just use
-    meaningful names directly. You'll see this pattern again with
-    `enumerate()` and with nested structures.
     """)
     return
 
@@ -751,49 +643,6 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### Nested Tuples
-
-    Tuples are immutable, but they can still nest.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
-    blocks = ((8, 10), (11, 1), (2, 4))
-    print(blocks[1][0])
-
-    for start, end in blocks:
-        print(f"Starts at {start}, ends at {end}")
-    ```
-
-    ```
-    11
-    Starts at 8, ends at 10
-    Starts at 11, ends at 1
-    Starts at 2, ends at 4
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ### Takeaway
-
-    Nesting and unpacking work on tuples exactly the way they do on
-    lists — the only difference is that a tuple's individual entries
-    still can't be reassigned in place.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
     ## Multi-Level Indexing
 
     Once a nested structure exists, you don't need to loop over
@@ -1062,7 +911,6 @@ def _(mo):
 
     - **`range()`** and **`enumerate()`** give you more control over
       iteration — start/stop/step, and index-plus-value together.
-    - **Tuples** are immutable sequences, useful for fixed data.
     - **List comprehensions** build lists compactly in one line;
       adding `if` filters which values make it in.
     - **Nested comprehensions and loops** build 2D data — the inner
