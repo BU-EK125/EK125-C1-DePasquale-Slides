@@ -543,106 +543,6 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Working with Nested Lists
-
-    A nested list — like seats in a theater — is just a list containing
-    other lists.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
-    seats = [['A1', 'A2'], ['B1', 'B2']]
-    for row in seats:
-        for seat in row:
-            print(seat)
-    ```
-
-    ```
-    A1
-    A2
-    B1
-    B2
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    Nesting `enumerate()` gives you **both** the row and column position
-    at once:
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
-    for i, row in enumerate(seats):
-        for j, seat in enumerate(row):
-            print(f"Row {i}, Col {j}: {seat}")
-    ```
-
-    ```
-    Row 0, Col 0: A1
-    Row 0, Col 1: A2
-    Row 1, Col 0: B1
-    Row 1, Col 1: B2
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    Combine `enumerate()` with a comprehension to **tag** values with
-    their positions in one step:
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
-    indexed = [(i, j, seat)
-               for i, row in enumerate(seats)
-               for j, seat in enumerate(row)]
-    print(indexed)
-    ```
-
-    ```
-    [(0, 0, 'A1'), (0, 1, 'A2'), (1, 0, 'B1'), (1, 1, 'B2')]
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ### Takeaway
-
-    Every seat is now structured data — tagged with its row index,
-    column index, and value — built in one expression instead of a
-    multi-line loop with manual bookkeeping.
-
-    You'll work with a nested list just like this one in today's GPP —
-    see [Problem 3.1: Understanding Nested Lists](https://BU-EK125.github.io/EK125/gpps/Class7_GPP.html#problem-3-1-understanding-nested-lists).
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
     ## Multi-Level Indexing
 
     Once a nested structure exists, you don't need to loop over
@@ -685,8 +585,11 @@ def _(mo):
     Python lists don't support comma-indexing like that — it raises a
     `TypeError`. Each level of nesting needs its own `[...]`.
 
-    You'll build a grid like this — with tuples inside instead of
-    numbers — in today's GPP — see
+    You'll index and mutate a nested list just like this one in today's
+    GPP — see
+    [Problem 3.1: Understanding Nested Lists](https://BU-EK125.github.io/EK125/gpps/Class7_GPP.html#problem-3-1-understanding-nested-lists).
+    You'll also build a grid like this — with tuples inside instead of
+    numbers — for
     [Problem 3.3: Grid of Coordinates](https://BU-EK125.github.io/EK125/gpps/Class7_GPP.html#problem-3-3-grid-of-coordinates).
     """)
     return
