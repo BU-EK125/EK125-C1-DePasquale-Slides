@@ -36,10 +36,14 @@ Don't duplicate those here; read them first).
   homework-help-session and discussion-section notebooks. Not yet audited
   by any Claude session; check their own docs before assuming this file's
   conventions apply.
-- **EK125-Instructors** (private) -- exists, purpose not yet documented.
-- **EK125WIP** (`briandepasquale/EK125WIP`, personal, not under the
-  BU-EK125 org) -- the raw-material working folder, organized by semester
-  (`S26`/`F25`/`F26`/`copyOfShared`). **Marimo lecture-deck drafts for
+- **EK125-Instructors** (private) -- the raw-material working repo,
+  organized by semester (`S26`/`F25`/`F26`/`copyOfShared`). **Transferred
+  from a personal repo (`briandepasquale/EK125WIP`) into the org and
+  renamed** -- same repo/history, formerly "EK125WIP" in older notes. A
+  local checkout's remote may still point at the old
+  `briandepasquale/EK125WIP.git` URL (redirects still work, but repoint to
+  `https://github.com/BU-EK125/EK125-Instructors.git` when convenient).
+  **Marimo lecture-deck drafts for
   Classes 2-4 already exist at `F26/Class {2,3,4}/Slides/`** (full
   `ClassN_Lecture.py`/`ClassN_GPP.py`/`HWN_*_Help_Session.py` families with
   `layouts/` and `custom.css`), built but never pushed here -- **check
@@ -91,7 +95,7 @@ solutions.
 
 ## Sourcing/auditing pattern
 
-When porting or referencing content from EK125-notebooks or EK125WIP,
+When porting or referencing content from EK125-notebooks or EK125-Instructors,
 cross-check against what students are *actually currently given* (a real
 downloaded copy of the assignment/GPP, not just the internal source) before
 trusting it. This has repeatedly caught real problems: dropped content,
@@ -118,7 +122,7 @@ cells left over from someone editing a file interactively.
 
 ## Lecture-deck fidelity-audit process (reusable)
 
-Established pattern from building the F26 drafts in EK125WIP: source a
+Established pattern from building the F26 drafts in EK125-Instructors: source a
 lecture deck only from that class's GPP notebook + its lecture PDF + the
 *public* reading page (`bu-ek125.github.io/EK125/ClassN.html`), then
 self-audit turn-by-turn ("is everything in the lecture in the html
