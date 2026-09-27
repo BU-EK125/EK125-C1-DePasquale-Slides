@@ -661,45 +661,6 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### Loops vs. Slicing
-
-    A loop extracts a subset **step by step**. Slicing describes the
-    same block of data in one expression.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
-    # Loop version:
-    subset = []
-    for i in range(1, 4):
-        subset.append(nums[i])
-    print(subset)
-
-    # Slicing -- same result:
-    print(nums[1:4])
-
-    # Negative indices aren't limited to -1:
-    print(nums[-1])   # Last
-    print(nums[-2])   # Second to last
-    ```
-
-    ```
-    [10, 15, 20]
-    [10, 15, 20]
-    25
-    20
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
     ### Takeaway
 
     This week's slicing stays to **flat** lists only — slicing whole
