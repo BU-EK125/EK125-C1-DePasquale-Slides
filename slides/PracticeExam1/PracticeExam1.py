@@ -51,22 +51,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
-    ## Problem 1: True/False (a–d)
+    ## Problem 1: True/False (a)
 
-    **a)** In the block of code below, the print statement will be
-    invoked five times:
+    In the block of code below, the print statement will be invoked
+    five times:
     ```python
     for i in range(5):
         print(i)
     ```
-
-    **b)** The expression `10 // 3` evaluates to `3.33`.
-
-    **c)** After executing `mylist = [1, 2, 3]` and then
-    `mylist[1] = 99`, the list becomes `[1, 99, 3]`.
-
-    **d)** After executing `mystring = "Python"` and then
-    `mystring[3] = "t"`, the string becomes `"Pytton"`.
     ''')
     return
 
@@ -74,19 +66,74 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### ✅ Answers
+    ### ✅ True
 
-    **a) True** — `range(5)` produces 5 values (0–4), so the loop body
-    runs 5 times.
+    `range(5)` produces 5 values (0–4), so the loop body runs 5 times.
+    """)
+    return
 
-    **b) False** — `//` is *integer* (floor) division: `10 // 3` is
-    `3`, not `3.33`. (`3.33...` is what `10 / 3` gives.)
 
-    **c) True** — lists are mutable; index assignment replaces that
-    one element in place.
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Problem 1: True/False (b)
 
-    **d) False** — strings are *immutable*. `mystring[3] = "t"`
-    doesn't silently change the string — it raises
+    The expression `10 // 3` evaluates to `3.33`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### ✅ False
+
+    `//` is *integer* (floor) division: `10 // 3` is `3`, not `3.33`.
+    (`3.33...` is what `10 / 3` gives.)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Problem 1: True/False (c)
+
+    After executing `mylist = [1, 2, 3]` and then `mylist[1] = 99`,
+    the list becomes `[1, 99, 3]`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### ✅ True
+
+    Lists are mutable; index assignment replaces that one element in
+    place.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Problem 1: True/False (d)
+
+    After executing `mystring = "Python"` and then
+    `mystring[3] = "t"`, the string becomes `"Pytton"`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### ✅ False
+
+    Strings are *immutable*. `mystring[3] = "t"` doesn't silently
+    change the string — it raises
     `TypeError: 'str' object does not support item assignment`.
     """)
     return
@@ -95,11 +142,13 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    💡 **Tip:** b) and d) are testing the same instinct from opposite
-    directions — two separate rules that are easy to blur together:
-    `/` vs `//` (division), and mutable vs immutable (list vs string).
-    When a True/False question changes just one word or one operator
-    from something you know, stop and identify exactly which rule it's
+    ## 💡 Tip
+
+    b) and d) are testing the same instinct from opposite directions —
+    two separate rules that are easy to blur together: `/` vs `//`
+    (division), and mutable vs immutable (list vs string). When a
+    True/False question changes just one word or one operator from
+    something you know, stop and identify exactly which rule it's
     probing before answering.
     """)
     return
@@ -108,18 +157,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Problem 1: True/False (e–h)
+    ## Problem 1: True/False (e)
 
-    **e)** A `while` loop will always execute its action at least
-    once.
-
-    **f)** The `random.seed()` function ensures that the same sequence
-    of "random" numbers is generated each time the program runs.
-
-    **g)** The expression `5 % 2 == 0` evaluates to `True`.
-
-    **h)** Tuples in Python are mutable, meaning members may be added
-    and removed after the tuple is created.
+    A `while` loop will always execute its action at least once.
     """)
     return
 
@@ -127,20 +167,11 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### ✅ Answers
+    ### ✅ False
 
-    **e) False** — a `while` loop checks its condition *first*; if
-    it's false immediately, the action never runs at all. Python has
-    no built-in do-while.
-
-    **f) True** — that's exactly what `random.seed()` is for: same
-    seed in, same sequence of "random" values out, every run.
-
-    **g) False** — `5 % 2` is `1` (the remainder), and `1 == 0` is
-    `False`.
-
-    **h) False** — tuples are immutable, the opposite of lists. Once
-    created, you cannot add, remove, or reassign any element.
+    A `while` loop checks its condition *first*; if it's false
+    immediately, the action never runs at all. Python has no built-in
+    do-while.
     """)
     return
 
@@ -148,7 +179,73 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    💡 **Tip:** if a True/False question names a specific built-in
+    ## Problem 1: True/False (f)
+
+    The `random.seed()` function ensures that the same sequence of
+    "random" numbers is generated each time the program runs.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### ✅ True
+
+    That's exactly what `random.seed()` is for: same seed in, same
+    sequence of "random" values out, every run.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Problem 1: True/False (g)
+
+    The expression `5 % 2 == 0` evaluates to `True`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### ✅ False
+
+    `5 % 2` is `1` (the remainder), and `1 == 0` is `False`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Problem 1: True/False (h)
+
+    Tuples in Python are mutable, meaning members may be added and
+    removed after the tuple is created.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### ✅ False
+
+    Tuples are immutable, the opposite of lists. Once created, you
+    cannot add, remove, or reassign any element.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## 💡 Tip
+
+    If a True/False question names a specific built-in
     (`random.seed()`, `%`, tuples), it's almost always testing whether
     you know that thing's *one defining property* — reproducibility,
     remainder, immutability. Answer from the definition, not a guess.
@@ -257,15 +354,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Problem 3: Expression Evaluation (a–c)
+    ## Problem 3: Expression Evaluation (a)
 
-    Show the result of each (typed sequentially):
-
-    **a)** `15 % 4 + 2`
-
-    **b)** `3 ** 2 > 10 or 4 < 5`
-
-    **c)** `"hello".upper() == "HELLO"`
+    Show the result: `15 % 4 + 2`
     """)
     return
 
@@ -273,15 +364,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### ✅ Answers
+    ### ✅ `5`
 
-    **a) `5`** — `15 % 4` is `3`, then `3 + 2` is `5`.
-
-    **b) `True`** — `3 ** 2` is `9`; `9 > 10` is `False`; but
-    `4 < 5` is `True`; `False or True` is `True`.
-
-    **c) `True`** — `.upper()` returns `"HELLO"`, which equals
-    `"HELLO"`.
+    `15 % 4` is `3`, then `3 + 2` is `5`.
     """)
     return
 
@@ -289,11 +374,53 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    💡 **Tip:** for b), evaluate strictly in precedence order —
-    exponent first (`**`), then comparisons (`>`, `<`), then `or`
-    last. Writing out each intermediate value on its own line (like
-    the answer above) catches mistakes that doing it all in one mental
-    leap won't.
+    ## Problem 3: Expression Evaluation (b)
+
+    Show the result: `3 ** 2 > 10 or 4 < 5`
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### ✅ `True`
+
+    `3 ** 2` is `9`; `9 > 10` is `False`; but `4 < 5` is `True`;
+    `False or True` is `True`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Problem 3: Expression Evaluation (c)
+
+    Show the result: `"hello".upper() == "HELLO"`
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### ✅ `True`
+
+    `.upper()` returns `"HELLO"`, which equals `"HELLO"`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## 💡 Tip
+
+    For b), evaluate strictly in precedence order — exponent first
+    (`**`), then comparisons (`>`, `<`), then `or` last. Writing out
+    each intermediate value on its own line (like the answer above)
+    catches mistakes that doing it all in one mental leap won't.
     """)
     return
 
@@ -301,20 +428,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
-    ## Problem 3: Expression Evaluation (d–f)
+    ## Problem 3: Expression Evaluation (d)
 
-    Show the result of each (typed sequentially):
-
-    **d)**
+    Show the result (typed sequentially, continuing from a–c):
     ```python
     x = [10, 20, 30]
     x.append(40)
     len(x)
     ```
-
-    **e)** `not (True and False)`
-
-    **f)** `"abc" * 2 + "d"`
     ''')
     return
 
@@ -322,17 +443,11 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### ✅ Answers
+    ### ✅ `4`
 
-    **d) `4`** — the assignment and `.append()` produce no displayed
-    value on their own; only the final `len(x)` does, and the list has
-    grown to 4 elements.
-
-    **e) `True`** — `True and False` is `False`; `not False` is
-    `True`.
-
-    **f) `"abcabcd"`** — `"abc" * 2` repeats the string first
-    (`"abcabc"`), *then* `+ "d"` appends once.
+    The assignment and `.append()` produce no displayed value on
+    their own; only the final `len(x)` does, and the list has grown
+    to 4 elements.
     """)
     return
 
@@ -340,10 +455,53 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    💡 **Tip:** for d), remember that **assignment (`=`) and most list
-    methods (`.append()`, `.sort()`, etc.) don't produce a displayed
-    value** — they return `None` or nothing at all. Only the *last*
-    expression that actually evaluates to something shows a result.
+    ## Problem 3: Expression Evaluation (e)
+
+    Show the result: `not (True and False)`
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### ✅ `True`
+
+    `True and False` is `False`; `not False` is `True`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Problem 3: Expression Evaluation (f)
+
+    Show the result: `"abc" * 2 + "d"`
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### ✅ `"abcabcd"`
+
+    `"abc" * 2` repeats the string first (`"abcabc"`), *then*
+    `+ "d"` appends once.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## 💡 Tip
+
+    For d), remember that **assignment (`=`) and most list methods
+    (`.append()`, `.sort()`, etc.) don't produce a displayed value** —
+    they return `None` or nothing at all. Only the *last* expression
+    that actually evaluates to something shows a result.
     """)
     return
 
