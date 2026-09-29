@@ -294,7 +294,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    💡 **Tip:** part a) is a classic "read the variable name, not just
+    ## 💡 Tip
+
+    Part a) is a classic "read the variable name, not just
     the type" trap — `input` looks like the built-in function, but
     it's been reassigned to a list. Whenever a name matches a
     built-in, check what it was actually assigned before assuming what
@@ -342,7 +344,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    💡 **Tip:** for c), trace the loop **one line at a time on scratch
+    ## 💡 Tip
+
+    For c), trace the loop **one line at a time on scratch
     paper** instead of doing it in your head — `x: 10, 8, 6, 4`, then
     check the *condition* before assuming one more subtraction
     happens. Off-by-one errors in while-loop tracing are the single
@@ -548,7 +552,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    💡 **Tip:** for slicing (b) and negative indices (c), **count on
+    ## 💡 Tip
+
+    For slicing (b) and negative indices (c), **count on
     your fingers or write the indices above the string** rather than
     eyeballing it — this is a very easy off-by-one to get wrong under
     time pressure, and there's no partial credit for "close."
@@ -592,7 +598,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    💡 **Tip:** `.replace(old, new)` replaces *every* occurrence of
+    ## 💡 Tip
+
+    `.replace(old, new)` replaces *every* occurrence of
     `old`, not just the first — here there's only one `"tion"` in the
     string, but don't assume that's always the case on a different
     string.
@@ -631,7 +639,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    💡 **Tip:** `nested[2][0]` is two indexing operations back to
+    ## 💡 Tip
+
+    `nested[2][0]` is two indexing operations back to
     back — resolve the *outer* one first (`nested[2]` → `[1, 2]`),
     then index *that* result. Don't try to do both steps in one mental
     jump.
@@ -682,7 +692,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    💡 **Tip:** part i) is the single most important idea in this
+    ## 💡 Tip
+
+    Part i) is the single most important idea in this
     whole problem: **a tuple being "immutable" only means you can't
     reassign what's *in* each tuple slot — it says nothing about
     whether that slot's own object can change itself.** A list stored
@@ -761,7 +773,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    💡 **Tip:** two easy points to lose here: (1) the **blank line**
+    ## 💡 Tip
+
+    Two easy points to lose here: (1) the **blank line**
     from the bare `print()` on line 2 — don't skip it; (2)
     `{value:.1f}` **rounds** `12.8765` to `12.9`, it doesn't truncate
     to `12.8`. Whenever you see an f-string format spec like `:.1f`,
@@ -820,7 +834,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    💡 **Tip:** each `elif` implicitly carries "and the previous
+    ## 💡 Tip
+
+    Each `elif` implicitly carries "and the previous
     conditions were all false" — that's *why* it's safe to drop the
     nesting. By the time Python checks `grade >= 80`, it already knows
     `grade < 90`, so you never need to write that bound explicitly.
@@ -865,7 +881,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    💡 **Tip:** fill the table **column by column, not row by row** —
+    ## 💡 Tip
+
+    Fill the table **column by column, not row by row** —
     compute the whole `not A` column first, then the whole `B and C`
     column, then combine. Doing one full row at a time makes it easy
     to slip and use the wrong row's B or C by accident.
@@ -911,7 +929,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    💡 **Tip:** this is a **prime-the-pump while loop** — ask once
+    ## 💡 Tip
+
+    This is a **prime-the-pump while loop** — ask once
     before the loop so there's something to check, then the loop's own
     action re-asks. Watch the logic direction: the *condition* needs
     `len < 6 OR no digit` (keep looping if *either* requirement is
@@ -972,7 +992,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    💡 **Tip:** "sum of the even numbers (NOT numbers with even
+    ## 💡 Tip
+
+    "sum of the even numbers (NOT numbers with even
     indices)" is called out explicitly for a reason — **index-based
     filtering (`numbers[::2]`) is the classic wrong answer here.**
     Filter on the *value* (`n % 2 == 0`), not the *position*. When a
@@ -1024,7 +1046,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    💡 **Tip:** this is the same **accumulator pattern** as Problem
+    ## 💡 Tip
+
+    This is the same **accumulator pattern** as Problem
     9's counting, just nested one level deeper — an *inner* loop
     builds one experiment's total (4 cards), and an *outer* loop
     repeats the whole experiment 100 times, counting successes. When a
