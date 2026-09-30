@@ -916,12 +916,18 @@ def _(mo):
     ### ✅ A working solution
 
     ```python
-    password = input("Enter a password: ")
-    while len(password) < 6 or not any(ch.isdigit() for ch in password):
+    have_valid_password = False
+    while not have_valid_password:
         password = input("Enter a password: ")
-    print("Password accepted!")
+        hasDigit = False
+        for char in password:
+            if char.isdigit():
+                hasDigit = True
+        if hasDigit and len(password) >= 6:
+            have_valid_password = True
+            print("Password accepted!")
     ```
-    (Verified against the exam's own example transcripts.)
+    (Verified against both of the exam's own example transcripts.)
     ''')
     return
 
@@ -969,15 +975,23 @@ def _(mo):
 
     ```python
     import random
+
     random.seed(42)
-    numbers = [random.randint(1, 20) for _ in range(6)]
-    print("Numbers:", numbers)
+    generated_numbers = []
+    for i in range(6):
+        generated_numbers.append(random.randint(1, 20))
 
-    even_sum = sum(n for n in numbers if n % 2 == 0)
-    print("Sum of even numbers:", even_sum)
+    even_sum = 0
+    greater_than_ten = 0
+    for number in generated_numbers:
+        if number % 2 == 0:
+            even_sum = even_sum + number
+        if number > 10:
+            greater_than_ten = greater_than_ten + 1
 
-    count_gt10 = sum(1 for n in numbers if n > 10)
-    print("Count greater than 10:", count_gt10)
+    print(f"Numbers: {generated_numbers}")
+    print(f"Sum of even numbers: {even_sum}")
+    print(f"Count greater than 10: {greater_than_ten}")
     ```
 
     ```
@@ -985,6 +999,9 @@ def _(mo):
     Sum of even numbers: 20
     Count greater than 10: 0
     ```
+    (The rubric's own sample solution prints `f"Number: ..."` (singular) —
+    corrected here to `"Numbers:"` to match the format the exam itself
+    requires.)
     ''')
     return
 
@@ -1026,19 +1043,25 @@ def _(mo):
     ```python
     import random
 
-    successes = 0
-    for _ in range(100):
-        total = sum(random.randint(1, 11) for _ in range(4))
-        if total <= 21:
-            successes += 1
+    under_twenty_one = 0
+    for experiment in range(100):
+        total_value = 0
+        for card_number in range(4):
+            total_value = total_value + random.randint(1, 11)
+        if total_value <= 21:
+            under_twenty_one += 1
 
-    print(f"Of 100 experiments, {successes} resulted in a value of 21 or less.")
+    print(f"Of 100 experiments, {under_twenty_one} resulted in a value of 21 or less.")
     ```
 
     ```
     Of 100 experiments, 40 resulted in a value of 21 or less.
     ```
-    (unseeded -- yours will be different, and so will the next run of this exact code)
+    (unseeded -- yours will be different, and so will the next run of this
+    exact code. The rubric's own sample solution says "a values of 21 or
+    less" -- corrected here to "a value" to match the exam's own stated
+    format. Its indentation was also lost in transcription; reconstructed
+    here to match the described logic.)
     ''')
     return
 
