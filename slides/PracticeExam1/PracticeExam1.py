@@ -766,16 +766,6 @@ def _(mo):
     *
     Complete!
     ```
-
-    **One point for each bullet below (per the rubric):**
-    - "Starting the simulation!" followed by blank line
-    - "Match found!"
-    - 0-2-4- on a single line (including trailing -)
-    - stars start on separate line from 0-2-4
-    - `***`
-    - `**`
-    - `*`
-    - "Complete!" on a separate line from the stars
     ''')
     return
 
@@ -837,14 +827,6 @@ def _(mo):
     else:
         result = "F"
     ```
-
-    **Point allocation (per the rubric):**
-    - 1 point for correct value when input is between 90 and 100
-    - 1 point for correct value when input is between 80 and 89
-    - 1 point for correct value when input is between 70 and 79
-    - 1 point for correct value when input is between 60 and 69
-    - 1 point for correct value when input is below 60
-    - 5 points for no nested ifs and elses
     ''')
     return
 
@@ -892,8 +874,6 @@ def _(mo):
     | T | T | F | F | F | **F** |
     | T | F | T | F | F | **F** |
     | F | T | T | T | T | **T** |
-
-    One point for each correct cell (per the rubric).
     """)
     return
 
@@ -933,7 +913,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
-    ### ✅ Sample solution (per the rubric)
+    ### ✅ A working solution
 
     ```python
     have_valid_password = False
@@ -948,13 +928,6 @@ def _(mo):
             print("Password accepted!")
     ```
     (Verified against both of the exam's own example transcripts.)
-
-    **Point allocation (per the rubric):**
-    - 2 pts: Correct initial prompt
-    - 4 pts: Loop continues while invalid
-    - 2 pts: Length check (at least 6) checked each loop
-    - 2 pts: Digit check (at least one digit) checked each loop
-    - 3 pts: Final message and correct termination
     ''')
     return
 
@@ -998,7 +971,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
-    ### ✅ Sample solution (per the rubric)
+    ### ✅ A working solution
 
     ```python
     import random
@@ -1029,14 +1002,6 @@ def _(mo):
     (The rubric's own sample solution prints `f"Number: ..."` (singular) —
     corrected here to `"Numbers:"` to match the format the exam itself
     requires.)
-
-    **Point allocation (per the rubric):**
-    - 2 pts: Correct seed usage
-    - 4 pts: Generating list of 6 random integers in correct range
-    - 3 pts: Printing the list correctly
-    - 4 pts: Summing only even numbers
-    - 3 pts: Counting numbers > 10
-    - 2 pts: Correct output format
     ''')
     return
 
@@ -1073,7 +1038,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
-    ### ✅ Sample solution (per the rubric)
+    ### ✅ A working solution
 
     ```python
     import random
@@ -1097,14 +1062,6 @@ def _(mo):
     less" -- corrected here to "a value" to match the exam's own stated
     format. Its indentation was also lost in transcription; reconstructed
     here to match the described logic.)
-
-    **Point allocation (per the rubric):**
-    - 2 pts: 100 trials are performed
-    - 2 pts: four random numbers are generated
-    - 2 pts: the value for a "hand" is computed correctly — sum of 4
-      random numbers between 1 and 11
-    - 1 pt: success trials are correctly tracked
-    - 1 pt: overall result correctly formatted
     ''')
     return
 
