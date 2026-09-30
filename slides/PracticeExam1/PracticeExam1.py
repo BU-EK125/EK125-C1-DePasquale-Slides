@@ -927,7 +927,6 @@ def _(mo):
             have_valid_password = True
             print("Password accepted!")
     ```
-    (Verified against both of the exam's own example transcripts.)
     ''')
     return
 
@@ -999,9 +998,6 @@ def _(mo):
     Sum of even numbers: 20
     Count greater than 10: 0
     ```
-    (The rubric's own sample solution prints `f"Number: ..."` (singular) —
-    corrected here to `"Numbers:"` to match the format the exam itself
-    requires.)
     ''')
     return
 
@@ -1057,11 +1053,8 @@ def _(mo):
     ```
     Of 100 experiments, 40 resulted in a value of 21 or less.
     ```
-    (unseeded -- yours will be different, and so will the next run of this
-    exact code. The rubric's own sample solution says "a values of 21 or
-    less" -- corrected here to "a value" to match the exam's own stated
-    format. Its indentation was also lost in transcription; reconstructed
-    here to match the described logic.)
+    (unseeded -- yours will be different, and so will the next run of
+    this exact code)
     ''')
     return
 
