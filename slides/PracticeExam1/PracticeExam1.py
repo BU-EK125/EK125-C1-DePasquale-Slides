@@ -142,21 +142,6 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## 💡 Tip
-
-    b) and d) are testing the same instinct from opposite directions —
-    two separate rules that are easy to blur together: `/` vs `//`
-    (division), and mutable vs immutable (list vs string). When a
-    True/False question changes just one word or one operator from
-    something you know, stop and identify exactly which rule it's
-    probing before answering.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
     ## Problem 1: True/False (e)
 
     A `while` loop will always execute its action at least once.
@@ -242,23 +227,10 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md("""
-    ## 💡 Tip
-
-    If a True/False question names a specific built-in
-    (`random.seed()`, `%`, tuples), it's almost always testing whether
-    you know that thing's *one defining property* — reproducibility,
-    remainder, immutability. Answer from the definition, not a guess.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
     mo.md('''
-    ## Problem 2: Multiple Choice (a–b)
+    ## Problem 2: Multiple Choice (a)
 
-    **a)** What is the value of `result` after this code executes?
+    What is the value of `result` after this code executes?
     ```python
     input = [1, 2, 3, 4]
     result = 0
@@ -266,11 +238,6 @@ def _(mo):
         result = result + 1
     ```
     A. `0`&nbsp;&nbsp;&nbsp; B. `4`&nbsp;&nbsp;&nbsp; C. `10`&nbsp;&nbsp;&nbsp; D. program fails to run
-
-    **b)** Which best describes what happens when a `for` loop
-    iterates through a string?
-
-    A. once per word &nbsp; B. once per character &nbsp; C. until the string is empty &nbsp; D. forever
     ''')
     return
 
@@ -278,15 +245,12 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### ✅ Answers
+    ### ✅ B (`4`)
 
-    **a) B (`4`)** — the loop adds `1` once per element, and there are
-    4 elements. (`input` here is just a variable name, shadowing the
-    built-in `input()` function — it's a plain list, no actual
-    input-reading involved.)
-
-    **b) B** — a `for` loop over a string iterates character by
-    character, same as over a list of single characters.
+    The loop adds `1` once per element, and there are 4 elements.
+    (`input` here is just a variable name, shadowing the built-in
+    `input()` function — it's a plain list, no actual input-reading
+    involved.)
     """)
     return
 
@@ -294,13 +258,23 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## 💡 Tip
+    ## Problem 2: Multiple Choice (b)
 
-    Part a) is a classic "read the variable name, not just
-    the type" trap — `input` looks like the built-in function, but
-    it's been reassigned to a list. Whenever a name matches a
-    built-in, check what it was actually assigned before assuming what
-    it does.
+    Which best describes what happens when a `for` loop iterates
+    through a string?
+
+    A. once per word &nbsp; B. once per character &nbsp; C. until the string is empty &nbsp; D. forever
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### ✅ B
+
+    A `for` loop over a string iterates character by character, same
+    as over a list of single characters.
     """)
     return
 
@@ -308,9 +282,8 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
-    ## Problem 2: Multiple Choice (c–d)
+    ## Problem 2: Multiple Choice (c)
 
-    **c)**
     ```python
     x = 10
     while x > 5:
@@ -318,10 +291,6 @@ def _(mo):
     print(x)
     ```
     What prints? A. nothing (infinite loop) &nbsp; B. `6` &nbsp; C. `4` &nbsp; D. `10`
-
-    **d)** What is the purpose of `end=''` in a `print()` statement?
-
-    A. ends the program &nbsp; B. adds extra characters &nbsp; C. prevents moving to a new line &nbsp; D. causes an error
     ''')
     return
 
@@ -329,14 +298,11 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### ✅ Answers
+    ### ✅ C (`4`)
 
-    **c) C (`4`)** — trace it: `10 → 8 → 6 → 4`, and the loop stops as
-    soon as `x > 5` is false (at `x = 4`), *before* subtracting again.
+    Trace it: `10 → 8 → 6 → 4`, and the loop stops as soon as
+    `x > 5` is false (at `x = 4`), *before* subtracting again.
     `print(x)` then shows `4`.
-
-    **d) C** — `end=''` replaces the default trailing `'\\n'` with
-    nothing, so the next `print()` continues on the same line.
     """)
     return
 
@@ -344,13 +310,22 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## 💡 Tip
+    ## Problem 2: Multiple Choice (d)
 
-    For c), trace the loop **one line at a time on scratch
-    paper** instead of doing it in your head — `x: 10, 8, 6, 4`, then
-    check the *condition* before assuming one more subtraction
-    happens. Off-by-one errors in while-loop tracing are the single
-    most common way students lose points on this problem type.
+    What is the purpose of `end=''` in a `print()` statement?
+
+    A. ends the program &nbsp; B. adds extra characters &nbsp; C. prevents moving to a new line &nbsp; D. causes an error
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### ✅ C
+
+    `end=''` replaces the default trailing `'\\n'` with nothing, so
+    the next `print()` continues on the same line.
     """)
     return
 
@@ -412,19 +387,6 @@ def _(mo):
     ### ✅ `True`
 
     `.upper()` returns `"HELLO"`, which equals `"HELLO"`.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## 💡 Tip
-
-    For b), evaluate strictly in precedence order — exponent first
-    (`**`), then comparisons (`>`, `<`), then `or` last. Writing out
-    each intermediate value on its own line (like the answer above)
-    catches mistakes that doing it all in one mental leap won't.
     """)
     return
 
@@ -499,21 +461,8 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md("""
-    ## 💡 Tip
-
-    For d), remember that **assignment (`=`) and most list methods
-    (`.append()`, `.sort()`, etc.) don't produce a displayed value** —
-    they return `None` or nothing at all. Only the *last* expression
-    that actually evaluates to something shows a result.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
     mo.md('''
-    ## Problem 4: Sequences (a–c)
+    ## Problem 4: Sequences (a)
 
     ```python
     colors = ["red", "green", "blue"]
@@ -523,11 +472,7 @@ def _(mo):
     mixed = ("hello", [1, 2])
     ```
 
-    **a)** `colors[0]`
-
-    **b)** `phrase[3:6]`
-
-    **c)** `scores[-2]`
+    `colors[0]`
     ''')
     return
 
@@ -535,16 +480,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### ✅ Answers
+    ### ✅ `'red'`
 
-    **a) `'red'`** — index `0` is the first element.
-
-    **b) `'rod'`** — `phrase[3:6]` takes indices 3, 4, 5. Spelling out
-    `"Introduction"`: `I(0) n(1) t(2) r(3) o(4) d(5) ...` — that's
-    `r`, `o`, `d`.
-
-    **c) `95`** — negative indices count from the end; `-2` is the
-    second-to-last element.
+    Index `0` is the first element.
     """)
     return
 
@@ -552,12 +490,46 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## 💡 Tip
+    ## Problem 4: Sequences (b)
 
-    For slicing (b) and negative indices (c), **count on
-    your fingers or write the indices above the string** rather than
-    eyeballing it — this is a very easy off-by-one to get wrong under
-    time pressure, and there's no partial credit for "close."
+    (same `phrase` as before)
+
+    `phrase[3:6]`
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### ✅ `'rod'`
+
+    `phrase[3:6]` takes indices 3, 4, 5. Spelling out
+    `"Introduction"`: `I(0) n(1) t(2) r(3) o(4) d(5) ...` — that's
+    `r`, `o`, `d`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Problem 4: Sequences (c)
+
+    (same `scores` as before)
+
+    `scores[-2]`
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### ✅ `95`
+
+    Negative indices count from the end; `-2` is the second-to-last
+    element.
     """)
     return
 
@@ -565,17 +537,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
-    ## Problem 4: Sequences (d–e)
+    ## Problem 4: Sequences (d)
 
-    (same `colors` / `phrase` as before)
+    (same `colors` as before)
 
-    **d)**
     ```python
     colors.append("yellow")
     len(colors)
     ```
-
-    **e)** `print(phrase.replace("tion", ""))`
     ''')
     return
 
@@ -583,14 +552,10 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### ✅ Answers
+    ### ✅ `4`
 
-    **d) `4`** — `colors` grows to
-    `["red", "green", "blue", "yellow"]`, so `len()` is `4`.
-
-    **e) `Introduc`** — `"Introduction"` ends in `...duction`, and
-    `"tion"` (the last 4 characters) gets replaced with nothing,
-    leaving `"Introduc"`.
+    `colors` grows to `["red", "green", "blue", "yellow"]`, so `len()`
+    is `4`.
     """)
     return
 
@@ -598,12 +563,11 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## 💡 Tip
+    ## Problem 4: Sequences (e)
 
-    `.replace(old, new)` replaces *every* occurrence of
-    `old`, not just the first — here there's only one `"tion"` in the
-    string, but don't assume that's always the case on a different
-    string.
+    (same `phrase` as before)
+
+    `print(phrase.replace("tion", ""))`
     """)
     return
 
@@ -611,14 +575,10 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Problem 4: Sequences (f–g)
+    ### ✅ `Introduc`
 
-    (`nested = [42, "hello", [1, 2]]`, `phrase = "Introduction"` —
-    still SEQUENTIAL, continuing from the earlier parts)
-
-    **f)** `nested[2][0]`
-
-    **g)** `"e" in phrase`
+    `"Introduction"` ends in `...duction`, and `"tion"` (the last 4
+    characters) gets replaced with nothing, leaving `"Introduc"`.
     """)
     return
 
@@ -626,12 +586,11 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### ✅ Answers
+    ## Problem 4: Sequences (f)
 
-    **f) `1`** — `nested[2]` is the list `[1, 2]`; its `[0]` is `1`.
+    (same `nested` as before)
 
-    **g) `False`** — spell out `"Introduction"`:
-    `I-n-t-r-o-d-u-c-t-i-o-n` — there's no letter `e` anywhere in it.
+    `nested[2][0]`
     """)
     return
 
@@ -639,12 +598,32 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## 💡 Tip
+    ### ✅ `1`
 
-    `nested[2][0]` is two indexing operations back to
-    back — resolve the *outer* one first (`nested[2]` → `[1, 2]`),
-    then index *that* result. Don't try to do both steps in one mental
-    jump.
+    `nested[2]` is the list `[1, 2]`; its `[0]` is `1`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Problem 4: Sequences (g)
+
+    (same `phrase` as before)
+
+    `"e" in phrase`
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### ✅ `False`
+
+    Spell out `"Introduction"`: `I-n-t-r-o-d-u-c-t-i-o-n` — there's
+    no letter `e` anywhere in it.
     """)
     return
 
@@ -652,17 +631,36 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
-    ## Problem 4: Sequences (h–i)
+    ## Problem 4: Sequences (h)
 
-    (`nested` and `mixed = ("hello", [1, 2])` — still SEQUENTIAL)
+    (same `nested` as before)
 
-    **h)**
     ```python
     nested.pop()
     len(nested)
     ```
+    ''')
+    return
 
-    **i)**
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### ✅ `2`
+
+    `.pop()` removes and returns the *last* element (`[1, 2]`);
+    `nested` is left with `[42, "hello"]`, so `len()` is `2`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ## Problem 4: Sequences (i)
+
+    (same `mixed` as before)
+
     ```python
     mixed[1].append(3)
     len(mixed) + len(mixed[1])
@@ -674,32 +672,13 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### ✅ Answers
+    ### ✅ `5`
 
-    **h) `2`** — `.pop()` removes and returns the *last* element
-    (`[1, 2]`); `nested` is left with `[42, "hello"]`, so `len()` is
-    `2`.
-
-    **i) `5`** — even though `mixed` is a tuple, `mixed[1]` is a
-    *list*, and lists are always mutable regardless of what holds a
-    reference to them. `.append(3)` grows it to `[1, 2, 3]` in place.
-    `len(mixed)` is still `2` (the tuple itself has 2 elements);
-    `len(mixed[1])` is now `3`; `2 + 3 = 5`.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## 💡 Tip
-
-    Part i) is the single most important idea in this
-    whole problem: **a tuple being "immutable" only means you can't
-    reassign what's *in* each tuple slot — it says nothing about
-    whether that slot's own object can change itself.** A list stored
-    inside a tuple is exactly as mutable as any other list. This trips
-    up far more students than any slicing question does.
+    Even though `mixed` is a tuple, `mixed[1]` is a *list*, and lists
+    are always mutable regardless of what holds a reference to them.
+    `.append(3)` grows it to `[1, 2, 3]` in place. `len(mixed)` is
+    still `2` (the tuple itself has 2 elements); `len(mixed[1])` is
+    now `3`; `2 + 3 = 5`.
     """)
     return
 
@@ -772,21 +751,6 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md("""
-    ## 💡 Tip
-
-    Two easy points to lose here: (1) the **blank line**
-    from the bare `print()` on line 2 — don't skip it; (2)
-    `{value:.1f}` **rounds** `12.8765` to `12.9`, it doesn't truncate
-    to `12.8`. Whenever you see an f-string format spec like `:.1f`,
-    work out the rounded value by hand before writing your answer —
-    don't guess.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
     mo.md('''
     ## Problem 6: Conditional Logic
 
@@ -834,20 +798,6 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## 💡 Tip
-
-    Each `elif` implicitly carries "and the previous
-    conditions were all false" — that's *why* it's safe to drop the
-    nesting. By the time Python checks `grade >= 80`, it already knows
-    `grade < 90`, so you never need to write that bound explicitly.
-    This is the whole trick behind every nested-if-to-elif rewrite.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
     ## Problem 7: Truth Table
 
     Complete the table for `(not A)`, `(B and C)`, and
@@ -880,19 +830,6 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md("""
-    ## 💡 Tip
-
-    Fill the table **column by column, not row by row** —
-    compute the whole `not A` column first, then the whole `B and C`
-    column, then combine. Doing one full row at a time makes it easy
-    to slip and use the wrong row's B or C by accident.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
     mo.md('''
     ## Problem 8: While Loop with Validation
 
@@ -913,7 +850,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
-    ### ✅ A working solution
+    ### ✅ Solution
 
     ```python
     have_valid_password = False
@@ -928,21 +865,6 @@ def _(mo):
             print("Password accepted!")
     ```
     ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## 💡 Tip
-
-    This is a **prime-the-pump while loop** — ask once
-    before the loop so there's something to check, then the loop's own
-    action re-asks. Watch the logic direction: the *condition* needs
-    `len < 6 OR no digit` (keep looping if *either* requirement is
-    still unmet) — even though the problem describes the requirement
-    itself with "AND."
-    """)
     return
 
 
@@ -970,7 +892,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
-    ### ✅ A working solution
+    ### ✅ Solution
 
     ```python
     import random
@@ -1005,21 +927,6 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## 💡 Tip
-
-    "sum of the even numbers (NOT numbers with even
-    indices)" is called out explicitly for a reason — **index-based
-    filtering (`numbers[::2]`) is the classic wrong answer here.**
-    Filter on the *value* (`n % 2 == 0`), not the *position*. When a
-    problem explicitly rules out a specific mistake in parentheses,
-    assume past students have made exactly that mistake.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
     ## Problem 10: BlackJack Experiment
 
     Deal 4 random "cards," each uniformly 1–11 (inclusive, no choice
@@ -1034,7 +941,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
-    ### ✅ A working solution
+    ### ✅ Solution
 
     ```python
     import random
@@ -1056,22 +963,6 @@ def _(mo):
     (unseeded -- yours will be different, and so will the next run of
     this exact code)
     ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## 💡 Tip
-
-    This is the same **accumulator pattern** as Problem
-    9's counting, just nested one level deeper — an *inner* loop
-    builds one experiment's total (4 cards), and an *outer* loop
-    repeats the whole experiment 100 times, counting successes. When a
-    problem says "simulate N experiments," that's almost always your
-    outer `for _ in range(N):` loop, with a counter initialized to `0`
-    *before* it starts.
-    """)
     return
 
 
