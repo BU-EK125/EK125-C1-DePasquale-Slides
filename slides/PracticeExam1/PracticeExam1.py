@@ -65,6 +65,65 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P1A">
+          <div class="ans-label">a)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md("""
     ### ✅ True
 
@@ -80,6 +139,65 @@ def _(mo):
 
     The expression `10 // 3` evaluates to `3.33`.
     """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P1B">
+          <div class="ans-label">b)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
     return
 
 
@@ -107,6 +225,65 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P1C">
+          <div class="ans-label">c)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md("""
     ### ✅ True
 
@@ -124,6 +301,65 @@ def _(mo):
     After executing `mystring = "Python"` and then
     `mystring[3] = "t"`, the string becomes `"Pytton"`.
     """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P1D">
+          <div class="ans-label">d)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
     return
 
 
@@ -166,6 +402,65 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P1E">
+          <div class="ans-label">e)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md("""
     ### ✅ False
 
@@ -184,6 +479,65 @@ def _(mo):
     The `random.seed()` function ensures that the same sequence of
     "random" numbers is generated each time the program runs.
     """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P1F">
+          <div class="ans-label">f)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
     return
 
 
@@ -210,6 +564,65 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P1G">
+          <div class="ans-label">g)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md("""
     ### ✅ False
 
@@ -226,6 +639,65 @@ def _(mo):
     Tuples in Python are mutable, meaning members may be added and
     removed after the tuple is created.
     """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P1H">
+          <div class="ans-label">h)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
     return
 
 
@@ -272,6 +744,73 @@ def _(mo):
 
     A. once per word &nbsp; B. once per character &nbsp; C. until the string is empty &nbsp; D. forever
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P2A">
+          <div class="ans-label">a)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <div class="ans-block" data-field="PE1_P2B">
+          <div class="ans-label">b)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
     return
 
 
@@ -328,6 +867,73 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P2C">
+          <div class="ans-label">c)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <div class="ans-block" data-field="PE1_P2D">
+          <div class="ans-label">d)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md("""
     ### ✅ Answers
 
@@ -367,6 +973,65 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P3A">
+          <div class="ans-label">a)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md("""
     ### ✅ `5`
 
@@ -382,6 +1047,65 @@ def _(mo):
 
     Show the result: `3 ** 2 > 10 or 4 < 5`
     """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P3B">
+          <div class="ans-label">b)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
     return
 
 
@@ -403,6 +1127,65 @@ def _(mo):
 
     Show the result: `"hello".upper() == "HELLO"`
     """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P3C">
+          <div class="ans-label">c)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
     return
 
 
@@ -446,6 +1229,65 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P3D">
+          <div class="ans-label">d)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md("""
     ### ✅ `4`
 
@@ -468,6 +1310,65 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P3E">
+          <div class="ans-label">e)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md("""
     ### ✅ `True`
 
@@ -483,6 +1384,65 @@ def _(mo):
 
     Show the result: `"abc" * 2 + "d"`
     """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P3F">
+          <div class="ans-label">f)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
     return
 
 
@@ -529,6 +1489,81 @@ def _(mo):
 
     **c)** `scores[-2]`
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P4A">
+          <div class="ans-label">a)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <div class="ans-block" data-field="PE1_P4B">
+          <div class="ans-label">b)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <div class="ans-block" data-field="PE1_P4C">
+          <div class="ans-label">c)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
     return
 
 
@@ -582,6 +1617,73 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P4D">
+          <div class="ans-label">d)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <div class="ans-block" data-field="PE1_P4E">
+          <div class="ans-label">e)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md("""
     ### ✅ Answers
 
@@ -620,6 +1722,73 @@ def _(mo):
 
     **g)** `"e" in phrase`
     """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P4F">
+          <div class="ans-label">f)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <div class="ans-block" data-field="PE1_P4G">
+          <div class="ans-label">g)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
     return
 
 
@@ -668,6 +1837,73 @@ def _(mo):
     len(mixed) + len(mixed[1])
     ```
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P4H">
+          <div class="ans-label">h)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <div class="ans-block" data-field="PE1_P4I">
+          <div class="ans-label">i)</div>
+          <div class="ans-row">
+            <input type="text" class="ans-input" placeholder="Your answer...">
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
     return
 
 
@@ -728,6 +1964,65 @@ def _(mo):
     print("Complete!")
     ```
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P5">
+          <div class="ans-label">Your output:</div>
+          <div class="ans-row">
+            <textarea class="ans-input" placeholder="Your answer..."></textarea>
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
     return
 
 
@@ -813,6 +2108,65 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P6">
+          <div class="ans-label">Your rewrite:</div>
+          <div class="ans-row">
+            <textarea class="ans-input" placeholder="Your answer..."></textarea>
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md('''
     ### ✅ Answer
     ```python
@@ -865,6 +2219,65 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P7">
+          <div class="ans-label">Your table (e.g. F,T,T / F,F,F / F,F,F / T,T,T):</div>
+          <div class="ans-row">
+            <textarea class="ans-input" placeholder="Your answer..."></textarea>
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md("""
     ### ✅ Answer
 
@@ -907,6 +2320,65 @@ def _(mo):
     Password accepted!
     ```
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P8">
+          <div class="ans-label">Your code:</div>
+          <div class="ans-row">
+            <textarea class="ans-input" placeholder="Your answer..."></textarea>
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
     return
 
 
@@ -964,6 +2436,65 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P9">
+          <div class="ans-label">Your code:</div>
+          <div class="ans-row">
+            <textarea class="ans-input" placeholder="Your answer..."></textarea>
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md('''
     ### ✅ A working solution
 
@@ -1015,6 +2546,65 @@ def _(mo):
     Of 100 experiments, N resulted in a value of 21 or less.
     ```
     """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.iframe(
+        """
+        <style>
+          body { margin:0; padding:12px; background:#1a1a1a; font-family:-apple-system,sans-serif; }
+          .ans-block { margin-bottom:14px; }
+          .ans-block:last-child { margin-bottom:0; }
+          .ans-label { color:#ccc; font-size:0.95em; margin-bottom:6px; font-family:monospace; }
+          .ans-row { display:flex; gap:8px; align-items:flex-start; }
+          .ans-input { flex:1; padding:10px; font-size:1.05em; font-family:monospace;
+                       border-radius:6px; border:1px solid #555; background:#2a2a2a; color:#eee; }
+          textarea.ans-input { min-height:70px; resize:vertical; }
+          .ans-submit { padding:10px 16px; font-size:1em; border-radius:6px; border:1px solid #555;
+                        background:#2a2a2a; color:#eee; cursor:pointer; }
+          .ans-status { margin-top:6px; font-size:0.9em; color:#9c9; min-height:1.1em; font-family:monospace; }
+        </style>
+        <div class="ans-block" data-field="PE1_P10">
+          <div class="ans-label">Your code:</div>
+          <div class="ans-row">
+            <textarea class="ans-input" placeholder="Your answer..."></textarea>
+            <button class="ans-submit">Submit</button>
+          </div>
+          <div class="ans-status"></div>
+        </div>
+        <script>
+        (function () {
+          document.querySelectorAll('.ans-block').forEach(function (block) {
+            var input = block.querySelector('.ans-input');
+            var btn = block.querySelector('.ans-submit');
+            var status = block.querySelector('.ans-status');
+            var fieldId = block.getAttribute('data-field');
+            var submitted = false;
+            btn.addEventListener('click', function () {
+              if (submitted) return;
+              var value = input.value.trim();
+              if (!value) return;
+              submitted = true;
+              input.disabled = true;
+              btn.disabled = true;
+              btn.style.opacity = '0.5';
+              fetch('https://docs.google.com/forms/d/e/FORM_ID_PLACEHOLDER/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'entry.' + fieldId + '=' + encodeURIComponent(value),
+              });
+              status.textContent = 'Submitted: ' + value;
+            });
+          });
+        })();
+        </script>
+        """,
+        width="100%",
+        height="180px",
+    )
     return
 
 
