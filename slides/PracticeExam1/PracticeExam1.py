@@ -766,6 +766,16 @@ def _(mo):
     *
     Complete!
     ```
+
+    **One point for each bullet below (per the rubric):**
+    - "Starting the simulation!" followed by blank line
+    - "Match found!"
+    - 0-2-4- on a single line (including trailing -)
+    - stars start on separate line from 0-2-4
+    - `***`
+    - `**`
+    - `*`
+    - "Complete!" on a separate line from the stars
     ''')
     return
 
@@ -827,6 +837,14 @@ def _(mo):
     else:
         result = "F"
     ```
+
+    **Point allocation (per the rubric):**
+    - 1 point for correct value when input is between 90 and 100
+    - 1 point for correct value when input is between 80 and 89
+    - 1 point for correct value when input is between 70 and 79
+    - 1 point for correct value when input is between 60 and 69
+    - 1 point for correct value when input is below 60
+    - 5 points for no nested ifs and elses
     ''')
     return
 
@@ -874,6 +892,8 @@ def _(mo):
     | T | T | F | F | F | **F** |
     | T | F | T | F | F | **F** |
     | F | T | T | T | T | **T** |
+
+    One point for each correct cell (per the rubric).
     """)
     return
 
@@ -913,15 +933,28 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
-    ### ✅ A working solution
+    ### ✅ Sample solution (per the rubric)
 
     ```python
-    password = input("Enter a password: ")
-    while len(password) < 6 or not any(ch.isdigit() for ch in password):
+    have_valid_password = False
+    while not have_valid_password:
         password = input("Enter a password: ")
-    print("Password accepted!")
+        hasDigit = False
+        for char in password:
+            if char.isdigit():
+                hasDigit = True
+        if hasDigit and len(password) >= 6:
+            have_valid_password = True
+            print("Password accepted!")
     ```
-    (Verified against the exam's own example transcripts.)
+    (Verified against both of the exam's own example transcripts.)
+
+    **Point allocation (per the rubric):**
+    - 2 pts: Correct initial prompt
+    - 4 pts: Loop continues while invalid
+    - 2 pts: Length check (at least 6) checked each loop
+    - 2 pts: Digit check (at least one digit) checked each loop
+    - 3 pts: Final message and correct termination
     ''')
     return
 
@@ -965,19 +998,27 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
-    ### ✅ A working solution
+    ### ✅ Sample solution (per the rubric)
 
     ```python
     import random
+
     random.seed(42)
-    numbers = [random.randint(1, 20) for _ in range(6)]
-    print("Numbers:", numbers)
+    generated_numbers = []
+    for i in range(6):
+        generated_numbers.append(random.randint(1, 20))
 
-    even_sum = sum(n for n in numbers if n % 2 == 0)
-    print("Sum of even numbers:", even_sum)
+    even_sum = 0
+    greater_than_ten = 0
+    for number in generated_numbers:
+        if number % 2 == 0:
+            even_sum = even_sum + number
+        if number > 10:
+            greater_than_ten = greater_than_ten + 1
 
-    count_gt10 = sum(1 for n in numbers if n > 10)
-    print("Count greater than 10:", count_gt10)
+    print(f"Numbers: {generated_numbers}")
+    print(f"Sum of even numbers: {even_sum}")
+    print(f"Count greater than 10: {greater_than_ten}")
     ```
 
     ```
@@ -985,6 +1026,17 @@ def _(mo):
     Sum of even numbers: 20
     Count greater than 10: 0
     ```
+    (The rubric's own sample solution prints `f"Number: ..."` (singular) —
+    corrected here to `"Numbers:"` to match the format the exam itself
+    requires.)
+
+    **Point allocation (per the rubric):**
+    - 2 pts: Correct seed usage
+    - 4 pts: Generating list of 6 random integers in correct range
+    - 3 pts: Printing the list correctly
+    - 4 pts: Summing only even numbers
+    - 3 pts: Counting numbers > 10
+    - 2 pts: Correct output format
     ''')
     return
 
@@ -1021,24 +1073,38 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
-    ### ✅ A working solution
+    ### ✅ Sample solution (per the rubric)
 
     ```python
     import random
 
-    successes = 0
-    for _ in range(100):
-        total = sum(random.randint(1, 11) for _ in range(4))
-        if total <= 21:
-            successes += 1
+    under_twenty_one = 0
+    for experiment in range(100):
+        total_value = 0
+        for card_number in range(4):
+            total_value = total_value + random.randint(1, 11)
+        if total_value <= 21:
+            under_twenty_one += 1
 
-    print(f"Of 100 experiments, {successes} resulted in a value of 21 or less.")
+    print(f"Of 100 experiments, {under_twenty_one} resulted in a value of 21 or less.")
     ```
 
     ```
     Of 100 experiments, 40 resulted in a value of 21 or less.
     ```
-    (unseeded -- yours will be different, and so will the next run of this exact code)
+    (unseeded -- yours will be different, and so will the next run of this
+    exact code. The rubric's own sample solution says "a values of 21 or
+    less" -- corrected here to "a value" to match the exam's own stated
+    format. Its indentation was also lost in transcription; reconstructed
+    here to match the described logic.)
+
+    **Point allocation (per the rubric):**
+    - 2 pts: 100 trials are performed
+    - 2 pts: four random numbers are generated
+    - 2 pts: the value for a "hand" is computed correctly — sum of 4
+      random numbers between 1 and 11
+    - 1 pt: success trials are correctly tracked
+    - 1 pt: overall result correctly formatted
     ''')
     return
 
