@@ -347,12 +347,20 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    **Steps:**
+    **Breaking down the logic:**
 
-    1. Decide the `item` (one `turbidity` reading) and the
-       `expression` (that reading, converted and rounded).
-    2. Write the comprehension over `turbidity`.
-    3. Store it in `ftu_readings` and print it.
+    Every comprehension has the same two slots:
+    `[expression for item in iterable]`. For a plain transform like
+    this one, filling them in is the whole problem:
+
+    1. **`iterable`** — the one list you're looping over. What is it
+       here?
+    2. **`expression`** — what you compute from each item, *before* it
+       goes in the new list. Here that's the conversion formula,
+       rounded.
+
+    No condition, no second list — just fill the two slots and you're
+    done.
     """)
     return
 
@@ -390,14 +398,27 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    **Steps:**
+    **Breaking down the logic:**
 
-    1. Decide what you're testing (`turbidity`) and what you're
-       collecting (`station_names`).
-    2. Pair the two lists together with `enumerate()` inside the
-       comprehension.
-    3. Add the condition: keep only readings above 5.0.
-    4. Store the result in `high_stations` and print it.
+    A conditional comprehension adds a third slot:
+    `[expression for item in iterable if condition]`. The hard part of
+    *this* problem is that the slots don't all point at the same list:
+
+    1. **`condition`** — what gets tested, and which list does the
+       testing look at? (`turbidity`, checked against 5.0)
+    2. **`expression`** — what actually ends up in the result list.
+       Is that the same thing being tested, or something else? (here,
+       it's the *name* from `station_names` — a different list)
+    3. Whenever the thing you test and the thing you keep come from
+       **different lists**, a plain `item` isn't enough — you need
+       that item's *position* too, so you can look up the matching
+       value in the other list.
+    4. **`iterable`** — which tool gives you a position *and* a value
+       together, so you can test one list and pull from the other at
+       that same position?
+
+    Answer those four, in that order, and the comprehension writes
+    itself.
     """)
     return
 
