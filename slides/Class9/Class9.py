@@ -311,7 +311,8 @@ def _(mo):
        and a name together.
     2. Use that same index to look up the matching value in
        `turbidity`.
-    3. Turn the index into a 1-based label.
+    3. `enumerate()` counts `0, 1, 2, ...`, but the report needs to
+       start at "Station 1" — add 1 to the index before printing it.
     4. Print one formatted line per station.
     """)
     return
@@ -322,9 +323,8 @@ def _(mo):
     mo.md("""
     - `enumerate()` is the tool here precisely because you need **two**
       things on every line: a position *and* a value.
-    - It hands you both — but it counts from 0, and the report needs
-      to count from 1. What's the one-line fix that turns a 0-based
-      index into the label "Station 1"?
+    - It counts `0, 1, 2, ...`, but the report starts at "Station 1" —
+      what's the simplest way to turn that `0` into a `1`?
     - The index you get from `enumerate(station_names)` is the *same*
       index that lines up with `turbidity` — that's how you pull the
       matching reading from the other list.
