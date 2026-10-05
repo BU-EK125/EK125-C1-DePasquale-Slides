@@ -278,47 +278,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### General Strategy: Breaking the Problem Into Parts
-
-    Before writing any code, figure out the shape of the whole problem.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    This problem has **4 parts (A–D)**, and all 4 start from the same
-    two lists above. None of them depend on each other — you can do
-    them in any order, though working top to bottom matches how the
-    file is already laid out.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    What each part actually asks for:
-
-    - **Part A** — *print* a numbered report. Needs a position and a
-      value together, on every line.
-    - **Part B** — *build a new list*, converting every reading to a
-      different unit.
-    - **Part C** — *build another new list*, keeping only the names
-      that pass a test.
-    - **Part D** — *print* a subset, visiting every other station.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    Notice the split: A and D just **print**; B and C **build a new
-    list**. That distinction — am I displaying something, or creating
-    something to use later? — is the first question worth asking for
-    any part of any problem.
+    This problem has **4 independent parts (A–D)** — none depend on
+    each other, so tackle them in any order. Each one breaks down into
+    its own small sequence of steps; some need more than others.
     """)
     return
 
@@ -336,6 +298,21 @@ def _(mo):
     Station 2 - Bridge A: 3.8 NTU
     ...
     ```
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    **Steps:**
+
+    1. Loop over `station_names` with `enumerate()` to get an index
+       and a name together.
+    2. Use that same index to look up the matching value in
+       `turbidity`.
+    3. Turn the index into a 1-based label.
+    4. Print one formatted line per station.
     """)
     return
 
@@ -363,6 +340,19 @@ def _(mo):
     Use a **list comprehension** to convert every reading to FTU
     (1 NTU = 1.05 FTU), rounded to 2 decimal places, into a new list
     `ftu_readings`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    **Steps:**
+
+    1. Decide the `item` (one `turbidity` reading) and the
+       `expression` (that reading, converted and rounded).
+    2. Write the comprehension over `turbidity`.
+    3. Store it in `ftu_readings` and print it.
     """)
     return
 
@@ -400,6 +390,21 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    **Steps:**
+
+    1. Decide what you're testing (`turbidity`) and what you're
+       collecting (`station_names`).
+    2. Pair the two lists together with `enumerate()` inside the
+       comprehension.
+    3. Add the condition: keep only readings above 5.0.
+    4. Store the result in `high_stations` and print it.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     - You're testing one list (`turbidity`) but collecting from the
       *other* one (`station_names`). What do you need — the index, or
       just the value — to pull the matching name out of a different
@@ -427,6 +432,18 @@ def _(mo):
     Mill Pond
     Downstream
     ```
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    **Steps:** (this one's simpler — only 2)
+
+    1. Work out the `range()` call that produces indices 0, 2, 4.
+    2. Loop with that range, indexing into `station_names` to print
+       each name.
     """)
     return
 
