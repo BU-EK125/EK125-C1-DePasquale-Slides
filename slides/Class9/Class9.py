@@ -61,6 +61,37 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ## What's an IDE, Generally?
+
+    "Integrated" is the key word — PyCharm bundles several tools that
+    you'd otherwise juggle separately into one application:
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    - **A file browser for your whole project** — not just one
+      notebook. See every `.py` file you've created, organized into
+      folders, and jump between them instantly.
+    - **A smarter editor** — syntax highlighting and autocomplete that
+      knows your variable and function names, not just keywords.
+    - **One-click running** — no cell-by-cell execution. Run the whole
+      file and watch the output appear in a console panel.
+    - **A debugger** — step through your code one line at a time and
+      watch your variables change, instead of guessing from `print()`
+      statements alone. (More on this in a later class.)
+    - **Error underlining as you type** — a misspelled variable or
+      missing colon gets flagged immediately, before you even run the
+      file.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## What's Actually Different
 
     A few concrete differences between a Colab notebook and a local
@@ -241,6 +272,54 @@ def _(mo):
     Four parts, each asking for a different way to process this data.
     Let's think through the *logic* of each one — not the final code.
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### General Strategy: Breaking the Problem Into Parts
+
+    Before writing any code, figure out the shape of the whole problem.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    This problem has **4 parts (A–D)**, and all 4 start from the same
+    two lists above. None of them depend on each other — you can do
+    them in any order, though working top to bottom matches how the
+    file is already laid out.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    What each part actually asks for:
+
+    - **Part A** — *print* a numbered report. Needs a position and a
+      value together, on every line.
+    - **Part B** — *build a new list*, converting every reading to a
+      different unit.
+    - **Part C** — *build another new list*, keeping only the names
+      that pass a test.
+    - **Part D** — *print* a subset, visiting every other station.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    Notice the split: A and D just **print**; B and C **build a new
+    list**. That distinction — am I displaying something, or creating
+    something to use later? — is the first question worth asking for
+    any part of any problem.
+    """)
     return
 
 
