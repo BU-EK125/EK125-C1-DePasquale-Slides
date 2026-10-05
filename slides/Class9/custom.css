@@ -1,0 +1,26 @@
+/* A short (pre-fragment) slide's content div is a flex item with the
+   browser's default min-width:auto, which lets it size to its text's
+   unwrapped width instead of wrapping -- causing long intro sentences
+   to overflow past the slide edge until a fragment adds more content.
+   min-width:0 lets it shrink and wrap like a normal block. */
+.reveal .mo-slide-content {
+  min-width: 0;
+}
+
+/* Slightly bigger code font when presenting in Slides layout, sized to still fit on one slide */
+.reveal .cm-editor,
+.reveal .cm-content,
+.reveal .cm-line {
+  font-size: 1.05em !important;
+  line-height: 1.3 !important;
+}
+
+/* Slightly bigger code/output text (e.g. print results) on slides */
+.reveal pre,
+.reveal code,
+.reveal .text-xs,
+.reveal .text-sm,
+.reveal .output {
+  font-size: 1.2em !important;
+  line-height: 1.25 !important;
+}
