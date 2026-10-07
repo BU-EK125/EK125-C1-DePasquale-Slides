@@ -115,7 +115,7 @@ def _(mo):
     mo.md('''
     ```python
     word = "Python"
-    print(word[:3])    # "Pyt"  -- start of the string through index 2
+    print(word[:3])    # "Pyt"  -- start through index 2
     print(word[3:])    # "hon"  -- index 3 through the end
     ```
 
@@ -144,7 +144,7 @@ def _(mo):
     ```python
     word = "Programming"
     print(word[-4:])    # "ming"      -- last 4 characters
-    print(word[:-3])    # "Programm"  -- everything except the last 3
+    print(word[:-3])    # "Programm"  -- all but the last 3
     ```
 
     ```

@@ -20,7 +20,7 @@
    relative to the prose container's own font-size, so bumping it here
    scales headings/body/bullets together proportionally. */
 .reveal .markdown.prose {
-  font-size: 25px !important;
+  font-size: 36px !important;
 }
 
 /* Slightly bigger code font when presenting in Slides layout, sized to still fit on one slide */
@@ -31,12 +31,15 @@
   line-height: 1.3 !important;
 }
 
-/* Slightly bigger code/output text (e.g. print results) on slides */
+/* Code/output text (e.g. print results) on slides. Fixed px rather than
+   em: these sit inside the same .markdown.prose wrapper as body text, so
+   an em value here compounds on top of that font-size bump above and
+   blows code blocks past the bottom of the slide. */
 .reveal pre,
 .reveal code,
 .reveal .text-xs,
 .reveal .text-sm,
 .reveal .output {
-  font-size: 1.2em !important;
+  font-size: 30px !important;
   line-height: 1.25 !important;
 }
