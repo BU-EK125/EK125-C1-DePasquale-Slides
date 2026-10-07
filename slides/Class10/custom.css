@@ -3,14 +3,24 @@
    it size to its text's unwrapped width instead of wrapping --
    causing long intro sentences to overflow past the slide edge.
    min-width:0 lets it shrink and wrap like a normal block. The same
-   element also gets an inline margin:auto top/bottom, which vertically
-   centers short slides instead of anchoring them to the top like
-   longer slides -- overriding that keeps every slide's content
+   element also gets an inline margin:auto top/bottom *and* its own
+   `justify-content: center` (it's a column flexbox), both of which
+   vertically center short slides instead of anchoring them to the top
+   like longer slides -- overriding both keeps every slide's content
    starting at the same place regardless of how much is on it. */
 .reveal .mo-slide-content {
   min-width: 0;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
+  justify-content: flex-start !important;
+}
+
+/* Bigger prose text (headings, paragraphs, bullets) to fill the slide's
+   black space -- Tailwind's typography plugin sizes all of this in em
+   relative to the prose container's own font-size, so bumping it here
+   scales headings/body/bullets together proportionally. */
+.reveal .markdown.prose {
+  font-size: 25px !important;
 }
 
 /* Slightly bigger code font when presenting in Slides layout, sized to still fit on one slide */
