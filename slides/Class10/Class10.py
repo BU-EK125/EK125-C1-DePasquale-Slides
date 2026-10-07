@@ -261,32 +261,6 @@ def _(mo):
     return
 
 
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ### Gotcha: `nums[-1]` vs. `nums[:-1]`
-
-    These look nearly identical but do very different things.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
-    numbers = [10, 20, 30, 40, 50]
-    print(numbers[-1])    # just the last element
-    print(numbers[:-1])   # everything EXCEPT the last element
-    ```
-
-    ```
-    50
-    [10, 20, 30, 40]
-    ```
-    ''')
-    return
-
 
 @app.cell(hide_code=True)
 def _(mo):
@@ -300,8 +274,6 @@ def _(mo):
       negative steps walk backward, and `[::-1]` reverses.
     - Only **lists** support slice assignment — replacing, inserting,
       or deleting a whole section at once.
-    - `nums[-1]` (one value) and `nums[:-1]` (everything but the last)
-      are easy to mix up — they're not the same thing.
 
     📝 [Today's GPP](https://BU-EK125.github.io/EK125/gpps/Class10_GPP.html)
     """)
@@ -341,14 +313,17 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    **Breaking down the logic — any "sliding window" problem has the
-    same four slots:**
+    **Setting up the full logic:**
 
-    1. **Window size** — given: 5 days.
-    2. **Number of windows** — `len(data) - window_size + 1`.
-    3. **One window** — a slice: `data[start : start + window_size]`.
-    4. **Per-window result** — what you compute from each window
-       (here, its average) and collect into a new list.
+    - **How many windows fit:** `len(daily_temps) - window_size + 1` —
+      this is both the answer *and* how many times the loop needs to
+      run.
+    - **The loop itself:** `for start in range(num_windows):` — each
+      pass slices out one window, `daily_temps[start : start +
+      window_size]`, computes its average, and appends it to a
+      results list.
+    - **After the loop:** print each result with a label showing
+      which days it covers.
     """)
     return
 
@@ -358,8 +333,9 @@ def _(mo):
     mo.md("""
     ### Takeaway
 
-    This exact shape reappears for any "process the data in
-    overlapping chunks" problem — only slot 4 changes.
+    This "slice a window, compute something, collect it" loop works
+    for any moving-window problem — only the per-window computation
+    changes.
     """)
     return
 
