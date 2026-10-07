@@ -94,7 +94,7 @@ def _(mo):
 
     🚩 **Common mistake:** forgetting the end index is *exclusive* —
     `word[2:3]` grabs only one character. To include index 3 as well,
-    you need `word[2:4]`. A slice's length is always `end - start`.
+    you need `word[2:4]`.
     """)
     return
 
@@ -217,8 +217,7 @@ def _(mo):
     ### Takeaway
 
     With a negative step, `start` must be **greater than** `end` or
-    you get nothing back — no error, just a silent empty result. Going
-    backward means starting from a *bigger* index.
+    you get nothing back — no error, just a silent empty result.
     """)
     return
 
@@ -280,15 +279,9 @@ def _(mo):
     mo.md("""
     ### Takeaway
 
-    🚩 **Common mistakes** with slice assignment:
-    - The right-hand side must be an **iterable**, even for one value —
-      `numbers[1:3] = 5` raises a `TypeError`; use `numbers[1:3] = [5]`.
-    - Assigning into a **zero-width slice** (like `data[3:3] = [...]`)
-      *inserts* new elements instead of replacing anything — there's
-      nothing between index 3 and itself to remove.
-    - With a **stepped** slice, the number of replacement values must
-      exactly match the number being replaced, or Python raises a
-      `ValueError`.
+    🚩 **Common mistake:** the right-hand side must be an **iterable**,
+    even for one value — `numbers[1:3] = 5` raises a `TypeError`; use
+    `numbers[1:3] = [5]`.
     """)
     return
 
@@ -345,164 +338,9 @@ def _(mo):
     mo.md("""
     ## HW5 Section 2: Slicing Practice
 
-    Section 2 of this week's homework (Problems 3–7) is all slicing —
-    same tools as today's reading, applied to five new datasets. Let's
-    think through each one's *logic*, not the final code.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ## Problem 3: Slice Warm-Up
-
-    ```python
-    stress_readings = [12.4, 15.1, 18.7, 14.3, 22.6,
-                        19.8, 16.2, 21.0, 13.5, 17.9]
-    ```
-
-    Six asks, each a single slice expression — no loops needed:
-    (a) first 3 · (b) last 4 · (c) positions 3–6 inclusive ·
-    (d) all except first and last · (e) reversed · (f) every other,
-    starting from the first.
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    **The Slice Recipe:** for every part, write out *which indices you
-    want* in plain English first, then translate:
-
-    - "First `n`" → `[:n]`. "Last `n`" → `[-n:]`.
-    - "`a` through `b` **inclusive**" → `[a:b+1]` — the `+1` is the
-      whole trick, since slicing's own end is exclusive.
-    - "All except first and last" → `[1:-1]`.
-    - "Reversed" → `[::-1]`. "Every other, from the first" → `[::2]`.
-
-    Match each of the six asks above to one of these patterns before
-    you type anything.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ## Problem 4: Negative Indices and Steps
-
-    ```python
-    aqi_data = [42, 45, 48, 51, 55, 60,
-                72, 85, 93, 88, 80, 75,
-                68, 64, 70, 78, 85, 90,
-                88, 80, 70, 60, 52, 47]
-    ```
-
-    Five asks:
-    - (a) final 6 hours
-    - (b) 5th-to-last through 2nd-to-last, inclusive — **negative
-      indices only**
-    - (c) every 3rd reading
-    - (d) hours 7–18, reversed, as a *single* slice
-    - (e) predict, then check: `aqi_data[-1]` vs. `aqi_data[-1:]`
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    - (a) and (b) are both the Slice Recipe from Problem 3 — just with
-      negative numbers. Write the indices out first: what are the
-      5th-to-last and 2nd-to-last positions, as negative numbers?
-    - (d) needs a **negative step**, which means `start` must come
-      *after* `end` in the list, not before — the opposite order you'd
-      use going forward.
-    - (e) is conceptual, not computational: one of these gives back a
-      single value, the other gives back a **list containing** that
-      value. Indexing and slicing never return the same type, even
-      when they grab "the same" element.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ## Problem 5: Slice Assignment
-
-    ```python
-    force_data = [0.0, 0.0, 0.0, 45.2, 67.8, 89.1,
-                  112.4, 98.3, 76.5, 0.0, 0.0]
-    ```
-
-    The first 3 and last 2 readings are instrument artifacts, not real
-    data. Clean the dataset: extract the valid middle, compute its
-    average, then overwrite the bad readings with that average.
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    **Steps:**
-
-    1. Slice out just the valid middle (indices 3 through 8) into its
-       own variable.
-    2. Compute the average of *that* variable — not the original list
-       — using `sum()` and `len()`, rounded.
-    3. Build two small replacement lists using `[value] * n`: one of
-       length 3, one of length 2.
-    4. Use slice assignment to drop each replacement list into the
-       first 3 and last 2 positions of the *original* list.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ### Takeaway
-
-    🚩 **Order matters here.** You must compute the average from the
-    valid data *before* you overwrite anything — the extracted
-    variable from step 1 protects that data, but only if you actually
-    read from it before step 4 changes the original list.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ## Problem 6: Building Sequences from Slices
-
-    ```python
-    line_A = [101, 102, 103, 104, 105]
-    line_B = [201, 202, 203, 204, 205]
-    ```
-
-    Three unrelated parts, each its own slicing trick:
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    - **Part A — Rotate `line_A` left by 2:** split it into two
-      pieces with two slices, then glue them back together in the
-      opposite order with `+`. Which piece comes first after the swap?
-    - **Part B — Interleave `line_A` and `line_B`:** start from a
-      placeholder list of 10 zeros (`[0] * 10`), then use **two**
-      stepped slice assignments — one starting at index 0, one at
-      index 1 — to drop each list into every other position.
-    - **Part C — Parts after a defective ID:** use `.index()` to find
-      *where* the defective ID lives — don't hard-code the position —
-      then slice from one past that point to the end.
+    Section 2 of this week's homework (Problems 3–7) is all slicing.
+    Let's walk through one of them — Problem 7 — since it's the one
+    with the most going on logically.
     """)
     return
 
@@ -528,18 +366,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    **Steps:**
+    **Breaking down the logic — any "sliding window" problem has the
+    same four slots:**
 
-    1. Work out *how many* 5-day windows fit in the data —
-       `len(daily_temps) - window_size + 1`. Why the `+ 1`?
-    2. Write that as a `range()`, where each number is the **starting
-       index** of one window.
-    3. Inside the loop, slice out that one window: `window_size`
-       values starting at the current index.
-    4. Compute that window's average, round it, and collect it into a
-       results list.
-    5. After the loop, print each result with a label showing which
-       days it covers.
+    1. **Window size** — given: 5 days.
+    2. **Number of windows** — `len(data) - window_size + 1`.
+    3. **One window** — a slice: `data[start : start + window_size]`.
+    4. **Per-window result** — what you compute from each window
+       (here, its average) and collect into a new list.
     """)
     return
 
@@ -549,11 +383,8 @@ def _(mo):
     mo.md("""
     ### Takeaway
 
-    This is the exact same "extract a window, process it, collect the
-    result" shape as the reading's own windowing example — just with
-    an average instead of a min/max. Write the pseudocode for step 1
-    through 4 in plain English *before* writing any Python; the loop
-    itself is short once the formula for "how many windows" is right.
+    This exact shape reappears for any "process the data in
+    overlapping chunks" problem — only slot 4 changes.
     """)
     return
 
@@ -563,7 +394,8 @@ def _(mo):
     mo.md("""
     ## Now It's Your Turn
 
-    Same patterns, your own data — work through Problems 3–7 in
+    We only walked through Problem 7 — Problems 3–6 use the exact
+    same slicing tools from today's lecture. Work through all five in
     PyCharm, run each part as you write it, and check your output
     against the expected results in the assignment.
 
