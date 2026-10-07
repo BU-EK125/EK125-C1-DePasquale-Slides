@@ -1,10 +1,16 @@
-/* A short (pre-fragment) slide's content div is a flex item with the
-   browser's default min-width:auto, which lets it size to its text's
-   unwrapped width instead of wrapping -- causing long intro sentences
-   to overflow past the slide edge until a fragment adds more content.
-   min-width:0 lets it shrink and wrap like a normal block. */
+/* A short (pre-fragment, or just low-content) slide's content div is
+   a flex item with the browser's default min-width:auto, which lets
+   it size to its text's unwrapped width instead of wrapping --
+   causing long intro sentences to overflow past the slide edge.
+   min-width:0 lets it shrink and wrap like a normal block. The same
+   element also gets an inline margin:auto top/bottom, which vertically
+   centers short slides instead of anchoring them to the top like
+   longer slides -- overriding that keeps every slide's content
+   starting at the same place regardless of how much is on it. */
 .reveal .mo-slide-content {
   min-width: 0;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 /* Slightly bigger code font when presenting in Slides layout, sized to still fit on one slide */

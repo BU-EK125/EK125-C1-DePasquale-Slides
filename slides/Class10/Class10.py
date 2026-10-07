@@ -225,31 +225,6 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Common Slicing Patterns
-
-    A handful of patterns cover most real uses — worth having
-    memorized rather than re-deriving every time:
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    - **First `n` items:** `sequence[:n]`
-    - **Last `n` items:** `sequence[-n:]`
-    - **Drop the first item:** `sequence[1:]`
-    - **Drop the last item:** `sequence[:-1]`
-    - **Drop first *and* last:** `sequence[1:-1]`
-    - **Every other item:** `sequence[::2]`
-    - **Reversed:** `sequence[::-1]`
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
     ## Slice Assignment (Lists Only)
 
     Lists let you assign directly into a slice to replace a whole
