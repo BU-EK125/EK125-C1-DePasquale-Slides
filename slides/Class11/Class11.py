@@ -477,8 +477,58 @@ def _(mo):
     mo.md("""
     ## Floating Point Error
 
-    Decimal numbers like `0.1` can't be stored **exactly** in binary, so
-    tiny rounding errors creep into floating-point arithmetic.
+    Computers store numbers in binary, and just like decimal fractions,
+    binary fractions can't represent every value exactly.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Why Some Decimals Don't Convert Exactly
+
+    Binary fractions are built from powers of **one-half**: the first
+    digit after the point is worth 1/2, the next 1/4, the next 1/8. A
+    decimal converts to a *finite* binary fraction only if its
+    denominator (in lowest terms) is a **power of 2**.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```
+    0.5  = 1/2   →  0.1   (base 2)
+    0.25 = 1/4   →  0.01  (base 2)
+    0.1  = 1/10  →  0.0001100110011...  (base 2)
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    `0.1` is 1/10, and 10 = 2×5 — that factor of 5 means it never
+    terminates in binary, just like 1/3 never terminates in decimal
+    (0.333...).
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### What's Actually Stored
+
+    A 64-bit float keeps 52 bits after the binary point, so that
+    repeating pattern gets cut off and rounded. The result: `0.1` is
+    actually stored as `0.1000000000000000055511151231257827...` — not
+    exactly `0.1`.
     """)
     return
 
