@@ -401,7 +401,17 @@ def _(mo):
     ## Why Test Your Code?
 
     A test is a small check that your code produces the output you
-    expect — catching bugs now, and catching anything you break later.
+    expect. Three reasons it's worth the extra code:
+
+    - **Correctness** — catches bugs early, before they affect results
+      you're relying on.
+    - **Regression guard** — confirms you haven't broken something that
+      used to work, if you edit the code later.
+    - **Documentation** — a well-written test shows exactly how a
+      function is supposed to behave.
+
+    In this course, you'll mostly write **unit tests** — checking one
+    small piece of code (a single function or calculation) in isolation.
     """)
     return
 
@@ -577,78 +587,6 @@ def _(mo):
     - Indexing and slicing work like lists, plus logical indexing
       (`arr[arr > 0]`) and reshape/transpose for rearranging shape.
     - Never compare floats with `==` — use `np.allclose()` instead.
-
-    📝 [Today's GPP](https://BU-EK125.github.io/EK125/gpps/Class11_GPP.html)
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## HW6 Section 1: NumPy and Testing
-
-    Section 1 of this week's homework (Problems 1–6) covers today's
-    material. Let's walk through one of them — Problem 2 — since it's
-    the one most directly about floating-point error.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ## Problem 2: Testing Floating Point Array Equality
-
-    ```python
-    a = np.array([[2.0, 4.0, 6.0],
-                  [8.0, 10.0, 12.0]])
-    ```
-
-    Build two arrays that *should* be identical: one as `a / np.sqrt(2)`,
-    the other as `np.sqrt(0.5) * a`. Sum each one, then compare the sums.
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    **Setting up the full logic:**
-
-    - **Two equivalent expressions:** `a / np.sqrt(2)` and
-      `np.sqrt(0.5) * a` are the same math, but floating-point arithmetic
-      can round each one differently in the last few bits.
-    - **Sum and compare:** compute `np.sum()` of each array, then compare
-      the two sums with `==` and with `np.isclose()`.
-    - **The asserts:** `assert sum1 == sum2` can fail even though the
-      math is "the same" — `assert np.isclose(sum1, sum2)` is the one
-      that should pass.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ### Takeaway
-
-    Mathematically-equivalent floating-point computations don't always
-    produce bit-identical results — that's exactly why tolerance-based
-    comparison exists.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## Now It's Your Turn
-
-    We only walked through Problem 2 — Problems 1 and 3–6 use the same
-    NumPy and testing tools from today's lecture. Work through all six in
-    PyCharm, run each part as you write it, and check your output
-    against the expected results in the assignment.
 
     📝 [Today's GPP](https://BU-EK125.github.io/EK125/gpps/Class11_GPP.html)
     """)
