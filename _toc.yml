@@ -19,3 +19,5 @@ chapters:
     title: "Class 10: Mastering Slicing"
   - url: https://bu-ek125.github.io/EK125-C1-DePasquale-Slides/Class11/index.html
     title: "Class 11: NumPy Arrays"
+  - url: https://bu-ek125.github.io/EK125-C1-DePasquale-Slides/Class12/index.html
+    title: "Class 12: Dictionaries"
