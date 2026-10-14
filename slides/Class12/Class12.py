@@ -591,34 +591,6 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Looping Over a Nested List
-
-    Loop over the nested list the same way you'd loop over any list.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
-    print('Your ice cream add-ins are:')
-    for yummy in icdessert['addins']:
-        print(yummy.title(), '!!!')
-    ```
-
-    ```
-    Your ice cream add-ins are:
-    Pecans !!!
-    Chocolate Chips !!!
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
     ## Dictionary Comprehension
 
     Like a list comprehension, but each entry produces a `key: value`
