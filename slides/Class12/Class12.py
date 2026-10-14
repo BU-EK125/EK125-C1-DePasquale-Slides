@@ -142,6 +142,36 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ## When to Use a Dictionary
+
+    Lists and NumPy arrays are for **ordered** data you access by
+    position — "the 3rd element." Reach for a dictionary when position
+    doesn't mean anything, but a **label** does:
+
+    - **A single record** — one hurricane's name, year, and category,
+      instead of remembering "index 0 is the name."
+    - **A lookup table** — mapping a student ID to a grade, or a word
+      to how many times it appeared.
+    - **Counting or grouping** — tallying votes or categories as you
+      loop through data.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    Use a **list** or **array** when order/position matters (especially
+    for numeric math); use a **dictionary** when a meaningful name does.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Creating a Dictionary
 
     Use `{}` with `key: value` pairs. Access a value with its key in
