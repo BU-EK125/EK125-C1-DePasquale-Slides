@@ -33,6 +33,303 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ## Defining and Calling a Function
+
+    Two reasons to write your own: reusing code, and building modular
+    programs. `def` starts a function header with parameters in
+    parentheses; `return` sends a value back out.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    def sqrarea(sidelen):
+        """This function calculates the area of a square."""
+        return sidelen**2
+
+    print(sqrarea(3))
+    ```
+
+    ```
+    9
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Functions with No Return
+
+    Not every function calculates something — some just perform a
+    task. Even then, Python hands back a value by default: `None`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    def printstrs(instr, n):
+        for i in range(n):
+            print(instr, end='')
+        print()
+    printstrs("Hi", 5)
+    print(printstrs('a', 2))
+    ```
+
+    ```
+    HiHiHiHiHi
+    aa
+    None
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Default and Keyword Arguments
+
+    A parameter can have a default value, used only if the caller
+    doesn't provide one. Naming an argument lets you skip defaults and
+    pass arguments in **any order**.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    def greet(name, greeting="Hello"):
+        print(f"{greeting}, {name}!")
+
+    greet("Alice")
+    greet(name="Bob", greeting="Hi")
+    ```
+
+    ```
+    Hello, Alice!
+    Hi, Bob!
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Mutable vs. Immutable Arguments
+
+    **Immutable** (numbers, strings, tuples) are always safe — any
+    "change" makes a new object. **Mutable** ones (lists, dicts) can
+    really be changed in place by a function.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    def modifyList(lst):
+        lst.append(999)
+        lst[0] = "changed"
+        print(f"Inside: {lst}")
+    myData = [1, 2, 3]
+    modifyList(myData)
+    print(f"Outside: {myData}")
+    ```
+
+    ```
+    Inside: ['changed', 2, 3, 999]
+    Outside: ['changed', 2, 3, 999]
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## In-Class Activity: Mad Libs Function Contest
+
+    Time to write a real function from scratch. Work in groups of
+    **three**.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## The Task
+
+    Write one function, `mad_libs`, that fills in a story template.
+    You're given a word bank (a dictionary of lists), a template
+    string, and a `CHOICES` dictionary — your function returns the
+    finished story.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    WORD_BANK = {
+        "adj":   ["sneaky", "gigantic", "soggy"],
+        "noun":  ["toaster", "llama", "professor"],
+        "verb":  ["tango", "sneeze", "teleport"],
+        "place": ["library", "volcano", "cafeteria"],
+    }
+
+    TEMPLATE = "The {adj} {noun} loves to {verb} in the {place}."
+    CHOICES  = {"adj": 1, "noun": 0, "verb": 2, "place": 1}
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Write the Function
+
+    Fill in `mad_libs` so it builds the story from `template`,
+    `word_bank`, and `choices`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    def mad_libs(template, word_bank, choices):
+        story = template
+        # your code here
+        return story
+
+    print(mad_libs(TEMPLATE, WORD_BANK, CHOICES))
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ## Expected Output
+
+    With the `CHOICES` above, your output should be:
+
+    ```
+    The gigantic toaster loves to teleport in the volcano.
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Requirements
+
+    Your function must use all of the following:
+
+    - A `for` loop over `choices.items()`, unpacking each pair as
+      `(blank, index)`
+    - A dictionary lookup into `word_bank`
+    - A list index to select the word
+    - The string method `.replace()`
+
+    Don't hard-code any words from the word bank or template — your
+    function must work for **any** valid `CHOICES`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Creative Round
+
+    Choose your own `CHOICES` to produce the funniest story you can.
+    Submit your `CHOICES` dictionary along with your function — the
+    class will vote on the funniest result.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## How You'll Be Rated (100 points)
+
+    - **Correctness (60)** — an autograder runs your function on
+      hidden inputs, including a repeated blank and a template with no
+      blanks.
+    - **Required constructs (20)** — 5 points each for the `.items()`
+      loop, the dictionary lookup, the list index, and `.replace()`.
+    - **Readability (10)** — clear variable names and at least one
+      comment explaining your approach.
+    - **Creative submission (10)** — full credit for a valid `CHOICES`
+      dictionary that runs without errors.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Bonus (up to 5 points)
+
+    - Funniest story, by class vote
+    - Most test cases passed on the first submission
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Submission
+
+    Submit **one Colab notebook per group of three**, containing your
+    function and your `CHOICES`, to the shared Google Drive folder —
+    📁 *(link — add before class)*. ⏰ *(due date — add before class)*
+
+    Your code must run without errors: a submission that crashes on
+    the hidden tests receives no correctness credit, so test with
+    several different `CHOICES` before submitting.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    # Appendix: Functions and Arguments, in Full
+
+    ### The complete walkthrough behind today's 4 condensed slides
+
+    Useful for review and for working through the GPP and homework —
+    not covered live due to time.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Why Write Your Own Functions?
 
     Two big reasons: **reusing code** you'd otherwise repeat, and
@@ -447,164 +744,6 @@ def _(mo):
     copying lists — worth reading on your own.
 
     📝 [Today's GPP](https://BU-EK125.github.io/EK125/gpps/Class13_GPP.html)
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## In-Class Activity: Mad Libs Function Contest
-
-    Time to write a real function from scratch. Work in groups of
-    **three**.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## The Task
-
-    Write one function, `mad_libs`, that fills in a story template.
-    You're given a word bank (a dictionary of lists), a template
-    string, and a `CHOICES` dictionary — your function returns the
-    finished story.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
-    WORD_BANK = {
-        "adj":   ["sneaky", "gigantic", "soggy"],
-        "noun":  ["toaster", "llama", "professor"],
-        "verb":  ["tango", "sneeze", "teleport"],
-        "place": ["library", "volcano", "cafeteria"],
-    }
-
-    TEMPLATE = "The {adj} {noun} loves to {verb} in the {place}."
-    CHOICES  = {"adj": 1, "noun": 0, "verb": 2, "place": 1}
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## Write the Function
-
-    Fill in `mad_libs` so it builds the story from `template`,
-    `word_bank`, and `choices`.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
-    def mad_libs(template, word_bank, choices):
-        story = template
-        # your code here
-        return story
-
-    print(mad_libs(TEMPLATE, WORD_BANK, CHOICES))
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ## Expected Output
-
-    With the `CHOICES` above, your output should be:
-
-    ```
-    The gigantic toaster loves to teleport in the volcano.
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## Requirements
-
-    Your function must use all of the following:
-
-    - A `for` loop over `choices.items()`, unpacking each pair as
-      `(blank, index)`
-    - A dictionary lookup into `word_bank`
-    - A list index to select the word
-    - The string method `.replace()`
-
-    Don't hard-code any words from the word bank or template — your
-    function must work for **any** valid `CHOICES`.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## Creative Round
-
-    Choose your own `CHOICES` to produce the funniest story you can.
-    Submit your `CHOICES` dictionary along with your function — the
-    class will vote on the funniest result.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## How You'll Be Rated (100 points)
-
-    - **Correctness (60)** — an autograder runs your function on
-      hidden inputs, including a repeated blank and a template with no
-      blanks.
-    - **Required constructs (20)** — 5 points each for the `.items()`
-      loop, the dictionary lookup, the list index, and `.replace()`.
-    - **Readability (10)** — clear variable names and at least one
-      comment explaining your approach.
-    - **Creative submission (10)** — full credit for a valid `CHOICES`
-      dictionary that runs without errors.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ### Bonus (up to 5 points)
-
-    - Funniest story, by class vote
-    - Most test cases passed on the first submission
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## Submission
-
-    Submit **one Colab notebook per group of three**, containing your
-    function and your `CHOICES`, to the shared Google Drive folder —
-    📁 *(link — add before class)*. ⏰ *(due date — add before class)*
-
-    Your code must run without errors: a submission that crashes on
-    the hidden tests receives no correctness credit, so test with
-    several different `CHOICES` before submitting.
     """)
     return
 
