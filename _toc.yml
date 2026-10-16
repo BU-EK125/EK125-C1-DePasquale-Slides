@@ -21,3 +21,5 @@ chapters:
     title: "Class 11: NumPy Arrays"
   - url: https://bu-ek125.github.io/EK125-C1-DePasquale-Slides/Class12/index.html
     title: "Class 12: Dictionaries"
+  - url: https://bu-ek125.github.io/EK125-C1-DePasquale-Slides/Class13/index.html
+    title: "Class 13: User-Defined Functions"
