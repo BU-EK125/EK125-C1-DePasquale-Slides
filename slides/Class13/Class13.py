@@ -172,10 +172,10 @@ def _(mo):
     mo.md("""
     ## The Task
 
-    Write one function, `mad_libs`, that fills in a story template.
-    You're given a word bank (a dictionary of lists), a template
-    string, and a `CHOICES` dictionary — your function returns the
-    finished story.
+    Write one function, `mad_libs`, that fills in a story template. You're
+    given a word bank (a dictionary of lists) and a template string —
+    you'll build your own `CHOICES` dictionary and your function returns
+    the finished story.
     """)
     return
 
@@ -192,47 +192,6 @@ def _(mo):
     }
 
     TEMPLATE = "The {adj} {noun} loves to {verb} in the {place}."
-    CHOICES  = {"adj": 1, "noun": 0, "verb": 2, "place": 1}
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## Write the Function
-
-    Fill in `mad_libs` so it builds the story from `template`,
-    `word_bank`, and `choices`.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
-    def mad_libs(template, word_bank, choices):
-        story = template
-        # your code here
-        return story
-
-    print(mad_libs(TEMPLATE, WORD_BANK, CHOICES))
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ## Expected Output
-
-    With the `CHOICES` above, your output should be:
-
-    ```
-    The gigantic toaster loves to teleport in the volcano.
     ```
     ''')
     return
@@ -260,40 +219,39 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ## Write the Function
+
+    Fill in `mad_libs` so it builds the story from `template`,
+    `word_bank`, and `choices`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    def mad_libs(template, word_bank, choices):
+        story = template
+        # your code here
+        return story
+    ```
+
+    Then build your own `CHOICES` dictionary (same shape as
+    `WORD_BANK`'s keys, with an index into each list) and call
+    `mad_libs(TEMPLATE, WORD_BANK, CHOICES)` with it.
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Creative Round
 
-    Choose your own `CHOICES` to produce the funniest story you can.
-    Submit your `CHOICES` dictionary along with your function — the
-    class will vote on the funniest result.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## How You'll Be Rated (100 points)
-
-    - **Correctness (60)** — an autograder runs your function on
-      hidden inputs, including a repeated blank and a template with no
-      blanks.
-    - **Required constructs (20)** — 5 points each for the `.items()`
-      loop, the dictionary lookup, the list index, and `.replace()`.
-    - **Readability (10)** — clear variable names and at least one
-      comment explaining your approach.
-    - **Creative submission (10)** — full credit for a valid `CHOICES`
-      dictionary that runs without errors.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ### Bonus (up to 5 points)
-
-    - Funniest story, by class vote
-    - Most test cases passed on the first submission
+    As you write `mad_libs`, choose your own `CHOICES` to make the
+    funniest story you can. Once everyone's done, we'll run them for
+    the class and vote on the funniest.
     """)
     return
 
@@ -303,13 +261,11 @@ def _(mo):
     mo.md("""
     ## Submission
 
-    Submit **one Colab notebook per group of three**, containing your
-    function and your `CHOICES`, to the shared Google Drive folder —
-    📁 *(link — add before class)*. ⏰ *(due date — add before class)*
+    Submit **one Colab notebook per group of three** — your function
+    and your `CHOICES` — to the shared Google Drive folder, so we can
+    run through them for the vote.
 
-    Your code must run without errors: a submission that crashes on
-    the hidden tests receives no correctness credit, so test with
-    several different `CHOICES` before submitting.
+    📁 *(link — add before class)* ⏰ *(due date — add before class)*
     """)
     return
 
