@@ -219,7 +219,8 @@ def _(mo):
     ```python
     def mad_libs(template, word_bank, choices):
         story = template
-        # your code here
+        for blank, index in choices.items():
+            pass  # your code here
         return story
     ```
 
