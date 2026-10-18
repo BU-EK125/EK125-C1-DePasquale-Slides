@@ -226,7 +226,8 @@ def _(mo):
 
     Then build your own `CHOICES` dictionary (same shape as
     `WORD_BANK`'s keys, with an index into each list) and call
-    `mad_libs(TEMPLATE, WORD_BANK, CHOICES)` with it.
+    `mad_libs(TEMPLATE, WORD_BANK, CHOICES)` with it. Add a line near
+    the top of your file with your table number, e.g. `TABLE_NUMBER = 3`.
     ''')
     return
 
