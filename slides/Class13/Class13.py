@@ -252,7 +252,7 @@ def _(mo):
     `CHOICES` — to the shared Google Drive folder, so we can run
     through them for the vote.
 
-    📁 *(link — add before class)* ⏰ *(due date — add before class)*
+    📁 [Submit here](https://drive.google.com/drive/folders/115-o349r8V7AkqC0kBH684pOqq8AlKJb?usp=sharing) ⏰ *(due date — add before class)*
     """)
     return
 
