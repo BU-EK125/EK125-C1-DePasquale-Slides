@@ -211,9 +211,9 @@ def _(mo):
 
     Fill in the loop body using all of the following:
 
-    - A dictionary lookup into `word_bank`
-    - A list index to select the word
-    - The string method `.replace()`
+    - A dictionary lookup into `word_bank` — 📖 [Dictionaries](https://BU-EK125.github.io/EK125/class/Class12.html#dictionaries)
+    - A list index to select the word — 📖 [List Indexing](https://BU-EK125.github.io/EK125/class/Class2.html#accessing-list-elements)
+    - The string method `.replace()` — 📖 [String Methods](https://BU-EK125.github.io/EK125/class/Class2.html#common-string-operations)
 
     Don't hard-code any words — your function must work for **any**
     valid `CHOICES`.
@@ -240,10 +240,27 @@ def _(mo):
     mo.md("""
     ## Step 4: Build Your `CHOICES`
 
-    Set `TABLE_NUMBER`, build `CHOICES` (same keys as `WORD_BANK`,
-    each mapped to an index), then call
-    `mad_libs(TEMPLATE, WORD_BANK, CHOICES)`.
+    Pick an index (0, 1, or 2) for each category — same keys as
+    `WORD_BANK`.
     """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    CHOICES = {
+        "adj": 0,    # 0, 1, or 2 -- your pick
+        "noun": 0,   # 0, 1, or 2 -- your pick
+        "verb": 0,   # 0, 1, or 2 -- your pick
+        "place": 0,  # 0, 1, or 2 -- your pick
+    }
+    ```
+
+    Then set `TABLE_NUMBER` and call
+    `mad_libs(TEMPLATE, WORD_BANK, CHOICES)`.
+    ''')
     return
 
 
