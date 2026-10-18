@@ -171,7 +171,7 @@ def _(mo):
 
     Download the template below and open it in PyCharm or VS Code.
 
-    📄 [Download mad_libs_template.py](https://github.com/BU-EK125/EK125-C1-DePasquale-Slides/blob/main/slides/Class13/mad_libs_template.py)
+    📄 [Download mad_libs_template.py](https://github.com/BU-EK125/EK125-C1-DePasquale-Slides/blob/main/slides/Class13/downloads/mad_libs_template.py)
     """)
     return
 
