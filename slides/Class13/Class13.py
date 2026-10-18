@@ -249,10 +249,10 @@ def _(mo):
     ## Submission
 
     Submit **one Colab notebook per table** — your function and your
-    `CHOICES` — to the shared Google Drive folder, so we can run
-    through them for the vote.
+    `CHOICES` — through this form. We'll use the **same form** after
+    everyone's submitted to vote on the funniest story.
 
-    📁 [Submit here](https://drive.google.com/drive/folders/115-o349r8V7AkqC0kBH684pOqq8AlKJb?usp=sharing) ⏰ *(due date — add before class)*
+    📝 [Submit and vote here](https://forms.gle/JpDvFxKsoRbSEf3Z8) ⏰ *(due date — add before class)*
     """)
     return
 
