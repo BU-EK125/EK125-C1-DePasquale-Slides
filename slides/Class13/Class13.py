@@ -158,8 +158,15 @@ def _(mo):
     mo.md("""
     ## In-Class Creative Round: Mad Libs
 
-    Work **by table**. Follow the steps below to write `mad_libs`,
-    then submit your funniest story.
+    Work **by table**. You'll write a function that fills in a story
+    template with your own words, using the same tools from today's
+    lecture — a function with parameters, a loop, a dictionary lookup,
+    a list index, and a string method, all working together.
+
+    There's no single correct answer here — every table picks
+    different words, so every story comes out different. The only
+    thing graded today is whether yours makes the class laugh. Follow
+    the six steps below, in order.
     """)
     return
 
@@ -169,7 +176,13 @@ def _(mo):
     mo.md("""
     ## Step 1: Get the Starter File
 
-    Download the template below and open it in PyCharm or VS Code.
+    Start from the template below instead of typing everything out
+    from scratch — it already has `WORD_BANK` and `TEMPLATE` filled
+    in, so you can spend your time on what's actually new today: the
+    `mad_libs` function itself.
+
+    Download it, open it in PyCharm or VS Code, and keep editing this
+    same file through every step below.
 
     📄 [Download mad_libs_template.py](https://github.com/BU-EK125/EK125-C1-DePasquale-Slides/blob/main/slides/Class13/downloads/mad_libs_template.py)
     """)
@@ -181,7 +194,13 @@ def _(mo):
     mo.md("""
     ## Step 2: Review the Setup
 
-    `WORD_BANK` and `TEMPLATE` are already filled in — don't change them.
+    Before writing any code, look over `WORD_BANK` and `TEMPLATE` on
+    the next slide. `WORD_BANK` maps each category to a list of three
+    words; `TEMPLATE` has a placeholder for each one, like `{adj}`.
+
+    Your function's job is to swap every placeholder for a word your
+    table picks. Don't change either one — they're the same for every
+    table, so everyone starts from the same ingredients.
     """)
     return
 
@@ -189,6 +208,8 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
+    ### The Given Data
+
     ```python
     WORD_BANK = {
         "adj":   ["sneaky", "gigantic", "soggy"],
@@ -224,6 +245,11 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
+    ### Your Starting Point
+
+    The loop and its two variables (`blank`, `index`) are already
+    written for you — your job is what happens inside it.
+
     ```python
     def mad_libs(template, word_bank, choices):
         story = template
@@ -240,8 +266,10 @@ def _(mo):
     mo.md("""
     ## Step 4: Build Your `CHOICES`
 
-    Pick an index (0, 1, or 2) for each category — same keys as
-    `WORD_BANK`.
+    This is where your table's creative choices come in. Pick an
+    index — 0, 1, or 2 — for each category, using the same keys as
+    `WORD_BANK`. Different combinations produce completely different
+    stories, so try a few before settling on your funniest one.
     """)
     return
 
@@ -249,6 +277,8 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
+    ### Shape of `CHOICES`
+
     ```python
     CHOICES = {
         "adj": 0,    # 0, 1, or 2 -- your pick
@@ -269,7 +299,12 @@ def _(mo):
     mo.md("""
     ## Step 5: Run It
 
-    Run your file. If it prints a complete sentence, you're done —
+    Run your file in PyCharm or VS Code and read what it prints. A
+    finished story reads as one complete sentence with every `{blank}`
+    replaced — if you still see curly braces, or Python raises an
+    error, go back and check your loop body before moving on.
+
+    Once it runs cleanly, feel free to try other `CHOICES` combos —
     the funnier, the better.
     """)
     return
@@ -280,8 +315,11 @@ def _(mo):
     mo.md("""
     ## Step 6: Submit & Vote
 
-    Submit **one file per table** through this form — funniest story
-    wins, judged by class vote.
+    Submit **one file per table** — your finished `mad_libs` function
+    and the `CHOICES` you landed on — through the form below. That
+    same form doubles as the ballot: once every table has shared its
+    story, we'll reuse it to vote, and funniest story wins. That's the
+    whole grade today.
 
     📝 [Submit and vote here](https://forms.gle/JpDvFxKsoRbSEf3Z8)
     """)
