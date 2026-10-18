@@ -98,8 +98,7 @@ def _(mo):
     ## Default and Keyword Arguments
 
     A parameter can have a default value, used only if the caller
-    doesn't provide one. Naming an argument lets you skip defaults and
-    pass arguments in **any order**.
+    skips it. Naming an argument lets you pass arguments in any order.
     """)
     return
 
@@ -128,9 +127,8 @@ def _(mo):
     mo.md("""
     ## Mutable vs. Immutable Arguments
 
-    **Immutable** (numbers, strings, tuples) are always safe — any
-    "change" makes a new object. **Mutable** ones (lists, dicts) can
-    really be changed in place by a function.
+    **Immutable** values are always safe; **mutable** ones (lists,
+    dicts) can really be changed in place by a function.
     """)
     return
 
@@ -141,7 +139,6 @@ def _(mo):
     ```python
     def modifyList(lst):
         lst.append(999)
-        lst[0] = "changed"
         print(f"Inside: {lst}")
     myData = [1, 2, 3]
     modifyList(myData)
@@ -149,8 +146,8 @@ def _(mo):
     ```
 
     ```
-    Inside: ['changed', 2, 3, 999]
-    Outside: ['changed', 2, 3, 999]
+    Inside: [1, 2, 3, 999]
+    Outside: [1, 2, 3, 999]
     ```
     ''')
     return
@@ -161,9 +158,9 @@ def _(mo):
     mo.md("""
     ## In-Class Creative Round: Mad Libs
 
-    Work **by table**. Write one function, `mad_libs`, that fills in a
-    story template with your own funny words — then the whole class
-    votes on the funniest result.
+    Work **by table**. Write one function, `mad_libs`, that fills a
+    story template with your own funny words — the class votes on the
+    funniest result.
     """)
     return
 
@@ -179,7 +176,8 @@ def _(mo):
         "place": ["library", "volcano", "cafeteria"],
     }
 
-    TEMPLATE = "The {adj} {noun} loves to {verb} in the {place}."
+    TEMPLATE = ("The {adj} {noun} loves to {verb} "
+                "in the {place}.")
     ```
     ''')
     return
@@ -248,11 +246,11 @@ def _(mo):
     mo.md("""
     ## Submission
 
-    Submit **one Colab notebook per table** — your function and your
-    `CHOICES` — through this form. We'll use the **same form** after
-    everyone's submitted to vote on the funniest story.
+    Submit **one notebook per table** — your function and CHOICES —
+    through this form. We'll reuse the **same form** to vote on the
+    funniest story.
 
-    📝 [Submit and vote here](https://forms.gle/JpDvFxKsoRbSEf3Z8) ⏰ *(due date — add before class)*
+    📝 [Submit and vote here](https://forms.gle/JpDvFxKsoRbSEf3Z8)
     """)
     return
 
@@ -287,9 +285,7 @@ def _(mo):
     mo.md("""
     ## Defining a Function
 
-    `def` starts a function header, followed by its name and
-    parameters in parentheses. The docstring, a triple-quoted string,
-    describes what it does; `return` sends a value back out.
+    `def` starts a header with name and parameters; `return` sends a value back.
     """)
     return
 
@@ -328,11 +324,9 @@ def _(mo):
     mo.md('''
     ```python
     def sqrarea_perim(sidelen):
-        """Calculates the area and perimeter of a square."""
         sqar = sidelen**2
         sqperim = 4 * sidelen
         return sqar, sqperim
-
     area, perim = sqrarea_perim(11)
     print(area, perim)
     ```
@@ -454,10 +448,8 @@ def _(mo):
     mo.md("""
     ## How Arguments Get Into Functions
 
-    When you call a function, Python doesn't copy your data — the
-    parameter is just a **new name** for the same object, like a
-    nickname. If "Liz" gets a haircut, "Elizabeth" does too, because
-    they're the same person.
+    Python doesn't copy your data into a function — the parameter is
+    just a new name for the same object, like a nickname.
     """)
     return
 
@@ -508,18 +500,16 @@ def _(mo):
 def _(mo):
     mo.md('''
     ```python
-    def createAccount(username, email, role="user", active=True):
-        return f"{username} ({email}): {role}, active={active}"
+    def createAccount(user, email, role="user"):
+        return f"{user} ({email}): {role}"
 
-    print(createAccount("alice", "alice@x.com", "admin", False))
-    print(createAccount(
-        username="bob", role="admin", email="bob@x.com"
-    ))
+    print(createAccount("alice", "a@x.com", "admin"))
+    print(createAccount(user="bob", email="b@x.com"))
     ```
 
     ```
-    alice (alice@x.com): admin, active=False
-    bob (bob@x.com): admin, active=True
+    alice (a@x.com): admin
+    bob (b@x.com): user
     ```
     ''')
     return
@@ -528,7 +518,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Two Types of Data: Mutable and Immutable
+    ## Mutable vs. Immutable Data
 
     **Immutable** (can't change): numbers, strings, tuples.
     **Mutable** (can change): lists, dictionaries, sets.
@@ -554,19 +544,17 @@ def _(mo):
 def _(mo):
     mo.md('''
     ```python
-    def tryToModify(x, s, t):
-        x = x + 1
-        s = s.upper()
-        t = t + (4,)
-        print(f"Inside: x={x}, s={s}, t={t}")
-    num, string, tup = 10, "hello", (1, 2, 3)
-    tryToModify(num, string, tup)
-    print(f"Outside: num={num}, string={string}, tup={tup}")
+    def tryToModify(x, s):
+        x, s = x + 1, s.upper()
+        print(f"Inside: x={x}, s={s}")
+    num, string = 10, "hello"
+    tryToModify(num, string)
+    print(f"Outside: num={num}, string={string}")
     ```
 
     ```
-    Inside: x=11, s=HELLO, t=(1, 2, 3, 4)
-    Outside: num=10, string=hello, tup=(1, 2, 3)
+    Inside: x=11, s=HELLO
+    Outside: num=10, string=hello
     ```
     ''')
     return
@@ -589,7 +577,6 @@ def _(mo):
     ```python
     def modifyList(lst):
         lst.append(999)
-        lst[0] = "changed"
         print(f"Inside: {lst}")
     myData = [1, 2, 3]
     modifyList(myData)
@@ -597,8 +584,8 @@ def _(mo):
     ```
 
     ```
-    Inside: ['changed', 2, 3, 999]
-    Outside: ['changed', 2, 3, 999]
+    Inside: [1, 2, 3, 999]
+    Outside: [1, 2, 3, 999]
     ```
     ''')
     return
@@ -609,9 +596,8 @@ def _(mo):
     mo.md("""
     ## Reassignment Doesn't Count
 
-    Assigning a brand-new value to the parameter, `lst = []`, just
-    creates a new local variable — in-place methods change the
-    original, but reassignment never does.
+    Reassigning the parameter (`lst = []`) never touches the original —
+    only in-place methods do.
     """)
     return
 
@@ -654,7 +640,6 @@ def _(mo):
     def processGrades(grades):
         grades.append(100)
         print(f"Inside: {grades}")
-
     grades = [85, 90, 78]
     processGrades(grades)
     print(f"Outside: {grades}")
@@ -679,9 +664,9 @@ def _(mo):
     - `lambda` makes a quick, one-expression anonymous function.
     - Default and keyword arguments let callers skip values and pass
       arguments in any order.
-    - Immutable arguments (numbers, strings, tuples) are always safe
-      inside a function; mutable ones (lists, dicts) can be changed in
-      place — but reassigning the parameter itself never escapes.
+    - Immutable arguments (numbers, strings, tuples) are always safe;
+      mutable ones (lists, dicts) can be changed in place — but
+      reassigning the parameter itself never escapes.
 
     Today's reading also covers variable scope, modular programs, and
     copying lists — worth reading on your own.

@@ -10,6 +10,7 @@
    starting at the same place regardless of how much is on it. */
 .reveal .mo-slide-content {
   min-width: 0;
+  width: 100%;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
   justify-content: flex-start !important;
@@ -20,7 +21,7 @@
    relative to the prose container's own font-size, so bumping it here
    scales headings/body/bullets together proportionally. */
 .reveal .markdown.prose {
-  font-size: 36px !important;
+  font-size: 39px !important;
 }
 
 /* Slightly bigger code font when presenting in Slides layout, sized to still fit on one slide */
@@ -40,6 +41,6 @@
 .reveal .text-xs,
 .reveal .text-sm,
 .reveal .output {
-  font-size: 30px !important;
+  font-size: 32px !important;
   line-height: 1.25 !important;
 }
