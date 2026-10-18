@@ -165,8 +165,10 @@ def _(mo):
 
     There's no single correct answer here — every table picks
     different words, so every story comes out different. The only
-    thing graded today is whether yours makes the class laugh. Follow
-    the six steps below, in order.
+    thing graded today is whether yours makes the class laugh.
+
+    What you'll actually do: download a file, write one function, pick
+    your words, run it, and submit. Six steps below, in order.
     """)
     return
 
@@ -176,13 +178,11 @@ def _(mo):
     mo.md("""
     ## Step 1: Get the Starter File
 
-    Start from the template below instead of typing everything out
-    from scratch — it already has `WORD_BANK` and `TEMPLATE` filled
-    in, so you can spend your time on what's actually new today: the
-    `mad_libs` function itself.
+    Download the file below and open it in PyCharm or VS Code. Keep
+    using this same file for every step that follows.
 
-    Download it, open it in PyCharm or VS Code, and keep editing this
-    same file through every step below.
+    `WORD_BANK` and `TEMPLATE` are already filled in — the only thing
+    left to build is `mad_libs`.
 
     📄 [Download mad_libs_template.py](https://github.com/BU-EK125/EK125-C1-DePasquale-Slides/blob/main/slides/Class13/downloads/mad_libs_template.py)
     """)
@@ -194,9 +194,10 @@ def _(mo):
     mo.md("""
     ## Step 2: Review the Setup
 
-    Before writing any code, look over `WORD_BANK` and `TEMPLATE` on
-    the next slide. `WORD_BANK` maps each category to a list of three
-    words; `TEMPLATE` has a placeholder for each one, like `{adj}`.
+    Nothing to write yet — just read. Look over `WORD_BANK` and
+    `TEMPLATE` on the next slide. `WORD_BANK` maps each category to a
+    list of three words; `TEMPLATE` has a placeholder for each one,
+    like `{adj}`.
 
     Your function's job is to swap every placeholder for a word your
     table picks. Don't change either one — they're the same for every
@@ -244,6 +245,23 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md("""
+    ### How to Approach It
+
+    For each `(blank, index)` pair the loop hands you, do these four
+    things, in order:
+
+    1. Look up the word list for `blank` in `word_bank`
+    2. Pick the word at position `index` in that list
+    3. Build the placeholder text from `blank`, e.g. `{adj}`
+    4. Replace that placeholder in `story`, and save the result
+       back into `story`
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md('''
     ### Your Starting Point
 
@@ -266,10 +284,12 @@ def _(mo):
     mo.md("""
     ## Step 4: Build Your `CHOICES`
 
-    This is where your table's creative choices come in. Pick an
-    index — 0, 1, or 2 — for each category, using the same keys as
-    `WORD_BANK`. Different combinations produce completely different
-    stories, so try a few before settling on your funniest one.
+    In your file, replace every `0` in the `CHOICES` skeleton below
+    with your own pick — 0, 1, or 2 — one per category. Also replace
+    `TABLE_NUMBER = 0` near the top with your table's actual number.
+
+    Different combinations produce completely different stories, so
+    try a few before settling on your funniest one.
     """)
     return
 
@@ -288,8 +308,8 @@ def _(mo):
     }
     ```
 
-    Then set `TABLE_NUMBER` and call
-    `mad_libs(TEMPLATE, WORD_BANK, CHOICES)`.
+    Then make sure `print(mad_libs(TEMPLATE, WORD_BANK, CHOICES))` is
+    still the last line of your file.
     ''')
     return
 
@@ -299,13 +319,23 @@ def _(mo):
     mo.md("""
     ## Step 5: Run It
 
-    Run your file in PyCharm or VS Code and read what it prints. A
-    finished story reads as one complete sentence with every `{blank}`
-    replaced — if you still see curly braces, or Python raises an
-    error, go back and check your loop body before moving on.
+    - **PyCharm:** press `Shift+F10`, or click the green ▶ button
+    - **VS Code:** click the ▶ button in the top right
 
-    Once it runs cleanly, feel free to try other `CHOICES` combos —
-    the funnier, the better.
+    Your story prints in the terminal/console panel at the bottom.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Check Your Output
+
+    A finished story reads as one complete sentence with every
+    `{blank}` replaced — if you still see curly braces, or Python
+    raises an error, go back and check your loop body before moving
+    on. Once it runs cleanly, feel free to try other `CHOICES` combos.
     """)
     return
 
@@ -315,10 +345,12 @@ def _(mo):
     mo.md("""
     ## Step 6: Submit & Vote
 
-    Submit **one file per table** — your finished `mad_libs` function
-    and the `CHOICES` you landed on — through the form below. That
-    same form doubles as the ballot: once every table has shared its
-    story, we'll reuse it to vote, and funniest story wins. That's the
+    Pick **one person at your table** to submit — everyone else can
+    watch. Upload your finished file through the form below; it asks
+    for your function and the `CHOICES` you landed on.
+
+    That same form doubles as the ballot — once every table's shared
+    its story, we'll reuse it to vote. Funniest story wins; that's the
     whole grade today.
 
     📝 [Submit and vote here](https://forms.gle/JpDvFxKsoRbSEf3Z8)

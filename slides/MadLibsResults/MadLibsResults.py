@@ -82,7 +82,7 @@ def _(mo):
             word = word_bank[blank][index]
             story = story.replace("{" + blank + "}", word)
         return story
-    CHOICES = {"adj": 2, "noun": 1, "verb": 1, "place": 2}
+    CHOICES = {"adj": 1, "noun": 0, "verb": 2, "place": 1}
     print(mad_libs(TEMPLATE, WORD_BANK, CHOICES))
     ```
     ''')
@@ -93,7 +93,7 @@ def _(mo):
 def _(mo):
     mo.md("""
     ```
-    The soggy llama loves to sneeze in the cafeteria.
+    The gigantic toaster loves to teleport in the volcano.
     ```
     """)
     return
