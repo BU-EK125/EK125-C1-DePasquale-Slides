@@ -64,9 +64,10 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Example Entry — Table 0 (test)
+    ## Entry: Test Submission
 
-    **Placeholder** — one real slide like this per table, after class.
+    From the test file submitted through the form — real tables will
+    each get their own slide in this same format.
     """)
     return
 

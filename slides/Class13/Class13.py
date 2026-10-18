@@ -158,9 +158,30 @@ def _(mo):
     mo.md("""
     ## In-Class Creative Round: Mad Libs
 
-    Work **by table**. Write one function, `mad_libs`, that fills a
-    story template with your own funny words — the class votes on the
-    funniest result.
+    Work **by table**. Follow the steps below to write `mad_libs`,
+    then submit your funniest story.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Step 1: Get the Starter File
+
+    Download the template below and open it in PyCharm or VS Code.
+
+    📄 [Download mad_libs_template.py](https://github.com/BU-EK125/EK125-C1-DePasquale-Slides/blob/main/slides/Class13/mad_libs_template.py)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Step 2: Review the Setup
+
+    `WORD_BANK` and `TEMPLATE` are already filled in — don't change them.
     """)
     return
 
@@ -186,29 +207,16 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Requirements
+    ## Step 3: Write `mad_libs`
 
-    Your function must use all of the following:
+    Fill in the loop body using all of the following:
 
-    - A `for` loop over `choices.items()`, unpacking each pair as
-      `(blank, index)`
     - A dictionary lookup into `word_bank`
     - A list index to select the word
     - The string method `.replace()`
 
-    Don't hard-code any words from the word bank or template — your
-    function must work for **any** valid `CHOICES`.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## Write the Function
-
-    Fill in `mad_libs` so it builds the story from `template`,
-    `word_bank`, and `choices`.
+    Don't hard-code any words — your function must work for **any**
+    valid `CHOICES`.
     """)
     return
 
@@ -223,11 +231,6 @@ def _(mo):
             pass  # your code here
         return story
     ```
-
-    Then build your own `CHOICES` dictionary (same shape as
-    `WORD_BANK`'s keys, with an index into each list) and call
-    `mad_libs(TEMPLATE, WORD_BANK, CHOICES)` with it. Add a line near
-    the top of your file with your table number, e.g. `TABLE_NUMBER = 3`.
     ''')
     return
 
@@ -235,10 +238,11 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## How It's Judged
+    ## Step 4: Build Your `CHOICES`
 
-    Choose your own `CHOICES` to make the funniest story you can.
-    That's the whole grade today: funniest story, by class vote.
+    Set `TABLE_NUMBER`, build `CHOICES` (same keys as `WORD_BANK`,
+    each mapped to an index), then call
+    `mad_libs(TEMPLATE, WORD_BANK, CHOICES)`.
     """)
     return
 
@@ -246,11 +250,21 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Submission
+    ## Step 5: Run It
 
-    Submit **one notebook per table** — your function and CHOICES —
-    through this form. We'll reuse the **same form** to vote on the
-    funniest story.
+    Run your file. If it prints a complete sentence, you're done —
+    the funnier, the better.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Step 6: Submit & Vote
+
+    Submit **one file per table** through this form — funniest story
+    wins, judged by class vote.
 
     📝 [Submit and vote here](https://forms.gle/JpDvFxKsoRbSEf3Z8)
     """)
