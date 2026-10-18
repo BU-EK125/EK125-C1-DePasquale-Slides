@@ -159,23 +159,11 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## In-Class Activity: Mad Libs Function Contest
+    ## In-Class Creative Round: Mad Libs
 
-    Time to write a real function from scratch. Work in groups of
-    **three**.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## The Task
-
-    Write one function, `mad_libs`, that fills in a story template. You're
-    given a word bank (a dictionary of lists) and a template string —
-    you'll build your own `CHOICES` dictionary and your function returns
-    the finished story.
+    Work **by table**. Write one function, `mad_libs`, that fills in a
+    story template with your own funny words — then the whole class
+    votes on the funniest result.
     """)
     return
 
@@ -247,11 +235,10 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Creative Round
+    ## How It's Judged
 
-    As you write `mad_libs`, choose your own `CHOICES` to make the
-    funniest story you can. Once everyone's done, we'll run them for
-    the class and vote on the funniest.
+    Choose your own `CHOICES` to make the funniest story you can.
+    That's the whole grade today: funniest story, by class vote.
     """)
     return
 
@@ -261,9 +248,9 @@ def _(mo):
     mo.md("""
     ## Submission
 
-    Submit **one Colab notebook per group of three** — your function
-    and your `CHOICES` — to the shared Google Drive folder, so we can
-    run through them for the vote.
+    Submit **one Colab notebook per table** — your function and your
+    `CHOICES` — to the shared Google Drive folder, so we can run
+    through them for the vote.
 
     📁 *(link — add before class)* ⏰ *(due date — add before class)*
     """)
