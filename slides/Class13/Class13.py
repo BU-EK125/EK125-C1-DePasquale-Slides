@@ -158,17 +158,7 @@ def _(mo):
     mo.md("""
     ## In Class Exercise: Mad Libs
 
-    Work **by table**. You'll write a function that fills in a story
-    template with your own words, using the same tools from today's
-    lecture — a function with parameters, a loop, a dictionary lookup,
-    a list index, and a string method, all working together.
-
-    There's no single correct answer here — every table picks
-    different words, so every story comes out different. The only
-    thing graded today is whether yours makes the class laugh.
-
-    What you'll actually do: download a file, write one function, pick
-    your words, run it, and submit. Six steps below, in order.
+    **Who knows what Mad Libs is?**
     """)
     return
 
@@ -177,13 +167,31 @@ def _(mo):
 def _(mo):
     mo.Html(
         '''
-        <div style="display: flex; align-items: center;
-                    justify-content: center; height: 100%;">
-          <img src="mad_libs_cover.jpg" style="max-height: 520px;
-               border-radius: 8px;">
+        <div style="display: flex; align-items: center; gap: 28px;">
+          <img src="mad_libs_cover.jpg" style="max-height: 200px;
+               border-radius: 8px; flex-shrink: 0;">
+          <p style="margin: 0; font-size: 30px; line-height: 1.3;
+             color: #ddd;">
+            A word game: you fill in blanks in a story template with
+            your own words, without seeing the story first — using
+            the same functions, loops, and dictionary/list skills
+            from today's lecture.
+          </p>
         </div>
         '''
     )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    - Work **by table**
+    - No single correct answer — every story comes out different
+    - Graded only on whether yours makes the class laugh
+    - Six steps below: download a file, write one function, pick
+      your words, run it, and submit
+    """)
     return
 
 
