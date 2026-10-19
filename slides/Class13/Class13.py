@@ -156,7 +156,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## In-Class Creative Round: Mad Libs
+    ## In Class Exercise: Mad Libs
 
     Work **by table**. You'll write a function that fills in a story
     template with your own words, using the same tools from today's
@@ -170,6 +170,20 @@ def _(mo):
     What you'll actually do: download a file, write one function, pick
     your words, run it, and submit. Six steps below, in order.
     """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.Html(
+        '''
+        <div style="display: flex; align-items: center;
+                    justify-content: center; height: 100%;">
+          <img src="mad_libs_cover.jpg" style="max-height: 520px;
+               border-radius: 8px;">
+        </div>
+        '''
+    )
     return
 
 
@@ -266,15 +280,19 @@ def _(mo):
     mo.md('''
     ### Your Starting Point
 
-    Write a header for `mad_libs` with three parameters — the
-    template, the word bank, and the choices — then fill in the loop
-    body below.
+    This is exactly what's in your starter file — the TODOs mark what
+    to add.
 
     ```python
+    # TODO: write the function header -- mad_libs
+    # needs three params: template, word_bank, choices.
     def YOUR_FUNCTION_NAME(PARAM_1, PARAM_2, PARAM_3):
         story = template
         for blank, index in choices.items():
-            pass  # your code here
+            # TODO: look up the word for blank in
+            # word_bank at index, then use
+            # story.replace() to swap it into story.
+            pass
         return story
     ```
     ''')
@@ -302,16 +320,19 @@ def _(mo):
     ### Shape of `CHOICES`
 
     ```python
+    # TODO: build your own CHOICES below -- same
+    # keys as WORD_BANK, each mapped to an index
+    # into that word's list. Make it funny!
     CHOICES = {
-        "adj": 0,    # 0, 1, or 2 -- your pick
-        "noun": 0,   # 0, 1, or 2 -- your pick
-        "verb": 0,   # 0, 1, or 2 -- your pick
-        "place": 0,  # 0, 1, or 2 -- your pick
+        "adj": 0,
+        "noun": 0,
+        "verb": 0,
+        "place": 0,
     }
+    # TODO: call your function with TEMPLATE,
+    # WORD_BANK, and CHOICES, and print the result.
+    print(CALL_YOUR_FUNCTION_HERE)
     ```
-
-    Then write a call to your function, passing `TEMPLATE`,
-    `WORD_BANK`, and `CHOICES`, wrapped in `print(...)`.
     ''')
     return
 
