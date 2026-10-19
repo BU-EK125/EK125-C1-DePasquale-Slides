@@ -9,6 +9,11 @@
 #    straight from GitHub, so it has to actually exist in the repo,
 #    not just in a generated build artifact)
 #
+# If slides/ClassN/downloads/ exists, its contents are also copied into
+# _slides_build/<DeckName>/, landing at <site>/<DeckName>/<file> -- the
+# same same-site, direct-download pattern the main EK125 site uses for
+# GPP/homework .py files, rather than linking out to GitHub's UI.
+#
 # Run this before `jb build .`. If you edited a deck locally, run this
 # and commit the resulting notebooks/*.ipynb change too -- pr-check
 # verifies they're in sync and fails if you forget.
@@ -34,4 +39,9 @@ for py_file in slides/*/*.py; do
   # this notebook is meant to run. Strip it so the Colab button doesn't
   # error on the very first cell.
   python3 strip_marimo_import.py "notebooks/$deck_name.ipynb"
+
+  if [ -d "$deck_dir/downloads" ]; then
+    echo "Publishing $deck_dir/downloads/* -> _slides_build/$deck_name/"
+    cp -r "$deck_dir"/downloads/. "_slides_build/$deck_name/"
+  fi
 done

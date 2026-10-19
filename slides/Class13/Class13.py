@@ -184,7 +184,7 @@ def _(mo):
     `WORD_BANK` and `TEMPLATE` are already filled in — the only thing
     left to build is `mad_libs`.
 
-    📄 [Download mad_libs_template.py](https://github.com/BU-EK125/EK125-C1-DePasquale-Slides/blob/main/slides/Class13/downloads/mad_libs_template.py)
+    📄 [Download mad_libs_template.py](https://BU-EK125.github.io/EK125-C1-DePasquale-Slides/Class13/mad_libs_template.py)
     """)
     return
 
