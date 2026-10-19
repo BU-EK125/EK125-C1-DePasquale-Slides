@@ -188,7 +188,6 @@ def _(mo):
     mo.md("""
     - Work **by table**
     - No single correct answer — every story comes out different
-    - Graded only on whether yours makes the class laugh
     - Six steps below: download a file, write one function, pick
       your words, run it, and submit
     """)
@@ -378,8 +377,7 @@ def _(mo):
     for your function and the `CHOICES` you landed on.
 
     That same form doubles as the ballot — once every table's shared
-    its story, we'll reuse it to vote. Funniest story wins; that's the
-    whole grade today.
+    its story, we'll reuse it to vote on the funniest one.
 
     📝 [Submit and vote here](https://forms.gle/JpDvFxKsoRbSEf3Z8)
     """)
