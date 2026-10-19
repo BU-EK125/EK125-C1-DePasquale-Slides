@@ -175,6 +175,20 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.Html(
+        '''
+        <div style="display: flex; align-items: center;
+                    justify-content: center; height: 100%;">
+          <img src="mad_libs_cover.jpg" style="max-height: 520px;
+               border-radius: 8px;">
+        </div>
+        '''
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md("""
     ## Step 1: Get the Starter File
 
