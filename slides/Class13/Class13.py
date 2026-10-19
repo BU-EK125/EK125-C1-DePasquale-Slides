@@ -216,14 +216,13 @@ def _(mo):
     mo.md("""
     ## Step 2: Review the Setup
 
-    Nothing to write yet — just read. Look over `WORD_BANK` and
-    `TEMPLATE` on the next slide. `WORD_BANK` maps each category to a
-    list of three words; `TEMPLATE` has a placeholder for each one,
-    like `{adj}`.
+    Nothing to write yet — just read.
 
-    Your function's job is to swap every placeholder for a word your
-    table picks. Don't change either one — they're the same for every
-    table, so everyone starts from the same ingredients.
+    `WORD_BANK` maps each category — `adj`, `noun`, `verb`, `place` —
+    to a list of three words. `TEMPLATE` is the story itself, with a
+    placeholder for each category, like `{adj}`.
+
+    Don't change either one — they're the same for every table.
     """)
     return
 
@@ -292,16 +291,14 @@ def _(mo):
     to add.
 
     ```python
-    # TODO: write the function header -- mad_libs
-    # needs three params: template, word_bank, choices.
-    def YOUR_FUNCTION_NAME(PARAM_1, PARAM_2, PARAM_3):
-        story = template
-        for blank, index in choices.items():
-            # TODO: look up the word for blank in
-            # word_bank at index, then use
-            # story.replace() to swap it into story.
-            pass
-        return story
+    # TODO: write a function called mad_libs with
+    # three parameters: the template, the word bank,
+    # and the choices. Then:
+    #   1. start with story = template
+    #   2. loop over choices.items() as (blank, index)
+    #   3. look up the word in word_bank, then use
+    #      story.replace() to swap it into story
+    #   4. return story
     ```
     ''')
     return

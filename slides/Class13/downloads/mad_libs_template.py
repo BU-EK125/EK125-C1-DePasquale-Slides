@@ -16,16 +16,13 @@ TEMPLATE = ("The {adj} {noun} loves to {verb} "
             "in the {place}.")
 
 
-# TODO: write the function header -- name it mad_libs, with three
-# parameters: the template, the word bank, and the choices.
-def YOUR_FUNCTION_NAME(PARAM_1, PARAM_2, PARAM_3):
-    story = template
-    for blank, index in choices.items():
-        # TODO: look up the word list for this blank in word_bank,
-        # grab the word at this blank's index, then use
-        # story.replace() to swap it into story.
-        pass
-    return story
+# TODO: write a function called mad_libs with three parameters: the
+# template, the word bank, and the choices. Then:
+#   1. start with story = template
+#   2. loop over choices.items() as (blank, index)
+#   3. look up the word in word_bank, then use story.replace() to
+#      swap it into story
+#   4. return story
 
 
 # TODO: build your own CHOICES below -- same keys as WORD_BANK, each
