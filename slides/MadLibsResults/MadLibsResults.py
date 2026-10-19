@@ -325,6 +325,42 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ## Entry: Table 9
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    def mad_libs(TEMPLATE, WORD_BANK, CHOICES):
+        story = TEMPLATE
+        for blank, index in CHOICES.items():
+            story = story.replace(
+                "{" + blank + "}", WORD_BANK[blank][index])
+        return story
+
+    CHOICES = {"adj": 0, "noun": 1, "verb": 1, "place": 2}
+    print(mad_libs(TEMPLATE, WORD_BANK, CHOICES))
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ```
+    The sneaky llama loves to sneeze in the cafeteria.
+    ```
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Entry: Table 10
     """)
     return
