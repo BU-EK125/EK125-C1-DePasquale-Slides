@@ -31,10 +31,16 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## How to Use This Deck
+    ## About This Activity
 
-    Each entry shows one table's `mad_libs` function and its story —
-    vote for the funniest once you've seen them all.
+    In [Class 13: User-Defined Functions](https://bu-ek125.github.io/EK125-C1-DePasquale-Slides/Class13/index.html),
+    students split into tables for an in-class Mad Libs exercise: write a
+    function that fills in a story template with chosen words, using the
+    functions and dictionaries covered that day. See that deck's "In Class
+    Exercise: Mad Libs" section for the full prompt and starter file.
+
+    Each entry below shows one table's actual `mad_libs` function and the
+    story it produced — vote for the funniest once you've seen them all.
     """)
     return
 
@@ -200,6 +206,47 @@ def _(mo):
     mo.md("""
     ```
     The soggy professor loves to tango in the volcano.
+    ```
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Entry: Table 5
+
+    This table wrote its own version of `TEMPLATE` without the `{}`
+    markers — still works, just a different style.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    TEMPLATE = "The adj noun loves to verb in the place."
+
+    def mad_libs(TEMPLATE, WORD_BANK, CHOICES):
+        story = TEMPLATE
+        for blank, index in CHOICES.items():
+            word = WORD_BANK[blank][index]
+            story = story.replace(blank, word)
+        return story
+
+    CHOICES = {"adj": 2, "noun": 0, "verb": 0, "place": 2}
+    print(mad_libs(TEMPLATE, WORD_BANK, CHOICES))
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ```
+    The soggy toaster loves to tango in the cafeteria.
     ```
     """)
     return
@@ -391,85 +438,6 @@ def _(mo):
     mo.md("""
     ```
     The soggy professor loves to sneeze in the volcano.
-    ```
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## Entry: Table (unnumbered)
-
-    This table wrote its own version of `TEMPLATE` without the `{}`
-    markers — still works, just a different style.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
-    TEMPLATE = "The adj noun loves to verb in the place."
-
-    def mad_libs(TEMPLATE, WORD_BANK, CHOICES):
-        story = TEMPLATE
-        for blank, index in CHOICES.items():
-            word = WORD_BANK[blank][index]
-            story = story.replace(blank, word)
-        return story
-
-    CHOICES = {"adj": 2, "noun": 0, "verb": 0, "place": 2}
-    print(mad_libs(TEMPLATE, WORD_BANK, CHOICES))
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ```
-    The soggy toaster loves to tango in the cafeteria.
-    ```
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## Entry: Test Submission
-
-    From the test file submitted through the form — real tables will
-    each get their own slide in this same format.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
-    def mad_libs(template, word_bank, choices):
-        story = template
-        for blank, index in choices.items():
-            word = word_bank[blank][index]
-            story = story.replace("{" + blank + "}", word)
-        return story
-    CHOICES = {"adj": 1, "noun": 0, "verb": 2, "place": 1}
-    print(mad_libs(TEMPLATE, WORD_BANK, CHOICES))
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ```
-    The gigantic toaster loves to teleport in the volcano.
     ```
     """)
     return
