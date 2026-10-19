@@ -231,7 +231,8 @@ def _(mo):
     mo.md("""
     ## Step 3: Write `mad_libs`
 
-    Fill in the loop body using all of the following:
+    Write the function's header, then fill in its loop body using all
+    of the following:
 
     - A dictionary lookup into `word_bank` — 📖 [Dictionaries](https://BU-EK125.github.io/EK125/class/Class12.html#dictionaries)
     - A list index to select the word — 📖 [List Indexing](https://BU-EK125.github.io/EK125/class/Class2.html#accessing-list-elements)
@@ -246,7 +247,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### How to Approach It
+    ### How to Approach the Loop
 
     For each `(blank, index)` pair the loop hands you, do these four
     things, in order:
@@ -265,11 +266,12 @@ def _(mo):
     mo.md('''
     ### Your Starting Point
 
-    The loop and its two variables (`blank`, `index`) are already
-    written for you — your job is what happens inside it.
+    Write a header for `mad_libs` with three parameters — the
+    template, the word bank, and the choices — then fill in the loop
+    body below.
 
     ```python
-    def mad_libs(template, word_bank, choices):
+    def YOUR_FUNCTION_NAME(PARAM_1, PARAM_2, PARAM_3):
         story = template
         for blank, index in choices.items():
             pass  # your code here
@@ -308,8 +310,8 @@ def _(mo):
     }
     ```
 
-    Then make sure `print(mad_libs(TEMPLATE, WORD_BANK, CHOICES))` is
-    still the last line of your file.
+    Then write a call to your function, passing `TEMPLATE`,
+    `WORD_BANK`, and `CHOICES`, wrapped in `print(...)`.
     ''')
     return
 
@@ -334,8 +336,8 @@ def _(mo):
 
     A finished story reads as one complete sentence with every
     `{blank}` replaced — if you still see curly braces, or Python
-    raises an error, go back and check your loop body before moving
-    on. Once it runs cleanly, feel free to try other `CHOICES` combos.
+    raises an error, check your function header, loop body, and
+    function call. Once it runs cleanly, try other `CHOICES` combos.
     """)
     return
 

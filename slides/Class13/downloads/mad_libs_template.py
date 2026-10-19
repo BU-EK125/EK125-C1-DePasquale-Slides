@@ -16,7 +16,9 @@ TEMPLATE = ("The {adj} {noun} loves to {verb} "
             "in the {place}.")
 
 
-def mad_libs(template, word_bank, choices):
+# TODO: write the function header -- name it mad_libs, with three
+# parameters: the template, the word bank, and the choices.
+def YOUR_FUNCTION_NAME(PARAM_1, PARAM_2, PARAM_3):
     story = template
     for blank, index in choices.items():
         # TODO: look up the word list for this blank in word_bank,
@@ -35,4 +37,6 @@ CHOICES = {
     "place": 0,
 }
 
-print(mad_libs(TEMPLATE, WORD_BANK, CHOICES))
+# TODO: call your function with TEMPLATE, WORD_BANK, and CHOICES, and
+# print the result.
+print(CALL_YOUR_FUNCTION_HERE)
