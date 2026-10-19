@@ -372,9 +372,11 @@ def _(mo):
     mo.md("""
     ## Step 6: Submit & Vote
 
-    Pick **one person at your table** to submit — everyone else can
-    watch. Upload your finished file through the form below; it asks
-    for your function and the `CHOICES` you landed on.
+    Divide and conquer — have different people tackle different parts
+    (the function, the `CHOICES`, testing it), showing their work to
+    the table, then pick **one person** to combine it all and submit.
+    Upload your finished file through the form below; it asks for your
+    function and the `CHOICES` you landed on.
 
     That same form doubles as the ballot — once every table's shared
     its story, we'll reuse it to vote on the funniest one.
