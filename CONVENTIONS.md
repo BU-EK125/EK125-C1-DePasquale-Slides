@@ -62,6 +62,35 @@ into the live page. **If a widget needs to react to a click, it must be
 and renders nothing. For a plain external embed (a URL), use
 `mo.Html('<iframe src="...">...</iframe>')` instead.
 
+## A literal `\n` inside a single-backtick code span silently vanishes
+
+Confirmed by direct test on a live deployed deck, not assumption: inline
+prose like `` `\n` `` -- a single-backtick code span whose *only* content
+is a literal backslash-n, written in the `.py` source as `` `\\n` `` so
+Python's own string escaping produces the two characters `\` and `n` --
+renders as **nothing**. Not styled oddly, not shown as plain text:
+the whole code span and its content disappear from the rendered slide,
+silently, with everything around it rendering fine. Confirmed on three
+separate occurrences in `slides/Class14/Class14.py` before they were
+fixed, and confirmed fixed by checking the live page's actual
+`innerText`, not just by re-reading the source.
+
+This is specific to a **single-backtick inline code span in prose**.
+The exact same `\n` inside a triple-backtick fenced code or output
+block (e.g. showing `['72\n', '68\n']` as hand-typed output text) renders
+completely normally -- don't let a working fenced-block example convince
+you an inline one is also fine.
+
+**The fix:** don't reference `\n` as a literal symbol in inline prose.
+Describe it in words instead (e.g. "a trailing newline character"), and
+let a fenced code/output block on the same slide show the literal
+character if a visual example is needed. If a new deck needs to call out
+some other escape-sequence literal (`\t`, `\r`, etc.) in prose, assume it
+has the same bug until proven otherwise -- check the live rendered page's
+text content, not just the exported HTML source, since this kind of
+silent-disappearance won't show up as a build error or an obviously
+malformed DOM node.
+
 ## A bare `print()` cell silently vanishes from the slides layout
 
 This is the single most important gotcha in this file, because it fails
