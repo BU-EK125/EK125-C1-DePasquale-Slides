@@ -26,3 +26,5 @@ chapters:
     title: "Class 13: User-Defined Functions"
   - url: https://bu-ek125.github.io/EK125-C1-DePasquale-Slides/MadLibsResults/index.html
     title: "Class 13: Mad Libs Results"
+  - url: https://bu-ek125.github.io/EK125-C1-DePasquale-Slides/Class14/index.html
+    title: "Class 14: Scripts, File I/O, and the Local File Environment"
