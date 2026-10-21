@@ -33,10 +33,127 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Before We Start: Variable Scope
+    ## Before We Start: Picking Up From Class 13
 
-    We didn't get to this in Class 13 — let's cover it now before
-    moving on to today's topic.
+    A quick recap, a few details we skipped, and variable scope — all
+    things we didn't get to in Class 13 — before moving on to today's
+    topic.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Quick Recap: Functions
+
+    `def` starts a function header with its parameters; `return` sends
+    a value back out. The **docstring** — a string right after the
+    header — is a one-sentence description of what the function does.
+    Parameters can also have **default values**, used only when the
+    caller doesn't provide one.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    def sqrarea(sidelen):
+        """This function calculates the area of a square."""
+        return sidelen**2
+
+    print(sqrarea(3))
+    ```
+
+    ```
+    9
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Returning Multiple Values
+
+    `return` can only hand back **one** object — but that object can
+    be a tuple, bundling several values together.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    def sqrarea_perim(sidelen):
+        sqar = sidelen**2
+        sqperim = 4 * sidelen
+        return sqar, sqperim
+
+    area, perim = sqrarea_perim(11)
+    print(area, perim)
+    ```
+
+    ```
+    121 44
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Lambda Functions
+
+    A `lambda` is a short, anonymous function — one expression, no
+    `def`, no `return` statement needed.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    times3 = lambda num: num * 3
+    print(times3(11))
+    ```
+
+    ```
+    33
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## How Arguments Get Into Functions
+
+    Python doesn't copy your data into a function — the parameter is
+    just a new name for the same object, like a nickname. That's the
+    key fact variable scope builds on next.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Scope Is Like *Inception*
+
+    A dream within a dream within a dream — each level has its own
+    rules, and you can see back out to an outer level, but an outer
+    level can't see into an inner one. A function call works the same
+    way: each one opens its own level, nested functions can see out to
+    the ones enclosing them, and once a level ends, everything inside
+    it is gone for good.
     """)
     return
 
@@ -104,13 +221,19 @@ def _(mo):
     outer()
     print(x)
     ```
+    ''')
+    return
 
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ```
     local
     enclosing
     global
     ```
-    ''')
+    """)
     return
 
 
@@ -203,6 +326,28 @@ def _(mo):
 def _(mo):
     mo.md('''
     ```python
+    # Without 'global' -- fails
+    count = 0
+
+    def increment():
+        count = count + 1
+        print(count)
+
+    increment()
+    ```
+
+    ```
+    UnboundLocalError: cannot access local variable 'count'
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    # With 'global' -- works
     count = 0
 
     def increment():
@@ -214,13 +359,19 @@ def _(mo):
     increment()
     print(count)
     ```
+    ''')
+    return
 
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ```
     1
     2
     2
     ```
-    ''')
+    """)
     return
 
 
@@ -297,13 +448,19 @@ def _(mo):
     print(result2)
     print(result1 is result2)
     ```
+    ''')
+    return
 
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ```
     ['apple']
     ['apple', 'banana']
     True
     ```
-    ''')
+    """)
     return
 
 
@@ -427,12 +584,18 @@ def _(mo):
     if __name__ == "__main__":
         main()
     ```
+    ''')
+    return
 
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ```
     Rectangle Area Calculator
     Area: 20
     ```
-    ''')
+    """)
     return
 
 
@@ -469,8 +632,16 @@ def _(mo):
 
     # Constants
     GRAVITY = 9.81
+    ```
+    ''')
+    return
 
-    # Function definitions
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    # Function definitions (continued from previous slide)
     def calculate_something(param1, param2):
         """Function docstring explaining what it does."""
         return param1 + param2
@@ -668,12 +839,18 @@ def _(mo):
         average = sum(temps) / len(temps)
         print(f"Average temperature: {average}")
     ```
+    ''')
+    return
 
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ```
     ['72\\n', '68\\n', '75\\n', '71\\n']
     Average temperature: 71.5
     ```
-    ''')
+    """)
     return
 
 
@@ -823,7 +1000,15 @@ def _(mo):
     with open('students.csv', 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerows(students)
+    ```
+    ''')
+    return
 
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
     with open('students.csv', 'r') as file:
         reader = csv.reader(file)
         header = next(reader)
@@ -832,13 +1017,19 @@ def _(mo):
             name, grade, age = row
             print(f"{name} scored {grade}")
     ```
+    ''')
+    return
 
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ```
     Columns: ['Name', 'Grade', 'Age']
     Alice scored 95
     Bob scored 87
     ```
-    ''')
+    """)
     return
 
 
@@ -1030,7 +1221,19 @@ def _(mo):
         for line in file:
             values = line.split(',')
             print(repr(values[2]))
+    ```
 
+    ```
+    '20\\n'
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
     # Fixed:
     with open('students2.txt', 'r') as file:
         for line in file:
@@ -1039,7 +1242,6 @@ def _(mo):
     ```
 
     ```
-    '20\\n'
     '20'
     ```
     ''')
@@ -1071,11 +1273,17 @@ def _(mo):
     with open('important.txt', 'r') as file:
         print(repr(file.read()))
     ```
+    ''')
+    return
 
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ```
     'new data\\n'
     ```
-    ''')
+    """)
     return
 
 
