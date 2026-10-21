@@ -277,7 +277,8 @@ def _(mo):
 
     1. **Local** — inside the current function
     2. **Enclosing** — in any function this one is nested inside
-    3. **Global** — at the module level
+    3. **Global** — at the module level (the top of your `.py` file,
+       outside any function)
     4. **Built-in** — Python's own names
     """)
     return
