@@ -63,20 +63,26 @@ Don't duplicate those here; read them first).
 
 ## Content privacy policy (governs what can be public, anywhere)
 
-The main EK125 site's README states the baseline rule: no solutions, no
-quizzes/exams, no IPPs published anywhere public -- Blackboard or similar is
-where assessment/answer content lives. As of Fall 2026 there are exactly
-two deliberate, scoped exceptions, decided explicitly by the instructor and
-not to be extended further without being asked:
+The main EK125 site's README states the baseline rule: no quizzes/exams, no
+IPPs published anywhere public -- Blackboard or similar is where
+assessment/answer content lives. As of Fall 2026 the instructor has made
+these deliberate, scoped exceptions -- not to be extended further (e.g. to
+Act 3, or to quizzes/exams/IPPs) without being asked again:
 
 1. **Homework problem statements** (not solutions) -- homework is now
    graded for submission only, not correctness, so the prompts themselves
    can be public.
-2. **GPP solutions for Act 1 (Classes 1-7) only.** Explicitly not extended
-   to Act 2/Act 3 GPP solutions or to any homework solutions.
+2. **GPP solutions for Act 1 (Classes 1-7) *and* Act 2.** Originally
+   Act-1-only; the instructor explicitly authorized extending this to Act 2
+   as well partway into Fall 2026 (confirmed directly in conversation, not
+   written elsewhere -- if this ever seems to conflict with older notes or
+   a stale copy of this file, the extension to Act 2 is the current,
+   correct policy). Still not extended to Act 3, or to any homework
+   solutions.
 
-If this repo ever surfaces GPP solution content (e.g. in a slide's
-answer-reveal), the same Act-1-only boundary applies.
+If this repo surfaces GPP solution content (e.g. in a slide's
+answer-reveal), the Act-1-and-2 boundary above applies -- still no Act 3
+GPP solutions and no homework solutions anywhere.
 
 ## The PII lesson (important, hard-won)
 
