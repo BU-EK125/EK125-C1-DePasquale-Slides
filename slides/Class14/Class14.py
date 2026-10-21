@@ -145,6 +145,56 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md('''
+    ```python
+    def show_identity(data):
+        print("Same object as outside?", data is myList)
+
+    myList = [1, 2, 3]
+    show_identity(myList)
+    ```
+
+    ```
+    Same object as outside? True
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Counter-Example: Reassigning Breaks the Nickname
+
+    `data = []` doesn't change what `myList` points to outside — it
+    just points `data` at a brand-new object instead.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    def reset(data):
+        data = []
+        print("Same object as outside?", data is myList)
+
+    myList = [1, 2, 3]
+    reset(myList)
+    print("Outside is still:", myList)
+    ```
+
+    ```
+    Same object as outside? False
+    Outside is still: [1, 2, 3]
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md("""
     ## Scope Is Like *Inception*
     """)
@@ -270,7 +320,9 @@ def _(mo):
     ## Reading a Global Is Easy
 
     A function can freely **read** a variable from an outer scope — no
-    special syntax needed.
+    special syntax needed. Notice `taxRate` below is **not** a
+    parameter — `price` is passed in because it's different on every
+    call, while `taxRate` is just read from global scope.
     """)
     return
 
@@ -291,6 +343,22 @@ def _(mo):
     108.0
     ```
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Pass It, or Read It as a Global?
+
+    - **Pass it as an argument** when the value is different on every
+      call, or you want the function reusable and testable on its
+      own, independent of outside state.
+    - **Read it as a global** when it's a fixed constant or shared
+      setting for the whole program — a tax rate, a config value — and
+      passing it to every function that needs it would just be
+      repetitive.
+    """)
     return
 
 
