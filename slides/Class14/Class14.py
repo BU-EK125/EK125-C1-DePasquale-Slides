@@ -452,10 +452,47 @@ def _(mo):
     mo.md("""
     ## GPP Solution: Problem 5.1
 
-    The GPP's own broken code hits this exact `UnboundLocalError` — the
-    fix below avoids `global` entirely by **returning** the updated
-    count and reassigning it in the caller, the preferred style for
-    this kind of state-tracking.
+    The GPP's own broken code (below) hits this exact
+    `UnboundLocalError` — `studentsProcessed` is assigned inside the
+    function, so Python treats it as local for the whole function,
+    even on the line that reads it first.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    # The GPP's broken starting point
+    studentsProcessed = 0
+
+    def processStudent(name):
+        print(f"Processing {name}")
+        studentsProcessed = studentsProcessed + 1
+        return f"Processed: {name}"
+
+    processStudent("Alice")
+    ```
+
+    ```
+    Processing Alice
+    UnboundLocalError: cannot access local variable
+    'studentsProcessed' where it is not associated
+    with a value
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### The Fix
+
+    Avoid `global` entirely by **returning** the updated count and
+    reassigning it in the caller — the preferred style for this kind
+    of state-tracking.
     """)
     return
 
