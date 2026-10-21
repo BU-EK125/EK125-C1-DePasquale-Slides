@@ -1095,7 +1095,8 @@ def _(mo):
     ## Reading Files: `.readlines()`
 
     Reads **all lines into a list** — one string per line, each still
-    ending in `\\n`. Good when you need to process every line.
+    ending in a trailing newline character. Good when you need to
+    process every line.
     """)
     return
 
@@ -1134,8 +1135,8 @@ def _(mo):
     mo.md("""
     ### Takeaway
 
-    Each line keeps its trailing `\\n` — use `.strip()` to remove it
-    before converting to a number or comparing strings.
+    Each line keeps its trailing newline character — use `.strip()`
+    to remove it before converting to a number or comparing strings.
     """)
     return
 
@@ -1179,7 +1180,7 @@ def _(mo):
 
     `'w'` mode creates the file if needed and overwrites it if it
     already exists. `.write()` does **not** add newlines for you — you
-    have to include `\\n` yourself.
+    have to include the newline character yourself.
     """)
     return
 
