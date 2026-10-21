@@ -33,6 +33,327 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ## Before We Start: Variable Scope
+
+    We didn't get to this in Class 13 — let's cover it now before
+    moving on to today's topic.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Variable Scope: What Is It?
+
+    A variable's **scope** is where it's valid. Every function gets its
+    own symbol table when it's called — once the function finishes,
+    that table (and everything in it) is gone.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    def sqrarea(sidelen):
+        sqar = sidelen**2
+        return sqar
+
+    area = sqrarea(4)
+    print(sqar)
+    ```
+
+    ```
+    NameError: name 'sqar' is not defined
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## The LEGB Rule
+
+    Looking up a name, Python checks four scopes in order:
+
+    1. **Local** — inside the current function
+    2. **Enclosing** — in any function this one is nested inside
+    3. **Global** — at the module level
+    4. **Built-in** — Python's own names
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    x = "global"
+
+    def outer():
+        x = "enclosing"
+        def inner():
+            x = "local"
+            print(x)
+        inner()
+        print(x)
+
+    outer()
+    print(x)
+    ```
+
+    ```
+    local
+    enclosing
+    global
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    Three separate variables, all named `x` — Python always resolves a
+    name to the **closest** scope that defines it.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Reading a Global Is Easy
+
+    A function can freely **read** a variable from an outer scope — no
+    special syntax needed.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    taxRate = 0.08
+
+    def calculateTotal(price):
+        return price * (1 + taxRate)
+
+    print(calculateTotal(100))
+    ```
+
+    ```
+    108.0
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Gotcha: Assigning Creates a New Local
+
+    If a function **assigns** to a name anywhere in its body, Python
+    treats that name as local for the *entire* function — even on a
+    line that reads it before the assignment happens.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    count = 0
+
+    def increment():
+        count = count + 1  # reads 'count' before assigning it
+        print(count)
+
+    increment()
+    ```
+
+    ```
+    UnboundLocalError: cannot access local variable 'count'
+    where it is not associated with a value
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## The `global` Keyword
+
+    To let a function **modify** a module-level variable, declare it
+    `global` first — otherwise `=` always creates a new local.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    count = 0
+
+    def increment():
+        global count
+        count = count + 1
+        print(count)
+
+    increment()
+    increment()
+    print(count)
+    ```
+
+    ```
+    1
+    2
+    2
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## The `nonlocal` Keyword
+
+    `global` only reaches the module level. For a nested function that
+    needs to modify a variable in its **enclosing** function (not the
+    global scope), use `nonlocal` instead.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    def outerFunction():
+        count = 0
+        def increment():
+            nonlocal count
+            count += 1
+        increment()
+        increment()
+        print(count)
+
+    outerFunction()
+    ```
+
+    ```
+    2
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    `global` reaches the module level; `nonlocal` reaches one level
+    out. Prefer returning a new value over either when you can — it's
+    usually easier to follow.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Gotcha: The Mutable Default Argument Trap
+
+    A default value is created **once**, when Python first reads the
+    `def` line — not fresh on every call. A mutable default (like
+    `[]`) is the same object every single call shares.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    def addItem(item, itemList=[]):
+        itemList.append(item)
+        return itemList
+
+    result1 = addItem("apple")
+    print(result1)
+    result2 = addItem("banana")
+    print(result2)
+    print(result1 is result2)
+    ```
+
+    ```
+    ['apple']
+    ['apple', 'banana']
+    True
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## The Fix: Default to `None`
+
+    Use `None` as the default, then create a fresh mutable object
+    **inside** the function body on every call.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    def addItem(item, itemList=None):
+        if itemList is None:
+            itemList = []
+        itemList.append(item)
+        return itemList
+
+    print(addItem("apple"))
+    print(addItem("banana"))
+    ```
+
+    ```
+    ['apple']
+    ['banana']
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    This pattern — default to `None`, build the real value inside the
+    function — applies to any mutable default: lists, dicts, sets.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## What Is a Script?
 
     Until now, you've written code in notebooks (Colab/Jupyter) — run one
@@ -242,6 +563,7 @@ def _(mo):
     | `'r'` | Read | Error |
     | `'w'` | Write (overwrite) | Creates a new file |
     | `'a'` | Append | Creates a new file |
+    | `'r+'` | Read/Write | Error |
     """)
     return
 
@@ -784,8 +1106,14 @@ def _(mo):
     - The `os` module answers *where am I* (`getcwd`, `listdir`), *does
       this exist* (`path.exists`), and *build me a path*
       (`path.join`) — all portable across operating systems.
+    - Scope follows the **LEGB** rule (Local, Enclosing, Global,
+      Built-in); assigning to a name anywhere in a function makes it
+      local for the whole function, unless declared `global`/`nonlocal`.
+    - A mutable default argument (like `itemList=[]`) is created once
+      and shared across every call — default to `None` instead.
 
     📝 [Today's GPP](https://BU-EK125.github.io/EK125/gpps/Class14_GPP.html)
+    📝 [This week's homework: HW7](https://BU-EK125.github.io/EK125/homework/HW7.html)
     """)
     return
 
