@@ -155,14 +155,17 @@ def _(mo):
     mo.md('''
     ```python
     def show_identity(data):
-        print("Same object as outside?", data is myList)
+        data.append(999)
+        print("Inside: ", data)
 
     myList = [1, 2, 3]
     show_identity(myList)
+    print("Outside:", myList)
     ```
 
     ```
-    Same object as outside? True
+    Inside:  [1, 2, 3, 999]
+    Outside: [1, 2, 3, 999]
     ```
     ''')
     return
@@ -185,16 +188,16 @@ def _(mo):
     ```python
     def reset(data):
         data = []
-        print("Same object as outside?", data is myList)
+        print("Inside: ", data)
 
     myList = [1, 2, 3]
     reset(myList)
-    print("Outside is still:", myList)
+    print("Outside:", myList)
     ```
 
     ```
-    Same object as outside? False
-    Outside is still: [1, 2, 3]
+    Inside:  []
+    Outside: [1, 2, 3]
     ```
     ''')
     return
@@ -642,6 +645,30 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ## Best Practice: Pass It, Don't `global` It
+
+    - **Default to passing arguments and returning values.** A
+      function that only touches what you hand it is easier to read,
+      test, and reuse — you don't have to track down every place that
+      might have changed its state behind the scenes.
+    - **`global`/`nonlocal` make bugs harder to find.** Any function
+      that can silently modify shared state means the *order* you
+      call functions in can matter in ways that aren't visible just
+      from reading a function's signature.
+    - **If you reach for `global`, ask first:** could this value just
+      be a parameter, and the result just be a return value? Usually
+      yes.
+    - **When `global` genuinely earns its keep:** true program-wide
+      state that many unrelated parts of a large program all need to
+      read or update — a logging counter, an app-wide setting — not a
+      shortcut to avoid passing one extra argument.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Gotcha: The Mutable Default Argument Trap
 
     A default value is created **once**, when Python first reads the
@@ -663,7 +690,6 @@ def _(mo):
     print(result1)
     result2 = addItem("banana")
     print(result2)
-    print(result1 is result2)
     ```
     ''')
     return
@@ -675,7 +701,6 @@ def _(mo):
     ```
     ['apple']
     ['apple', 'banana']
-    True
     ```
     """)
     return
