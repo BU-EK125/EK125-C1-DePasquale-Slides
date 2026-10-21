@@ -52,6 +52,8 @@ def _(mo):
     header — is a one-sentence description of what the function does.
     Parameters can also have **default values**, used only when the
     caller doesn't provide one.
+
+    📖 [GPP: Adding Docstrings](https://BU-EK125.github.io/EK125/gpps/Class14_GPP.html#problem-2-adding-docstrings-to-functions)
     """)
     return
 
@@ -112,6 +114,8 @@ def _(mo):
 
     A `lambda` is a short, anonymous function — one expression, no
     `def`, no `return` statement needed.
+
+    📖 [GPP Part 7: Lambda Functions](https://BU-EK125.github.io/EK125/gpps/Class13_GPP.html#part-7-lambda-functions)
     """)
     return
 
@@ -139,6 +143,9 @@ def _(mo):
     Python doesn't copy your data into a function — the parameter is
     just a new name for the same object, like a nickname. That's the
     key fact variable scope builds on next.
+
+    📖 [GPP Part 1: Parameter Passing](https://BU-EK125.github.io/EK125/gpps/Class13_GPP.html#part-1-understanding-parameter-passing)
+    📝 [HW7 Problem 6: Mutable vs. Immutable Arguments](https://BU-EK125.github.io/EK125/homework/HW7.html#problem-6-mutable-vs-immutable-arguments)
     """)
     return
 
@@ -232,6 +239,9 @@ def _(mo):
     A variable's **scope** is where it's valid. Every function gets its
     own symbol table when it's called — once the function finishes,
     that table (and everything in it) is gone.
+
+    📖 [GPP Part 5: Variable Scope](https://BU-EK125.github.io/EK125/gpps/Class13_GPP.html#part-5-variable-scope-legb-rule)
+    📝 [HW7 Problem 5: Local Scope](https://BU-EK125.github.io/EK125/homework/HW7.html#problem-5-local-scope)
     """)
     return
 
@@ -317,6 +327,46 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ## GPP Solution: Problem 5.2
+
+    The GPP asks you to predict this same kind of nested-scope lookup
+    before running it — same shape as the example above, different
+    variable name.
+
+    📖 [GPP Part 5](https://BU-EK125.github.io/EK125/gpps/Class13_GPP.html#part-5-variable-scope-legb-rule)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    x = 10
+
+    def outer():
+        x = 20
+        def inner():
+            print(f"Inner sees x = {x}")
+        inner()
+        print(f"Outer sees x = {x}")
+
+    outer()
+    print(f"Global sees x = {x}")
+    ```
+
+    ```
+    Inner sees x = 20
+    Outer sees x = 20
+    Global sees x = 10
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Reading a Global Is Easy
 
     A function can freely **read** a variable from an outer scope — no
@@ -370,6 +420,8 @@ def _(mo):
     If a function **assigns** to a name anywhere in its body, Python
     treats that name as local for the *entire* function — even on a
     line that reads it before the assignment happens.
+
+    📖 [GPP Problem 5.1: Fix the Broken Code](https://BU-EK125.github.io/EK125/gpps/Class13_GPP.html#part-5-variable-scope-legb-rule)
     """)
     return
 
@@ -390,6 +442,48 @@ def _(mo):
     ```
     UnboundLocalError: cannot access local variable 'count'
     where it is not associated with a value
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## GPP Solution: Problem 5.1
+
+    The GPP's own broken code hits this exact `UnboundLocalError` — the
+    fix below avoids `global` entirely by **returning** the updated
+    count and reassigning it in the caller, the preferred style for
+    this kind of state-tracking.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    studentsProcessed = 0
+
+    def processStudent(name, count):
+        print(f"Processing {name}")
+        count = count + 1
+        return count
+
+    studentsProcessed = processStudent("Alice", studentsProcessed)
+    studentsProcessed = processStudent("Bob", studentsProcessed)
+    studentsProcessed = processStudent(
+        "Charlie", studentsProcessed)
+    print(f"Total processed: "
+          f"{studentsProcessed}")
+    ```
+
+    ```
+    Processing Alice
+    Processing Bob
+    Processing Charlie
+    Total processed: 3
     ```
     ''')
     return
@@ -674,6 +768,8 @@ def _(mo):
     When you run a file directly (`python calculator.py`), Python sets
     the special variable `__name__` to `"__main__"`. This pattern says:
     "only run this part if I'm the file being executed directly."
+
+    📖 [GPP: Understanding `if __name__`](https://BU-EK125.github.io/EK125/gpps/Class14_GPP.html#problem-8-understanding-the-if-name-main-pattern)
     """)
     return
 
@@ -727,6 +823,8 @@ def _(mo):
     ## Script Structure Best Practices
 
     A well-organized script follows the same order every time:
+
+    📖 [GPP: Script Organization](https://BU-EK125.github.io/EK125/gpps/Class14_GPP.html#problem-3-script-organization)
     """)
     return
 
@@ -799,6 +897,8 @@ def _(mo):
     the `close()` call — especially if an error happens first. The
     modern way wraps it in a **context manager**: a `with` block that
     closes the file automatically, even if something goes wrong inside.
+
+    📝 [HW7 Problem 7: Writing and Reading Back Sensor Data](https://BU-EK125.github.io/EK125/homework/HW7.html#problem-7-writing-and-reading-back-sensor-data)
     """)
     return
 
@@ -1047,6 +1147,8 @@ def _(mo):
 
     `'a'` mode adds to the **end** of a file instead of erasing it
     first — the basis of a logging pattern you'll use constantly.
+
+    📝 [HW7 Problem 8: Write vs. Append](https://BU-EK125.github.io/EK125/homework/HW7.html#problem-8-write-vs-append-a-lab-activity-log)
     """)
     return
 
@@ -1092,6 +1194,8 @@ def _(mo):
     CSV (Comma-Separated Values) stores tabular data as plain text —
     one row per line, fields separated by commas. Python's `csv`
     module handles the reading and writing for you.
+
+    📝 [HW7 Problem 9: Reading and Writing CSV Files](https://BU-EK125.github.io/EK125/homework/HW7.html#problem-9-reading-and-writing-csv-files)
     """)
     return
 
@@ -1192,6 +1296,8 @@ def _(mo):
 
     `os` lets your code ask questions about — and move around — the
     file system: where am I, what's here, does this exist.
+
+    📝 [HW7 Problem 10: Organizing Experiment Folders with `os`](https://BU-EK125.github.io/EK125/homework/HW7.html#problem-10-organizing-experiment-folders-with-os)
     """)
     return
 
