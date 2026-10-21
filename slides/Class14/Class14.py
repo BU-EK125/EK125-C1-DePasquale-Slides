@@ -456,6 +456,8 @@ def _(mo):
     `UnboundLocalError` — `studentsProcessed` is assigned inside the
     function, so Python treats it as local for the whole function,
     even on the line that reads it first.
+
+    📖 [GPP Part 5](https://BU-EK125.github.io/EK125/gpps/Class13_GPP.html#part-5-variable-scope-legb-rule)
     """)
     return
 
