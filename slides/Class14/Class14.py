@@ -147,14 +147,30 @@ def _(mo):
 def _(mo):
     mo.md("""
     ## Scope Is Like *Inception*
-
-    A dream within a dream within a dream — each level has its own
-    rules, and you can see back out to an outer level, but an outer
-    level can't see into an inner one. A function call works the same
-    way: each one opens its own level, nested functions can see out to
-    the ones enclosing them, and once a level ends, everything inside
-    it is gone for good.
     """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.Html(
+        '''
+        <div style="display: flex; align-items: center; gap: 28px;">
+          <img src="inception_poster.jpg" style="max-height: 320px;
+               border-radius: 8px; flex-shrink: 0;">
+          <p style="margin: 0; font-size: 30px; line-height: 1.3;
+             color: #ddd;">
+            A dream within a dream within a dream — each level has its
+            own rules, and you can see back out to an outer level, but
+            an outer level can't see into an inner one. A function
+            call works the same way: each one opens its own level,
+            nested functions can see out to the ones enclosing them,
+            and once a level ends, everything inside it is gone for
+            good.
+          </p>
+        </div>
+        '''
+    )
     return
 
 
@@ -504,6 +520,32 @@ def _(mo):
 
     This pattern — default to `None`, build the real value inside the
     function — applies to any mutable default: lists, dicts, sets.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Scope: What to Remember
+
+    - **LEGB order** — Local → Enclosing → Global → Built-in. Python
+      always resolves a name to the *closest* scope that defines it.
+    - A function's local variables are gone once it returns —
+      referencing one afterward raises `NameError`.
+    - **Gotcha:** assigning to a name *anywhere* in a function makes it
+      local for the *entire* function, even on an earlier line that
+      only reads it — that's what raises `UnboundLocalError`, not a
+      missing `global`.
+    - Reading an outer-scope variable needs no special syntax;
+      **modifying** one does — `global` for the module level,
+      `nonlocal` for an enclosing function.
+    - **Gotcha:** `global` and `nonlocal` are not interchangeable —
+      `global` only ever reaches the module level, never an enclosing
+      function's variables.
+    - **Gotcha:** scope is decided by where code is *written*
+      (lexically), not by where a function happens to be *called
+      from*.
     """)
     return
 
