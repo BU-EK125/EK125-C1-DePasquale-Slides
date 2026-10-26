@@ -93,6 +93,19 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    **The three rotating duties** (separate from who owns which
+    function — that never changes): **Integrator** runs everyone's
+    code together, **Tester** checks a function against its contract,
+    **Recorder** keeps the contract/Decision Log current and submits
+    the team's work. These rotate across Classes 15–19 so everyone
+    does every job once.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     **Part C — Make the Day-1 decisions.** Blank values, metrics and
     goals, types, result key names, rounding, and ties — each decided
     as a team and logged in the Decision Log.
@@ -158,6 +171,73 @@ def _(mo):
     Keep everything you compute today. In Class 17, these same
     hand-calculated answers become the **test cases** that tell you
     whether your real code is correct.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## What a Finished Contract Looks Like
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    Before diving into the details, here's the target: a complete,
+    filled-in contract for the Data Loader. Notice there's no real
+    code inside it — just a precise description someone else could
+    build against without ever seeing the real implementation.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    def load_tracker_data(filename):
+        """Read a fitness tracker CSV file and return its
+        data as a dictionary.
+
+        Parameters:
+            filename (str): name of the CSV file, e.g.
+                "fitness_data.csv"
+
+        Returns:
+            A dictionary with one key per column: "day",
+            "steps", "resting_hr", "sleep_hours",
+            "active_minutes". Each value is a list, one entry
+            per day with no blank readings. "day" is a list of
+            ints; the rest are lists of floats.
+
+            Example (first 5 days):
+            {"day": [1, 2, 3, 4, 5],
+             "steps": [8478.0, 9430.0, 6970.0, 4569.0, 12192.0],
+             "resting_hr": [61.0, 67.0, 67.0, 59.0, 66.0],
+             "sleep_hours": [8.1, 7.8, 6.4, 7.7, 7.6],
+             "active_minutes": [50.0, 34.0, 52.0, 21.0, 38.0]}
+
+        Side effects: none. Does not print.
+
+        Assumptions and messy cases: if any value in a row
+            is blank, the whole row is skipped.
+        """
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    Every placeholder in your own contract template should end up
+    looking this precise by the end of today — especially the
+    "Example:" line, which you'll work out by hand this afternoon.
     """)
     return
 
