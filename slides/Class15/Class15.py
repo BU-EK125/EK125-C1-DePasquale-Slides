@@ -313,6 +313,26 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ## What Must `analyze_metric` Return?
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    Unlike the Loader's keys (forced by the CSV's own columns), these
+    key names are **your team's own decision** from Part C this
+    morning. At minimum the dictionary needs: the average, the
+    minimum, the maximum, which day was best, and how many days met
+    the goal — whatever your team decided to call them.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Data Analyst: `steps`
     """)
     return
@@ -323,6 +343,8 @@ def _(mo):
     mo.md("""
     Using that dictionary, write the exact dictionary
     `analyze_metric` would return for `steps` with your goal (8000).
+    We'll use `average`/`minimum`/`maximum`/`best_day`/
+    `days_meeting_goal` here — swap in your own team's key names.
     """)
     return
 
