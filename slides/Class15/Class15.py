@@ -64,61 +64,6 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## What a Finished Contract Looks Like
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    Here's the target: a complete, filled-in contract for the Data
-    Loader. No real code inside it — just a precise description a
-    teammate could build against without ever seeing the real
-    implementation.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    ```python
-    def load_tracker_data(filename):
-        """Read a fitness tracker CSV file and return its
-        data as a dictionary.
-
-        Parameters:
-            filename (str): name of the CSV file, e.g.
-                "fitness_data.csv"
-
-        Returns:
-            A dictionary with one key per column: "day",
-            "steps", "resting_hr", "sleep_hours",
-            "active_minutes". Each value is a list, one entry
-            per day with no blank readings. "day" is a list of
-            ints; the rest are lists of floats.
-
-            Example (first 5 days):
-            {"day": [1, 2, 3, 4, 5],
-             "steps": [8478.0, 9430.0, 6970.0, 4569.0, 12192.0],
-             "resting_hr": [61.0, 67.0, 67.0, 59.0, 66.0],
-             "sleep_hours": [8.1, 7.8, 6.4, 7.7, 7.6],
-             "active_minutes": [50.0, 34.0, 52.0, 21.0, 38.0]}
-
-        Side effects: none. Does not print.
-
-        Assumptions and messy cases: if any value in a row
-            is blank, the whole row is skipped.
-        """
-    ```
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
     ## Part E: Work Out the Expected Answers by Hand
     """)
     return
@@ -198,6 +143,40 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ## From One Line to a Dictionary of Lists
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    This is the "dictionary of lists" pattern from today's reading:
+    one list per column, where position *i* in every list is the same
+    row. For each row: split it like you just did, convert each value
+    to your team's chosen type (int for `day`, float for the rest),
+    and **append it to that column's list**.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    # After Day 1:  day = [1],      steps = [8478.0], ...
+    # After Day 2:  day = [1, 2],   steps = [8478.0, 9430.0], ...
+    ```
+
+    Keep going through Day 5, one row at a time, for every column —
+    that builds the dictionary `load_tracker_data` returns.
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Data Loader: The Dictionary for Days 1–5
     """)
     return
@@ -208,7 +187,7 @@ def _(mo):
     mo.md("""
     Write the exact dictionary `load_tracker_data` would return for a
     file containing only Days 1–5. Skip any row missing a value
-    (today's reference decision).
+    (today's reference decision — though none of Days 1–5 are blank).
     """)
     return
 
@@ -226,6 +205,61 @@ def _(mo):
      'resting_hr': [61.0, 67.0, 67.0, 59.0, 66.0],
      'sleep_hours': [8.1, 7.8, 6.4, 7.7, 7.6],
      'active_minutes': [50.0, 34.0, 52.0, 21.0, 38.0]}
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Now Write It as a Contract
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    You just computed that dictionary. Here's what it looks like
+    written up as the Loader's contract — the key names and types
+    come straight from the CSV's own columns, and the "Example" line
+    is exactly what you just worked out.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    def load_tracker_data(filename):
+        """Read a fitness tracker CSV file and return its
+        data as a dictionary.
+
+        Parameters:
+            filename (str): name of the CSV file, e.g.
+                "fitness_data.csv"
+
+        Returns:
+            A dictionary with one key per column: "day",
+            "steps", "resting_hr", "sleep_hours",
+            "active_minutes". Each value is a list, one entry
+            per day with no blank readings. "day" is a list of
+            ints; the rest are lists of floats.
+
+            Example (first 5 days):
+            {"day": [1, 2, 3, 4, 5],
+             "steps": [8478.0, 9430.0, 6970.0, 4569.0, 12192.0],
+             "resting_hr": [61.0, 67.0, 67.0, 59.0, 66.0],
+             "sleep_hours": [8.1, 7.8, 6.4, 7.7, 7.6],
+             "active_minutes": [50.0, 34.0, 52.0, 21.0, 38.0]}
+
+        Side effects: none. Does not print.
+
+        Assumptions and messy cases: if any value in a row
+            is blank, the whole row is skipped.
+        """
     ```
     ''')
     return
