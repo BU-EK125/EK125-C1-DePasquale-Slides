@@ -34,103 +34,10 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Today's Project: The Fitness Tracker Analyzer
-    """)
-    return
+    ## Before You Continue
 
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    Starting today, your team builds a program that reads a friend's
-    28-day fitness-tracker CSV, analyzes several metrics, and writes a
-    summary report — running through Class 19.
-
-    📖 [Project Overview](https://BU-EK125.github.io/EK125/class/FitnessTrackerProject.html)
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    **Good news: no new Python syntax.** Everything uses functions
-    (Class 13), dictionaries (Class 12), and files (Class 14). Today's
-    new skill is *thinking and communicating* like a programmer on a
-    team.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## This Morning, In Brief
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    **Part A — Meet the data.** Opened `fitness_data.csv`, found which
-    days have blank values, and decided whether higher or lower is
-    better for each metric.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    **Part B — Divide the work.** Claimed one of the three fixed
-    functions (`load_tracker_data`, `analyze_metric`, `write_report`),
-    set a duty rotation, and wrote the main program's plan on paper.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    **The three rotating duties** (separate from who owns which
-    function — that never changes): **Integrator** runs everyone's
-    code together, **Tester** checks a function against its contract,
-    **Recorder** keeps the contract/Decision Log current and submits
-    the team's work. These rotate across Classes 15–19 so everyone
-    does every job once.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    **Part C — Make the Day-1 decisions.** Blank values, metrics and
-    goals, types, result key names, rounding, and ties — each decided
-    as a team and logged in the Decision Log.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    **Part D — Draft your own contract.** Each owner wrote their
-    function's docstring contract and checked the two seams with
-    their teammates.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ### Takeaway
-
-    If your team hasn't finished Parts A–D yet, finish those first —
-    everything this afternoon builds directly on the decisions you
-    just made.
+    If you haven't finished this morning (Parts A–D), stop and finish
+    those first — everything below builds directly on it.
     """)
     return
 
