@@ -119,7 +119,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Part E: Tracing a CSV Row by Hand
+    ## Part E: Work Out the Expected Answers by Hand
     """)
     return
 
@@ -127,9 +127,27 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    `.strip().split(",")` on a clean line gives a list of **strings**;
-    the same trace on a row with blanks gives empty strings — exactly
-    what the Loader checks for before converting types.
+    **About 20 minutes, together.** We'll work through this as a
+    class, step by step, using only Days 1–5 of `fitness_data.csv`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Warm-Up: What Does Python Actually See?
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    **W1.** Line 2 of the file, as Python reads it, is the text
+    `1,8478,61,8.1,50` followed by a newline character. After
+    `.strip().split(",")`, what list do you get? Are the items
+    numbers or strings?
     """)
     return
 
@@ -145,7 +163,18 @@ def _(mo):
     ```
     ['1', '8478', '61', '8.1', '50']
     ```
+
+    All **strings** — not numbers.
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    **W2.** What does the line for Day 9 become after
+    `.strip().split(",")`?
+    """)
     return
 
 
@@ -160,6 +189,8 @@ def _(mo):
     ```
     ['9', '', '', '5.6', '']
     ```
+
+    Blanks become **empty strings**.
     ''')
     return
 
@@ -167,7 +198,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Building the Dictionary of Lists
+    ## Data Loader: The Dictionary for Days 1–5
     """)
     return
 
@@ -175,9 +206,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    Skip any row missing a value (today's reference decision), and
-    every list below ends up the same length — Day 1 is position 0 in
-    all five.
+    Write the exact dictionary `load_tracker_data` would return for a
+    file containing only Days 1–5. Skip any row missing a value
+    (today's reference decision).
     """)
     return
 
@@ -186,7 +217,6 @@ def _(mo):
 def _(mo):
     mo.md('''
     ```python
-    # Using only Days 1-5 of the file
     load_tracker_data("fitness_data.csv")
     ```
 
@@ -249,7 +279,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Computing `analyze_metric`: Two Ways "Best" Can Mean
+    ## Data Analyst: `steps`
     """)
     return
 
@@ -257,8 +287,8 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    "Best" depends entirely on `higher_is_better` — watch it flip
-    between these two calls on the same Days 1–5 data.
+    Using that dictionary, write the exact dictionary
+    `analyze_metric` would return for `steps` with your goal (8000).
     """)
     return
 
@@ -276,6 +306,23 @@ def _(mo):
      'goal': 8000, 'days_meeting_goal': 3}
     ```
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Data Analyst: `resting_hr` (Lower Is Better)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    Now do the same for `resting_hr` with your goal (62) —
+    remember: **lower** is better here.
+    """)
     return
 
 
@@ -300,7 +347,8 @@ def _(mo):
 def _(mo):
     mo.md("""
     Steps: Day 5's maximum (12192) wins. Resting HR: Day 4's
-    **minimum** (59) wins instead — lower is better there.
+    **minimum** (59) wins instead — the same function, flipped by
+    `higher_is_better`.
     """)
     return
 
@@ -343,7 +391,16 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Writing the Report
+    ## Report Writer: The Exact Report Text
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    Write the exact report text `write_report` would produce from
+    those two results.
     """)
     return
 
@@ -365,6 +422,18 @@ def _(mo):
       Goal: 62  (met on 2 of 5 days)
     ```
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    Put these into your contract as the **Example** values. Keep this
+    work — in Class 17, these hand-calculated answers become your
+    **test cases**: how you'll know your real function is correct.
+    """)
     return
 
 
