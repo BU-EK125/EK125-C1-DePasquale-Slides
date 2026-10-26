@@ -45,7 +45,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## This Afternoon: From Plan to Precision
+    ## This Afternoon: Prove the Plan Works
     """)
     return
 
@@ -53,31 +53,10 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    This morning you made decisions. This afternoon you prove they
-    work — by actually working the numbers by hand, the way your
-    functions will have to.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    **Part E:** work out real answers together, as a class. **Part
+    **Part E:** work out real numbers together, as a class. **Part
     F:** stress-test another team's contract. **Part G:** fix what
-    the stress test finds and finish the contract.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ### Takeaway
-
-    Keep everything you compute today. In Class 17, these same
-    hand-calculated answers become the **test cases** that tell you
-    whether your real code is correct.
+    the stress test finds and submit. Keep everything you compute —
+    it becomes your **test cases** in Class 17.
     """)
     return
 
@@ -93,10 +72,10 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    Before diving into the details, here's the target: a complete,
-    filled-in contract for the Data Loader. Notice there's no real
-    code inside it — just a precise description someone else could
-    build against without ever seeing the real implementation.
+    Here's the target: a complete, filled-in contract for the Data
+    Loader. No real code inside it — just a precise description a
+    teammate could build against without ever seeing the real
+    implementation.
     """)
     return
 
@@ -140,11 +119,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### Takeaway
-
-    Every placeholder in your own contract template should end up
-    looking this precise by the end of today — especially the
-    "Example:" line, which you'll work out by hand this afternoon.
+    ## Part E: Tracing a CSV Row by Hand
     """)
     return
 
@@ -152,18 +127,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Part E: What Does Python Actually See?
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    Before computing anything, trace exactly what each line of the
-    CSV becomes in Python. Day 1's raw line ends with a newline
-    character; `.strip()` removes it, then `.split(",")` breaks it
-    into a list of **strings**.
+    `.strip().split(",")` on a clean line gives a list of **strings**;
+    the same trace on a row with blanks gives empty strings — exactly
+    what the Loader checks for before converting types.
     """)
     return
 
@@ -173,8 +139,7 @@ def _(mo):
     mo.md('''
     ```python
     line = "1,8478,61,8.1,50\\n"
-    values = line.strip().split(",")
-    print(values)
+    print(line.strip().split(","))
     ```
 
     ```
@@ -186,57 +151,16 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md("""
-    Every item is a **string** — `'1'`, not `1`. The loader has to
-    convert each column to the right type (`int` for `day`, `float`
-    for everything else) before it goes in the dictionary.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## Now the Blank Row
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    Day 9 is missing three readings. The same
-    `.strip().split(",")` trace shows how a blank reading shows up in
-    Python — not as `None`, but as an **empty string**.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
     mo.md('''
     ```python
-    line = "9,,,5.6,\\n"
-    values = line.strip().split(",")
-    print(values)
+    line = "9,,,5.6,\\n"   # Day 9 is missing 3 readings
+    print(line.strip().split(","))
     ```
 
     ```
     ['9', '', '', '5.6', '']
     ```
     ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ### Takeaway
-
-    This is exactly how the Loader detects a blank reading: check
-    whether `""` shows up anywhere in `values` before converting the
-    row.
-    """)
     return
 
 
@@ -251,9 +175,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    `load_tracker_data` reads one row at a time, skips any row that's
-    missing a value (today's reference decision — "skip the whole
-    row"), and appends each column to its own list.
+    Skip any row missing a value (today's reference decision), and
+    every list below ends up the same length — Day 1 is position 0 in
+    all five.
     """)
     return
 
@@ -280,18 +204,6 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### Takeaway
-
-    All five lists have the same length (5) and line up position by
-    position — position 0 is Day 1 in every list. That alignment is
-    the whole point.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
     ## Gotcha: Skip the Row, or Skip the Value?
     """)
     return
@@ -300,8 +212,8 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    If a Loader skips only the **blank value** instead of the whole
-    row, the lists stop lining up — and nothing tells you.
+    Skip only the **blank value** instead of the whole row, and the
+    lists stop lining up — with no error to warn you.
     """)
     return
 
@@ -310,7 +222,7 @@ def _(mo):
 def _(mo):
     mo.md('''
     ```python
-    # A small example: Day 2's steps reading was blank
+    # Day 2's steps reading was blank
     day   = [1, 2, 3, 4]         # every day kept
     steps = [7000, 9000, 8000]   # Day 2 skipped, but only here
 
@@ -327,21 +239,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    Position 1 should be Day 2 in every list — but `steps[1]` is
-    actually **Day 3's** reading. Skip the whole row instead, and
-    every list stays the same length and lines up.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ### Takeaway
-
+    `steps[1]` should be Day 2 but is actually **Day 3's** reading.
     Decide this once, write it in the contract, and make sure the
-    Loader and the Analyst agree. A length mismatch like this gives a
-    wrong answer with **no error**.
+    Loader and Analyst agree.
     """)
     return
 
@@ -349,7 +249,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Computing `analyze_metric`: Steps
+    ## Computing `analyze_metric`: Two Ways "Best" Can Mean
     """)
     return
 
@@ -357,9 +257,8 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    Think it through in words first: start with the first day as the
-    best so far; for each day, if it's better, it becomes the new
-    best; count the days that meet the goal.
+    "Best" depends entirely on `higher_is_better` — watch it flip
+    between these two calls on the same Days 1–5 data.
     """)
     return
 
@@ -377,33 +276,6 @@ def _(mo):
      'goal': 8000, 'days_meeting_goal': 3}
     ```
     ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    Day 5's 12192 steps is the maximum, so `best_day` is 5. Three of
-    the five days (1, 2, and 5) meet the 8000-step goal.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## Computing `analyze_metric`: Resting Heart Rate
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    Same function, but `higher_is_better=False` — a **lower** resting
-    heart rate is the better one. "Best" always depends on this flag;
-    never assume bigger is better.
-    """)
     return
 
 
@@ -427,11 +299,8 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### Takeaway
-
-    Day 4's 59 bpm is the minimum, so it's the **best** day here — the
-    opposite of the steps example. Only Days 1 and 4 meet the
-    62-bpm-or-lower goal.
+    Steps: Day 5's maximum (12192) wins. Resting HR: Day 4's
+    **minimum** (59) wins instead — lower is better there.
     """)
     return
 
@@ -447,9 +316,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    `best_day` must be the actual **day number** from the `day`
-    column — not its position in the list. After skipping rows, those
-    two numbers drift apart.
+    `best_day` must be the day **number** from the `day` column, not
+    its position in the list — after skipping rows, those two numbers
+    drift apart.
     """)
     return
 
@@ -460,9 +329,7 @@ def _(mo):
     ```python
     # Day 3 was skipped -- position 2 in the list is Day 4,
     # not Day 3
-    day   = [1, 2, 4, 5]
-    steps = [8478.0, 9430.0, 4569.0, 12192.0]
-
+    day = [1, 2, 4, 5]
     print(day[2])
     ```
 
@@ -476,29 +343,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### Takeaway
-
-    Say explicitly in your contract: `best_day` is a day **number**,
-    read from the `day` list at the winning position — never just the
-    winning position itself.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
     ## Writing the Report
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    `write_report` turns the Analyst's dictionaries into formatted
-    text. Rounding and formatting are decisions too — your team
-    already decided who rounds, and to how many places.
     """)
     return
 
@@ -526,7 +371,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Part F: The Contract Stress Test
+    ## Part F: Contract Stress Test (10 min)
     """)
     return
 
@@ -534,62 +379,25 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    Swap Team Contracts with a neighboring team. Using **only their
-    contract** — no talking — try to write code against it. Every
-    question you'd have to ask is a gap in their contract.
-    """)
-    return
+    **Swap** your Team Contract with a neighboring team.
 
+    **Without talking to them**, using only what's written, answer on
+    paper:
 
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md('''
-    Remember the reading's weather-station example: Person B's
-    function returned a key named `"avg"`; Person C's code expected
-    `"average"`. Both were "right" — they just never agreed.
+    1. The line of code that loads their data file.
+    2. The line of code that analyzes `steps` with their goal.
+    3. The line of code that prints the **average** from that result.
+    4. The exact value their `load_tracker_data` would return for
+       just Days 1–2.
+    5. Every question you wanted to ask, because their contract
+       didn't say.
 
-    ```
-    KeyError: 'average'
-    ```
+    **Return the sheet.** Fix your own contract for every question
+    you got back, and log each fix in the Decision Log.
 
-    This is exactly the kind of gap a stress test catches before it
-    becomes a bug.
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## What to Flag in a Stress Test
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    - A vague Returns line ("returns the data") instead of a type,
-      structure, and example value
-    - `best_day` described ambiguously as an index instead of a day
-      number
-    - Two owners using different key names for the same thing
-    - Blank-value handling that's never stated — or stated
-      differently by the Loader and the Analyst
-    - A function that both prints **and** returns (Class 13's rule:
-      pick one)
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ### Takeaway
-
-    A perfect contract gets **zero** questions in the stress test.
-    Every question you receive shows a guess your own teammates might
-    have made differently too.
+    *Common gaps to watch for:* a vague Returns line, `best_day` as
+    an index instead of a day number, mismatched key names, and
+    unstated blank-value handling.
     """)
     return
 
@@ -607,19 +415,10 @@ def _(mo):
     mo.md("""
     - Answer the four problem-definition questions: what goes in,
       what comes out, what counts as success, what's messy
-    - Fix every gap the stress test turned up, and log each change in
-      the Decision Log
-    - Fill in your team's working agreement (communication plan,
-      meeting times, file ownership)
-    - Go through the submission checklist at the end of the Team
-      Contract template
-    """)
-    return
+    - Fix every gap the stress test turned up, and log each change
+    - Fill in your working agreement and go through the submission
+      checklist
 
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
     The Recorder submits the Team Contract as a **group PDF** to
     Gradescope ("Fitness Tracker Part 1: Team Contract") by
     **Tuesday 10/27, 11:59 PM**.
@@ -642,19 +441,9 @@ def _(mo):
     mo.md("""
     Next class, you'll turn today's contracts into **stubs** — each
     function returns its contract's example value before any real
-    logic exists — and get the whole three-function pipeline running
-    end to end.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ### Takeaway
-
-    A good contract today means a good stub tomorrow, and a good test
-    case in Class 17. Precision now saves debugging later.
+    logic exists — and get the whole pipeline running end to end. A
+    good contract today means a good stub tomorrow, and a good test
+    case in Class 17.
     """)
     return
 
@@ -671,17 +460,13 @@ def _(mo):
 def _(mo):
     mo.md("""
     - **Seams:** the places one person's code hands data to
-      another's — most team bugs live here, not inside any one
-      function
-    - **Function contract:** name, inputs, output (type, exact
-      structure, and an example value), side effects, and
-      assumptions — written as a docstring
+      another's — most team bugs live here
+    - **Function contract:** name, inputs, output (type, structure,
+      and an example value), side effects, and assumptions
     - **Dictionary of lists:** every column-list must stay the same
       length and stay lined up by position
     - **Stress test:** the fastest way to find a contract's gaps
       before they become bugs
-    - **Decision Log:** a dated, written record — so no decision
-      lives only in someone's memory
 
     📖 [Full reading: Class 15](https://BU-EK125.github.io/EK125/class/Class15.html)
     📋 [Today's Team Activity](https://BU-EK125.github.io/EK125/gpps/Class15_TeamActivity.html)
