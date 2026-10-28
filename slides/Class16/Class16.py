@@ -95,6 +95,61 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ## Running the Skeleton
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    Once every stub exists, run `main.py`. If every stub is faithful,
+    the program runs start to finish — and the output is obviously
+    fake.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```
+    STUB REPORT
+    steps 5 8327.8 4569.0 12192.0 5 8000 3
+    resting_hr 5 8327.8 4569.0 12192.0 5 62 3
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    Every metric shows the **same** numbers, because the Analyst's
+    stub always returns the same example. **That is a success.** It
+    proves: every import works, every function is called with the
+    right number of arguments, every return value has the shape the
+    next function expects, and every key the Report Writer uses
+    exists.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    You now have a **running skeleton**. From here on, your team only
+    ever goes from a working program to a slightly more real working
+    program — never three untested pieces put together and hoped for.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Checking the Seams
     """)
     return
