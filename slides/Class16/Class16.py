@@ -57,19 +57,23 @@ def _(mo):
 def _(mo):
     mo.md('''
     ```python
-    def summarize_temperatures(temps):
-        """Calculate the average, high, and low of a list
-        of temperatures.
+    def read_temperatures(filename):
+        """Read temperatures in degrees F from a file.
 
-        Returns: dict with keys "average", "high", "low"
-            (floats, degrees F).
-            Example: {"average": 71.6, "high": 72.5,
-                      "low": 70.8}
+        Returns: list of float, one per valid reading.
+            Example: [71.2, 70.8, 72.5, 71.9]
         """
+        # PLAN:
+        # 1. Make an empty list for the temperatures
+        # 2. Open the file for reading
+        # 3. For each line in the file:
+        #      a. strip the newline
+        #      b. if the line is not blank and not "-999",
+        #         convert it to float and add it to the list
+        # 4. Return the list
+
         # STUB: return the example value from the contract
-        summary = {"average": 71.6, "high": 72.5,
-                   "low": 70.8}
-        return summary
+        return [71.2, 70.8, 72.5, 71.9]
     ```
     ''')
     return
@@ -80,9 +84,91 @@ def _(mo):
     mo.md("""
     ### Takeaway
 
-    A stub never does the real work — it just promises the right
-    type, structure, and keys so every other function can be built
-    and tested against it today.
+    This afternoon, add this kind of pseudocode *above* your own
+    stub's `return` — one comment per step, written in plain English,
+    covering the messy cases your contract describes. **Leave the
+    stub body in place.** The program must still run.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Checking the Seams
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    A program that runs isn't automatically correct. Print every
+    value as it crosses from one function to the next, and compare it
+    to the contract.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    data = load_tracker_data("fitness_data.csv")
+    print("SEAM 1 type:", type(data))
+    print("SEAM 1 keys:", list(data.keys()))
+    print("SEAM 1 lengths:", len(data["day"]),
+          len(data["steps"]))
+
+    results = analyze_metric(data, "steps", 8000)
+    print("SEAM 2 type:", type(results))
+    print("SEAM 2 keys:", list(results.keys()))
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    Three questions answer most seam problems: Is it the right
+    **type**? Does it have the right **keys**? Are the lists the
+    right **length**? These prints are temporary — put them in
+    `check_seams.py` (a copy of `main.py`), so the real `main.py`
+    stays clean.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## The Four Errors You'll Most Likely See Today
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    | Error | Usually means | Where to look |
+    |---|---|---|
+    | `ModuleNotFoundError: No module named 'loader'` | Can't find the **file** | Same folder? Spelled exactly right? |
+    | `ImportError: cannot import name 'load_data'` | File found, **function name** doesn't match | Compare the `import` line to the `def` line |
+    | `TypeError: 'NoneType' object is not subscriptable` | A function **printed instead of returning** | Does that function have a `return`? |
+    | `KeyError: 'average'` | The two sides of a seam **disagree on a key name** | Compare the key in the error to the contract |
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    Three of these four are **seam errors** — each piece is fine on
+    its own, but two pieces don't agree. When an error appears, ask
+    "which seam?" before you ask "which line?"
     """)
     return
 
