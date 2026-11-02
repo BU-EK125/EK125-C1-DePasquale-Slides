@@ -110,7 +110,7 @@ def _(mo):
 def _(mo):
     mo.md('''
     ```python
-    line = "7,,42\\n"
+    line = "7,,42"
     values = line.strip().split(",")
     print(values)
     ```
@@ -133,6 +133,21 @@ def _(mo):
     True
     ```
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    **Why this is the trick, not just a shortcut:** your Loader
+    doesn't know in advance *which* column will be missing on a bad
+    row — it could be steps one day, resting heart rate the next.
+    Checking value by value means writing a separate check for every
+    column, and keeping all of them in sync as the contract changes.
+    `"" in values` asks one question — "is anything in this row
+    blank?" — and it's correct no matter which column, or how many
+    columns, the file has.
+    """)
     return
 
 
@@ -314,13 +329,25 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md("""
+    Each card below is a small, self-contained example of one place
+    real teams get tripped up today — grouped by which function it
+    hits. None of these are your project's actual code; each one is a
+    generic stand-in so you can see the pattern and apply it to your
+    own function.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md('''
     **Loader — the last line of a file can be blank too:**
     ```python
-    line = "\\n"
+    line = ""            # a blank line
     values = line.strip().split(",")
-    print(values)          # ['']
-    print("" in values)    # True
+    print(values)        # ['']
+    print("" in values)  # True
     ```
     An empty trailing line still becomes a row with one blank value —
     it gets skipped the same way, no special-case code needed.
@@ -333,9 +360,13 @@ def _(mo):
     mo.md('''
     **Analyst — position vs. identifier:**
     ```python
-    best_index = 2                  # a position in a list
-    day_number = days[best_index]   # what you actually need
+    best_index = 2                 # a position
+    day_number = days[best_index]  # what you need
     ```
+    `best_index` only tells you *where* in the list the best value
+    sits. If your contract's `best_day` key means an actual day
+    number, you must look that day up with `days[best_index]` — the
+    index itself is almost never the answer your report needs.
     ''')
     return
 
@@ -349,9 +380,9 @@ def _(mo):
     count = 0
     for value in values:
         if higher_is_better:
-            if value > best:     # > -- an earlier tie wins
+            if value > best:   # earlier tie wins
                 best = value
-            if value >= goal:    # >= -- a value AT the goal counts
+            if value >= goal:  # a tie counts
                 count += 1
         else:
             if value < best:
@@ -374,6 +405,9 @@ def _(mo):
     print(f"{8327.8:.1f}")   # 8327.8
     print(f"{8000:,}")       # 8,000
     ```
+    `:.1f` rounds to one decimal place; `:,` adds thousands commas.
+    Your contract's example output already shows the exact format
+    expected — match it, rather than printing Python's raw default.
     ''')
     return
 
@@ -397,10 +431,21 @@ def _(mo):
     mo.md('''
     **Everyone — floats don't compare exactly:**
     ```python
-    print(0.1 + 0.2)                    # 0.30000000000000004
-    print(0.1 + 0.2 == 0.3)             # False
-    print(round(0.1 + 0.2, 1) == 0.3)   # True
+    print(0.1 + 0.2)
+    print(0.1 + 0.2 == 0.3)
+    print(round(0.1 + 0.2, 1) == 0.3)
     ```
+
+    ```
+    0.30000000000000004
+    False
+    True
+    ```
+    Computers store decimals with tiny rounding error, so a calculated
+    total can be *off by a hair* from the number you expect. If your
+    test checks an average or a sum with `==`, a correct function can
+    still "fail" — round both sides to the same number of decimals
+    before comparing.
     ''')
     return
 
