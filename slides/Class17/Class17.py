@@ -91,7 +91,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Trick 1: Skipping a Bad Value
+    ## Trick 1: Checking a Whole Row at Once
     """)
     return
 
@@ -99,9 +99,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    What does a blank line, or a missing-data code like `-999`,
-    actually look like once you've read it? How do you decide whether
-    to use a line or skip it?
+    After `.strip().split(",")`, what does a row with a missing value
+    turn into? How could you check the *whole row* for a blank, in
+    one line, instead of checking each value separately?
     """)
     return
 
@@ -110,23 +110,27 @@ def _(mo):
 def _(mo):
     mo.md('''
     ```python
-    def read_temperatures(filename):
-        """Read temperatures in F from a file. Skips blank
-        lines and -999."""
-        # 1. Make an empty list for the temperatures
-        temps = []
-        # 2. Open the file for reading
-        with open(filename, "r") as file:
-            # 3. For each line in the file:
-            for line in file:
-                # a. strip the newline
-                reading = line.strip()
-                # b. if not blank and not "-999", convert
-                #    it and add it
-                if reading != "" and reading != "-999":
-                    temps.append(float(reading))
-        # 4. Return the list
-        return temps
+    line = "7,,42\\n"
+    values = line.strip().split(",")
+    print(values)
+    ```
+
+    ```
+    ['7', '', '42']
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    print("" in values)
+    ```
+
+    ```
+    True
     ```
     ''')
     return
@@ -137,9 +141,9 @@ def _(mo):
     mo.md("""
     ### Takeaway
 
-    The same idea scales up: your Loader checks a whole **row** of
-    several columns at once, not just one value. What check would let
-    you test several values together, instead of one at a time?
+    `in` checks the whole list in one line — the same membership test
+    from Class 3, now applied to a list instead of a single string.
+    No `continue` needed: an `if` just decides whether the row counts.
     """)
     return
 
@@ -311,11 +315,15 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
-    **Loader — check a whole row at once:**
+    **Loader — the last line of a file can be blank too:**
     ```python
-    row = ["3", "", "67", "6.4", "52"]
-    print("" in row)   # True -- skip this row
+    line = "\\n"
+    values = line.strip().split(",")
+    print(values)          # ['']
+    print("" in values)    # True
     ```
+    An empty trailing line still becomes a row with one blank value —
+    it gets skipped the same way, no special-case code needed.
     ''')
     return
 
@@ -335,15 +343,25 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
-    **Analyst — two branches, one loop:**
+    **Analyst — tracking the best *and* the goal count, together:**
     ```python
-    if higher_is_better:
-        if value > best:
-            best = value
-    else:
-        if value < best:
-            best = value
+    best = values[0]
+    count = 0
+    for value in values:
+        if higher_is_better:
+            if value > best:     # > -- an earlier tie wins
+                best = value
+            if value >= goal:    # >= -- a value AT the goal counts
+                count += 1
+        else:
+            if value < best:
+                best = value
+            if value <= goal:
+                count += 1
     ```
+    Both comparisons flip together when `higher_is_better` is
+    `False`. Using `>`/`<` instead of `>=`/`<=` for the goal count
+    would silently miss a value that lands exactly on the goal.
     ''')
     return
 
@@ -356,6 +374,20 @@ def _(mo):
     print(f"{8327.8:.1f}")   # 8327.8
     print(f"{8000:,}")       # 8,000
     ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    **Report Writer — every write needs its own line break:**
+    ```python
+    file.write("Average: 8327.8")
+    file.write("Range: 4569.0 to 12192.0")
+    ```
+    Without an explicit trailing newline character at the end of each
+    write, those two lines land on the same line in the file.
     ''')
     return
 
