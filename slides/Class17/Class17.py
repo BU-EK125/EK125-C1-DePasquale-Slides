@@ -310,20 +310,66 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md("""
-    - **Loader:** a blank value becomes an empty string after
-      splitting — can you check the *whole row* at once, instead of
-      one value at a time?
-    - **Analyst:** tracking "best so far" gives you a **list
-      position** — after skipping rows, does that position still
-      match the day number?
-    - **Analyst:** what changes in your comparisons when
-      `higher_is_better` is `False`? (Hint: more than one line.)
-    - **Report Writer:** check your contract's example value closely —
-      does it want `8327.8`, or something formatted differently?
-    - **Everyone:** `0.1 + 0.2 != 0.3`. If your test compares floats
-      with `==`, where should the rounding happen?
-    """)
+    mo.md('''
+    **Loader — check a whole row at once:**
+    ```python
+    row = ["3", "", "67", "6.4", "52"]
+    print("" in row)   # True -- skip this row
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    **Analyst — position vs. identifier:**
+    ```python
+    best_index = 2                  # a position in a list
+    day_number = days[best_index]   # what you actually need
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    **Analyst — two branches, one loop:**
+    ```python
+    if higher_is_better:
+        if value > best:
+            best = value
+    else:
+        if value < best:
+            best = value
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    **Report Writer — format what the contract promises:**
+    ```python
+    print(f"{8327.8:.1f}")   # 8327.8
+    print(f"{8000:,}")       # 8,000
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    **Everyone — floats don't compare exactly:**
+    ```python
+    print(0.1 + 0.2)                    # 0.30000000000000004
+    print(0.1 + 0.2 == 0.3)             # False
+    print(round(0.1 + 0.2, 1) == 0.3)   # True
+    ```
+    ''')
     return
 
 
