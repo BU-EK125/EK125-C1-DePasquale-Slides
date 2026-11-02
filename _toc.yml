@@ -30,3 +30,5 @@ chapters:
     title: "Class 14: Scripts, File I/O, and the Local File Environment"
   - url: https://bu-ek125.github.io/EK125-C1-DePasquale-Slides/Class16/index.html
     title: "Class 16: Stub Building"
+  - url: https://bu-ek125.github.io/EK125-C1-DePasquale-Slides/Class17/index.html
+    title: "Class 17: Writing Real Functions"
