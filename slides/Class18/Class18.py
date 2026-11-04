@@ -440,6 +440,87 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ## Quiz 9 Review: Four Things to Practice
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    Quiz 9 covers Classes 17–18. These four cards are generic
+    stand-ins for the exact skills it tests — work through each one
+    before Friday.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    **Tracing a best-value loop — ties:**
+    ```python
+    vals = [71.2, 74.5, 74.5, 73.0]
+    best = 0
+    for i in range(len(vals)):
+        if vals[i] > vals[best]:
+            best = i
+    print(best)  # 1 -- the earlier tie wins
+    ```
+    Swap `>` for `>=` and `best` becomes `2` instead — the *later*
+    tie wins. One symbol change, opposite tie-breaking behavior.
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    **Predicting `check()` — PASS or FAIL:**
+    ```python
+    check("avg", 0.3, round(0.1 + 0.2, 1))  # PASS
+    check("avg", 0.3, 0.1 + 0.2)            # FAIL
+    check("count", 4, "4")                  # FAIL
+    ```
+    The second FAILs on float rounding error, not a real bug. The
+    third FAILs because `4` and `"4"` are different types. FAIL means
+    "these two values disagree" — not automatically "the function is
+    wrong."
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    **Writing a boundary-value test:**
+    ```python
+    check("at goal", True, meets_goal(8000, 8000))
+    ```
+    A value clearly above or below the goal passes whether the
+    function uses `>` or `>=`. Only a value exactly *at* the goal
+    tells them apart. Never paste a function's own output in as
+    `expected` — a buggy function's bug would just pass itself.
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    **A FAIL: function or test?**
+
+    Hand-calculate the true answer yourself, from the input. If it
+    disagrees with `actual`, the function has a bug. If your own
+    `expected` value was the one that was wrong, fix the test —
+    don't touch working code because of a bad test.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Quiz 9: What's Fair Game
     """)
     return
@@ -457,6 +538,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    - Everything on the four review cards above
     - Read a multi-file traceback: name the file and function where
       it crashed, then say whose code is off-contract
     - Given a scenario, choose the correct integration order
