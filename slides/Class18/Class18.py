@@ -100,7 +100,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Quiz 9 Review: Four Things to Practice
+    ## Quiz 9 Review
     """)
     return
 
@@ -108,9 +108,8 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    Quiz 9 covers Classes 17–18. These four cards are generic
-    stand-ins for the exact skills it tests — work through each one
-    before Friday.
+    Quiz 9 covers Classes 17–18. Each card below is a generic
+    stand-in for one skill it tests.
     """)
     return
 
@@ -143,9 +142,7 @@ def _(mo):
     check("laps", 6, "6")                  # FAIL
     ```
     The second FAILs on float rounding error, not a real bug. The
-    third FAILs because `6` and `"6"` are different types. FAIL means
-    "these two values disagree" — not automatically "the function is
-    wrong."
+    third FAILs because `6` and `"6"` are different types.
     ''')
     return
 
@@ -170,27 +167,9 @@ def _(mo):
     mo.md("""
     **A FAIL: function or test?**
 
-    Hand-calculate the true answer yourself, from the input. If it
-    disagrees with `actual`, the function has a bug. If your own
-    `expected` value was the one that was wrong, fix the test —
-    don't touch working code because of a bad test.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## Quiz 9 Review, Part 2
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    Five more generic stand-ins, covering the rest of what Quiz 9
-    tests.
+    Hand-calculate the true answer from the input. If it disagrees
+    with `actual`, the function's wrong. If your own `expected` was
+    wrong, fix the test instead.
     """)
     return
 
@@ -224,12 +203,10 @@ def _(mo):
     mo.md("""
     **Choosing the integration order:**
 
-    All three functions pass their own tests individually. Swap in
-    the Loader, then the Analyst, then the Report Writer — rerunning
-    on a small file with known answers after each swap, not all
-    three at once. If it worked right after the Loader and broke the
-    moment you added the Analyst, check the Analyst first — it's the
-    only thing that changed between a working run and a broken one.
+    Swap in the Loader, then the Analyst, then the Report Writer —
+    one at a time, rerunning on a small known-answer file after each
+    swap. If it broke right after you added the Analyst, check the
+    Analyst first: it's the only thing that changed.
     """)
     return
 
@@ -275,40 +252,6 @@ def _(mo):
     3. Two days tie for best resting heart rate; the contract is
        silent on which wins. → Also a gap — the team decides, not
        whoever noticed it first.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## Quiz 9: What's Fair Game
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    No new syntax this week, but the integration skills from today
-    are. Possible things we might ask you to do:
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    - Everything on the review cards above
-    - Read a multi-file traceback: name the file and function where
-      it crashed, then say whose code is off-contract
-    - Given a scenario, choose the correct integration order
-    - Compute the expected number of complete days from a description
-      of a file
-    - Spot a wrong "best day" from a small table of raw data, using a
-      cross-check
-    - Code or contract? Given a short scenario, choose the right
-      process
     """)
     return
 
