@@ -117,7 +117,8 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
-    **Tracing a best-value loop — ties:**
+    **Tracing a loop by hand:** one question gives you a loop and a
+    call, then asks for the exact final value of a variable.
     ```python
     vals = [71.2, 74.5, 74.5, 73.0]
     best = 0
@@ -135,7 +136,8 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
-    **Predicting `check()` — PASS or FAIL:**
+    **Predicting test output:** you'll see several `check()` calls
+    and have to circle PASS or FAIL for each, explaining any FAIL.
     ```python
     check("hr", 0.9, round(0.6 + 0.3, 1))  # PASS
     check("hr", 0.9, 0.6 + 0.3)            # FAIL
@@ -150,7 +152,8 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
-    **Writing a boundary-value test:**
+    **Writing your own test:** given a contract, you'll have to
+    write a `check()` call that can actually catch a specific bug.
     ```python
     check("at goal", True, meets_goal(8000, 8000))
     ```
@@ -165,7 +168,8 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    **A FAIL: function or test?**
+    **Function or test?** given a FAIL's expected and actual values,
+    you'll have to decide which side is wrong, and explain why.
 
     Hand-calculate the true answer from the input. If it disagrees
     with `actual`, the function's wrong. If your own `expected` was
@@ -177,7 +181,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md('''
-    **Reading a multi-file traceback:**
+    **Reading a multi-file traceback:** a crash shows up in one
+    file, but was actually caused by another — you'll have to say
+    where it crashed, what broke, and whose code is off-contract.
     ```
     Traceback (most recent call last):
       File "main.py", line 18, in main
@@ -201,7 +207,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    **Choosing the integration order:**
+    **Choosing the integration order:** you'll pick the safest plan
+    from a few options, and explain what to check first when
+    something breaks.
 
     Swap in the Loader, then the Analyst, then the Report Writer —
     one at a time, rerunning on a small known-answer file after each
@@ -214,7 +222,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    **Counting complete days:**
+    **Counting complete days:** given a short description of a
+    file, you'll compute how many rows should make it into the
+    report.
 
     A file has 20 rows; 3 contain at least one blank value, and the
     contract skips any row with a blank entirely. Expected "days
@@ -228,7 +238,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    **Cross-checking a reported "best day":**
+    **Cross-checking a reported value:** given a small table of raw
+    data and a reported result, you'll spot what's wrong using the
+    raw numbers.
 
     The report says the best step count was 14,200 on Day 9. The
     raw CSV shows Day 9 logged 11,400 — but Day 11 logged 14,200.
@@ -242,7 +254,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    **Code or contract?**
+    **Code or contract?** for a few short scenarios, you'll decide
+    whose job it is to fix the problem — and whether the team needs
+    to weigh in first.
 
     1. Contract promises key `avg_steps`; the Analyst's code returns
        `average`. → The Analyst's own bug, fixed in their own file.
