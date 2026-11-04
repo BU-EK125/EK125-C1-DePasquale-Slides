@@ -138,12 +138,12 @@ def _(mo):
     mo.md('''
     **Predicting `check()` — PASS or FAIL:**
     ```python
-    check("avg", 0.3, round(0.1 + 0.2, 1))  # PASS
-    check("avg", 0.3, 0.1 + 0.2)            # FAIL
-    check("count", 4, "4")                  # FAIL
+    check("hr", 0.9, round(0.6 + 0.3, 1))  # PASS
+    check("hr", 0.9, 0.6 + 0.3)            # FAIL
+    check("laps", 6, "6")                  # FAIL
     ```
     The second FAILs on float rounding error, not a real bug. The
-    third FAILs because `4` and `"4"` are different types. FAIL means
+    third FAILs because `6` and `"6"` are different types. FAIL means
     "these two values disagree" — not automatically "the function is
     wrong."
     ''')
@@ -181,6 +181,107 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ## Quiz 9 Review, Part 2
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    Five more generic stand-ins, covering the rest of what Quiz 9
+    tests.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    **Reading a multi-file traceback:**
+    ```
+    Traceback (most recent call last):
+      File "main.py", line 18, in main
+        write_report(results, "report.txt")
+      File "reporter.py", line 12, in write_report
+        f"Best day: {results['best_day']}"
+    KeyError: 'best_day'
+    ```
+    ```python
+    # Last line of summarize_week:
+    return {"best": days[i], "goal_count": n}
+    ```
+    The crash is in `reporter.py`, but the Analyst's own return line
+    never produces the key `'best_day'` — it returns `'best'`
+    instead. The Report Writer is reading the contract correctly;
+    the Analyst is off-contract.
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    **Choosing the integration order:**
+
+    All three functions pass their own tests individually. Swap in
+    the Loader, then the Analyst, then the Report Writer — rerunning
+    on a small file with known answers after each swap, not all
+    three at once. If it worked right after the Loader and broke the
+    moment you added the Analyst, check the Analyst first — it's the
+    only thing that changed between a working run and a broken one.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    **Counting complete days:**
+
+    A file has 20 rows; 3 contain at least one blank value, and the
+    contract skips any row with a blank entirely. Expected "days
+    analyzed": 20 − 3 = **17**. If the report says 18 instead,
+    something is under-skipping — check whether the Loader's blank
+    check looks at every column or just one.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    **Cross-checking a reported "best day":**
+
+    The report says the best step count was 14,200 on Day 9. The
+    raw CSV shows Day 9 logged 11,400 — but Day 11 logged 14,200.
+    The *value* is right, attached to the *wrong* day — a classic
+    sign that skipping a blank row dropped one list's entry but not
+    the other's, shifting everything after it by one.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    **Code or contract?**
+
+    1. Contract promises key `avg_steps`; the Analyst's code returns
+       `average`. → The Analyst's own bug, fixed in their own file.
+    2. Report Writer wants to print percent-of-goal, but the
+       contract never promised that value. → A gap — the team
+       decides and logs it before any code changes.
+    3. Two days tie for best resting heart rate; the contract is
+       silent on which wins. → Also a gap — the team decides, not
+       whoever noticed it first.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Quiz 9: What's Fair Game
     """)
     return
@@ -198,7 +299,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    - Everything on the four review cards above
+    - Everything on the review cards above
     - Read a multi-file traceback: name the file and function where
       it crashed, then say whose code is off-contract
     - Given a scenario, choose the correct integration order
