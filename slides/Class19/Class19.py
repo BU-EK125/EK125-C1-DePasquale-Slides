@@ -533,6 +533,25 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md('''
+    ```python
+    evens = [i**3 for i in range(7) if i % 2 == 0]
+    print(evens)
+    ```
+    ```
+    [0, 8, 64, 216]
+    ```
+    A list comprehension: `[expression for i in iterable if
+    condition]`. The `if` at the end filters which values make it in.
+
+    **Ask yourself:** what does this print if the condition is
+    `i % 2 != 0` instead?
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md("""
     ## Review: Class 10 — Mastering Slicing
     """)
@@ -558,6 +577,24 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md('''
+    ```python
+    word = "Programming"
+    word[0:4]   # "Prog"
+    word[2:3]   # "o" -- just one character
+    ```
+    `sequence[start:end]` includes `start` and stops *right before*
+    `end` — a common mistake is forgetting that the end index is
+    exclusive.
+
+    **Ask yourself:** what slice would grab just `"ram"` from
+    `"Programming"`?
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md("""
     ## Review: Class 11 — NumPy Arrays
     """)
@@ -577,6 +614,24 @@ def _(mo):
     array multiplies element-wise.
 
     📖 [Full reading: Class 11](https://BU-EK125.github.io/EK125/class/Class11.html)
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    arr1d = np.array([31, 42, 11])
+    logarr = arr1d > 20
+    arr1d[logarr]   # [31 42]
+    ```
+    A comparison on an array produces an array of `True`/`False` —
+    use it directly to filter. On a 2D array, logical indexing always
+    returns a flat 1D result.
+
+    **Ask yourself:** what does `arr1d[arr1d > 20]` return if every
+    value is below 20?
     ''')
     return
 
@@ -610,6 +665,25 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md('''
+    ```python
+    day0 = {"day": 1, "steps": 9000}
+    day1 = {"day": 2, "steps": 7500}
+    days = [day0, day1]
+    for d in days:
+        if d["steps"] >= 8000:
+            print(d["day"])
+    ```
+    A list of dictionaries stores one record per entry — loop through
+    the list, then index into each dictionary by key.
+
+    **Ask yourself:** what prints if `day1`'s steps were 8000 exactly?
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md("""
     ## Review: Class 13 — User-Defined Functions
     """)
@@ -637,6 +711,27 @@ def _(mo):
     default: `None`. A default parameter can be left out entirely.
 
     📖 [Full reading: Class 13](https://BU-EK125.github.io/EK125/class/Class13.html)
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    def add_day(data):
+        data.append(999)
+
+    my_data = [1, 2, 3]
+    add_day(my_data)
+    print(my_data)
+    ```
+    A list passed into a function can be changed in place — the
+    caller's own variable sees the change too, with no `return`
+    needed.
+
+    **Ask yourself:** would this still happen if `my_data` were a
+    tuple instead of a list?
     ''')
     return
 
@@ -694,6 +789,25 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md('''
+    ```python
+    with open("report.txt", "w") as f:
+        f.write("original data")
+
+    # Later, accidentally reopened in "w" mode:
+    with open("report.txt", "w") as f:
+        f.write("new data")
+    ```
+    Opening an existing file in `"w"` mode erases it immediately —
+    even before you write anything new. Use `"a"` to add on instead.
+
+    **Ask yourself:** what does `report.txt` contain after this runs?
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md("""
     ## Review: Class 15 — Project Kickoff
     """)
@@ -709,6 +823,24 @@ def _(mo):
 
     📖 [Full reading: Class 15](https://BU-EK125.github.io/EK125/class/Class15.html)
     """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    **A vague contract vs. a precise one:**
+    ```python
+    def load_data(filename):
+        """Reads the data and returns it."""
+    ```
+    A teammate reading this can't answer: returns what *shape*? What
+    happens to a blank value? What are the dictionary's keys, and
+    their types?
+
+    **Ask yourself:** what's the smallest change that would answer
+    all three questions?
+    ''')
     return
 
 
@@ -738,6 +870,25 @@ def _(mo):
 
     📖 [Full reading: Class 16](https://BU-EK125.github.io/EK125/class/Class16.html)
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    | Error | Usually means |
+    |---|---|
+    | `ModuleNotFoundError: No module named 'loader'` | Can't find the file |
+    | `ImportError: cannot import name 'load_data'` | File found, function name doesn't match |
+    | `TypeError: 'NoneType' object is not subscriptable` | A function printed instead of returning |
+    | `KeyError: 'average'` | Two sides of a seam disagree on a key name |
+
+    Three of these four are **seam errors** — each piece is fine on
+    its own, but two pieces don't agree.
+
+    **Ask yourself:** which of these four would `d.get("average")`
+    avoid entirely?
+    """)
     return
 
 
@@ -774,6 +925,27 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md('''
+    ```python
+    value = 8327.8
+    print(f"{value:.1f}")
+    print(f"{8000:,}")
+    ```
+    ```
+    8327.8
+    8,000
+    ```
+    An f-string's format spec controls exactly how a number prints —
+    `:.1f` rounds to one decimal, `:,` adds thousands commas. Match
+    whatever your contract's example value shows.
+
+    **Ask yourself:** what does `f"{8327.8:,.0f}"` print?
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md("""
     ## Review: Class 18 — Integrating It All Together
     """)
@@ -788,6 +960,26 @@ def _(mo):
     often in two different files.
 
     📖 [Full reading: Class 18](https://BU-EK125.github.io/EK125/class/Class18.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    | Check | Question to ask |
+    |---|---|
+    | **Counts** | Is the number of items what it should be? |
+    | **Lengths** | Do lists that should match have the same length? |
+    | **Ranges** | Are values physically possible? |
+    | **Cross-check** | Does one result agree with the raw data? |
+
+    A program can run with no errors and still be wrong — nobody has
+    a resting heart rate of −999. The program can't tell you its own
+    answer is ridiculous; you have to check.
+
+    **Ask yourself:** which of these four would catch a `best_day`
+    that's a list position instead of a real day number?
     """)
     return
 
