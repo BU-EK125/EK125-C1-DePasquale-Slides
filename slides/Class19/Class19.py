@@ -559,6 +559,51 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ## Quick Reference: Classes 9–19
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    Every class since Exam 1 shows up somewhere on Friday. If
+    something below feels rusty, the reading is one click away.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    | Class | Where it shows up |
+    |---|---|
+    | [9: Moving to PyCharm](https://BU-EK125.github.io/EK125/class/Class9.html) | Imports, running a file, where a variable lives |
+    | [10: Mastering Slicing](https://BU-EK125.github.io/EK125/class/Class10.html) | Slicing with a step, list comprehensions |
+    | [11: NumPy Arrays](https://BU-EK125.github.io/EK125/class/Class11.html) | Array math vs. list math, shape, indexing |
+    | [12: Dictionaries](https://BU-EK125.github.io/EK125/class/Class12.html) | `.get()`, keys/values, a dictionary of lists |
+    | [13: User-Defined Functions](https://BU-EK125.github.io/EK125/class/Class13.html) | Return vs. print, scope, default parameters |
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    | Class | Where it shows up |
+    |---|---|
+    | [14: File I/O](https://BU-EK125.github.io/EK125/class/Class14.html) | `with`, reading/writing a file, skipping blank rows |
+    | [15: Project Kickoff](https://BU-EK125.github.io/EK125/class/Class15.html) | Contracts as a shared vocabulary (less exam weight) |
+    | [16: Stub Building](https://BU-EK125.github.io/EK125/class/Class16.html) | A faithful stub, reading a contract closely |
+    | [17: Writing Real Functions](https://BU-EK125.github.io/EK125/class/Class17.html) | `check()` tests, boundary values, position vs. label |
+    | [18: Integrating It All Together](https://BU-EK125.github.io/EK125/class/Class18.html) | Multi-file tracebacks, the right integration order |
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Exam 2: What's Fair Game
     """)
     return
