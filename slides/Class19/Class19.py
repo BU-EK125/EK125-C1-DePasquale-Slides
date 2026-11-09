@@ -46,6 +46,10 @@ def _(mo):
     different code. Five bugs are hiding inside: one syntax, two
     runtime, two logic. Debug it until your report matches theirs
     exactly.
+
+    **Note:** today's material is not on Exam 2. Exam 2 (Friday
+    11/13) covers Classes 9–18 — see the review near the end of this
+    deck.
     """)
     return
 
@@ -55,9 +59,9 @@ def _(mo):
     mo.md("""
     ### Takeaway
 
-    This is Exam 2 rehearsal — the same three skills you'll use on
-    paper: classify a bug, read a traceback, and debug code you
-    didn't write.
+    Same method every time: classify the bug, read the traceback
+    bottom-up, and debug code you didn't write by starting from its
+    contract.
     """)
     return
 
@@ -560,7 +564,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Quick Reference: Classes 9–19
+    ## Exam 2 Review: Classes 9–18
     """)
     return
 
@@ -568,8 +572,9 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    Every class since Exam 1 shows up somewhere on Friday. If
-    something below feels rusty, the reading is one click away.
+    Exam 2 (Friday 11/13) covers Classes 9 through 18 — not today's
+    material. One worked reminder from each class, with a link back
+    to the full reading.
     """)
     return
 
@@ -577,13 +582,194 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    | Class | Where it shows up |
-    |---|---|
-    | [9: Moving to PyCharm](https://BU-EK125.github.io/EK125/class/Class9.html) | Imports, running a file, where a variable lives |
-    | [10: Mastering Slicing](https://BU-EK125.github.io/EK125/class/Class10.html) | Slicing with a step, list comprehensions |
-    | [11: NumPy Arrays](https://BU-EK125.github.io/EK125/class/Class11.html) | Array math vs. list math, shape, indexing |
-    | [12: Dictionaries](https://BU-EK125.github.io/EK125/class/Class12.html) | `.get()`, keys/values, a dictionary of lists |
-    | [13: User-Defined Functions](https://BU-EK125.github.io/EK125/class/Class13.html) | Return vs. print, scope, default parameters |
+    ## Review: Class 9 — Moving to PyCharm
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    x = 10
+    x + 5         # Colab: shows 15 below the cell
+    print(x + 5)  # .py file: shows 15 either way
+    ```
+    In a `.py` file, nothing is displayed unless you explicitly
+    `print()` it — a bare expression on its own line does nothing
+    and causes no error, so a "working" program can still show zero
+    output.
+
+    📖 [Full reading: Class 9](https://BU-EK125.github.io/EK125/class/Class9.html)
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Review: Class 10 — Mastering Slicing
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    nums[::-1]     # [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+    nums[9:4:-1]   # [9, 8, 7, 6, 5]
+    ```
+    A negative step walks backward; `[::-1]` is the standard idiom
+    for reversing. With a negative step, `start` must be *greater
+    than* `end` or you silently get nothing back — no error.
+
+    📖 [Full reading: Class 10](https://BU-EK125.github.io/EK125/class/Class10.html)
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Review: Class 11 — NumPy Arrays
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    arr2d = np.array([[1, 3, 8], [-2, 5, 33]])
+    arr2d[1, 2]    # 33
+    arr2d[0, 1:]   # [3 8]
+    ```
+    `arr2d[row, col]` — the first index is always the row, the
+    second always the column. A plain list repeats under `*`; an
+    array multiplies element-wise.
+
+    📖 [Full reading: Class 11](https://BU-EK125.github.io/EK125/class/Class11.html)
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Review: Class 12 — Dictionaries
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    print(bigone.get("size"))
+    print(bigone.get("size", -999))
+    ```
+    ```
+    None
+    -999
+    ```
+    `get()` is safer than `bigone["size"]` whenever a key might be
+    missing — it never raises a `KeyError`.
+
+    📖 [Full reading: Class 12](https://BU-EK125.github.io/EK125/class/Class12.html)
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Review: Class 13 — User-Defined Functions
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    def printstrs(instr, n):
+        for i in range(n):
+            print(instr, end="")
+        print()
+
+    printstrs("Hi", 5)
+    print(printstrs("a", 2))
+    ```
+    ```
+    HiHiHiHiHi
+    aa
+    None
+    ```
+    A function with no `return` still hands back a value by
+    default: `None`. A default parameter can be left out entirely.
+
+    📖 [Full reading: Class 13](https://BU-EK125.github.io/EK125/class/Class13.html)
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Review: Class 14 — File I/O
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    with open("log.txt") as f:
+        for line in f:
+            values = line.split(",")
+            print(repr(values[2]))
+    ```
+    ```python
+    # Fixed:
+            values = line.strip().split(",")
+            print(repr(values[2]))
+    ```
+    Splitting a raw line keeps the trailing newline stuck to its
+    last field — easy to miss until something downstream compares
+    strings and silently fails.
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    def sqrarea(sidelen):
+        sqar = sidelen**2
+        return sqar
+
+    area = sqrarea(4)
+    print(sqar)
+    ```
+    ```
+    NameError: name 'sqar' is not defined
+    ```
+    Every function gets its own scope. Once a function finishes, its
+    local variables are gone — only the returned value survives.
+
+    📖 [Full reading: Class 14](https://BU-EK125.github.io/EK125/class/Class14.html)
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Review: Class 15 — Project Kickoff
     """)
     return
 
@@ -591,13 +777,11 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    | Class | Where it shows up |
-    |---|---|
-    | [14: File I/O](https://BU-EK125.github.io/EK125/class/Class14.html) | `with`, reading/writing a file, skipping blank rows |
-    | [15: Project Kickoff](https://BU-EK125.github.io/EK125/class/Class15.html) | Contracts as a shared vocabulary (less exam weight) |
-    | [16: Stub Building](https://BU-EK125.github.io/EK125/class/Class16.html) | A faithful stub, reading a contract closely |
-    | [17: Writing Real Functions](https://BU-EK125.github.io/EK125/class/Class17.html) | `check()` tests, boundary values, position vs. label |
-    | [18: Integrating It All Together](https://BU-EK125.github.io/EK125/class/Class18.html) | Multi-file tracebacks, the right integration order |
+    Where "contract" comes from: parameters, returns, and side
+    effects, agreed on and written down before any code — the
+    vocabulary every later class builds on.
+
+    📖 [Full reading: Class 15](https://BU-EK125.github.io/EK125/class/Class15.html)
     """)
     return
 
@@ -605,7 +789,67 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Exam 2: What's Fair Game
+    ## Review: Class 16 — Stub Building
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    def read_temperatures(filename):
+        """Read temperatures (deg F) from a file.
+
+        Returns: list of float.
+            Example: [71.2, 70.8, 72.5, 71.9]
+        """
+        return [71.2, 70.8, 72.5, 71.9]
+    ```
+    A faithful stub: same header and docstring, returns (never
+    prints) the contract's own example values, with the correct
+    types — even before the real logic exists.
+
+    📖 [Full reading: Class 16](https://BU-EK125.github.io/EK125/class/Class16.html)
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Review: Class 17 — Writing Real Functions
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    temps = [71.2, 74.5, 73.8, 76.1]
+    days  = [1, 2, 4, 5]   # day 3 had no reading
+
+    best_index = 0
+    for i in range(len(temps)):
+        if temps[i] > temps[best_index]:
+            best_index = i
+
+    print(best_index)        # 3 -- a position
+    print(days[best_index])  # 5 -- the actual day
+    ```
+    `best_index` is a position in the list — the moment any rows get
+    skipped, position and day number drift apart.
+
+    📖 [Full reading: Class 17](https://BU-EK125.github.io/EK125/class/Class17.html)
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Review: Class 18 — Integrating It All Together
     """)
     return
 
@@ -613,7 +857,11 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    Exam 2 is **Friday 11/13**. Today's skills are directly tested:
+    Swap in one real function at a time, rerunning after each
+    change. A traceback's crash site and its bug's actual source are
+    often in two different files.
+
+    📖 [Full reading: Class 18](https://BU-EK125.github.io/EK125/class/Class18.html)
     """)
     return
 
@@ -621,14 +869,17 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    - Label a bug as syntax, runtime, or logic
-    - Match an error message to its likely cause
-    - Fix a string-plus-int concatenation
-    - Find a `<` vs `<=` boundary bug against a docstring, and write
-      the `check()` that catches it
-    - Find a position-vs-label bug
-    - Trace a loop and find the first line where it differs from
-      what's expected
+    ## Exam 2
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    - **Friday 11/13**, 1 hour 40 minutes, 10 problems
+    - One handwritten 8.5x11 reference sheet allowed
+    - Covers Classes 9–18
     """)
     return
 
