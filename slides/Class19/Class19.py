@@ -461,80 +461,6 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## This Afternoon
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    - **Live debugging** of the two logic bugs together — trace
-      tables, and an optional look at the PyCharm debugger
-    - **Add a regression test** to your own project file
-    - **Team retrospective**
-    - **Start your individual reflection** — finish it for homework
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## The Retrospective
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    | | Question |
-    |---|---|
-    | **Continue** | What worked well that we should keep doing? |
-    | **Stop** | What caused problems that we should stop doing? |
-    | **Start** | What should we try next time that we didn't do this time? |
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    Two ground rules: **blame the process, not the person** — almost
-    every bug traces back to something the process allowed. And **be
-    specific** — "communication was bad" helps no one.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    **Try rewriting this one:** *"Sam was slow and communication was
-    bad."*
-
-    A specific, process-focused version: *"We didn't agree in Class
-    15 on who checks the Drive folder before class, so Step 2 used
-    stale files."*
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ### Takeaway
-
-    Your integration log and Decision Log are your evidence for
-    this — use them instead of relying on memory.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
     ## Wrapping Up Part 5
     """)
     return
@@ -862,24 +788,6 @@ def _(mo):
     often in two different files.
 
     📖 [Full reading: Class 18](https://BU-EK125.github.io/EK125/class/Class18.html)
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## Exam 2
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    - **Friday 11/13**, 1 hour 40 minutes, 10 problems
-    - One handwritten 8.5x11 reference sheet allowed
-    - Covers Classes 9–18
     """)
     return
 
