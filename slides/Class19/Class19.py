@@ -531,7 +531,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Due Tuesday
+    ## Wrapping Up Part 5
     """)
     return
 
@@ -539,7 +539,8 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    Gradescope, by **Tuesday 11/10, 11:59 PM**:
+    **Not actually required for submission** — no Gradescope
+    deadline tomorrow. Still finish this work; you'll want it done:
     """)
     return
 
