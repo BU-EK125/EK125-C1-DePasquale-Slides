@@ -1378,16 +1378,19 @@ def _(mo):
     ### ✅ Answer
 
     ```python
-    with open("temperatures.txt", "w") as f:
-        for temp in [72, 75, 68]:
-            print(temp, file=f)
+    with open('temperatures.txt', 'w') as file:
+        file.write('72\\\\n')
+        file.write('75\\\\n')
+        file.write('68\\\\n')
     ```
     ```python
-    with open("temperatures.txt") as f:
-        temps = [int(line) for line in f]
+    with open('temperatures.txt', 'r') as file:
+        temperatures = []
+        for line in file:
+            temperatures.append(int(line))
 
-    avg = sum(temps) / len(temps)
-    print(f"Average temperature: {avg}")
+    average = sum(temperatures) / len(temperatures)
+    print(f"Average temperature: {average}")
     ```
 
     💡 `int(line)` works even with the trailing newline still
