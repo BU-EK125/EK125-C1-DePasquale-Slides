@@ -765,6 +765,8 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    - **A contract describes what a function does, never how** — a
+      header, parameters, and a return value, not the code inside it
     - **A faithful stub:** same header and docstring, `return`
       (never `print`) the contract's own example values, with the
       correct types
