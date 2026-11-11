@@ -64,7 +64,7 @@ def _(mo):
       function never touches the outer one
     - **Mutable vs. immutable arguments** — a list change inside a
       function is visible outside; a reassignment isn't
-    - **Dictionary basics** — `in` checks keys; `.get()` never
+    - **Dictionary gotchas** — `in` checks keys; `.get()` never
       raises `KeyError`
     - **Dict of lists / list of dicts** — know which `len()` you're
       actually asking for
@@ -312,7 +312,18 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Dictionary Basics Under Pressure
+    ## Dictionary Gotchas
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    Dictionaries are everywhere once you're building anything real —
+    a single wrong choice between `in`, `.get()`, and `[]` is one of
+    the most common ways a function that "looks right" quietly
+    breaks on a value it wasn't expecting.
     """)
     return
 
@@ -412,6 +423,16 @@ def _(mo):
 def _(mo):
     mo.md("""
     ## Writing a Combined Function
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    Real functions rarely exercise just one skill at a time — here's
+    what it looks like when several show up together in a single,
+    realistic function, the way they do in your own project code.
     """)
     return
 
@@ -578,6 +599,16 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    Tracing — predicting exactly what a program does, one line at a
+    time — is the most reliable way to catch a bug before it ships,
+    and the only real way to understand code someone else wrote.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     Mix a default parameter, `enumerate`, a dictionary that
     accumulates as it goes, and a `None` result — trace it line by
     line before checking the answer.
@@ -644,6 +675,17 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md("""
+    A test is only useful if it's aimed at a specific way the code
+    could be wrong — not just any input. These are three of the
+    most common blind spots: places a careless test quietly passes
+    even when the function doesn't actually work.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md('''
     ```python
     def average_rating(ratings):
@@ -686,6 +728,17 @@ def _(mo):
 def _(mo):
     mo.md("""
     ## Debugging: Contract First
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    Most debugging mistakes don't come from not knowing Python —
+    they come from starting in the wrong place. Before touching any
+    code, the contract tells you exactly what "right" is supposed
+    to look like.
     """)
     return
 
