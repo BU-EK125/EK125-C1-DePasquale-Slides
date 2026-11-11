@@ -1106,8 +1106,13 @@ def _(mo):
     from solar_tools import summarize_output
     ```
 
-    No `.py` in the module name, and import the function itself,
-    not the whole module, since you'll call it unqualified.
+    `main.py` needs to *call* `summarize_output` without
+    redefining it, so it imports the already-written function
+    from the file it actually lives in. Two details matter: the
+    module name is the filename with no `.py`, and importing the
+    function itself (not the whole module) means you can write
+    `summarize_output(...)` directly, instead of
+    `solar_tools.summarize_output(...)`.
     """)
     return
 
@@ -1141,9 +1146,20 @@ def _(mo):
     mo.md('''
     ### ✅ `{"days_met": 3, "best_day": 3, "average": 5.04}`
 
-    `days_met` is 3 (the contract says "at or above" target, and
-    5.0 counts). `best_day` is 3, not 5 — days 3 and 5 tie at 6.1,
-    and ties go to the *earliest* day. `average` is `25.2 / 5`.
+    Walk the five days against `target = 5.0`:
+
+    | day | kwh | met? |
+    |-----|-----|------|
+    | 1   | 4.2 | no   |
+    | 2   | 5.0 | yes — equals target, counts as "at or above" |
+    | 3   | 6.1 | yes  |
+    | 4   | 3.8 | no   |
+    | 5   | 6.1 | yes  |
+
+    `days_met` is 3 (days 2, 3, 5). `best_day` is 3, not 5 — days
+    3 and 5 tie for the highest output at 6.1, and ties go to the
+    *earliest* day. `average` is the total output over all five
+    days, met or not: `(4.2+5.0+6.1+3.8+6.1) / 5 = 25.2 / 5 = 5.04`.
     ''')
     return
 
@@ -1179,8 +1195,11 @@ def _(mo):
     print(f"Best day: {summary['best_day']}")
     ```
 
-    Watch the quote style: single quotes inside an f-string that's
-    itself in double quotes.
+    `summary` is the dict from part (c), where `"best_day"` is
+    `3` — so the f-string drops that value in and the line prints
+    exactly `Best day: 3`. Watch the quote style: single quotes
+    around the dictionary key inside an f-string that's itself in
+    double quotes; mixing those up is a `SyntaxError`.
     ''')
     return
 
@@ -1214,11 +1233,22 @@ def _(mo):
     mo.md("""
     ### ✅ Three violations
 
+    The contract from part (a) promises exactly three keys —
+    `"days_met"` (int), `"best_day"` (int), `"average"` (float).
+    This stub runs without error because Python never checks
+    keys or types against a docstring, but it breaks the
+    contract three separate ways:
+
     1. `"Days_Met"` should be `"days_met"` — keys are case
-       sensitive, so this is a `KeyError` waiting to happen.
-    2. `best_day` is `4.0` (a float); the contract says `int`.
-    3. `average` is `"5.25"` (a string); the contract says `float`
-       — arithmetic on it would crash.
+       sensitive, so any caller that writes `summary["days_met"]`
+       hits a `KeyError`, even though a key named "the same thing"
+       is sitting right there.
+    2. `best_day` is `4.0`, a float; the contract promises `int`.
+       Code that assumes an index (`pages[best_day]`) could behave
+       oddly with a float instead.
+    3. `average` is `"5.25"`, a string; the contract promises
+       `float`. Any arithmetic on it — `summary["average"] * 2` —
+       crashes instead of computing.
     """)
     return
 

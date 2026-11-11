@@ -100,10 +100,19 @@ def _(mo):
     def apply_late_fee(balance, fee=0.25):
         return balance + fee
 
-    apply_late_fee(2.00)          # 2.25
-    apply_late_fee(2.00, 1.00)    # 3.00
-    apply_late_fee(balance=2.00, fee=1.00)
+    apply_late_fee(2.00)          # ?
+    apply_late_fee(2.00, 1.00)    # ?
+    apply_late_fee(balance=2.00, fee=1.00)  # ?
     ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ### ✅ Answer: `2.25`, `3.00`, `3.00`
+
     - First call: only `balance` is given, so `fee` falls back
       to its default, `0.25` → `2.00 + 0.25 = 2.25`
     - Second call: `1.00` fills `fee` positionally (it's the
@@ -120,8 +129,17 @@ def _(mo):
     ```python
     total = 2.00
     apply_late_fee(total)  # result discarded
-    print(total)            # 2.0 -- unchanged
+    print(total)            # ?
     ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ### ✅ Answer: `2.0` — unchanged
+
     - `apply_late_fee(total)` runs, computes `2.00 + 0.25 = 2.25`,
       and `return`s it — but nothing on that line catches it
     - Without writing `total = apply_late_fee(total)`, that
@@ -167,9 +185,9 @@ def _(mo):
     def show_title(title):
         print(f"Now reading: {title}")
 
-    show_title("Dune")        # prints the line
-    x = show_title("Dune")    # prints the line
-    print(x)                   # None
+    show_title("Dune")        # ?
+    x = show_title("Dune")    # ?
+    print(x)                   # ?
     ```
     ''')
     return
@@ -178,7 +196,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### Takeaway
+    ### ✅ Answer: `x` is `None`
 
     - `show_title("Dune")` prints the line and nothing is stored,
       so there's nothing to look at afterward
@@ -186,8 +204,18 @@ def _(mo):
       happens either way, whether or not you capture the result
     - There's no `return` in the function, so Python fills one in
       automatically: `None`. That's what ends up in `x`
-    - Printing and returning are separate actions — one produces
-      visible output, the other hands data back to the caller
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    Printing and returning are separate actions — one produces
+    visible output, the other hands data back to the caller. A
+    function with no `return` statement always hands back `None`.
     """)
     return
 
@@ -227,12 +255,25 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### Takeaway
+    ### ✅ Answer: `False 25`
 
     `goal = 30` inside the function creates a brand-new **local**
     variable — it doesn't touch the global `goal` at all. The
-    function compares against 30 (so `28 >= 30` is `False`), and
-    the global `goal` printed afterward is still 25.
+    function compares against its own local `30` (so `28 >= 30`
+    is `False`), and the global `goal` printed afterward is still
+    `25`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    Assigning to a name inside a function always creates a local
+    variable, even if a global one with the same name exists — it
+    never reaches out and modifies the global by that assignment.
     """)
     return
 
@@ -257,11 +298,24 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ### ✅ Answer: `NameError`
+
+    `summarize("dune")` runs fine and prints `4`. But `total` only
+    exists inside `summarize` — once the function returns, it's
+    gone. The last line raises `NameError`, since the main program
+    never defined its own `total`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ### Takeaway
 
-    `total` only exists inside `summarize` — once the function
-    returns, it's gone. The last line raises `NameError`, since
-    the main program never defined its own `total`.
+    A variable created inside a function only lives for as long as
+    that function is running — nothing outside the function can see
+    it, before or after the call.
     """)
     return
 
@@ -303,7 +357,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### Takeaway
+    ### ✅ Answer: `['Dune', 'Emma']` and `EMMA`
 
     - `shelf.append(title)` changes the *same* list object the
       caller passed in — so `books` becomes `["Dune", "Emma"]`,
@@ -314,8 +368,20 @@ def _(mo):
     - `return title` hands back that new string, so
       `print(books)` shows `['Dune', 'Emma']` and `print(result)`
       shows `EMMA`
-    - Lists are mutable (changed in place); strings and numbers
-      are not (any "change" is really a brand-new value)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    Lists are mutable, so an in-place change (`.append`, `.sort`,
+    `[i] = ...`) is visible outside the function. Strings and
+    numbers are not — any "change" to one is really a brand-new
+    value, and reassigning a parameter name never reaches back to
+    the caller's variable.
     """)
     return
 
@@ -352,11 +418,11 @@ def _(mo):
     mo.md('''
     ```python
     book = {"title": "Dune", "copies": 3}
-    "copies" in book         # True
-    3 in book                 # False, not a key
-    book.get("author")         # None, no error
-    book.get("author", "?")    # "?"
-    book["author"]              # KeyError
+    "copies" in book         # ?
+    3 in book                 # ?
+    book.get("author")         # ?
+    book.get("author", "?")    # ?
+    book["author"]              # ?
     ```
     ''')
     return
@@ -376,7 +442,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### Takeaway
+    ### ✅ Answer: `True`, `False`, `None`, `"?"`, `KeyError`
 
     - `"copies" in book` → `True`: `in` only ever looks at keys
     - `3 in book` → `False`: `3` is a *value* here, not a key, so
@@ -387,6 +453,19 @@ def _(mo):
       default returns that default instead
     - `book["author"]` → `KeyError`: square brackets are the only
       one of these that raises on a missing key
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    `in` on a dictionary always checks keys, never values.
+    `.get()` is the safe way to handle a key that might be
+    missing; square brackets are the only one of the three that
+    raises.
     """)
     return
 
@@ -415,11 +494,11 @@ def _(mo):
         "title": ["Dune", "Emma", "Kim"],
         "copies": [3, 1, 2],
     }
-    library["title"][1]    # "Emma"
-    len(library)             # 2 -- keys
-    len(library["title"])    # 3 -- books
-    library["title"][0:2]    # ["Dune", "Emma"]
-    library.get("author", [])  # [] -- safe
+    library["title"][1]    # ?
+    len(library)             # ?
+    len(library["title"])    # ?
+    library["title"][0:2]    # ?
+    library.get("author", [])  # ?
     ```
     ''')
     return
@@ -427,8 +506,8 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md("""
-    ### Takeaway
+    mo.md('''
+    ### ✅ Answer: `"Emma"`, `2`, `3`, `["Dune", "Emma"]`, `[]`
 
     - `library["title"][1]` → `"Emma"`: index into the list
       stored under the `"title"` key
@@ -441,6 +520,18 @@ def _(mo):
       slicing, once you're inside the right key
     - `library.get("author", [])` → `[]`: a missing key with an
       empty-list default, safe to loop over immediately
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    `len()` of the whole dictionary counts its keys; `len()` of
+    one of its lists counts that list's entries — two very
+    different numbers that are easy to mix up.
     """)
     return
 
@@ -521,6 +612,26 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ### ✅ Answer
+
+    ```
+    Mia: 3
+    Noah: 0
+    Ava: 0
+    ```
+
+    Mia's 4 weeks: `32, 0, 45, 50` — three are `>= 25`. Noah never
+    logged a page, so his empty list just never enters the inner
+    loop; `count` stays `0` with no special-case code required.
+    Ava's `20, 20, 20` never reaches the `25` goal, so she's `0`
+    too.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ### Takeaway
 
     `goal=25` is a default parameter; the manual `count` accumulator
@@ -552,9 +663,9 @@ def _(mo):
     mo.md('''
     ```python
     grid = np.array([[5, 10], [3, 8], [7, 2]])
-    grid.shape    # (3, 2)
-    grid[1, 0]    # 3
-    grid[:, 1]    # [10  8  2]
+    grid.shape    # ?
+    grid[1, 0]    # ?
+    grid[:, 1]    # ?
     ```
     ''')
     return
@@ -563,13 +674,25 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### Takeaway
+    ### ✅ Answer: `(3, 2)`, `3`, `[10  8  2]`
 
     - `grid.shape` → `(3, 2)`: 3 rows, 2 columns
     - `grid[1, 0]` → `3`: row index 1, column index 0 — the
       second row, `[3, 8]`, first entry
     - `grid[:, 1]` → `[10  8  2]`: every row (`:`), column index
       1 only — the second column, read top to bottom
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    `.shape` reports `(rows, columns)`. `arr[row, col]` indexes
+    directly — a colon in either spot grabs a whole row or column
+    instead of a single entry.
     """)
     return
 
@@ -595,10 +718,25 @@ def _(mo):
     mo.md('''
     ```python
     books = ["Dune", "Emma", "Kim", "1984"]
-    books[::-1]              # reversed
-    books[::2]                # every other book
-    list(range(10, 0, -2))    # [10, 8, 6, 4, 2]
+    books[::-1]              # ?
+    books[::2]                # ?
+    list(range(10, 0, -2))    # ?
     ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ### ✅ Answer
+
+    - `books[::-1]` reads the whole list backward:
+      `["1984", "Kim", "Emma", "Dune"]`
+    - `books[::2]` starts at the beginning and takes every
+      second entry: `["Dune", "Kim"]`
+    - `range(10, 0, -2)` counts down from 10, stopping before 0,
+      in steps of 2: `[10, 8, 6, 4, 2]`
     ''')
     return
 
@@ -608,12 +746,10 @@ def _(mo):
     mo.md("""
     ### Takeaway
 
-    - `books[::-1]` reads the whole list backward:
-      `["1984", "Kim", "Emma", "Dune"]`
-    - `books[::2]` starts at the beginning and takes every
-      second entry: `["Dune", "Kim"]`
-    - `range(10, 0, -2)` counts down from 10, stopping before 0,
-      in steps of 2: `[10, 8, 6, 4, 2]`
+    A negative step walks backward instead of forward; any other
+    step size just changes how many entries get skipped each
+    time. `range(start, stop, step)` follows the exact same rule
+    with plain numbers instead of a sequence.
     """)
     return
 
@@ -623,8 +759,8 @@ def _(mo):
     mo.md('''
     ```python
     tags = ["new"]
-    tags * 2            # ["new", "new"]
-    np.array([1, 2]) * 2   # [2 4]
+    tags * 2            # ?
+    np.array([1, 2]) * 2   # ?
     ```
     ''')
     return
@@ -633,13 +769,24 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### Takeaway
+    ### ✅ Answer: `["new", "new"]` and `[2 4]`
 
     - `tags * 2` repeats the list: `["new", "new"]` — the same
       element written out twice
     - `np.array([1, 2]) * 2` instead multiplies **each entry**
-      by 2: `[2 4]` — the same `*` operator means something
-      completely different once it's a NumPy array
+      by 2: `[2 4]`
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    The same `*` operator means something completely different
+    depending on the type it's applied to — repetition for a
+    plain list, element-wise multiplication for a NumPy array.
     """)
     return
 
@@ -701,6 +848,8 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ### ✅ Answer
+
     ```
     {'l': 1, 'i': 2, 'b': 1, 'r': 1, 's': 1}
     None
@@ -759,10 +908,34 @@ def _(mo):
     check("avg", 4.2, average_rating(r))
     check("avg", 4.2, round(average_rating(r), 1))
     ```
-    A correct function can still FAIL a `check()` that compares
-    floats with `==` — round inside the *test*, not the function,
-    unless the contract itself promises rounding.
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### ✅ Answer: first check FAILS, second check PASSES
+
+    `average_rating` is correct — `(4.0+4.1+4.5)/3` is
+    mathematically `4.2`. But floating-point arithmetic can store
+    that as something like `4.199999999999999` instead of exactly
+    `4.2`, so comparing with `==` fails even though the function
+    did its job. Rounding inside the *test* (not the function)
+    clears up that noise, so the second `check()` passes.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    Round inside the test, not the function, unless the contract
+    itself promises rounding — a correct function can still FAIL a
+    `check()` that compares floats with `==`.
+    """)
     return
 
 
@@ -770,13 +943,38 @@ def _(mo):
 def _(mo):
     mo.md('''
     ```python
-    check("at goal", True, meets_goal(25, 25))
+    check("at quota", True, reaches_quota(45, 45))
     tied = {"Mia": 50, "Ava": 50}
     check("earliest tie", "Mia", top_reader(tied))
     ```
-    A boundary test uses a value exactly at the goal. A tie test uses
-    two equal values to check which one the function picks.
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### ✅ Answer: both checks PASS
+
+    The first assumes `reaches_quota` treats `>=` as inclusive, so
+    a page count exactly equal to the quota still counts as
+    reaching it. The second assumes `top_reader` breaks a tie by
+    picking whichever name it saw *first* — here, `"Mia"`, since
+    she comes first in `tied`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    A boundary test uses a value exactly at the edge of a
+    condition (not safely inside or outside it). A tie test uses
+    two equal values to check which one a function picks when
+    there's no single "correct" one.
+    """)
     return
 
 
@@ -819,10 +1017,34 @@ def _(mo):
                 worst = i
         return worst
     ```
-    The docstring says "the lowest-page week" — but the code returns
-    a list **position**, not a week number. Read the contract before
-    the code: does "week" mean an index, or a label?
+    Does this function match its own contract?
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### ✅ Answer: no — it returns an index, not a week
+
+    The docstring says "the lowest-page week" — but the code
+    returns a list **position** (an `int` index into `pages`), not
+    a week number. If weeks are labeled starting at 1, or logged
+    out of order, that index doesn't actually identify the week at
+    all.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    Read the contract before the code: does "week" mean an index,
+    or a label? A function can run without error and still not do
+    what its own docstring promises.
+    """)
     return
 
 
@@ -833,33 +1055,33 @@ def _(mo):
     pages = [32, -999, 45, 50]  # -999 = not logged
     average = sum(pages) / len(pages)
     ```
-    A sentinel meant to signal "missing" corrupts the statistic if
-    nothing filters it out first — check the loader before trusting
-    the analyst's math.
+    What does `average` actually come out to?
     ''')
     return
 
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md('''
-    ```
-    Traceback (most recent call last):
-      File "main.py", line 10, in main
-        write_summary(stats, "out.txt")
-      File "reporter.py", line 6, in write_summary
-        f"Average: {stats['avg_pages']}"
-    KeyError: 'avg_pages'
-    ```
-    ```python
-    # Last line of summarize in analyzer.py:
-    return {"pages_avg": total / count}
-    ```
-    The crash is in `reporter.py`, but the dictionary was built in
-    `analyzer.py` — it returns `pages_avg`, not the contract's
-    `avg_pages`. The file that crashes and the file with the bug are
-    often not the same file.
-    ''')
+    mo.md("""
+    ### ✅ Answer: `-218.0`
+
+    `sum([32, -999, 45, 50])` is `-872`, divided by 4 entries is
+    `-218.0` — a wildly wrong "average" that the code never
+    complains about, because `-999` is just a number to Python,
+    not a flag meaning "missing."
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    A sentinel meant to signal "missing" corrupts the statistic if
+    nothing filters it out first — check the loader before
+    trusting the analyst's math.
+    """)
     return
 
 
@@ -909,10 +1131,35 @@ def _(mo):
     if __name__ == "__main__":
         test_apply_late_fee()
     ```
-    A test function defined like this runs when you execute this
-    file directly, but stays silent when a teammate's `main.py`
-    imports a function from it.
+    What happens when a teammate's `main.py` imports
+    `apply_late_fee` from this file?
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### ✅ Answer: nothing prints
+
+    `test_apply_late_fee()` only runs inside the
+    `if __name__ == "__main__":` block, and that block only
+    executes when *this* file is the one being run directly — not
+    when another file imports a function out of it.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    A test function guarded by `if __name__ == "__main__":` runs
+    when you execute this file directly, but stays silent on
+    import — exactly the behavior you want from a file's own
+    self-test.
+    """)
     return
 
 
