@@ -825,6 +825,8 @@ def _(mo):
 def _(mo):
     mo.md("""
     📖 [Review: Class 19](https://BU-EK125.github.io/EK125/class/Class19.html)
+
+    *General project/debugging practice — not tied to a specific item on the current exam.*
     """)
     return
 
