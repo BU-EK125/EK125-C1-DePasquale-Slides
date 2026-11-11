@@ -104,8 +104,12 @@ def _(mo):
     apply_late_fee(2.00, 1.00)    # 3.00
     apply_late_fee(balance=2.00, fee=1.00)
     ```
-    First call uses the default fee. Second overrides it
-    positionally. Third does the same by keyword.
+    - First call: only `balance` is given, so `fee` falls back
+      to its default, `0.25` → `2.00 + 0.25 = 2.25`
+    - Second call: `1.00` fills `fee` positionally (it's the
+      second parameter) → `2.00 + 1.00 = 3.00`
+    - Third call: the same two values, passed by name instead
+      of position — same result, `3.00`
     ''')
     return
 
@@ -118,9 +122,12 @@ def _(mo):
     apply_late_fee(total)  # result discarded
     print(total)            # 2.0 -- unchanged
     ```
-    A default is only used when the caller leaves that argument out.
-    Calling a function doesn't change the variable you passed in
-    unless you reassign it yourself.
+    - `apply_late_fee(total)` runs, computes `2.00 + 0.25 = 2.25`,
+      and `return`s it — but nothing on that line catches it
+    - Without writing `total = apply_late_fee(total)`, that
+      `2.25` is thrown away the moment the call finishes
+    - `total` itself was never reassigned, so it's still `2.00`
+      when printed
     ''')
     return
 
@@ -173,9 +180,14 @@ def _(mo):
     mo.md("""
     ### Takeaway
 
-    A function with no `return` statement always hands back `None` —
-    whatever it printed along the way is separate from what it
-    returned.
+    - `show_title("Dune")` prints the line and nothing is stored,
+      so there's nothing to look at afterward
+    - `x = show_title("Dune")` prints that same line — printing
+      happens either way, whether or not you capture the result
+    - There's no `return` in the function, so Python fills one in
+      automatically: `None`. That's what ends up in `x`
+    - Printing and returning are separate actions — one produces
+      visible output, the other hands data back to the caller
     """)
     return
 
@@ -293,10 +305,17 @@ def _(mo):
     mo.md("""
     ### Takeaway
 
-    `shelf.append(...)` changes the *same* list the caller passed
-    in — `books` becomes `["Dune", "Emma"]`. But `title = ...`
-    rebinds the local name only; the caller's own string is never
-    touched. Lists are mutable; strings (and numbers) are not.
+    - `shelf.append(title)` changes the *same* list object the
+      caller passed in — so `books` becomes `["Dune", "Emma"]`,
+      visible outside the function too
+    - `title = title.upper()` makes `title` point at a brand-new
+      string, `"EMMA"` — it never touches the caller's original
+      string, it just rebinds the local name
+    - `return title` hands back that new string, so
+      `print(books)` shows `['Dune', 'Emma']` and `print(result)`
+      shows `EMMA`
+    - Lists are mutable (changed in place); strings and numbers
+      are not (any "change" is really a brand-new value)
     """)
     return
 
@@ -359,8 +378,15 @@ def _(mo):
     mo.md("""
     ### Takeaway
 
-    `in` on a dictionary always checks keys, never values. `.get()`
-    never raises `KeyError`; square brackets do.
+    - `"copies" in book` → `True`: `in` only ever looks at keys
+    - `3 in book` → `False`: `3` is a *value* here, not a key, so
+      `in` never finds it
+    - `book.get("author")` → `None`: a missing key with no
+      default quietly returns `None`
+    - `book.get("author", "?")` → `"?"`: a missing key with a
+      default returns that default instead
+    - `book["author"]` → `KeyError`: square brackets are the only
+      one of these that raises on a missing key
     """)
     return
 
@@ -404,9 +430,17 @@ def _(mo):
     mo.md("""
     ### Takeaway
 
-    `len()` of the whole dictionary counts its keys; `len()` of one
-    of its lists counts that list's entries — two very different
-    numbers that are easy to mix up.
+    - `library["title"][1]` → `"Emma"`: index into the list
+      stored under the `"title"` key
+    - `len(library)` → `2`: the dictionary has two keys,
+      `"title"` and `"copies"` — `len()` counts *keys*
+    - `len(library["title"])` → `3`: that one list has three
+      books in it — a completely different number from the one
+      above, easy to mix up
+    - `library["title"][0:2]` → `["Dune", "Emma"]`: ordinary list
+      slicing, once you're inside the right key
+    - `library.get("author", [])` → `[]`: a missing key with an
+      empty-list default, safe to loop over immediately
     """)
     return
 
@@ -531,8 +565,11 @@ def _(mo):
     mo.md("""
     ### Takeaway
 
-    `.shape` reports (rows, columns). `arr[row, col]` indexes
-    directly — a colon in either spot grabs a whole row or column.
+    - `grid.shape` → `(3, 2)`: 3 rows, 2 columns
+    - `grid[1, 0]` → `3`: row index 1, column index 0 — the
+      second row, `[3, 8]`, first entry
+    - `grid[:, 1]` → `[10  8  2]`: every row (`:`), column index
+      1 only — the second column, read top to bottom
     """)
     return
 
@@ -568,15 +605,42 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    - `books[::-1]` reads the whole list backward:
+      `["1984", "Kim", "Emma", "Dune"]`
+    - `books[::2]` starts at the beginning and takes every
+      second entry: `["Dune", "Kim"]`
+    - `range(10, 0, -2)` counts down from 10, stopping before 0,
+      in steps of 2: `[10, 8, 6, 4, 2]`
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md('''
     ```python
     tags = ["new"]
     tags * 2            # ["new", "new"]
     np.array([1, 2]) * 2   # [2 4]
     ```
-    The same `*` operator, two completely different results,
-    depending only on whether it's a list or a NumPy array.
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    - `tags * 2` repeats the list: `["new", "new"]` — the same
+      element written out twice
+    - `np.array([1, 2]) * 2` instead multiplies **each entry**
+      by 2: `[2 4]` — the same `*` operator means something
+      completely different once it's a NumPy array
+    """)
     return
 
 

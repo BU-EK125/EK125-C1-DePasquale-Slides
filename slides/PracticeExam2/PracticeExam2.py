@@ -108,12 +108,21 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md("""
+    mo.md('''
     ### ✅ True
 
     Two different keys can map to the same value — only the keys
     themselves have to be distinct.
-    """)
+
+    ```python
+    grades = {"Alice": 90, "Bob": 90, "Charlie": 75}
+    ```
+    `"Alice"`, `"Bob"`, and `"Charlie"` are all distinct keys —
+    that's required. But `"Alice"` and `"Bob"` both map to `90`,
+    the same value, and that's completely fine. Trying to write
+    a second `"Alice"` key, on the other hand, would just
+    overwrite the first one instead of creating a duplicate.
+    ''')
     return
 
 
