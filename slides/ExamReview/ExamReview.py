@@ -34,7 +34,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## How to Use This Deck
+    ## Three Parts
     """)
     return
 
@@ -42,16 +42,17 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    For every problem:
+    For every problem: **try it yourself** first, using the question
+    as shown, then **advance** to see the answer and the reasoning
+    behind it.
 
-    1. **Try it yourself** first, using the question as shown.
-    2. **Advance** to see the answer and the reasoning behind it.
-
-    Three parts, back to back: **Practice Exam 2** (general syntax,
-    same style as Exam 1), **Project Practice** (a battery-rig
-    scenario built around the project skills — contracts, stubs,
-    tracing, debugging), then **Additional Review** — a few skills
-    neither practice set fully drills on its own.
+    - **Part One: Practice Exam 2** — general syntax, same style as
+      Exam 1.
+    - **Part Two: Additional Review** — a few skills neither
+      practice set fully drills on its own.
+    - **Part Three: Project Practice** — a battery-rig scenario
+      built around the project skills: contracts, stubs, tracing,
+      debugging.
     """)
     return
 
