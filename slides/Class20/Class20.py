@@ -140,6 +140,111 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ## Scope: Local vs. Global
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    goal = 25
+
+    def meets_goal(pages):
+        goal = 30
+        return pages >= goal
+
+    print(meets_goal(28), goal)
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    `goal = 30` inside the function creates a brand-new **local**
+    variable — it doesn't touch the global `goal` at all. The
+    function compares against 30 (so `28 >= 30` is `False`), and
+    the global `goal` printed afterward is still 25.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    def summarize(word):
+        total = 0
+        for ch in word:
+            total = total + 1
+        print(total)
+
+    summarize("dune")
+    print(total)
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    `total` only exists inside `summarize` — once the function
+    returns, it's gone. The last line raises `NameError`, since
+    the main program never defined its own `total`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## Mutable vs. Immutable Arguments
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md('''
+    ```python
+    def add_book(shelf, title):
+        shelf.append(title)
+        title = title.upper()
+        return title
+
+    books = ["Dune"]
+    result = add_book(books, "Emma")
+    print(books)
+    print(result)
+    ```
+    ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Takeaway
+
+    `shelf.append(...)` changes the *same* list the caller passed
+    in — `books` becomes `["Dune", "Emma"]`. But `title = ...`
+    rebinds the local name only; the caller's own string is never
+    touched. Lists are mutable; strings (and numbers) are not.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Dictionary Basics Under Pressure
     """)
     return
