@@ -1231,14 +1231,8 @@ def _(mo):
       and where a test needs to specifically target them.
     - **Follow the data**: the file that crashes isn't always the
       file with the bug.
-    """)
-    return
 
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ## Good Luck!
+    Good luck!
     """)
     return
 
