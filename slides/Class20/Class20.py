@@ -1087,53 +1087,6 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md('''
-    ```
-    Traceback (most recent call last):
-      File "main.py", line 6, in main
-        for s in scores:
-    TypeError: 'int' object is not iterable
-    ```
-    ```python
-    # Last line of compute_scores in scorer.py:
-    """Returns: a list of scores."""
-    return total
-    ```
-    Which file actually has the bug?
-    ''')
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ### ✅ Answer: `scorer.py`, not `main.py`
-
-    `main.py` tries to loop over `scores`, and crashes there
-    because that's where the mismatch first gets used. But the
-    actual contract violation is in `scorer.py`: the docstring
-    promises a list of scores, and the code hands back a single
-    `int` — the running `total` — instead.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md("""
-    ### Takeaway
-
-    The file that crashes and the file with the bug are often not
-    the same file — the traceback tells you where the program gave
-    up, not where the mistake was made. Here the wrong *type* broke
-    the contract, not a wrong key name — the same "check upstream
-    first" instinct still finds it.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def _(mo):
     mo.md("""
     📖 [Review: Class 18](https://BU-EK125.github.io/EK125/class/Class18.html)
     """)
