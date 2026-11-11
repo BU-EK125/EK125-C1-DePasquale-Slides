@@ -406,12 +406,11 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ### ✅ B — 16
+    ### ✅ A — 11
 
-    `*` binds tighter than `+`: `3 * 2` is 6 first, then
-    `5 + 6` is 11... wait, trace again: `y * 2` is `3 * 2 = 6`,
-    `x + 6` is `5 + 6 = 11`? Double-check with Python itself —
-    operator precedence always beats doing it in your head.
+    `*` binds tighter than `+`: `y * 2` is `3 * 2 = 6` first, then
+    `x + 6` is `5 + 6 = 11`. Operator precedence always beats
+    doing it purely in your head — trace it one step at a time.
     """)
     return
 
