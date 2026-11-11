@@ -1471,7 +1471,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## A Reading Challenge, for Practice
+    ## What's Covered
     """)
     return
 
@@ -1479,10 +1479,31 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    One scenario for everything today: a library tracks a summer
-    reading challenge. Readers log pages read per week; the library
-    tracks its own book inventory. None of this is from the real
-    exam — it's a fresh scenario to practice the same skills on.
+    - **Default parameters** — positional vs. keyword calls, and
+      what happens when you skip one
+    - **Functions with no return** — a function always hands back
+      something, even if it's `None`
+    - **Scope: local vs. global** — a name assigned inside a
+      function never touches the outer one
+    - **Mutable vs. immutable arguments** — a list change inside a
+      function is visible outside; a reassignment isn't
+    - **Dictionary basics** — `in` checks keys; `.get()` never
+      raises `KeyError`
+    - **Dict of lists / list of dicts** — know which `len()` you're
+      actually asking for
+    - **Writing a combined function** — a default parameter, a
+      manual counter, no `sum()`/`len()` shortcuts
+    - **2D NumPy** — `.shape` and `arr[row, col]` indexing
+    - **Slicing and repetition** — negative steps, and list `*` vs.
+      array `*`
+    - **Tracing** — follow the exact order of execution, including
+      what gets printed vs. returned
+    - **Testing: floats, boundaries, ties** — round before comparing
+      floats, and target the exact edge case
+    - **Debugging: contract first** — read the docstring before the
+      code, and watch for sentinel values
+    - **Quick review** — stub rules, import errors, and the course's
+      style rules
     """)
     return
 
