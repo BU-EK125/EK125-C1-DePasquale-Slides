@@ -86,6 +86,14 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md("""
+    📖 [Review: Class 10](https://BU-EK125.github.io/EK125/class/Class10.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md('''
     ## Problem 1: True/False (b)
 
@@ -115,6 +123,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 7](https://BU-EK125.github.io/EK125/class/Class7.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 1: True/False (c)
 
     In a dictionary, keys must be unique, but values do not need
@@ -130,6 +146,14 @@ def _(mo):
 
     Two different keys can map to the same value — only the keys
     themselves have to be distinct.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 12](https://BU-EK125.github.io/EK125/class/Class12.html)
     """)
     return
 
@@ -164,6 +188,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 12](https://BU-EK125.github.io/EK125/class/Class12.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 1: True/False (e)
 
     NumPy arrays can contain elements of different data types
@@ -179,6 +211,14 @@ def _(mo):
 
     NumPy arrays are homogeneous — every element shares one dtype.
     A Python list is what lets you mix types freely.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 11](https://BU-EK125.github.io/EK125/class/Class11.html)
     """)
     return
 
@@ -210,6 +250,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 14](https://BU-EK125.github.io/EK125/class/Class14.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 1: True/False (g)
 
     The slice `word[2:5]` includes the character at index 5.
@@ -224,6 +272,14 @@ def _(mo):
 
     The end index in a slice is always **exclusive** — `word[2:5]`
     stops right before index 5.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 10](https://BU-EK125.github.io/EK125/class/Class10.html)
     """)
     return
 
@@ -246,6 +302,14 @@ def _(mo):
 
     `[x for x in items if condition]` — the trailing `if` filters
     which values make it into the new list.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 7](https://BU-EK125.github.io/EK125/class/Class7.html)
     """)
     return
 
@@ -279,6 +343,14 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md("""
+    📖 [Review: Class 10](https://BU-EK125.github.io/EK125/class/Class10.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md('''
     ## Problem 2: Multiple Choice (b)
 
@@ -301,6 +373,14 @@ def _(mo):
 
     `myDict["d"] = 4` adds a new key (now 4 keys). Reassigning
     `"a"` changes a value in place — it doesn't add a key.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 12](https://BU-EK125.github.io/EK125/class/Class12.html)
     """)
     return
 
@@ -338,6 +418,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 13](https://BU-EK125.github.io/EK125/class/Class13.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 2: Multiple Choice (d)
 
     Which statement is true about NumPy arrays?
@@ -358,6 +446,14 @@ def _(mo):
     `arr * 2`, `arr + arr`, `arr > 5` all apply to every element
     at once — no loop needed. That's the core reason to reach for
     NumPy over a plain list.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 11](https://BU-EK125.github.io/EK125/class/Class11.html)
     """)
     return
 
@@ -396,6 +492,14 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md("""
+    📖 [Review: Class 12](https://BU-EK125.github.io/EK125/class/Class12.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md('''
     ## Problem 3: Expression Evaluation (b)
 
@@ -414,6 +518,14 @@ def _(mo):
 
     `.keys()` returns a *view* of the keys, in insertion order —
     not a plain list, though it behaves like one in a loop.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 12](https://BU-EK125.github.io/EK125/class/Class12.html)
     """)
     return
 
@@ -444,6 +556,14 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md("""
+    📖 [Review: Class 10](https://BU-EK125.github.io/EK125/class/Class10.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md('''
     ## Problem 3: Expression Evaluation (d)
 
@@ -468,6 +588,14 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md("""
+    📖 [Review: Class 10](https://BU-EK125.github.io/EK125/class/Class10.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md('''
     ## Problem 3: Expression Evaluation (e)
 
@@ -484,6 +612,14 @@ def _(mo):
     ### ✅ `[0, 1, 4, 9]`
 
     Squares of 0, 1, 2, 3 — `range(4)` stops before 4.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 7](https://BU-EK125.github.io/EK125/class/Class7.html)
     """)
     return
 
@@ -515,6 +651,14 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md("""
+    📖 [Review: Class 11](https://BU-EK125.github.io/EK125/class/Class11.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md('''
     ## Problem 3: Expression Evaluation (g)
 
@@ -539,6 +683,14 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md("""
+    📖 [Review: Class 12](https://BU-EK125.github.io/EK125/class/Class12.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md('''
     ## Problem 3: Expression Evaluation (h)
 
@@ -556,6 +708,14 @@ def _(mo):
 
     2, then 2+3=5, then 5+3=8; the next value (11) would be past
     10, so the sequence stops.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 10](https://BU-EK125.github.io/EK125/class/Class10.html)
     """)
     return
 
@@ -589,6 +749,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 7](https://BU-EK125.github.io/EK125/class/Class7.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 4 (a): `matrix[1][2]`
     """)
     return
@@ -607,6 +775,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 7](https://BU-EK125.github.io/EK125/class/Class7.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 4 (b): `matrix[0]`
     """)
     return
@@ -618,6 +794,14 @@ def _(mo):
     ### ✅ `[1, 2, 3]`
 
     The whole first row, as a list.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 7](https://BU-EK125.github.io/EK125/class/Class7.html)
     """)
     return
 
@@ -644,6 +828,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 7](https://BU-EK125.github.io/EK125/class/Class7.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 4 (d): `matrix[-1][0]`
     """)
     return
@@ -655,6 +847,14 @@ def _(mo):
     ### ✅ `7`
 
     `-1` is the last row (`[7, 8, 9]`); position 0 is `7`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 7](https://BU-EK125.github.io/EK125/class/Class7.html)
     """)
     return
 
@@ -685,6 +885,14 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md("""
+    📖 [Review: Class 7](https://BU-EK125.github.io/EK125/class/Class7.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md('''
     ## Problem 4 (f)
 
@@ -702,6 +910,14 @@ def _(mo):
 
     The first element of each row — a classic "grab one column"
     comprehension.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 7](https://BU-EK125.github.io/EK125/class/Class7.html)
     """)
     return
 
@@ -727,6 +943,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 7](https://BU-EK125.github.io/EK125/class/Class7.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 4 (h): `coordinates[1][1]`
     """)
     return
@@ -738,6 +962,14 @@ def _(mo):
     ### ✅ `2`
 
     `coordinates[1]` is the tuple `(1, 2)`; its position 1 is `2`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 7](https://BU-EK125.github.io/EK125/class/Class7.html)
     """)
     return
 
@@ -786,6 +1018,14 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md("""
+    📖 [Review: Class 13](https://BU-EK125.github.io/EK125/class/Class13.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md('''
     ## Problem 6: Write a Function
 
@@ -815,6 +1055,14 @@ def _(mo):
     💡 Check the empty-list case *first* — dividing by `len([])`
     would crash with `ZeroDivisionError` otherwise.
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 13](https://BU-EK125.github.io/EK125/class/Class13.html)
+    """)
     return
 
 
@@ -858,6 +1106,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 16](https://BU-EK125.github.io/EK125/class/Class16.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 7 (b)
 
     Write the import line for `summarize_output`, which lives in
@@ -877,6 +1133,14 @@ def _(mo):
 
     No `.py` in the module name, and import the function itself,
     not the whole module, since you'll call it unqualified.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 16](https://BU-EK125.github.io/EK125/class/Class16.html)
     """)
     return
 
@@ -912,6 +1176,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 16](https://BU-EK125.github.io/EK125/class/Class16.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 7 (d)
 
     Using `summary` from part (c), print exactly:
@@ -935,6 +1207,14 @@ def _(mo):
     Watch the quote style: single quotes inside an f-string that's
     itself in double quotes.
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 16](https://BU-EK125.github.io/EK125/class/Class16.html)
+    """)
     return
 
 
@@ -971,6 +1251,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 16](https://BU-EK125.github.io/EK125/class/Class16.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 8: List Comprehensions (a)
 
     Create a list of squares of 1 through 10 (inclusive):
@@ -991,6 +1279,14 @@ def _(mo):
     `range(1, 11)` is the "inclusive of 10" trick: stop one past
     the value you want to include.
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 7](https://BU-EK125.github.io/EK125/class/Class7.html)
+    """)
     return
 
 
@@ -1020,6 +1316,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 7](https://BU-EK125.github.io/EK125/class/Class7.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 8 (c)
 
     `numbers = [1, 2, ..., 10]` — keep only the even numbers:
@@ -1040,6 +1344,14 @@ def _(mo):
     💡 If you can write the `for` loop version first, the
     comprehension is just that loop flattened onto one line.
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 7](https://BU-EK125.github.io/EK125/class/Class7.html)
+    """)
     return
 
 
@@ -1087,6 +1399,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 14](https://BU-EK125.github.io/EK125/class/Class14.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 10: NumPy Array Operations
 
     Create an array `[10, 20, 30, 40, 50]`, multiply it by 3, and
@@ -1116,6 +1436,14 @@ def _(mo):
     💡 `arr * 3` makes a *new* array — it never changes `arr`
     itself unless you reassign it back.
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 11](https://BU-EK125.github.io/EK125/class/Class11.html)
+    """)
     return
 
 
@@ -1172,6 +1500,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 18](https://BU-EK125.github.io/EK125/class/Class18.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 1 (b)
 
     Which function is off-contract — and how do you know?
@@ -1192,6 +1528,14 @@ def _(mo):
     print(f"Peak: {summary['peak_kn']} kN")
     ```
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 18](https://BU-EK125.github.io/EK125/class/Class18.html)
+    """)
     return
 
 
@@ -1222,6 +1566,14 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md("""
+    📖 [Review: Class 18](https://BU-EK125.github.io/EK125/class/Class18.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md('''
     ## Problem 2: Write a Precise Contract (a)
 
@@ -1243,6 +1595,14 @@ def _(mo):
     Is the return a dict or a list? What are the exact keys? Are
     values `int` or `float`? What happens to blank or `-999`
     rows? What units? Does it print anything?
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 15](https://BU-EK125.github.io/EK125/class/Class15.html)
     """)
     return
 
@@ -1284,6 +1644,14 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md("""
+    📖 [Review: Class 15](https://BU-EK125.github.io/EK125/class/Class15.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md('''
     ## Problem 3: Faithful Stubs (a)
 
@@ -1311,6 +1679,14 @@ def _(mo):
     instead of returning — the function gives back `None`. C
     misspells the key (`"cell"` instead of `"cell_id"`) — a
     `KeyError` waiting to happen.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 16](https://BU-EK125.github.io/EK125/class/Class16.html)
     """)
     return
 
@@ -1360,6 +1736,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 16](https://BU-EK125.github.io/EK125/class/Class16.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 3 (b)
 
     A stub hard-codes `cell_id: "B7"`. The program calls it for
@@ -1377,6 +1761,14 @@ def _(mo):
     It runs, but you can't tell whether `main.py` passed the right
     IDs. Passing `cell_id` through lets the skeleton prove each
     argument arrived where it should.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 16](https://BU-EK125.github.io/EK125/class/Class16.html)
     """)
     return
 
@@ -1431,6 +1823,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 16](https://BU-EK125.github.io/EK125/class/Class16.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 4 (b)
 
     Output when you run `cellmath.py` directly instead?
@@ -1450,6 +1850,14 @@ def _(mo):
 
     `test_to_percent()` only runs here, because `__name__` equals
     `"__main__"` only when the file itself is run directly.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 16](https://BU-EK125.github.io/EK125/class/Class16.html)
     """)
     return
 
@@ -1479,6 +1887,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 16](https://BU-EK125.github.io/EK125/class/Class16.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 4 (d)
 
     What error does each import line cause, in `main.py`?
@@ -1499,6 +1915,14 @@ def _(mo):
     2. `ImportError: cannot import name 'to_pct'` — file found,
        function name wrong.
     3. `ModuleNotFoundError` — capitalization must match exactly.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 16](https://BU-EK125.github.io/EK125/class/Class16.html)
     """)
     return
 
@@ -1537,6 +1961,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 18](https://BU-EK125.github.io/EK125/class/Class18.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 5 (b)
 
     Which variable is `None`? Which function created that value?
@@ -1551,6 +1983,14 @@ def _(mo):
 
     It was created by `assess_cell` in `analyzer.py` (main.py line
     8), then handed to `format_cell`.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 18](https://BU-EK125.github.io/EK125/class/Class18.html)
     """)
     return
 
@@ -1581,6 +2021,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 18](https://BU-EK125.github.io/EK125/class/Class18.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 5 (d)
 
     Write one temporary line, added between lines 8 and 9 of
@@ -1601,6 +2049,14 @@ def _(mo):
     It would show `<class 'NoneType'>` instead of the expected
     `<class 'dict'>`.
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 18](https://BU-EK125.github.io/EK125/class/Class18.html)
+    """)
     return
 
 
@@ -1637,6 +2093,14 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md("""
+    📖 [Review: Class 19](https://BU-EK125.github.io/EK125/class/Class19.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md('''
     ## Problem 6 (b)
 
@@ -1654,6 +2118,14 @@ def _(mo):
     ### ✅ SYNTAX
 
     Missing colon. Fix: `if voltage > 4.2:`
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 19](https://BU-EK125.github.io/EK125/class/Class19.html)
     """)
     return
 
@@ -1691,6 +2163,14 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md("""
+    📖 [Review: Class 19](https://BU-EK125.github.io/EK125/class/Class19.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md('''
     ## Problem 6 (d)
 
@@ -1718,6 +2198,14 @@ def _(mo):
     for i in range(len(values) - 1):
     ```
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 19](https://BU-EK125.github.io/EK125/class/Class19.html)
+    """)
     return
 
 
@@ -1758,6 +2246,14 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md("""
+    📖 [Review: Class 19](https://BU-EK125.github.io/EK125/class/Class19.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md('''
     ## Problem 6 (f)
 
@@ -1780,6 +2276,14 @@ def _(mo):
     print(result["fade_pct"])
     ```
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 19](https://BU-EK125.github.io/EK125/class/Class19.html)
+    """)
     return
 
 
@@ -1832,6 +2336,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 19](https://BU-EK125.github.io/EK125/class/Class19.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 7 (b)
 
     What does the function return as written? What *should* it
@@ -1847,6 +2359,14 @@ def _(mo):
 
     Two bugs are hiding in those two numbers — find them in the
     next part.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 19](https://BU-EK125.github.io/EK125/class/Class19.html)
     """)
     return
 
@@ -1886,6 +2406,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 19](https://BU-EK125.github.io/EK125/class/Class19.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 7 (d)
 
     Write two `check()` calls that FAIL on the buggy code and
@@ -1916,6 +2444,14 @@ def _(mo):
     A test with no tie and no boundary value would PASS on both
     the buggy and fixed code — it wouldn't catch either bug.
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 17](https://BU-EK125.github.io/EK125/class/Class17.html)
+    """)
     return
 
 
@@ -1962,6 +2498,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 17](https://BU-EK125.github.io/EK125/class/Class17.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 8 (b)
 
     Now write `percent_in_range` so all four tests pass.
@@ -1989,6 +2533,14 @@ def _(mo):
     `ZeroDivisionError` — exactly the bug the smallest-input test
     exists to catch.
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 17](https://BU-EK125.github.io/EK125/class/Class17.html)
+    """)
     return
 
 
@@ -2037,6 +2589,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 14](https://BU-EK125.github.io/EK125/class/Class14.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Problem 10: Write the Main Program
 
     Three functions, three files: `load_cycles`, `assess_metric`,
@@ -2077,6 +2637,14 @@ def _(mo):
     makes "no globals" automatic — call `write_report` once,
     after the loop, not inside it.
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 18](https://BU-EK125.github.io/EK125/class/Class18.html)
+    """)
     return
 
 
@@ -2192,6 +2760,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 13](https://BU-EK125.github.io/EK125/class/Class13.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Functions With No Return
     """)
     return
@@ -2220,6 +2796,14 @@ def _(mo):
     A function with no `return` statement always hands back `None` —
     whatever it printed along the way is separate from what it
     returned.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 13](https://BU-EK125.github.io/EK125/class/Class13.html)
     """)
     return
 
@@ -2293,6 +2877,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 14](https://BU-EK125.github.io/EK125/class/Class14.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Mutable vs. Immutable Arguments
     """)
     return
@@ -2325,6 +2917,14 @@ def _(mo):
     in — `books` becomes `["Dune", "Emma"]`. But `title = ...`
     rebinds the local name only; the caller's own string is never
     touched. Lists are mutable; strings (and numbers) are not.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 13](https://BU-EK125.github.io/EK125/class/Class13.html)
     """)
     return
 
@@ -2377,6 +2977,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 12](https://BU-EK125.github.io/EK125/class/Class12.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Dict of Lists, List of Dicts
     """)
     return
@@ -2408,6 +3016,14 @@ def _(mo):
     `len()` of the whole dictionary counts its keys; `len()` of one
     of its lists counts that list's entries — two very different
     numbers that are easy to mix up.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 12](https://BU-EK125.github.io/EK125/class/Class12.html)
     """)
     return
 
@@ -2483,6 +3099,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 13](https://BU-EK125.github.io/EK125/class/Class13.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## 2D NumPy
     """)
     return
@@ -2508,6 +3132,14 @@ def _(mo):
 
     `.shape` reports (rows, columns). `arr[row, col]` indexes
     directly — a colon in either spot grabs a whole row or column.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 11](https://BU-EK125.github.io/EK125/class/Class11.html)
     """)
     return
 
@@ -2544,6 +3176,14 @@ def _(mo):
     The same `*` operator, two completely different results,
     depending only on whether it's a list or a NumPy array.
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 10](https://BU-EK125.github.io/EK125/class/Class10.html)
+    """)
     return
 
 
@@ -2609,6 +3249,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 13](https://BU-EK125.github.io/EK125/class/Class13.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Testing: Floats, Boundaries, Ties
     """)
     return
@@ -2643,6 +3291,14 @@ def _(mo):
     A boundary test uses a value exactly at the goal. A tie test uses
     two equal values to check which one the function picks.
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 17](https://BU-EK125.github.io/EK125/class/Class17.html)
+    """)
     return
 
 
@@ -2713,6 +3369,14 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    📖 [Review: Class 18](https://BU-EK125.github.io/EK125/class/Class18.html)
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Quick Review
     """)
     return
@@ -2750,6 +3414,14 @@ def _(mo):
     file directly, but stays silent when a teammate's `main.py`
     imports a function from it.
     ''')
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    📖 [Review: Class 16](https://BU-EK125.github.io/EK125/class/Class16.html)
+    """)
     return
 
 
