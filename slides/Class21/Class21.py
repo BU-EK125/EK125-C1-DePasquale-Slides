@@ -144,6 +144,24 @@ def _(plt):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ### Reading this code
+
+    - `plt.subplots()` with no arguments hands back two things at
+      once: a **Figure** (`fig`) -- the whole blank page -- and one
+      **Axes** (`ax`) -- one actual plotting area drawn on that page
+    - Everything about the plot itself -- `.plot()`, and later
+      `.set_xlabel()`, `.legend()`, `.grid()` -- is called on `ax`,
+      not `fig`
+    - The bare `fig` on its own last line is what displays the
+      figure. Without it, the plot would exist but nothing would
+      show up at all
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     `plt.plot()` connects the points `(1,2)`, `(2,4)`, ... `(5,10)` with
     straight lines. It works -- but a reader has no idea what either
     axis even means.
