@@ -25,6 +25,10 @@ def _(mo):
 
     📖 [Full reading: Class 21](https://BU-EK125.github.io/EK125/class/Class21.html)
     📋 [Group Practice: Class 21](https://BU-EK125.github.io/EK125/gpps/Class21_GPP.html)
+
+    *Curious how these slides work? They're built with
+    [marimo](https://marimo.io), a Python notebook that runs live,
+    right in your browser.*
     """)
     return
 
