@@ -771,7 +771,30 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Plotting Directly From a Pandas DataFrame
+    ## Working With Pandas DataFrames
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    `pandas` is Python's main library for tabular data -- the kind
+    you'd see in a spreadsheet, with named columns and rows. Its core
+    object is the **DataFrame**. The convention is to import it as
+    `pd`:
+
+    ```python
+    import pandas as pd
+
+    data = {"Month": ["Jan", "Feb", "Mar"],
+            "Sales": [150, 200, 175]}
+    df = pd.DataFrame(data)
+    ```
+
+    Each dictionary key becomes a column name, and each list becomes
+    that column's values -- `df["Sales"]` pulls out a column exactly
+    the way a plain list would.
     """)
     return
 
@@ -826,28 +849,15 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md('''
-    Geographic data gets its own library, `folium`, which draws
-    heatmaps on a real OpenStreetMap:
-
-    ```python
-    import folium
-    from folium.plugins import HeatMap
-
-    boston_map = folium.Map(
-        location=[42.3601, -71.0589], zoom_start=13)
-    HeatMap(coffee_shop_data, radius=15,
-            blur=25).add_to(boston_map)
-    boston_map.save("boston_heatmap.html")
-    ```
-
-    The reading's Appendix also tours **Plotly** (interactive,
-    zoomable), **Seaborn** (statistical plots with nicer defaults),
-    **Altair**, and **Bokeh**. None of these are required for this
-    course -- matplotlib stays the foundation because it's the most
-    widely supported and gives you the most direct control -- but
-    they're worth knowing exist for your own projects later.
-    ''')
+    mo.md("""
+    The reading's Appendix tours several more libraries: **folium**
+    (geographic heatmaps on a real map), **Plotly** (interactive,
+    zoomable plots), **Seaborn** (statistical plots with nicer
+    defaults), **Altair**, and **Bokeh**. None of these are required
+    for this course -- matplotlib stays the foundation because it's
+    the most widely supported and gives you the most direct control
+    -- but they're worth knowing exist for your own projects later.
+    """)
     return
 
 
