@@ -115,7 +115,9 @@ def _(mo):
     In PyCharm, `matplotlib` must be installed in your project once
     before you can import it (Python Packages tool window, or
     `pip install matplotlib` in the Terminal) -- unlike Colab, where
-    it's already there.
+    it's already there. Same steps as installing NumPy back in
+    [Class 11](https://BU-EK125.github.io/EK125/class/Class11.html),
+    just a different package name.
     """)
     return
 
