@@ -269,11 +269,48 @@ def _(plt):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    `s` controls marker size -- it can carry information too, not just
+    looks. Here it stands in for a third variable, shoe size:
+    """)
+    return
+
+
+@app.cell
+def _(mo):
+    size_scale_slider = mo.ui.slider(5, 60, value=20, step=5,
+                                      label="Size scale (points per shoe size)")
+    size_scale_slider
+    return (size_scale_slider,)
+
+
+@app.cell
+def _(plt, size_scale_slider):
+    _heights = [160, 165, 170, 175, 180, 185]
+    _weights = [60, 65, 70, 75, 80, 85]
+    _shoe_size = [7, 8, 8, 9, 10, 11]
+    _scale = size_scale_slider.value
+    _sizes = [s * _scale / 8 for s in _shoe_size]
+
+    _fig, _ax = plt.subplots(figsize=(6, 3.8))
+    _ax.scatter(_heights, _weights, color="blue", s=_sizes, alpha=0.6)
+    _ax.set_xlabel("Height (cm)")
+    _ax.set_ylabel("Weight (kg)")
+    _ax.set_title("Height vs. Weight (marker size = shoe size)")
+    _fig
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ### Takeaway
 
     Use a scatter plot for the relationship between two variables when
     each point is a separate, independent measurement -- connecting
     them with a line would imply an order that isn't really there.
+    Marker size (`s=`) can encode a third variable directly on the
+    same plot, the way it did for "hours of sleep" in the reading's
+    own bubble-size example.
     """)
     return
 
@@ -307,12 +344,48 @@ def _(plt):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    Drag the cutoff itself and watch which metals cross the line:
+    """)
+    return
+
+
+@app.cell
+def _(mo):
+    cutoff_slider = mo.ui.slider(1.0, 12.0, value=5.0, step=0.5,
+                                  label="Light/heavy cutoff (g/cm3)")
+    cutoff_slider
+    return (cutoff_slider,)
+
+
+@app.cell
+def _(cutoff_slider, plt):
+    _metals = ["Aluminum", "Titanium", "Steel", "Copper", "Lead"]
+    _density_g_per_cm3 = [2.70, 4.51, 7.85, 8.96, 11.34]
+    _cutoff = cutoff_slider.value
+    _light = [m for m, d in zip(_metals, _density_g_per_cm3) if d < _cutoff]
+
+    _fig, _ax = plt.subplots(figsize=(6, 3.5))
+    _ax.bar(_metals, _density_g_per_cm3, color="gray")
+    _ax.axhline(y=_cutoff, color="red", linestyle="--",
+                label=f"Cutoff: {_cutoff:g} g/cm3")
+    _ax.set_ylabel("Density (g/cm$^3$)")
+    _ax.set_title(f"Light metals: {', '.join(_light) if _light else '(none)'}")
+    _ax.legend()
+    _ax.grid(axis="y")
+    _fig
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ### Takeaway
 
     Bar charts compare one number across categories. `plt.axhline()`
     draws a reference line across the whole plot -- useful for a
-    cutoff or a target value, the way it's used here to separate
-    "light" metals (aluminum, titanium) from "heavy" ones.
+    cutoff or a target value. Drag it low enough and every metal is
+    "heavy"; drag it above 11.34 and every metal is "light" -- the
+    cutoff is a choice, not a fact about the data.
     """)
     return
 
@@ -610,11 +683,45 @@ def _(np, plt):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    How few points does it take before "smooth" breaks down?
+    """)
+    return
+
+
+@app.cell
+def _(mo):
+    points_slider = mo.ui.slider(3, 100, value=100, step=1,
+                                  label="Number of points")
+    points_slider
+    return (points_slider,)
+
+
+@app.cell
+def _(np, plt, points_slider):
+    _n = points_slider.value
+    _x_values = np.linspace(0, 10, _n)
+    _y_values = np.sin(_x_values)
+
+    _fig, _ax = plt.subplots(figsize=(6, 3.8))
+    _ax.plot(_x_values, _y_values, marker="o" if _n <= 30 else None)
+    _ax.set_xlabel("x")
+    _ax.set_ylabel("sin(x)")
+    _ax.set_title(f"Sine Function ({_n} points)")
+    _ax.grid(True)
+    _fig
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ### Takeaway
 
     100 points, not just a handful, is what makes this curve look
-    smooth. `matplotlib` plots NumPy arrays exactly as happily as it
-    plots plain lists.
+    smooth. Drag down toward 3-5 points and `matplotlib` still
+    connects them with straight lines -- the curve doesn't get wrong,
+    it just stops looking like a sine wave. `matplotlib` plots NumPy
+    arrays exactly as happily as it plots plain lists.
     """)
     return
 
