@@ -153,8 +153,14 @@ def _(mo):
       `.set_xlabel()`, `.legend()`, `.grid()` -- is called on `ax`,
       not `fig`
     - The bare `fig` on its own last line is what displays the
-      figure. Without it, the plot would exist but nothing would
-      show up at all
+      figure **on this slide** -- notebooks (this deck, and Colab)
+      auto-display whatever a cell's last bare expression evaluates
+      to, the same way a lone `2 + 2` would just print `4`
+    - **In a PyCharm script, that trick does nothing.** There's no
+      notebook display hook, so a bare `fig` silently does nothing at
+      all. That's why every GPP and the reading itself always end
+      with `plt.show()` -- call that explicitly to display every
+      currently open figure
     """)
     return
 
