@@ -68,6 +68,22 @@ anymore -- except two places this script cleans up:
    ```python body, unindented) followed by a markdown cell for any
    trailing caption -- the hand-typed *output* fence is dropped
    entirely, since running the cell for real produces its own output.
+
+5. A code cell shaped exactly like `name = mo.ui.slider(...)` followed
+   by a bare `name` (the slides-side pattern for a live, draggable
+   control -- see CONVENTIONS.md). There's no marimo runtime on Colab
+   to make the widget interactive, and downstream cells read the
+   slider's current position as `name.value`, so a bare `NameError` on
+   `mo` isn't the only failure mode -- a plain number swapped in for
+   `name` would fix this cell but break every downstream one with
+   `AttributeError: 'int' object has no attribute 'value'`. Instead the
+   cell is rewritten to a tiny stand-in that still has a `.value`:
+   `name = type("_StaticSlider", (), {"value": <default>})()`, where
+   `<default>` is the `value=` keyword from the original call if it
+   gave one, else the slider's `start` (its first positional argument)
+   -- exactly what `mo.ui.slider()` itself defaults to when `value` is
+   omitted. Every downstream cell that reads `name.value` keeps working
+   unchanged, just frozen at that one starting value instead of live.
 """
 
 import ast
@@ -123,6 +139,57 @@ def is_iframe_cell(source: str) -> bool:
     unlike `as_html_cell`, nothing is extracted from it."""
     call = _parse_call(source)
     return call is not None and _is_mo_attr(call.func, "iframe")
+
+
+def static_slider_source(source: str):
+    """`name = mo.ui.slider(...)` [+ bare `name`] -> a rewritten source
+    defining `name` as a static stand-in with the slider's starting
+    `.value` (see docstring case 5), or None if `source` doesn't match
+    that exact shape."""
+    try:
+        tree = ast.parse(source.strip())
+    except SyntaxError:
+        return None
+    body = tree.body
+    if len(body) not in (1, 2):
+        return None
+    assign = body[0]
+    if (
+        not isinstance(assign, ast.Assign)
+        or len(assign.targets) != 1
+        or not isinstance(assign.targets[0], ast.Name)
+    ):
+        return None
+    name = assign.targets[0].id
+    call = assign.value
+    # mo.ui.slider(...) -- mo.ui is itself an attribute access off `mo`,
+    # so this is two nested Attribute nodes, not the single-level shape
+    # `_is_mo_attr` checks for (that's for plain `mo.<name>(...)` calls).
+    if not (
+        isinstance(call, ast.Call)
+        and isinstance(call.func, ast.Attribute)
+        and call.func.attr == "slider"
+        and isinstance(call.func.value, ast.Attribute)
+        and call.func.value.attr == "ui"
+        and isinstance(call.func.value.value, ast.Name)
+        and call.func.value.value.id == "mo"
+    ):
+        return None
+    if len(body) == 2:
+        display = body[1]
+        if not (
+            isinstance(display, ast.Expr)
+            and isinstance(display.value, ast.Name)
+            and display.value.id == name
+        ):
+            return None
+    default_node = next((kw.value for kw in call.keywords if kw.arg == "value"), None)
+    if default_node is None:
+        if not call.args:
+            return None
+        default_node = call.args[0]
+    default_src = ast.unparse(default_node)
+    return f'{name} = type("_StaticSlider", (), {{"value": {default_src}}})()'
 
 
 _HANDTYPED_CODE_OUTPUT_RE = re.compile(
@@ -182,6 +249,11 @@ for cell in nb["cells"]:
             new_cells.append(cell)
             continue
         if is_iframe_cell(source):
+            continue
+        static_slider = static_slider_source(source)
+        if static_slider is not None:
+            cell = {**cell, "source": static_slider}
+            new_cells.append(cell)
             continue
         html = as_html_cell(source)
         if html is not None:
