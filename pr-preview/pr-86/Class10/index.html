@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-CZceb_kH.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-Bam3NpBI.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-C_DwAp7Z.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-CEsLFVD9.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-D5MAsWEG.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-C6PDArdf.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        const scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          const element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          const newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((_entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>Class10</title>
+    <script type="module" crossorigin src="./assets/index-CgQsZfww.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/rolldown-runtime-B0Z9INg1.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-CUdNIagt.js">
+    <link rel="modulepreload" crossorigin href="./assets/compiler-runtime-BQ9S8nyo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-Dc9HkKI2.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-CKsE8sC1.js">
+    <link rel="modulepreload" crossorigin href="./assets/schemas-BL-NsLlF.js">
+    <link rel="modulepreload" crossorigin href="./assets/isObject-BCaOs5rp.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-oX0TOjjx.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-Cmx0b_zA.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-aFmHgJZY.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DnwgSs_Z.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseMerge-CQpUq7ep.js">
+    <link rel="modulepreload" crossorigin href="./assets/objects-snlMn4yk.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-B74pBk57.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-BdZUApHd.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-Ci2dTZ72.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-B3E7otfg.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-BDbGiS7O.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-CrTnjj37.js">
+    <link rel="modulepreload" crossorigin href="./assets/session-C8nQMsOE.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-CmBpjGXk.js">
+    <link rel="modulepreload" crossorigin href="./assets/clsx-DB0hHKMi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-ldLVeaqm.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-BmzAqMKq.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CyYN7zJg.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-BBdeXCvU.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-restore-focus-B98SEiGc.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-BoklZTGL.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-rHn2EdoM.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-Wea4hZ6R.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-BFOBKCJB.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-C4-_TnkF.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-BplWpfFo.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-CeQt3rdW.js">
+    <link rel="modulepreload" crossorigin href="./assets/toast-KNfsFUiB.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-DR2Z2N4w.js">
+    <link rel="modulepreload" crossorigin href="./assets/paths-CzfpItSz.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DKSBdWUf.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BbJ1_N2T.js">
+    <link rel="modulepreload" crossorigin href="./assets/database-zap-CrkOvbyN.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-CeE3i3Qa.js">
+    <link rel="modulepreload" crossorigin href="./assets/arrays-BqUx5USx.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-Haz_uxEL.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-DsgsDslU.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-DMbg9X18.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-BDakodZ2.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-CC89xOwH.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-yTHMxhVa.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-k9DpjH68.js">
+    <link rel="modulepreload" crossorigin href="./assets/write-secret-modal-CBUZw27N.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-gbN72xHe.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-BJG-7Qob.js">
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-HclGiUj8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BczecT6V.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BTskHGpb.js">
+    <link rel="modulepreload" crossorigin href="./assets/capabilities-Bj3s1hGN.js">
+    <link rel="modulepreload" crossorigin href="./assets/cjs-C49f7GXV.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-BPvK7C_R.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Ccyblc8N.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-B_3iMIUq.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-BHZPE0Mc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BN-7G8qZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-DFf033uX.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CiUBikfn.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-MRn68vX1.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Bviq_Dee.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DBqBVprh.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DueXZKz9.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-CJTNBbet.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-Ho3YdAx3.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-DucTwMkf.js">
+    <link rel="modulepreload" crossorigin href="./assets/purify.es-CYRiAeUx.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-BcQ8Tm3j.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-DjNf4SIX.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-RyCOE8jo.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BhJktFeI.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-DFhUGBjO.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-DrliQ_7g.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-CMqNngzA.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-DOPs2jx8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-VuyoeQOD.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-EBegnOE0.js">
+    <link rel="modulepreload" crossorigin href="./assets/hat-glasses-DVgK5i5l.js">
+    <link rel="modulepreload" crossorigin href="./assets/package-BeYhVWvM.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-D9vyuMar.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-CNPGWpMu.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-Bq_nmf5u.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-D5bOh7g6.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser-CLRkNgm7.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-B1vGi-z4.js">
+    <link rel="modulepreload" crossorigin href="./assets/micromark-factory-space-D9Dr-k4J.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-YOKDWASO-CaoEAGJk.js">
+    <link rel="stylesheet" crossorigin href="./assets/cells-0PFKL3SH.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-2TQenOiQ.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <style title='marimo-custom'>/* A short (pre-fragment, or just low-content) slide's content div is
+   a flex item with the browser's default min-width:auto, which lets
+   it size to its text's unwrapped width instead of wrapping --
+   causing long intro sentences to overflow past the slide edge.
+   min-width:0 lets it shrink and wrap like a normal block. The same
+   element also gets an inline margin:auto top/bottom *and* its own
+   `justify-content: center` (it's a column flexbox), both of which
+   vertically center short slides instead of anchoring them to the top
+   like longer slides -- overriding both keeps every slide's content
+   starting at the same place regardless of how much is on it. */
+.reveal .mo-slide-content {
+  min-width: 0;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  justify-content: flex-start !important;
+}
+
+/* Bigger prose text (headings, paragraphs, bullets) to fill the slide's
+   black space -- Tailwind's typography plugin sizes all of this in em
+   relative to the prose container's own font-size, so bumping it here
+   scales headings/body/bullets together proportionally. */
+.reveal .markdown.prose {
+  font-size: 36px !important;
+}
+
+/* Slightly bigger code font when presenting in Slides layout, sized to still fit on one slide */
+.reveal .cm-editor,
+.reveal .cm-content,
+.reveal .cm-line {
+  font-size: 1.05em !important;
+  line-height: 1.3 !important;
+}
+
+/* Code/output text (e.g. print results) on slides. Fixed px rather than
+   em: these sit inside the same .markdown.prose wrapper as body text, so
+   an em value here compounds on top of that font-size bump above and
+   blows code blocks past the bottom of the slide. */
+.reveal pre,
+.reveal code,
+.reveal .text-xs,
+.reveal .text-sm,
+.reveal .output {
+  font-size: 30px !important;
+  line-height: 1.25 !important;
+}
+</style><script>
+(function () {
+  function addColabButton() {
+    var parts = window.location.pathname.split('/').filter(Boolean);
+    // Path is .../EK125-C1-DePasquale-Slides/<DeckName>/index.html -- deck name is the
+    // second-to-last segment regardless of trailing slash/filename.
+    var deckName = parts[parts.length - 2] || parts[parts.length - 1];
+    if (!deckName) return;
+
+    var colabUrl =
+      'https://colab.research.google.com/github/BU-EK125/EK125-C1-DePasquale-Slides/blob/main/notebooks/' +
+      deckName + '.ipynb';
+
+    var btn = document.createElement('a');
+    btn.href = colabUrl;
+    btn.target = '_blank';
+    btn.rel = 'noopener';
+    btn.title = 'Open this deck as a notebook in Google Colab';
+    btn.textContent = '🚀 Open in Colab';
+    btn.style.cssText = [
+      'position:fixed', 'top:12px', 'right:12px', 'z-index:99999',
+      'background:#fff', 'color:#111', 'padding:8px 14px',
+      'border-radius:8px', 'text-decoration:none',
+      'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif',
+      'font-size:14px', 'font-weight:600',
+      'box-shadow:0 2px 8px rgba(0,0,0,0.25)', 'border:1px solid #ddd',
+    ].join(';');
+    document.body.appendChild(btn);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', addColabButton);
+  } else {
+    addColabButton();
+  }
+})();
+</script>
+
+<script data-marimo="true">
+    Object.defineProperty(window, "__MARIMO_EXPORT_CONTEXT__", {
+        value: Object.freeze({
+            trusted: true,
+            notebookCode: "import marimo\n\n__generated_with = \"0.25.0\"\napp = marimo.App(\n    width=\"full\",\n    layout_file=\"data:application/json;base64,eyJ0eXBlIjogInNsaWRlcyIsICJkYXRhIjogeyJjZWxscyI6IFt7InNob3dDb2RlIjogZmFsc2V9LCB7fSwge30sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwge30sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwge30sIHt9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHt9XX19\",\n    css_file=\"custom.css\",\n    html_head_file=\"../../colab_button.html\",\n)\n\n\n@app.cell\ndef _():\n    import marimo as mo\n\n    return (mo,)\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    # Mastering Slicing\n\n    ### Extracting, Reversing, and Replacing Parts of a Sequence\n\n    *Class 10*\n\n    \ud83d\udcd6 [Full reading: Class 10](https://BU-EK125.github.io/EK125/class/Class10.html)\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## Quick Review: Indexing\n\n    One index gets you **one element** \u2014 positive counts from the\n    front, negative counts from the back. Slicing, today's topic, gets\n    you a **window** of elements instead.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ```python\n    word = \"Python\"\n    print(word[0])      # 'P'\n    print(word[-1])     # 'n'\n    ```\n\n    ```\n    P\n    n\n    ```\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## Basic Slice Notation\n\n    `sequence[start:end]` grabs a window: it **includes** `start` and\n    **stops right before** `end`.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ```python\n    word = \"Programming\"\n    print(word[0:4])   # \"Prog\"\n    print(word[3:7])   # \"gram\"\n    ```\n\n    ```\n    Prog\n    gram\n    ```\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Takeaway\n\n    \ud83d\udea9 **Common mistake:** forgetting the end index is *exclusive* \u2014\n    `word[2:3]` grabs only one character. To include index 3 as well,\n    you need `word[2:4]`.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Omitting Start and End\n\n    Leave either side blank to mean \"all the way to that edge.\"\n    `sequence[:]` \u2014 both sides blank \u2014 copies the whole thing.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ```python\n    word = \"Python\"\n    print(word[:3])    # \"Pyt\"  -- start through index 2\n    print(word[3:])    # \"hon\"  -- index 3 through the end\n    ```\n\n    ```\n    Pyt\n    hon\n    ```\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## Negative Indices in Slices\n\n    Negative indices work inside slices too \u2014 they still count\n    backward from the end, one position at a time.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ```python\n    word = \"Programming\"\n    print(word[-4:])    # \"ming\"      -- last 4 characters\n    print(word[:-3])    # \"Programm\"  -- all but the last 3\n    ```\n\n    ```\n    ming\n    Programm\n    ```\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## The Step Parameter\n\n    A third number, `sequence[start:end:step]`, sets how many\n    positions to move each time \u2014 not just one.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ```python\n    numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\n    print(numbers[::2])     # every other element, starting at 0\n    print(numbers[1::2])    # every other element, starting at 1\n    ```\n\n    ```\n    [0, 2, 4, 6, 8]\n    [1, 3, 5, 7, 9]\n    ```\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Negative Steps: Reversing\n\n    A negative step walks **backward**. `[::-1]` is the standard\n    Python idiom for reversing any sequence.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ```python\n    numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\n    print(numbers[::-1])     # the whole thing, reversed\n    print(numbers[9:4:-1])   # indices 9 down to 5\n    ```\n\n    ```\n    [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]\n    [9, 8, 7, 6, 5]\n    ```\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Takeaway\n\n    With a negative step, `start` must be **greater than** `end` or\n    you get nothing back \u2014 no error, just a silent empty result.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## Slice Assignment (Lists Only)\n\n    Lists let you assign directly into a slice to replace a whole\n    section at once. Strings can't \u2014 they're immutable.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ```python\n    numbers = [1, 2, 3, 4, 5]\n    numbers[1:4] = [20, 30, 40]\n    print(numbers)\n    ```\n\n    ```\n    [1, 20, 30, 40, 5]\n    ```\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Takeaway\n\n    \ud83d\udea9 **Common mistake:** the right-hand side must be an **iterable**,\n    even for one value \u2014 `numbers[1:3] = 5` raises a `TypeError`; use\n    `numbers[1:3] = [5]`.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## Summary\n\n    - `sequence[start:end]` includes `start`, excludes `end`.\n    - Leaving either side blank means \"to that edge\"; `[:]` copies the\n      whole sequence.\n    - A third number, `step`, controls direction and spacing \u2014\n      negative steps walk backward, and `[::-1]` reverses.\n    - Only **lists** support slice assignment \u2014 replacing, inserting,\n      or deleting a whole section at once.\n\n    \ud83d\udcdd [Today's GPP](https://BU-EK125.github.io/EK125/gpps/Class10_GPP.html)\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## HW5 Section 2: Slicing Practice\n\n    Section 2 of this week's homework (Problems 3\u20137) is all slicing.\n    Let's walk through one of them \u2014 Problem 7 \u2014 since it's the one\n    with the most going on logically.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## Problem 7: Moving Window Analysis\n\n    ```python\n    daily_temps = [8.2, 9.1, 11.4, 10.3, 13.6,\n                   15.2, 14.8, 16.1, 17.3, 15.9,\n                   14.2, 12.8, 11.1, 9.7, 10.5]\n    window_size = 5\n    ```\n\n    Compute a **moving average**: the average of every 5 consecutive\n    days, sliding forward one day at a time.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    **Setting up the full logic:**\n\n    - **How many windows fit:** `len(daily_temps) - window_size + 1` \u2014\n      this is both the answer *and* how many times the loop needs to\n      run.\n    - **The loop itself:** `for start in range(num_windows):` \u2014 each\n      pass slices out one window, `daily_temps[start : start +\n      window_size]`, computes its average, and appends it to a\n      results list.\n    - **After the loop:** print each result with a label showing\n      which days it covers.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Takeaway\n\n    This \"slice a window, compute something, collect it\" loop works\n    for any moving-window problem \u2014 only the per-window computation\n    changes.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## Now It's Your Turn\n\n    We only walked through Problem 7 \u2014 Problems 3\u20136 use the exact\n    same slicing tools from today's lecture. Work through all five in\n    PyCharm, run each part as you write it, and check your output\n    against the expected results in the assignment.\n\n    \ud83d\udcdd [Today's GPP](https://BU-EK125.github.io/EK125/gpps/Class10_GPP.html)\n    \"\"\")\n    return\n\n\nif __name__ == \"__main__\":\n    app.run()\n",
+        }),
+        writable: false,
+        configurable: false,
+    });
+</script>
+<marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.25.0%22%0Aapp%20%3D%20marimo.App(%0A%20%20%20%20width%3D%22full%22%2C%0A%20%20%20%20layout_file%3D%22data%3Aapplication%2Fjson%3Bbase64%2CeyJ0eXBlIjogInNsaWRlcyIsICJkYXRhIjogeyJjZWxscyI6IFt7InNob3dDb2RlIjogZmFsc2V9LCB7fSwge30sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwge30sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwge30sIHt9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHt9XX19%22%2C%0A%20%20%20%20css_file%3D%22custom.css%22%2C%0A%20%20%20%20html_head_file%3D%22..%2F..%2Fcolab_button.html%22%2C%0A)%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%20Mastering%20Slicing%0A%0A%20%20%20%20%23%23%23%20Extracting%2C%20Reversing%2C%20and%20Replacing%20Parts%20of%20a%20Sequence%0A%0A%20%20%20%20*Class%2010*%0A%0A%20%20%20%20%F0%9F%93%96%20%5BFull%20reading%3A%20Class%2010%5D(https%3A%2F%2FBU-EK125.github.io%2FEK125%2Fclass%2FClass10.html)%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Quick%20Review%3A%20Indexing%0A%0A%20%20%20%20One%20index%20gets%20you%20**one%20element**%20%E2%80%94%20positive%20counts%20from%20the%0A%20%20%20%20front%2C%20negative%20counts%20from%20the%20back.%20Slicing%2C%20today's%20topic%2C%20gets%0A%20%20%20%20you%20a%20**window**%20of%20elements%20instead.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%60%60%60python%0A%20%20%20%20word%20%3D%20%22Python%22%0A%20%20%20%20print(word%5B0%5D)%20%20%20%20%20%20%23%20'P'%0A%20%20%20%20print(word%5B-1%5D)%20%20%20%20%20%23%20'n'%0A%20%20%20%20%60%60%60%0A%0A%20%20%20%20%60%60%60%0A%20%20%20%20P%0A%20%20%20%20n%0A%20%20%20%20%60%60%60%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Basic%20Slice%20Notation%0A%0A%20%20%20%20%60sequence%5Bstart%3Aend%5D%60%20grabs%20a%20window%3A%20it%20**includes**%20%60start%60%20and%0A%20%20%20%20**stops%20right%20before**%20%60end%60.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%60%60%60python%0A%20%20%20%20word%20%3D%20%22Programming%22%0A%20%20%20%20print(word%5B0%3A4%5D)%20%20%20%23%20%22Prog%22%0A%20%20%20%20print(word%5B3%3A7%5D)%20%20%20%23%20%22gram%22%0A%20%20%20%20%60%60%60%0A%0A%20%20%20%20%60%60%60%0A%20%20%20%20Prog%0A%20%20%20%20gram%0A%20%20%20%20%60%60%60%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Takeaway%0A%0A%20%20%20%20%F0%9F%9A%A9%20**Common%20mistake%3A**%20forgetting%20the%20end%20index%20is%20*exclusive*%20%E2%80%94%0A%20%20%20%20%60word%5B2%3A3%5D%60%20grabs%20only%20one%20character.%20To%20include%20index%203%20as%20well%2C%0A%20%20%20%20you%20need%20%60word%5B2%3A4%5D%60.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Omitting%20Start%20and%20End%0A%0A%20%20%20%20Leave%20either%20side%20blank%20to%20mean%20%22all%20the%20way%20to%20that%20edge.%22%0A%20%20%20%20%60sequence%5B%3A%5D%60%20%E2%80%94%20both%20sides%20blank%20%E2%80%94%20copies%20the%20whole%20thing.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%60%60%60python%0A%20%20%20%20word%20%3D%20%22Python%22%0A%20%20%20%20print(word%5B%3A3%5D)%20%20%20%20%23%20%22Pyt%22%20%20--%20start%20through%20index%202%0A%20%20%20%20print(word%5B3%3A%5D)%20%20%20%20%23%20%22hon%22%20%20--%20index%203%20through%20the%20end%0A%20%20%20%20%60%60%60%0A%0A%20%20%20%20%60%60%60%0A%20%20%20%20Pyt%0A%20%20%20%20hon%0A%20%20%20%20%60%60%60%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Negative%20Indices%20in%20Slices%0A%0A%20%20%20%20Negative%20indices%20work%20inside%20slices%20too%20%E2%80%94%20they%20still%20count%0A%20%20%20%20backward%20from%20the%20end%2C%20one%20position%20at%20a%20time.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%60%60%60python%0A%20%20%20%20word%20%3D%20%22Programming%22%0A%20%20%20%20print(word%5B-4%3A%5D)%20%20%20%20%23%20%22ming%22%20%20%20%20%20%20--%20last%204%20characters%0A%20%20%20%20print(word%5B%3A-3%5D)%20%20%20%20%23%20%22Programm%22%20%20--%20all%20but%20the%20last%203%0A%20%20%20%20%60%60%60%0A%0A%20%20%20%20%60%60%60%0A%20%20%20%20ming%0A%20%20%20%20Programm%0A%20%20%20%20%60%60%60%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20The%20Step%20Parameter%0A%0A%20%20%20%20A%20third%20number%2C%20%60sequence%5Bstart%3Aend%3Astep%5D%60%2C%20sets%20how%20many%0A%20%20%20%20positions%20to%20move%20each%20time%20%E2%80%94%20not%20just%20one.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%60%60%60python%0A%20%20%20%20numbers%20%3D%20%5B0%2C%201%2C%202%2C%203%2C%204%2C%205%2C%206%2C%207%2C%208%2C%209%5D%0A%20%20%20%20print(numbers%5B%3A%3A2%5D)%20%20%20%20%20%23%20every%20other%20element%2C%20starting%20at%200%0A%20%20%20%20print(numbers%5B1%3A%3A2%5D)%20%20%20%20%23%20every%20other%20element%2C%20starting%20at%201%0A%20%20%20%20%60%60%60%0A%0A%20%20%20%20%60%60%60%0A%20%20%20%20%5B0%2C%202%2C%204%2C%206%2C%208%5D%0A%20%20%20%20%5B1%2C%203%2C%205%2C%207%2C%209%5D%0A%20%20%20%20%60%60%60%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Negative%20Steps%3A%20Reversing%0A%0A%20%20%20%20A%20negative%20step%20walks%20**backward**.%20%60%5B%3A%3A-1%5D%60%20is%20the%20standard%0A%20%20%20%20Python%20idiom%20for%20reversing%20any%20sequence.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%60%60%60python%0A%20%20%20%20numbers%20%3D%20%5B0%2C%201%2C%202%2C%203%2C%204%2C%205%2C%206%2C%207%2C%208%2C%209%5D%0A%20%20%20%20print(numbers%5B%3A%3A-1%5D)%20%20%20%20%20%23%20the%20whole%20thing%2C%20reversed%0A%20%20%20%20print(numbers%5B9%3A4%3A-1%5D)%20%20%20%23%20indices%209%20down%20to%205%0A%20%20%20%20%60%60%60%0A%0A%20%20%20%20%60%60%60%0A%20%20%20%20%5B9%2C%208%2C%207%2C%206%2C%205%2C%204%2C%203%2C%202%2C%201%2C%200%5D%0A%20%20%20%20%5B9%2C%208%2C%207%2C%206%2C%205%5D%0A%20%20%20%20%60%60%60%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Takeaway%0A%0A%20%20%20%20With%20a%20negative%20step%2C%20%60start%60%20must%20be%20**greater%20than**%20%60end%60%20or%0A%20%20%20%20you%20get%20nothing%20back%20%E2%80%94%20no%20error%2C%20just%20a%20silent%20empty%20result.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Slice%20Assignment%20(Lists%20Only)%0A%0A%20%20%20%20Lists%20let%20you%20assign%20directly%20into%20a%20slice%20to%20replace%20a%20whole%0A%20%20%20%20section%20at%20once.%20Strings%20can't%20%E2%80%94%20they're%20immutable.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%60%60%60python%0A%20%20%20%20numbers%20%3D%20%5B1%2C%202%2C%203%2C%204%2C%205%5D%0A%20%20%20%20numbers%5B1%3A4%5D%20%3D%20%5B20%2C%2030%2C%2040%5D%0A%20%20%20%20print(numbers)%0A%20%20%20%20%60%60%60%0A%0A%20%20%20%20%60%60%60%0A%20%20%20%20%5B1%2C%2020%2C%2030%2C%2040%2C%205%5D%0A%20%20%20%20%60%60%60%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Takeaway%0A%0A%20%20%20%20%F0%9F%9A%A9%20**Common%20mistake%3A**%20the%20right-hand%20side%20must%20be%20an%20**iterable**%2C%0A%20%20%20%20even%20for%20one%20value%20%E2%80%94%20%60numbers%5B1%3A3%5D%20%3D%205%60%20raises%20a%20%60TypeError%60%3B%20use%0A%20%20%20%20%60numbers%5B1%3A3%5D%20%3D%20%5B5%5D%60.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Summary%0A%0A%20%20%20%20-%20%60sequence%5Bstart%3Aend%5D%60%20includes%20%60start%60%2C%20excludes%20%60end%60.%0A%20%20%20%20-%20Leaving%20either%20side%20blank%20means%20%22to%20that%20edge%22%3B%20%60%5B%3A%5D%60%20copies%20the%0A%20%20%20%20%20%20whole%20sequence.%0A%20%20%20%20-%20A%20third%20number%2C%20%60step%60%2C%20controls%20direction%20and%20spacing%20%E2%80%94%0A%20%20%20%20%20%20negative%20steps%20walk%20backward%2C%20and%20%60%5B%3A%3A-1%5D%60%20reverses.%0A%20%20%20%20-%20Only%20**lists**%20support%20slice%20assignment%20%E2%80%94%20replacing%2C%20inserting%2C%0A%20%20%20%20%20%20or%20deleting%20a%20whole%20section%20at%20once.%0A%0A%20%20%20%20%F0%9F%93%9D%20%5BToday's%20GPP%5D(https%3A%2F%2FBU-EK125.github.io%2FEK125%2Fgpps%2FClass10_GPP.html)%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20HW5%20Section%202%3A%20Slicing%20Practice%0A%0A%20%20%20%20Section%202%20of%20this%20week's%20homework%20(Problems%203%E2%80%937)%20is%20all%20slicing.%0A%20%20%20%20Let's%20walk%20through%20one%20of%20them%20%E2%80%94%20Problem%207%20%E2%80%94%20since%20it's%20the%20one%0A%20%20%20%20with%20the%20most%20going%20on%20logically.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Problem%207%3A%20Moving%20Window%20Analysis%0A%0A%20%20%20%20%60%60%60python%0A%20%20%20%20daily_temps%20%3D%20%5B8.2%2C%209.1%2C%2011.4%2C%2010.3%2C%2013.6%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2015.2%2C%2014.8%2C%2016.1%2C%2017.3%2C%2015.9%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2014.2%2C%2012.8%2C%2011.1%2C%209.7%2C%2010.5%5D%0A%20%20%20%20window_size%20%3D%205%0A%20%20%20%20%60%60%60%0A%0A%20%20%20%20Compute%20a%20**moving%20average**%3A%20the%20average%20of%20every%205%20consecutive%0A%20%20%20%20days%2C%20sliding%20forward%20one%20day%20at%20a%20time.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20**Setting%20up%20the%20full%20logic%3A**%0A%0A%20%20%20%20-%20**How%20many%20windows%20fit%3A**%20%60len(daily_temps)%20-%20window_size%20%2B%201%60%20%E2%80%94%0A%20%20%20%20%20%20this%20is%20both%20the%20answer%20*and*%20how%20many%20times%20the%20loop%20needs%20to%0A%20%20%20%20%20%20run.%0A%20%20%20%20-%20**The%20loop%20itself%3A**%20%60for%20start%20in%20range(num_windows)%3A%60%20%E2%80%94%20each%0A%20%20%20%20%20%20pass%20slices%20out%20one%20window%2C%20%60daily_temps%5Bstart%20%3A%20start%20%2B%0A%20%20%20%20%20%20window_size%5D%60%2C%20computes%20its%20average%2C%20and%20appends%20it%20to%20a%0A%20%20%20%20%20%20results%20list.%0A%20%20%20%20-%20**After%20the%20loop%3A**%20print%20each%20result%20with%20a%20label%20showing%0A%20%20%20%20%20%20which%20days%20it%20covers.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Takeaway%0A%0A%20%20%20%20This%20%22slice%20a%20window%2C%20compute%20something%2C%20collect%20it%22%20loop%20works%0A%20%20%20%20for%20any%20moving-window%20problem%20%E2%80%94%20only%20the%20per-window%20computation%0A%20%20%20%20changes.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Now%20It's%20Your%20Turn%0A%0A%20%20%20%20We%20only%20walked%20through%20Problem%207%20%E2%80%94%20Problems%203%E2%80%936%20use%20the%20exact%0A%20%20%20%20same%20slicing%20tools%20from%20today's%20lecture.%20Work%20through%20all%20five%20in%0A%20%20%20%20PyCharm%2C%20run%20each%20part%20as%20you%20write%20it%2C%20and%20check%20your%20output%0A%20%20%20%20against%20the%20expected%20results%20in%20the%20assignment.%0A%0A%20%20%20%20%F0%9F%93%9D%20%5BToday's%20GPP%5D(https%3A%2F%2FBU-EK125.github.io%2FEK125%2Fgpps%2FClass10_GPP.html)%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <script data-marimo="true">
+      Object.defineProperty(window, "__MARIMO_MOUNT_CONFIG__", {
+        value: Object.freeze({
+            "filename": "notebook.py",
+            "cwd": "",
+            "lspWorkspace": null,
+            "mode": "read",
+            "version": "0.25.0",
+            "serverToken": "unused",
+            "config": {"ai": {"allow_provider_config": true, "custom_providers": {}, "enabled": true, "models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "auto_close_pairs": true, "copilot": false, "signature_hint_on_typing": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "code_lens": true, "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "medium", "reference_highlighting": true, "theme": "dark"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": false}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "pip"}, "runtime": {"auto_instantiate": false, "auto_reload": "off", "default_csv_encoding": "utf-8", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "show_tracebacks": false, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"css_file": "custom.css", "html_head_file": "../../colab_button.html", "layout_file": "data:application/json;base64,eyJ0eXBlIjogInNsaWRlcyIsICJkYXRhIjogeyJjZWxscyI6IFt7InNob3dDb2RlIjogZmFsc2V9LCB7fSwge30sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwge30sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwge30sIHt9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHt9XX19", "sql_output": "auto", "width": "full"},
+            "layout": {"data": {"cells": [{"showCode": false}, {}, {}, {"type": "fragment"}, {}, {"type": "fragment"}, {"type": "fragment"}, {}, {"type": "fragment"}, {}, {"type": "fragment"}, {}, {"type": "fragment"}, {}, {"type": "fragment"}, {"type": "fragment"}, {}, {"type": "fragment"}, {"type": "fragment"}, {}, {}, {}, {}, {"type": "fragment"}, {}]}, "type": "slides"},
+            "view": {"showAppCode": true},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null
+        }),
+        writable: false,
+        configurable: false,
+      });
+    </script>
+  </body>
+</html>
