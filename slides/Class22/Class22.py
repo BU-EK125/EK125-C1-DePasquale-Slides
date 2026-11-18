@@ -288,13 +288,24 @@ def _(mo):
     mo.md("""
     ### A Basic Line Plot
 
+    ```python
+    import matplotlib.pyplot as plt
+    x = [1, 2, 3, 4, 5]
+    y = [1, 4, 9, 16, 25]
+    plt.plot(x, y)
+    plt.xlabel('X values')
+    plt.ylabel('Y values')
+    plt.title('My Plot')
+    plt.show()
+    ```
+
     ```matlab
-    x = 0:0.1:2*pi;
-    y = sin(x);
-    plot(x, y);
-    xlabel('x');
-    ylabel('sin(x)');
-    title('A Sine Wave');
+    x = [1, 2, 3, 4, 5];
+    y = [1, 4, 9, 16, 25];
+    plot(x, y)
+    xlabel('X values')
+    ylabel('Y values')
+    title('My Plot')
     ```
 
     No import, no `show()` -- MATLAB displays the Figure window the
@@ -304,15 +315,15 @@ def _(mo):
 
 
 @app.cell(hide_code=True)
-def _(np, plt):
-    _x = np.linspace(0, 2 * np.pi, 100)
-    _y = np.sin(_x)
+def _(plt):
+    _x = [1, 2, 3, 4, 5]
+    _y = [1, 4, 9, 16, 25]
 
     _fig, _ax = plt.subplots()
     _ax.plot(_x, _y)
-    _ax.set_xlabel("x")
-    _ax.set_ylabel("sin(x)")
-    _ax.set_title("A Sine Wave")
+    _ax.set_xlabel("X values")
+    _ax.set_ylabel("Y values")
+    _ax.set_title("My Plot")
     _fig
     return
 
@@ -351,6 +362,12 @@ def _(mo):
     mo.md("""
     ### Multiple Lines and a Legend
 
+    ```python
+    plt.plot(x, y1, label='Line 1')
+    plt.plot(x, y2, label='Line 2')
+    plt.legend()
+    ```
+
     ```matlab
     plot(x, y1, x, y2);
     legend('sin(x)', 'cos(x)');
@@ -380,6 +397,14 @@ def _(np, plt):
 def _(mo):
     mo.md("""
     ### Subplots
+
+    ```python
+    plt.subplot(2, 1, 1)   # 2 rows, 1 column, plot 1
+    plt.plot(x, y1)
+
+    plt.subplot(2, 1, 2)   # 2 rows, 1 column, plot 2
+    plt.plot(x, y2)
+    ```
 
     ```matlab
     subplot(2, 1, 1);
@@ -423,7 +448,7 @@ def _(mo):
     % x, y = randn(100,1)
     scatter(x, y);
 
-    categories = {'A','B','C','D','E'};
+    categories = 1:5;
     values = [23, 45, 31, 52, 38];
     bar(categories, values);
 
@@ -438,7 +463,7 @@ def _(np, plt):
     np.random.seed(42)
     _scatter_x = np.random.randn(100)
     _scatter_y = np.random.randn(100)
-    _categories = ["A", "B", "C", "D", "E"]
+    _categories = [1, 2, 3, 4, 5]
     _values = [23, 45, 31, 52, 38]
     _hist_data = np.random.randn(1000)
 
@@ -476,7 +501,8 @@ def _(mo):
       (`'#FF5733'`) -- MATLAB only *names* eight colors, so use RGB
       or hex for anything else; `colormap('parula')`, `'jet'`, `'hot'`
     - **Axes and labels**: `xlim`, `ylim`, `grid on/off`,
-      `axis equal`, `xticks`, `legend('Location', 'best')`
+      `axis equal`, `xticks`, `xticklabels` (for categorical data),
+      `xtickangle(45)` (rotate long labels), `legend('Location', 'best')`
     - **Saving**: `saveas(gcf, 'myplot.png')` -- `gcf` means
       *get current figure*; also supports `.pdf`, `.fig`, `.eps`
     """)
@@ -609,6 +635,62 @@ def _(mo):
     - Keep the 1-based vs. 0-based indexing difference fresh --
       it's the single easiest Python habit to bring into MATLAB by
       mistake
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ## This Week's Homework: HW8
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    **HW8: Plotting in Python and MATLAB, Vectors and Matrices** --
+    due **Tuesday, November 24**, covering Classes 21, 22, *and* 23
+    together. Two halves, 50 points each: a Python half (Problems
+    1-3, from last class) and a MATLAB half (Problems 4-6, starting
+    with today's material).
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### Problem 4 picks up right where today left off
+
+    It asks you to recreate Problem 1's Python stress-strain plot --
+    same two metals, same look -- in MATLAB, using `hold on` to put
+    both lines on one set of axes (see "Multiple Lines and a Legend"
+    above). Then it asks you to list three Python/MATLAB differences
+    you noticed along the way -- today's slides are full of them.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
+    ### A few tips, not answers
+
+    - End every line with `;` unless the problem tells you to
+      display a result -- the same rule as "Semicolons and Output"
+    - Two separate `plot()` calls bracketed by `hold on` / `hold off`
+      is simpler than trying to pass both lines to one `plot()` call
+    - Your MATLAB elastic-modulus numbers must match your Python
+      numbers from Problem 1 -- a built-in self-check
+    - Save each figure with `saveas(gcf, 'filename.png')` -- see
+      "Saving Figures" under "MATLAB Documentation" above
+    - Problems 5 and 6 lean into matrices and logical indexing --
+      that's genuinely Class 23 material, not this lecture, so don't
+      worry if those feel like a step up
+
+    📋 Full assignment: [HW8](https://BU-EK125.github.io/EK125/homework/HW8.html)
     """)
     return
 
