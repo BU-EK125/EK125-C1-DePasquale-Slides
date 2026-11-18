@@ -230,6 +230,12 @@ def _(mo):
     0:2:9        % 0, 2, 4, 6, 8 (start:step:end)
     linspace(0, 10, 5)
     ```
+
+    **Watch the endpoint:** `range(0, 10)` *excludes* its stop value --
+    it stops at 9. `0:9` in MATLAB *includes* its endpoint -- it's
+    written as 9 because that's where you actually want it to stop.
+    Same output, different reason: Python's upper bound is exclusive,
+    MATLAB's colon range is inclusive.
     """)
     return
 
