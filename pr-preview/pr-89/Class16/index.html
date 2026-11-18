@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-CZceb_kH.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-Bam3NpBI.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-C_DwAp7Z.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-CEsLFVD9.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-D5MAsWEG.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-C6PDArdf.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        const scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          const element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          const newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((_entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>Class16</title>
+    <script type="module" crossorigin src="./assets/index-CgQsZfww.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/rolldown-runtime-B0Z9INg1.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-CUdNIagt.js">
+    <link rel="modulepreload" crossorigin href="./assets/compiler-runtime-BQ9S8nyo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-Dc9HkKI2.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-CKsE8sC1.js">
+    <link rel="modulepreload" crossorigin href="./assets/schemas-BL-NsLlF.js">
+    <link rel="modulepreload" crossorigin href="./assets/isObject-BCaOs5rp.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-oX0TOjjx.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-Cmx0b_zA.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-aFmHgJZY.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DnwgSs_Z.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseMerge-CQpUq7ep.js">
+    <link rel="modulepreload" crossorigin href="./assets/objects-snlMn4yk.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-B74pBk57.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-BdZUApHd.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-Ci2dTZ72.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-B3E7otfg.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-BDbGiS7O.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-CrTnjj37.js">
+    <link rel="modulepreload" crossorigin href="./assets/session-C8nQMsOE.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-CmBpjGXk.js">
+    <link rel="modulepreload" crossorigin href="./assets/clsx-DB0hHKMi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-ldLVeaqm.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-BmzAqMKq.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CyYN7zJg.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-BBdeXCvU.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-restore-focus-B98SEiGc.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-BoklZTGL.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-rHn2EdoM.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-Wea4hZ6R.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-BFOBKCJB.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-C4-_TnkF.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-BplWpfFo.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-CeQt3rdW.js">
+    <link rel="modulepreload" crossorigin href="./assets/toast-KNfsFUiB.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-DR2Z2N4w.js">
+    <link rel="modulepreload" crossorigin href="./assets/paths-CzfpItSz.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DKSBdWUf.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BbJ1_N2T.js">
+    <link rel="modulepreload" crossorigin href="./assets/database-zap-CrkOvbyN.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-CeE3i3Qa.js">
+    <link rel="modulepreload" crossorigin href="./assets/arrays-BqUx5USx.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-Haz_uxEL.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-DsgsDslU.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-DMbg9X18.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-BDakodZ2.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-CC89xOwH.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-yTHMxhVa.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-k9DpjH68.js">
+    <link rel="modulepreload" crossorigin href="./assets/write-secret-modal-CBUZw27N.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-gbN72xHe.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-BJG-7Qob.js">
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-HclGiUj8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BczecT6V.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BTskHGpb.js">
+    <link rel="modulepreload" crossorigin href="./assets/capabilities-Bj3s1hGN.js">
+    <link rel="modulepreload" crossorigin href="./assets/cjs-C49f7GXV.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-BPvK7C_R.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Ccyblc8N.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-B_3iMIUq.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-BHZPE0Mc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BN-7G8qZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-DFf033uX.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CiUBikfn.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-MRn68vX1.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Bviq_Dee.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DBqBVprh.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DueXZKz9.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-CJTNBbet.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-Ho3YdAx3.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-DucTwMkf.js">
+    <link rel="modulepreload" crossorigin href="./assets/purify.es-CYRiAeUx.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-BcQ8Tm3j.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-DjNf4SIX.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-RyCOE8jo.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BhJktFeI.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-DFhUGBjO.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-DrliQ_7g.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-CMqNngzA.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-DOPs2jx8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-VuyoeQOD.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-EBegnOE0.js">
+    <link rel="modulepreload" crossorigin href="./assets/hat-glasses-DVgK5i5l.js">
+    <link rel="modulepreload" crossorigin href="./assets/package-BeYhVWvM.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-D9vyuMar.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-CNPGWpMu.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-Bq_nmf5u.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-D5bOh7g6.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser-CLRkNgm7.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-B1vGi-z4.js">
+    <link rel="modulepreload" crossorigin href="./assets/micromark-factory-space-D9Dr-k4J.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-YOKDWASO-CaoEAGJk.js">
+    <link rel="stylesheet" crossorigin href="./assets/cells-0PFKL3SH.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-2TQenOiQ.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <style title='marimo-custom'>/* A short (pre-fragment, or just low-content) slide's content div is
+   a flex item with the browser's default min-width:auto, which lets
+   it size to its text's unwrapped width instead of wrapping --
+   causing long intro sentences to overflow past the slide edge.
+   min-width:0 lets it shrink and wrap like a normal block. The same
+   element also gets an inline margin:auto top/bottom *and* its own
+   `justify-content: center` (it's a column flexbox), both of which
+   vertically center short slides instead of anchoring them to the top
+   like longer slides -- overriding both keeps every slide's content
+   starting at the same place regardless of how much is on it. */
+.reveal .mo-slide-content {
+  min-width: 0;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  justify-content: flex-start !important;
+}
+
+/* Bigger prose text (headings, paragraphs, bullets) to fill the slide's
+   black space -- Tailwind's typography plugin sizes all of this in em
+   relative to the prose container's own font-size, so bumping it here
+   scales headings/body/bullets together proportionally. */
+.reveal .markdown.prose {
+  font-size: 36px !important;
+}
+
+/* Slightly bigger code font when presenting in Slides layout, sized to still fit on one slide */
+.reveal .cm-editor,
+.reveal .cm-content,
+.reveal .cm-line {
+  font-size: 1.05em !important;
+  line-height: 1.3 !important;
+}
+
+/* Code/output text (e.g. print results) on slides. Fixed px rather than
+   em: these sit inside the same .markdown.prose wrapper as body text, so
+   an em value here compounds on top of that font-size bump above and
+   blows code blocks past the bottom of the slide. */
+.reveal pre,
+.reveal code,
+.reveal .text-xs,
+.reveal .text-sm,
+.reveal .output {
+  font-size: 30px !important;
+  line-height: 1.25 !important;
+}
+</style><script>
+(function () {
+  function addColabButton() {
+    var parts = window.location.pathname.split('/').filter(Boolean);
+    // Path is .../EK125-C1-DePasquale-Slides/<DeckName>/index.html -- deck name is the
+    // second-to-last segment regardless of trailing slash/filename.
+    var deckName = parts[parts.length - 2] || parts[parts.length - 1];
+    if (!deckName) return;
+
+    var colabUrl =
+      'https://colab.research.google.com/github/BU-EK125/EK125-C1-DePasquale-Slides/blob/main/notebooks/' +
+      deckName + '.ipynb';
+
+    var btn = document.createElement('a');
+    btn.href = colabUrl;
+    btn.target = '_blank';
+    btn.rel = 'noopener';
+    btn.title = 'Open this deck as a notebook in Google Colab';
+    btn.textContent = '🚀 Open in Colab';
+    btn.style.cssText = [
+      'position:fixed', 'top:12px', 'right:12px', 'z-index:99999',
+      'background:#fff', 'color:#111', 'padding:8px 14px',
+      'border-radius:8px', 'text-decoration:none',
+      'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif',
+      'font-size:14px', 'font-weight:600',
+      'box-shadow:0 2px 8px rgba(0,0,0,0.25)', 'border:1px solid #ddd',
+    ].join(';');
+    document.body.appendChild(btn);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', addColabButton);
+  } else {
+    addColabButton();
+  }
+})();
+</script>
+
+<script data-marimo="true">
+    Object.defineProperty(window, "__MARIMO_EXPORT_CONTEXT__", {
+        value: Object.freeze({
+            trusted: true,
+            notebookCode: "import marimo\n\n__generated_with = \"0.25.0\"\napp = marimo.App(\n    width=\"full\",\n    layout_file=\"data:application/json;base64,eyJ0eXBlIjogInNsaWRlcyIsICJkYXRhIjogeyJjZWxscyI6IFt7InNob3dDb2RlIjogZmFsc2V9LCB7fSwge30sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwge30sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9XX19\",\n    css_file=\"custom.css\",\n    html_head_file=\"../../colab_button.html\",\n)\n\n\n@app.cell\ndef _():\n    import marimo as mo\n\n    return (mo,)\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    # Stub Building\n\n    ### Fitness Tracker Project \u2014 Part 2: The Running Skeleton\n\n    *Class 16*\n\n    \ud83d\udcd6 [Full reading: Class 16](https://BU-EK125.github.io/EK125/class/Class16.html)\n    \ud83d\udccb [Today's Team Activity](https://BU-EK125.github.io/EK125/gpps/Class16_TeamActivity.html)\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## A Faithful Stub, with Its Docstring\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    This is the reading's own weather-station example, not your\n    Fitness Tracker code \u2014 so it shows the pattern without handing\n    you your own Part 2 answer. The same five rules apply to your\n    Loader, Analyst, and Report Writer: copy the header and docstring\n    exactly, return the contract's example value, use easy parameters\n    directly, always `return` (never `print`), and touch every key a\n    teammate's data will need.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ```python\n    def read_temperatures(filename):\n        \"\\\"\"Read temperatures in degrees F from a file.\n\n        Returns: list of float, one per valid reading.\n            Example: [71.2, 70.8, 72.5, 71.9]\n        \"\\\"\"\n        # PLAN:\n        # 1. Make an empty list for the temperatures\n        # 2. Open the file for reading\n        # 3. For each line in the file:\n        #      a. strip the newline\n        #      b. if the line is not blank and not \"-999\",\n        #         convert it to float and add it to the list\n        # 4. Return the list\n\n        # STUB: return the example value from the contract\n        return [71.2, 70.8, 72.5, 71.9]\n    ```\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Takeaway\n\n    This afternoon, add this kind of pseudocode *above* your own\n    stub's `return` \u2014 one comment per step, written in plain English,\n    covering the messy cases your contract describes. **Leave the\n    stub body in place.** The program must still run.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## Running the Skeleton\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    Once every stub exists, run `main.py`. If every stub is faithful,\n    the program runs start to finish \u2014 and the output is obviously\n    fake.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ```\n    STUB REPORT\n    steps 5 8327.8 4569.0 12192.0 5 8000 3\n    resting_hr 5 8327.8 4569.0 12192.0 5 62 3\n    ```\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    Every metric shows the **same** numbers, because the Analyst's\n    stub always returns the same example. **That is a success.** It\n    proves: every import works, every function is called with the\n    right number of arguments, every return value has the shape the\n    next function expects, and every key the Report Writer uses\n    exists.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Takeaway\n\n    You now have a **running skeleton**. From here on, your team only\n    ever goes from a working program to a slightly more real working\n    program \u2014 never three untested pieces put together and hoped for.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## Checking the Seams\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    A program that runs isn't automatically correct. Print every\n    value as it crosses from one function to the next, and compare it\n    to the contract.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ```python\n    data = load_tracker_data(\"fitness_data.csv\")\n    print(\"SEAM 1 type:\", type(data))\n    print(\"SEAM 1 keys:\", list(data.keys()))\n    print(\"SEAM 1 lengths:\", len(data[\"day\"]),\n          len(data[\"steps\"]))\n\n    results = analyze_metric(data, \"steps\", 8000)\n    print(\"SEAM 2 type:\", type(results))\n    print(\"SEAM 2 keys:\", list(results.keys()))\n    ```\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    Three questions answer most seam problems: Is it the right\n    **type**? Does it have the right **keys**? Are the lists the\n    right **length**? These prints are temporary \u2014 put them in\n    `check_seams.py` (a copy of `main.py`), so the real `main.py`\n    stays clean.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## The Four Errors You'll Most Likely See Today\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    | Error | Usually means | Where to look |\n    |---|---|---|\n    | `ModuleNotFoundError: No module named 'loader'` | Can't find the **file** | Same folder? Spelled exactly right? |\n    | `ImportError: cannot import name 'load_data'` | File found, **function name** doesn't match | Compare the `import` line to the `def` line |\n    | `TypeError: 'NoneType' object is not subscriptable` | A function **printed instead of returning** | Does that function have a `return`? |\n    | `KeyError: 'average'` | The two sides of a seam **disagree on a key name** | Compare the key in the error to the contract |\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Takeaway\n\n    Three of these four are **seam errors** \u2014 each piece is fine on\n    its own, but two pieces don't agree. When an error appears, ask\n    \"which seam?\" before you ask \"which line?\"\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## Due Sunday: The Running Skeleton\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    Gradescope: **\"Fitness Tracker Part 2: Running Skeleton\"** \u2014 group\n    submission, by **Sunday 11/1, 11:59 PM**. Submit more than once;\n    Gradescope keeps your history.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    - `loader.py`, `analyzer.py`, `reporter.py`, `main.py` \u2014 each a\n      faithful stub\n    - `check_seams.py`, with your final seam-check output pasted in a\n      comment at the bottom\n    - An updated Team Contract (PDF) \u2014 **only** if it changed today\n\n    *Before you submit:* `main.py` runs start to finish with no\n    errors, the report file is created, and `check_seams.py` checks\n    both seams with every check matching the contract.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## How Should `main.py` Look?\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    Three import lines \u2014 file name without `.py`, then the exact\n    function name \u2014 a `main()` function running your team's plan from\n    Section 3 of your contract, and the `if __name__ ==\n    \"__main__\":` guard calling `main()`.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ```python\n    from loader import load_tracker_data\n    from analyzer import analyze_metric\n    from reporter import write_report\n\n\n    def main():\n        data = load_tracker_data(\"fitness_data.csv\")\n\n        # Your team's plan from Section 3 -- at least 3\n        # metrics, resting_hr required\n        plan = [(\"steps\", 8000, True),\n                (\"resting_hr\", 62, False)]\n\n        results_list = []\n        for metric, goal, higher_is_better in plan:\n            results = analyze_metric(data, metric, goal,\n                                      higher_is_better)\n            results_list.append(results)\n\n        write_report(results_list, \"fitness_report.txt\")\n\n\n    if __name__ == \"__main__\":\n        main()\n    ```\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ### Takeaway\n\n    The `plan` list here is illustrative \u2014 use your own team's\n    metrics and goals from Part C, not these exact numbers.\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    ## Quiz 8 and Exam 2: What's Fair Game\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    No new Python syntax was covered this week, but the new skills\n    from Classes 15\u201316 are fair game. Possible things we might ask\n    you to do:\n    \"\"\")\n    return\n\n\n@app.cell(hide_code=True)\ndef _(mo):\n    mo.md(\"\"\"\n    - Given a contract docstring, write a correct call and store the\n      result\n    - Given a contract, write the expression to access one value from\n      the returned dictionary\n    - Identify which key or type mismatch causes an error, or a\n      silent wrong answer\n    - Given a few rows of CSV text, write the dictionary of lists a\n      loader would return\n    - Identify what is missing from a vague contract\n    - Given a contract, write the call that stores the result\n      (Class 15)\n    - Given a contract, write a faithful stub (Class 16)\n    - Pick the faithful stub from four options, or explain why one is\n      unfaithful\n    - Match an error message (`ModuleNotFoundError`, `ImportError`,\n      `NoneType ... not subscriptable`, `KeyError`) to its most likely\n      cause\n    - Write the import line for a function in a named file\n    - Predict the output of a short `main()` that uses a stub\n    \"\"\")\n    return\n\n\nif __name__ == \"__main__\":\n    app.run()\n",
+        }),
+        writable: false,
+        configurable: false,
+    });
+</script>
+<marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.25.0%22%0Aapp%20%3D%20marimo.App(%0A%20%20%20%20width%3D%22full%22%2C%0A%20%20%20%20layout_file%3D%22data%3Aapplication%2Fjson%3Bbase64%2CeyJ0eXBlIjogInNsaWRlcyIsICJkYXRhIjogeyJjZWxscyI6IFt7InNob3dDb2RlIjogZmFsc2V9LCB7fSwge30sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwge30sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9XX19%22%2C%0A%20%20%20%20css_file%3D%22custom.css%22%2C%0A%20%20%20%20html_head_file%3D%22..%2F..%2Fcolab_button.html%22%2C%0A)%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%20Stub%20Building%0A%0A%20%20%20%20%23%23%23%20Fitness%20Tracker%20Project%20%E2%80%94%20Part%202%3A%20The%20Running%20Skeleton%0A%0A%20%20%20%20*Class%2016*%0A%0A%20%20%20%20%F0%9F%93%96%20%5BFull%20reading%3A%20Class%2016%5D(https%3A%2F%2FBU-EK125.github.io%2FEK125%2Fclass%2FClass16.html)%0A%20%20%20%20%F0%9F%93%8B%20%5BToday's%20Team%20Activity%5D(https%3A%2F%2FBU-EK125.github.io%2FEK125%2Fgpps%2FClass16_TeamActivity.html)%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20A%20Faithful%20Stub%2C%20with%20Its%20Docstring%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20This%20is%20the%20reading's%20own%20weather-station%20example%2C%20not%20your%0A%20%20%20%20Fitness%20Tracker%20code%20%E2%80%94%20so%20it%20shows%20the%20pattern%20without%20handing%0A%20%20%20%20you%20your%20own%20Part%202%20answer.%20The%20same%20five%20rules%20apply%20to%20your%0A%20%20%20%20Loader%2C%20Analyst%2C%20and%20Report%20Writer%3A%20copy%20the%20header%20and%20docstring%0A%20%20%20%20exactly%2C%20return%20the%20contract's%20example%20value%2C%20use%20easy%20parameters%0A%20%20%20%20directly%2C%20always%20%60return%60%20(never%20%60print%60)%2C%20and%20touch%20every%20key%20a%0A%20%20%20%20teammate's%20data%20will%20need.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%60%60%60python%0A%20%20%20%20def%20read_temperatures(filename)%3A%0A%20%20%20%20%20%20%20%20%22%5C%22%22Read%20temperatures%20in%20degrees%20F%20from%20a%20file.%0A%0A%20%20%20%20%20%20%20%20Returns%3A%20list%20of%20float%2C%20one%20per%20valid%20reading.%0A%20%20%20%20%20%20%20%20%20%20%20%20Example%3A%20%5B71.2%2C%2070.8%2C%2072.5%2C%2071.9%5D%0A%20%20%20%20%20%20%20%20%22%5C%22%22%0A%20%20%20%20%20%20%20%20%23%20PLAN%3A%0A%20%20%20%20%20%20%20%20%23%201.%20Make%20an%20empty%20list%20for%20the%20temperatures%0A%20%20%20%20%20%20%20%20%23%202.%20Open%20the%20file%20for%20reading%0A%20%20%20%20%20%20%20%20%23%203.%20For%20each%20line%20in%20the%20file%3A%0A%20%20%20%20%20%20%20%20%23%20%20%20%20%20%20a.%20strip%20the%20newline%0A%20%20%20%20%20%20%20%20%23%20%20%20%20%20%20b.%20if%20the%20line%20is%20not%20blank%20and%20not%20%22-999%22%2C%0A%20%20%20%20%20%20%20%20%23%20%20%20%20%20%20%20%20%20convert%20it%20to%20float%20and%20add%20it%20to%20the%20list%0A%20%20%20%20%20%20%20%20%23%204.%20Return%20the%20list%0A%0A%20%20%20%20%20%20%20%20%23%20STUB%3A%20return%20the%20example%20value%20from%20the%20contract%0A%20%20%20%20%20%20%20%20return%20%5B71.2%2C%2070.8%2C%2072.5%2C%2071.9%5D%0A%20%20%20%20%60%60%60%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Takeaway%0A%0A%20%20%20%20This%20afternoon%2C%20add%20this%20kind%20of%20pseudocode%20*above*%20your%20own%0A%20%20%20%20stub's%20%60return%60%20%E2%80%94%20one%20comment%20per%20step%2C%20written%20in%20plain%20English%2C%0A%20%20%20%20covering%20the%20messy%20cases%20your%20contract%20describes.%20**Leave%20the%0A%20%20%20%20stub%20body%20in%20place.**%20The%20program%20must%20still%20run.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Running%20the%20Skeleton%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20Once%20every%20stub%20exists%2C%20run%20%60main.py%60.%20If%20every%20stub%20is%20faithful%2C%0A%20%20%20%20the%20program%20runs%20start%20to%20finish%20%E2%80%94%20and%20the%20output%20is%20obviously%0A%20%20%20%20fake.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%60%60%60%0A%20%20%20%20STUB%20REPORT%0A%20%20%20%20steps%205%208327.8%204569.0%2012192.0%205%208000%203%0A%20%20%20%20resting_hr%205%208327.8%204569.0%2012192.0%205%2062%203%0A%20%20%20%20%60%60%60%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20Every%20metric%20shows%20the%20**same**%20numbers%2C%20because%20the%20Analyst's%0A%20%20%20%20stub%20always%20returns%20the%20same%20example.%20**That%20is%20a%20success.**%20It%0A%20%20%20%20proves%3A%20every%20import%20works%2C%20every%20function%20is%20called%20with%20the%0A%20%20%20%20right%20number%20of%20arguments%2C%20every%20return%20value%20has%20the%20shape%20the%0A%20%20%20%20next%20function%20expects%2C%20and%20every%20key%20the%20Report%20Writer%20uses%0A%20%20%20%20exists.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Takeaway%0A%0A%20%20%20%20You%20now%20have%20a%20**running%20skeleton**.%20From%20here%20on%2C%20your%20team%20only%0A%20%20%20%20ever%20goes%20from%20a%20working%20program%20to%20a%20slightly%20more%20real%20working%0A%20%20%20%20program%20%E2%80%94%20never%20three%20untested%20pieces%20put%20together%20and%20hoped%20for.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Checking%20the%20Seams%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20A%20program%20that%20runs%20isn't%20automatically%20correct.%20Print%20every%0A%20%20%20%20value%20as%20it%20crosses%20from%20one%20function%20to%20the%20next%2C%20and%20compare%20it%0A%20%20%20%20to%20the%20contract.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%60%60%60python%0A%20%20%20%20data%20%3D%20load_tracker_data(%22fitness_data.csv%22)%0A%20%20%20%20print(%22SEAM%201%20type%3A%22%2C%20type(data))%0A%20%20%20%20print(%22SEAM%201%20keys%3A%22%2C%20list(data.keys()))%0A%20%20%20%20print(%22SEAM%201%20lengths%3A%22%2C%20len(data%5B%22day%22%5D)%2C%0A%20%20%20%20%20%20%20%20%20%20len(data%5B%22steps%22%5D))%0A%0A%20%20%20%20results%20%3D%20analyze_metric(data%2C%20%22steps%22%2C%208000)%0A%20%20%20%20print(%22SEAM%202%20type%3A%22%2C%20type(results))%0A%20%20%20%20print(%22SEAM%202%20keys%3A%22%2C%20list(results.keys()))%0A%20%20%20%20%60%60%60%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20Three%20questions%20answer%20most%20seam%20problems%3A%20Is%20it%20the%20right%0A%20%20%20%20**type**%3F%20Does%20it%20have%20the%20right%20**keys**%3F%20Are%20the%20lists%20the%0A%20%20%20%20right%20**length**%3F%20These%20prints%20are%20temporary%20%E2%80%94%20put%20them%20in%0A%20%20%20%20%60check_seams.py%60%20(a%20copy%20of%20%60main.py%60)%2C%20so%20the%20real%20%60main.py%60%0A%20%20%20%20stays%20clean.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20The%20Four%20Errors%20You'll%20Most%20Likely%20See%20Today%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%7C%20Error%20%7C%20Usually%20means%20%7C%20Where%20to%20look%20%7C%0A%20%20%20%20%7C---%7C---%7C---%7C%0A%20%20%20%20%7C%20%60ModuleNotFoundError%3A%20No%20module%20named%20'loader'%60%20%7C%20Can't%20find%20the%20**file**%20%7C%20Same%20folder%3F%20Spelled%20exactly%20right%3F%20%7C%0A%20%20%20%20%7C%20%60ImportError%3A%20cannot%20import%20name%20'load_data'%60%20%7C%20File%20found%2C%20**function%20name**%20doesn't%20match%20%7C%20Compare%20the%20%60import%60%20line%20to%20the%20%60def%60%20line%20%7C%0A%20%20%20%20%7C%20%60TypeError%3A%20'NoneType'%20object%20is%20not%20subscriptable%60%20%7C%20A%20function%20**printed%20instead%20of%20returning**%20%7C%20Does%20that%20function%20have%20a%20%60return%60%3F%20%7C%0A%20%20%20%20%7C%20%60KeyError%3A%20'average'%60%20%7C%20The%20two%20sides%20of%20a%20seam%20**disagree%20on%20a%20key%20name**%20%7C%20Compare%20the%20key%20in%20the%20error%20to%20the%20contract%20%7C%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Takeaway%0A%0A%20%20%20%20Three%20of%20these%20four%20are%20**seam%20errors**%20%E2%80%94%20each%20piece%20is%20fine%20on%0A%20%20%20%20its%20own%2C%20but%20two%20pieces%20don't%20agree.%20When%20an%20error%20appears%2C%20ask%0A%20%20%20%20%22which%20seam%3F%22%20before%20you%20ask%20%22which%20line%3F%22%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Due%20Sunday%3A%20The%20Running%20Skeleton%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20Gradescope%3A%20**%22Fitness%20Tracker%20Part%202%3A%20Running%20Skeleton%22**%20%E2%80%94%20group%0A%20%20%20%20submission%2C%20by%20**Sunday%2011%2F1%2C%2011%3A59%20PM**.%20Submit%20more%20than%20once%3B%0A%20%20%20%20Gradescope%20keeps%20your%20history.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20-%20%60loader.py%60%2C%20%60analyzer.py%60%2C%20%60reporter.py%60%2C%20%60main.py%60%20%E2%80%94%20each%20a%0A%20%20%20%20%20%20faithful%20stub%0A%20%20%20%20-%20%60check_seams.py%60%2C%20with%20your%20final%20seam-check%20output%20pasted%20in%20a%0A%20%20%20%20%20%20comment%20at%20the%20bottom%0A%20%20%20%20-%20An%20updated%20Team%20Contract%20(PDF)%20%E2%80%94%20**only**%20if%20it%20changed%20today%0A%0A%20%20%20%20*Before%20you%20submit%3A*%20%60main.py%60%20runs%20start%20to%20finish%20with%20no%0A%20%20%20%20errors%2C%20the%20report%20file%20is%20created%2C%20and%20%60check_seams.py%60%20checks%0A%20%20%20%20both%20seams%20with%20every%20check%20matching%20the%20contract.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20How%20Should%20%60main.py%60%20Look%3F%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20Three%20import%20lines%20%E2%80%94%20file%20name%20without%20%60.py%60%2C%20then%20the%20exact%0A%20%20%20%20function%20name%20%E2%80%94%20a%20%60main()%60%20function%20running%20your%20team's%20plan%20from%0A%20%20%20%20Section%203%20of%20your%20contract%2C%20and%20the%20%60if%20__name__%20%3D%3D%0A%20%20%20%20%22__main__%22%3A%60%20guard%20calling%20%60main()%60.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%60%60%60python%0A%20%20%20%20from%20loader%20import%20load_tracker_data%0A%20%20%20%20from%20analyzer%20import%20analyze_metric%0A%20%20%20%20from%20reporter%20import%20write_report%0A%0A%0A%20%20%20%20def%20main()%3A%0A%20%20%20%20%20%20%20%20data%20%3D%20load_tracker_data(%22fitness_data.csv%22)%0A%0A%20%20%20%20%20%20%20%20%23%20Your%20team's%20plan%20from%20Section%203%20--%20at%20least%203%0A%20%20%20%20%20%20%20%20%23%20metrics%2C%20resting_hr%20required%0A%20%20%20%20%20%20%20%20plan%20%3D%20%5B(%22steps%22%2C%208000%2C%20True)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20(%22resting_hr%22%2C%2062%2C%20False)%5D%0A%0A%20%20%20%20%20%20%20%20results_list%20%3D%20%5B%5D%0A%20%20%20%20%20%20%20%20for%20metric%2C%20goal%2C%20higher_is_better%20in%20plan%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20results%20%3D%20analyze_metric(data%2C%20metric%2C%20goal%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20higher_is_better)%0A%20%20%20%20%20%20%20%20%20%20%20%20results_list.append(results)%0A%0A%20%20%20%20%20%20%20%20write_report(results_list%2C%20%22fitness_report.txt%22)%0A%0A%0A%20%20%20%20if%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20%20%20%20%20main()%0A%20%20%20%20%60%60%60%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%23%20Takeaway%0A%0A%20%20%20%20The%20%60plan%60%20list%20here%20is%20illustrative%20%E2%80%94%20use%20your%20own%20team's%0A%20%20%20%20metrics%20and%20goals%20from%20Part%20C%2C%20not%20these%20exact%20numbers.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Quiz%208%20and%20Exam%202%3A%20What's%20Fair%20Game%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20No%20new%20Python%20syntax%20was%20covered%20this%20week%2C%20but%20the%20new%20skills%0A%20%20%20%20from%20Classes%2015%E2%80%9316%20are%20fair%20game.%20Possible%20things%20we%20might%20ask%0A%20%20%20%20you%20to%20do%3A%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20-%20Given%20a%20contract%20docstring%2C%20write%20a%20correct%20call%20and%20store%20the%0A%20%20%20%20%20%20result%0A%20%20%20%20-%20Given%20a%20contract%2C%20write%20the%20expression%20to%20access%20one%20value%20from%0A%20%20%20%20%20%20the%20returned%20dictionary%0A%20%20%20%20-%20Identify%20which%20key%20or%20type%20mismatch%20causes%20an%20error%2C%20or%20a%0A%20%20%20%20%20%20silent%20wrong%20answer%0A%20%20%20%20-%20Given%20a%20few%20rows%20of%20CSV%20text%2C%20write%20the%20dictionary%20of%20lists%20a%0A%20%20%20%20%20%20loader%20would%20return%0A%20%20%20%20-%20Identify%20what%20is%20missing%20from%20a%20vague%20contract%0A%20%20%20%20-%20Given%20a%20contract%2C%20write%20the%20call%20that%20stores%20the%20result%0A%20%20%20%20%20%20(Class%2015)%0A%20%20%20%20-%20Given%20a%20contract%2C%20write%20a%20faithful%20stub%20(Class%2016)%0A%20%20%20%20-%20Pick%20the%20faithful%20stub%20from%20four%20options%2C%20or%20explain%20why%20one%20is%0A%20%20%20%20%20%20unfaithful%0A%20%20%20%20-%20Match%20an%20error%20message%20(%60ModuleNotFoundError%60%2C%20%60ImportError%60%2C%0A%20%20%20%20%20%20%60NoneType%20...%20not%20subscriptable%60%2C%20%60KeyError%60)%20to%20its%20most%20likely%0A%20%20%20%20%20%20cause%0A%20%20%20%20-%20Write%20the%20import%20line%20for%20a%20function%20in%20a%20named%20file%0A%20%20%20%20-%20Predict%20the%20output%20of%20a%20short%20%60main()%60%20that%20uses%20a%20stub%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <script data-marimo="true">
+      Object.defineProperty(window, "__MARIMO_MOUNT_CONFIG__", {
+        value: Object.freeze({
+            "filename": "notebook.py",
+            "cwd": "",
+            "lspWorkspace": null,
+            "mode": "read",
+            "version": "0.25.0",
+            "serverToken": "unused",
+            "config": {"ai": {"allow_provider_config": true, "custom_providers": {}, "enabled": true, "models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "auto_close_pairs": true, "copilot": false, "signature_hint_on_typing": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "code_lens": true, "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "medium", "reference_highlighting": true, "theme": "dark"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": false}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "pip"}, "runtime": {"auto_instantiate": false, "auto_reload": "off", "default_csv_encoding": "utf-8", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "show_tracebacks": false, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"css_file": "custom.css", "html_head_file": "../../colab_button.html", "layout_file": "data:application/json;base64,eyJ0eXBlIjogInNsaWRlcyIsICJkYXRhIjogeyJjZWxscyI6IFt7InNob3dDb2RlIjogZmFsc2V9LCB7fSwge30sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwge30sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHt9LCB7InR5cGUiOiAiZnJhZ21lbnQifSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9LCB7fSwgeyJ0eXBlIjogImZyYWdtZW50In0sIHsidHlwZSI6ICJmcmFnbWVudCJ9XX19", "sql_output": "auto", "width": "full"},
+            "layout": {"data": {"cells": [{"showCode": false}, {}, {}, {"type": "fragment"}, {"type": "fragment"}, {"type": "fragment"}, {}, {"type": "fragment"}, {"type": "fragment"}, {"type": "fragment"}, {"type": "fragment"}, {}, {"type": "fragment"}, {"type": "fragment"}, {"type": "fragment"}, {}, {"type": "fragment"}, {"type": "fragment"}, {}, {"type": "fragment"}, {"type": "fragment"}, {}, {"type": "fragment"}, {"type": "fragment"}, {"type": "fragment"}, {}, {"type": "fragment"}, {"type": "fragment"}]}, "type": "slides"},
+            "view": {"showAppCode": true},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null
+        }),
+        writable: false,
+        configurable: false,
+      });
+    </script>
+  </body>
+</html>
