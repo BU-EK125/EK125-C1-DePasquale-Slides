@@ -621,7 +621,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    ## Coming to Class Prepared
+    ## Install MATLAB Today
     """)
     return
 
@@ -629,8 +629,10 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
-    - Install MATLAB and open it before class
-    - Create `x = 1:10` in the Command Window
+    - Install MATLAB today -- before this lecture or after, whichever
+      fits your schedule, as long as it's done
+    - Once it's installed, open it and create `x = 1:10` in the
+      Command Window
     - Plot it: `plot(x, x.^2)`
     - Keep the 1-based vs. 0-based indexing difference fresh --
       it's the single easiest Python habit to bring into MATLAB by
