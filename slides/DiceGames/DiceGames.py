@@ -25,10 +25,12 @@ def _(mo):
 
     🧪 [Run the full interactive notebook in Colab](https://colab.research.google.com/github/BU-EK125/EK125-C1-DePasquale-Slides/blob/main/slides/DiceGames/dice_games_fortran_to_machine_code.ipynb)
 
-    *(The floating "Open in Colab" button above opens a read-only
-    copy of these slides. The link above opens the real, runnable
-    notebook -- every language in this deck actually compiles and
-    runs there.)*
+    *(Same notebook the "Open in Colab" button above opens -- unlike
+    most decks on this site, this one's button links to the real,
+    runnable notebook, not a flattened read-only copy. Every
+    language here actually compiles and runs there. Colab may open
+    it in "playground mode" first -- click "Copy to Drive" to run
+    cells.)*
 
     *Curious how these slides work? They're built with
     [marimo](https://marimo.io), a Python notebook that runs live,
