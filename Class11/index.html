@@ -230,9 +230,20 @@
     var deckName = parts[parts.length - 2] || parts[parts.length - 1];
     if (!deckName) return;
 
+    // Most decks have no real code to run -- the button opens the
+    // flattened, non-executable notebook export of the slide text.
+    // A deck that ships an actual runnable notebook (committed
+    // alongside its slides/<DeckName>/ source, not auto-generated)
+    // gets listed here instead, so the button opens that one.
+    var REAL_NOTEBOOK_PATHS = {
+      DiceGames: 'slides/DiceGames/dice_games_fortran_to_machine_code.ipynb',
+    };
+    var notebookPath =
+      REAL_NOTEBOOK_PATHS[deckName] || ('notebooks/' + deckName + '.ipynb');
+
     var colabUrl =
-      'https://colab.research.google.com/github/BU-EK125/EK125-C1-DePasquale-Slides/blob/main/notebooks/' +
-      deckName + '.ipynb';
+      'https://colab.research.google.com/github/BU-EK125/EK125-C1-DePasquale-Slides/blob/main/' +
+      notebookPath;
 
     var btn = document.createElement('a');
     btn.href = colabUrl;
