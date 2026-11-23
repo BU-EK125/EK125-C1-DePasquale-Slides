@@ -167,6 +167,35 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md("""
+    ### How to read the real notebook's cells
+
+    Every notebook you've used in this course so far has been
+    ordinary Python cells. The real notebook behind this deck adds
+    three new kinds of cell -- all standard Colab/Jupyter features,
+    not anything specific to this notebook:
+
+    - **`%%writefile name`** as a cell's first line saves everything
+      below it as a file called `name`. It does **not** run
+      anything -- it's how each `dice_game.py`/`.f90`/`.c`/... source
+      file gets created in the first place
+    - **A line starting with `!`** runs a shell command, exactly as
+      if you'd typed it into a terminal -- `!gcc dice_game.c -o
+      dice_c` runs the C compiler the same way it would outside
+      Colab
+    - **`printf '\\n\\n\\n\\n\\nn\\n' | ./program`** feeds typed-out
+      input into a program automatically. Colab's `!` cells can't
+      pause and wait for you to type while they run, so each `\\n`
+      stands in for one press of Enter, and the final `n` declines
+      the rematch. The `|` is a **pipe**: it sends one command's
+      output straight into the next command's input, instead of to
+      the screen
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md("""
     ## Setup
     """)
     return
