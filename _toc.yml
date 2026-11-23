@@ -46,3 +46,5 @@ chapters:
     title: "Class 22: From Python to MATLAB: Syntax and Plotting"
   - url: https://bu-ek125.github.io/EK125-C1-DePasquale-Slides/Class23/index.html
     title: "Class 23: Creating Vectors and Matrices in MATLAB"
+  - url: https://bu-ek125.github.io/EK125-C1-DePasquale-Slides/DiceGames/index.html
+    title: "Bonus: The Same Dice Game, Eleven Ways"
